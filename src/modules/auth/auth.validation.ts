@@ -99,3 +99,21 @@ export const resetPassword = Joi.object({
         "any.required": "Mật khẩu mới là bắt buộc",
     }),
 });
+
+export const ChangePasswordBody = Joi.object({
+    oldPassword: Joi.string().min(6).required().messages({
+        "string.empty": "Mật khẩu không được để trống",
+        "any.required": "Mật khẩu cũ là bắt buộc",
+    }),
+    newPassword: Joi.string().min(6).required().messages({
+        "string.empty": "Mật khẩu không được để trống",
+        "any.required": "Mật khẩu mới là bắt buộc",
+    }),
+    confirmPassword: Joi.string()
+        .valid(Joi.ref("newPassword"))
+        .required()
+        .messages({
+            "string.empty": "Mật khẩu không được để trống",
+            "any.only": "Xác nhận mật khẩu không khớp",
+        }),
+});

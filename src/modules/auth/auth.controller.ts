@@ -53,3 +53,9 @@ export const resetPassword = catchAsync(async (req: Request, res: Response) => {
 
   return success(res, null, "Đặt lại mật khẩu thành công");
 });
+
+export const changePassword = catchAsync(async (req: Request, res: Response) => {
+  await authService.changePassword(req.body, req.user._id.toString());
+
+  return success(res, null, "Đổi mật khẩu thành công");
+});

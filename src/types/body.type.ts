@@ -26,3 +26,10 @@ interface ILoginBody {
 }
 export type { ILoginBody };
 
+interface IChangePasswordBody {
+    oldPassword: string;
+    newPassword: string;
+}
+
+export type { IChangePasswordBody };
+
