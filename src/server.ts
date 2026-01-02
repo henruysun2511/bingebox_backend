@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./configs/connectDB";
-import { errorHandler } from "./middlewares/error.middleware";
+import { errorHandlerMiddleware } from "./middlewares/error.middleware";
 import routes from "./modules/index.routes";
 import { ENV } from "./shares/constants/enviroment";
 
@@ -20,7 +20,7 @@ app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
 app.use("/api/v1", routes);
 
 
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
 connectDB().then(() => {
   app.listen(PORT, () => {

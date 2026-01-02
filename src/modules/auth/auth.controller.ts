@@ -59,3 +59,12 @@ export const changePassword = catchAsync(async (req: Request, res: Response) => 
 
   return success(res, null, "Đổi mật khẩu thành công");
 });
+
+export const googleCallback = async (req: Request, res: Response) => {
+  const { accessToken, refreshToken } = await authService.googleLogin(req.user._id.toString());
+
+  // Redirect về frontend
+  res.redirect(
+    `${ENV.CLIENT_URL}/oauth-success?accessToken=${accessToken}&refreshToken=${refreshToken}`
+  );
+};

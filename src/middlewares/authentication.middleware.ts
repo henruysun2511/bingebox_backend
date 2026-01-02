@@ -1,3 +1,4 @@
+import { IUser } from "@/types/object.type";
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import User from "../modules/user/user.schema";
@@ -30,14 +31,14 @@ export const authenticationMiddleware = async (
     const user = await User.findOne({
       _id: decoded.userId,
       isDeleted: false,
-    });
+    }).lean<IUser>();
 
     if (!user) {
       throw new AppError("Người dùng không tồn tại", 404);
     }
 
     //Gắn user vào request
-    req.user = user!; 
+    req.user = user;
     next();
   } catch (error: any) {
     if (error.name === "TokenExpiredError") {

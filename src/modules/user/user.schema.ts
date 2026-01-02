@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { GenderEnum } from "../../shares/constants/enum";
+import { GenderEnum, LoginTypeEnum } from "../../shares/constants/enum";
 import { IUser } from "../../types/object.type";
 
 const userSchema = new mongoose.Schema<IUser>({
@@ -34,13 +34,23 @@ const userSchema = new mongoose.Schema<IUser>({
         enum: Object.values(GenderEnum),
         default: GenderEnum.OTHER,
     },
+    googleId: {
+        type: String,
+        unique: true,
+        sparse: true,
+    },
+    provider: {
+        type: String,
+        enum: Object.values(LoginTypeEnum),
+        default: LoginTypeEnum.LOCAL,
+    },
 },
     {
         timestamps: true,
         //Không trả về mật khẩu
         toJSON: {
             transform(doc, ret) {
-                delete ret.password; 
+                delete ret.password;
                 return ret;
             },
         },

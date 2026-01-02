@@ -20,16 +20,16 @@ export const getActorDetail = catchAsync(async (req: Request, res: Response) => 
 });
 
 export const createActor = catchAsync(async (req: Request, res: Response) => {
-  const actor = await actorService.createActor(req.body, req.user._id.toString());
+  const actor = await actorService.createActor(req.body, req.user!._id.toString());
   return success(res, actor, "Tạo diễn viên thành công", 201);
 });
 
 export const updateActor = catchAsync(async (req: Request, res: Response) => {
-  const actor = await actorService.updateActor(req.params.id, req.body, req.user._id.toString());
+  const actor = await actorService.updateActor(req.params.id, req.body, req.user!._id.toString());
   return success(res, actor, "Cập nhật diễn viên thành công");
 });
 
 export const deleteActor = catchAsync(async (req: Request, res: Response) => {
-  await actorService.deleteActor(req.params.id, req.user._id.toString());
+  await actorService.deleteActor(req.params.id, req.user!._id.toString());
   return success(res, null, "Xóa diễn viên thành công");
 });

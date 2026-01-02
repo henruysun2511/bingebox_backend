@@ -3,7 +3,7 @@ import Joi from "joi";
 import { AppError } from "../utils/appError";
 
 
-export const validate =
+export const validateMiddleware =
     (
         schema: Joi.ObjectSchema,
         property: "body" | "query" | "params" = "body"

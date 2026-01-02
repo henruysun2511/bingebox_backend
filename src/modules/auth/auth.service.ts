@@ -3,7 +3,7 @@ import crypto from "crypto";
 import Jwt from "jsonwebtoken";
 import { default as UserModel } from "../../modules/user/user.schema";
 import { ENV } from "../../shares/constants/enviroment";
-import { ILoginBody, IRegisterBody } from "../../types/body.type";
+import { IChangePasswordBody, ILoginBody, IRegisterBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { sendOtpEmail } from "../../utils/sendEmail";
 import { default as PasswordResetModel } from "./passwordReset.schema";
@@ -164,5 +164,57 @@ export class AuthService {
         await record.deleteOne();
 
         return true;
+    }
+
+    async changePassword(data: IChangePasswordBody, userId: string) {
+        const { oldPassword, newPassword } = data;
+
+        const user = await this.userModel.findById(userId).select("+password");
+
+        if (!user || !user.password) {
+            throw new AppError("Người dùng không tồn tại", 404);
+        }
+
+        // Check mật khẩu cũ
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        if (!isMatch) {
+            throw new AppError("Mật khẩu cũ không đúng", 400);
+        }
+
+        // Không cho trùng mật khẩu cũ
+        const isSame = await bcrypt.compare(newPassword, user.password);
+        if (isSame) {
+            throw new AppError("Mật khẩu mới phải khác mật khẩu cũ", 400);
+        }
+
+        // Hash mật khẩu mới
+        user.password = await bcrypt.hash(newPassword, 10);
+        await user.save();
+
+        //Logout toàn bộ thiết bị
+        await this.sessionModel.deleteMany({ userId });
+
+        return true;
+    }
+
+    async googleLogin(userId: string) {
+        const accessToken = Jwt.sign(
+            { userId: userId },
+            ENV.ACCESS_TOKEN_SECRET as string,
+            { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
+        );
+
+        const refreshToken = crypto.randomBytes(64).toString("hex");
+
+        await this.sessionModel.create({
+            userId: userId,
+            refreshToken,
+            expiresAt: new Date(Date.now() + ENV.REFRESH_TOKEN_TTL),
+        });
+
+        return {
+            accessToken,
+            refreshToken
+        };
     }
 }

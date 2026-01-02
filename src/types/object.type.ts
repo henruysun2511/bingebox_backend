@@ -1,4 +1,4 @@
-import { GenderEnum } from "@/shares/constants/enum";
+import { GenderEnum, LoginTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 import { IBaseDocument } from "../shares/bases/baseDocument";
 
@@ -21,6 +21,8 @@ interface IUser extends IBaseDocument {
     avatar?: string;
     birth?: Date;
     gender?: GenderEnum;
+    googleId?: string;
+    provider?: LoginTypeEnum;
     role: string;
 }
 

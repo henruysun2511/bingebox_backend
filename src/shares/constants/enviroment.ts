@@ -12,4 +12,8 @@ export const ENV = {
 
     EMAIL_USER: process.env.EMAIL_USER || "huysun2511@gmail.com",
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
+
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID as string,
+    GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET as string,
+    GOOGLE_CALLBACK_URL: process.env.GOOGLE_CALLBACK_URL as string,
 }; 
