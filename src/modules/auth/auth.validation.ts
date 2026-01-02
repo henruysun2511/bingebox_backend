@@ -51,9 +51,12 @@ export const register = Joi.object({
         }),
 
     birth: Joi.date()
-        .optional()
+        .required()
+        .less("now")
         .messages({
             "date.base": "Ngày sinh không hợp lệ",
+            "date.less": "Ngày sinh phải là một ngày trong quá khứ",
+            "any.required": "Vui lòng cung cấp ngày sinh",
         }),
 
     gender: Joi.string()

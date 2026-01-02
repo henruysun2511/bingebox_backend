@@ -2,16 +2,6 @@ import { GenderEnum, LoginTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 import { IBaseDocument } from "../shares/bases/baseDocument";
 
-interface IActor extends IBaseDocument {
-    _id?: mongoose.Types.ObjectId;
-    name: string; 
-    bio?: string; 
-    avatar: string; 
-    nationality?: string;
-    gender?: GenderEnum; 
-}
-export type { IActor };
-
 interface IUser extends IBaseDocument {
     _id: mongoose.Types.ObjectId;
     username: string;
@@ -35,4 +25,20 @@ interface ISession extends IBaseDocument {
     expiresAt: Date;
 }
 export type { ISession };
+
+interface IActor extends IBaseDocument {
+    _id?: mongoose.Types.ObjectId;
+    name: string; 
+    bio?: string; 
+    avatar: string; 
+    nationality?: string;
+    gender?: GenderEnum; 
+}
+export type { IActor };
+
+interface ICategory extends IBaseDocument {
+    _id: mongoose.Types.ObjectId;
+    name: string;
+}
+export type { ICategory };
 

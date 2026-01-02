@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
+import { validateMiddleware } from "../../middlewares/validation.middleware";
+import * as controller from "./user.controller";
+import * as v from "./user.validation";
+
+const router = Router();
+
+router.get("/me", authenticationMiddleware, controller.getUserProfile);
+router.patch("/me", authenticationMiddleware, validateMiddleware(v.updateUserProfile), controller.updateUserProfile);
+
+export default router;

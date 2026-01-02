@@ -33,3 +33,12 @@ interface IChangePasswordBody {
 
 export type { IChangePasswordBody };
 
+interface IUserBody {
+    fullName?: string;
+    avatar?: string;
+    gender?: string;
+    birth?: Date;
+}
+
+export type { IUserBody };
+

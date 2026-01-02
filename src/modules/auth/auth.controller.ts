@@ -55,13 +55,20 @@ export const resetPassword = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const changePassword = catchAsync(async (req: Request, res: Response) => {
-  await authService.changePassword(req.body, req.user._id.toString());
+  await authService.changePassword(req.body, req.user!._id.toString());
 
   return success(res, null, "Đổi mật khẩu thành công");
 });
 
 export const googleCallback = async (req: Request, res: Response) => {
-  const { accessToken, refreshToken } = await authService.googleLogin(req.user._id.toString());
+  const { accessToken, refreshToken } = await authService.googleLogin(req.user!._id.toString());
+
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: ENV.REFRESH_TOKEN_TTL,
+  });
 
   // Redirect về frontend
   res.redirect(
