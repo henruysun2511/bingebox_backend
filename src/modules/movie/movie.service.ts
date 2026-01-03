@@ -1,8 +1,8 @@
-import { IMovieBody } from "@/types/body.type";
-import { IMovieQuery } from "@/types/param.type";
-import { AppError } from "@/utils/appError";
-import { buildPagination } from "@/utils/buildPagination";
 import mongoose from "mongoose";
+import { IMovieBody } from "../../types/body.type";
+import { IMovieQuery } from "../../types/param.type";
+import { AppError } from "../../utils/appError";
+import { buildPagination } from "../../utils/buildPagination";
 import { default as ActorModel } from "../actor/actor.schema";
 import { default as CategoryModel } from "../category/category.schema";
 import { buildMovieQuery } from "./movie.query";
@@ -23,7 +23,7 @@ export class MovieService {
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
-                .select("name poster releaseDate status categories format"),
+                .select("name poster releaseDate agePermission subtitle categories format"),
             this.movieModel.countDocuments(filter),
         ]);
 

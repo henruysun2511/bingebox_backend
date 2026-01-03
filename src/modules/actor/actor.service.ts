@@ -3,11 +3,13 @@ import { IActorBody } from "../../types/body.type";
 import { IActorQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
+import MovieModel from "../movie/movie.schema";
 import { buildActorQuery } from "./actor.query";
 import ActorModel from "./actor.schema";
 
 export class ActorService {
-    private actorModel = ActorModel;
+    private actorModel = ActorModel; 
+    private movieModel = MovieModel;
 
     async getActors(query: IActorQuery) {
         const { filter, sort } = buildActorQuery(query);
@@ -31,6 +33,29 @@ export class ActorService {
                 totalPages: Math.ceil(total / limit),
             },
         };
+    }
+
+    async getMoviesByActor(actorId: string) {
+        if (!mongoose.Types.ObjectId.isValid(actorId)) {
+            throw new AppError("Actor ID không hợp lệ", 400);
+        }
+
+        const actor = await this.actorModel.findOne({
+            _id: actorId,
+            isDeleted: false,
+        });
+
+        if (!actor) {
+            throw new AppError("Không tìm thấy actor", 404);
+        }
+
+        const movies = await this.movieModel.find({
+            actors: actorId,
+            isDeleted: false,
+        })
+            .select("name poster releaseDate agePermission subtitle categories format");
+
+        return movies;
     }
 
     async getActorDetail(id: string) {

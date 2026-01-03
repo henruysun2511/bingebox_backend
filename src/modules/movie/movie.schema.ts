@@ -1,7 +1,7 @@
-import { baseFields } from "@/shares/bases/baseField";
-import { AgePermissionTypeEnum, MovieStatusEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
-import { IMovie } from "@/types/object.type";
 import mongoose from "mongoose";
+import { baseFields } from "../../shares/bases/baseField";
+import { AgePermissionTypeEnum, MovieStatusEnum, SubtitleTypeEnum } from "../../shares/constants/enum";
+import { IMovie } from "../../types/object.type";
 
 const movieSchema = new mongoose.Schema<IMovie>({
     ...baseFields,

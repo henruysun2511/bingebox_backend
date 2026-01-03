@@ -1,5 +1,5 @@
-import { IMovieQuery } from "@/types/param.type";
-import { buildSort } from "@/utils/buidSort";
+import { IMovieQuery } from "../../types/param.type";
+import { buildSort } from "../../utils/buidSort";
 
 export function buildMovieQuery(query: IMovieQuery) {
     const filter: any = {

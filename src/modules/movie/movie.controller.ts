@@ -1,6 +1,6 @@
-import { catchAsync } from "@/utils/catchAsync";
-import { success } from "@/utils/response";
 import { Request, Response } from "express";
+import { catchAsync } from "../../utils/catchAsync";
+import { success } from "../../utils/response";
 import { MovieService } from "./movie.service";
 
 const movieService = new MovieService();

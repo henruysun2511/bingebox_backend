@@ -19,6 +19,13 @@ export const getActorDetail = catchAsync(async (req: Request, res: Response) => 
   return success(res, actor, "Lấy chi tiết diễn viên thành công");
 });
 
+export const getMoviesByActor = catchAsync(async (req: Request, res: Response) => {
+    const { actorId } = req.params;
+    const movies = await actorService.getMoviesByActor(actorId);
+    return success(res, movies, "Lấy danh sách phim của actor thành công");
+  }
+);
+
 export const createActor = catchAsync(async (req: Request, res: Response) => {
   const actor = await actorService.createActor(req.body, req.user!._id.toString());
   return success(res, actor, "Tạo diễn viên thành công", 201);
