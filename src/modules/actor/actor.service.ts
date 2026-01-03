@@ -8,7 +8,7 @@ import { buildActorQuery } from "./actor.query";
 import ActorModel from "./actor.schema";
 
 export class ActorService {
-    private actorModel = ActorModel; 
+    private actorModel = ActorModel;
     private movieModel = MovieModel;
 
     async getActors(query: IActorQuery) {
@@ -53,7 +53,12 @@ export class ActorService {
             actors: actorId,
             isDeleted: false,
         })
-            .select("name poster releaseDate agePermission subtitle categories format");
+            .select("name poster releaseDate agePermission subtitle categories format")
+            .populate({
+                path: "categories",
+                select: "name",
+                match: { isDeleted: false } 
+            });
 
         return movies;
     }

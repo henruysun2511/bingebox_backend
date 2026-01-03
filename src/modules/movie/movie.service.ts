@@ -23,7 +23,13 @@ export class MovieService {
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
-                .select("name poster releaseDate agePermission subtitle categories format"),
+                .select("name poster releaseDate agePermission subtitle categories format")
+                .populate({
+                    path: "categories",
+                    select: "name", // Chỉ lấy trường name của Category
+                    match: { isDeleted: false } // Chỉ lấy các thể loại chưa bị xóa
+                })
+                .lean(),
             this.movieModel.countDocuments(filter),
         ]);
 

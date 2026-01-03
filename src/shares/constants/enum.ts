@@ -10,15 +10,15 @@ export enum GenderEnum {
 }
 
 export enum MovieStatusEnum {
-    COMING_SOON = 'coming_soon',
-    NOW_SHOWING = 'now_showing',
-    ENDED = 'ended',
+    COMING_SOON = 'COMING_SOON',
+    NOW_SHOWING = 'NOW_SHOWING',
+    ENDED = 'ENDED',
 }
 
 export enum SubtitleTypeEnum {
-    NONE = 'None',
-    SUBTITLE = 'Phụ đề',
-    DUBBING = 'Lồng tiếng',
+    NONE = 'NONE',
+    SUBTITLE = 'SUBTITLE',
+    DUBBING = 'DUBBING',
 }
 
 export enum AgePermissionTypeEnum {
