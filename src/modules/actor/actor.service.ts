@@ -68,7 +68,7 @@ export class ActorService {
         }
 
         const updatedActor = await this.actorModel.findOneAndUpdate(
-            { _id: id, deleted: false },
+            { _id: id, isDeleted: false },
             {
                 ...data,
                 updatedBy: userId

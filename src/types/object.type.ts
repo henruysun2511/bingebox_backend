@@ -1,4 +1,4 @@
-import { GenderEnum, LoginTypeEnum } from "@/shares/constants/enum";
+import { AgePermissionTypeEnum, GenderEnum, LoginTypeEnum, MovieStatusEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 import { IBaseDocument } from "../shares/bases/baseDocument";
 
@@ -28,11 +28,11 @@ export type { ISession };
 
 interface IActor extends IBaseDocument {
     _id?: mongoose.Types.ObjectId;
-    name: string; 
-    bio?: string; 
-    avatar: string; 
+    name: string;
+    bio?: string;
+    avatar: string;
     nationality?: string;
-    gender?: GenderEnum; 
+    gender?: GenderEnum;
 }
 export type { IActor };
 
@@ -41,4 +41,25 @@ interface ICategory extends IBaseDocument {
     name: string;
 }
 export type { ICategory };
+
+interface IMovie extends IBaseDocument {
+    _id?: mongoose.Types.ObjectId;
+    name: string;
+    duration: number;
+    releaseDate: Date;
+    director?: string;
+    description: string;
+    subtitle?: SubtitleTypeEnum;
+    poster: string;
+    banner: string;
+    trailer: string;
+    actors: mongoose.Types.ObjectId[];
+    categories: mongoose.Types.ObjectId[];
+    nationality?: string;
+    agePermission: AgePermissionTypeEnum;
+    status: MovieStatusEnum;
+    format?: string[];
+}
+
+export type { IMovie };
 

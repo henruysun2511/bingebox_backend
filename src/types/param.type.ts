@@ -14,3 +14,13 @@ interface IActorQuery extends IPagintion {
 }
 export type { IActorQuery };
 
+interface IMovieQuery extends IPagintion {
+    name?: string;
+    status?: string;
+    releaseDate?: string;
+    categoryIds?: string;
+    agePermission?: string;
+    sort?: string;
+}
+export type { IMovieQuery };
+

@@ -6,9 +6,9 @@ import * as v from "./actor.validation";
 
 const router = Router();
 
-router.get("/", authenticationMiddleware, validateMiddleware(v.GetActorListQuery, "query"), controller.getActors);
+router.get("/", validateMiddleware(v.GetActorListQuery, "query"), controller.getActors);
 router.get("/:id", validateMiddleware(v.GetActorIdParam, "params"), controller.getActorDetail);
-router.post("/", authenticationMiddleware, validateMiddleware(v.createActor, "body"), controller.createActor);
-router.patch("/:id", authenticationMiddleware, validateMiddleware(v.GetActorIdParam, "params"), validateMiddleware(v.updateActor, "body"), controller.updateActor);
+router.post("/", authenticationMiddleware, validateMiddleware(v.createActorBody, "body"), controller.createActor);
+router.patch("/:id", authenticationMiddleware, validateMiddleware(v.GetActorIdParam, "params"), validateMiddleware(v.updateActorBody, "body"), controller.updateActor);
 router.delete("/:id", authenticationMiddleware, validateMiddleware(v.GetActorIdParam, "params"), controller.deleteActor);
 export default router;

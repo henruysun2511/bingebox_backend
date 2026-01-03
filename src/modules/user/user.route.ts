@@ -7,6 +7,6 @@ import * as v from "./user.validation";
 const router = Router();
 
 router.get("/me", authenticationMiddleware, controller.getUserProfile);
-router.patch("/me", authenticationMiddleware, validateMiddleware(v.updateUserProfile), controller.updateUserProfile);
+router.patch("/me", authenticationMiddleware, validateMiddleware(v.updateUserProfileBody), controller.updateUserProfile);
 
 export default router;

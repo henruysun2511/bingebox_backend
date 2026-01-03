@@ -7,7 +7,7 @@ export const GetCategoryIdParam = Joi.object({
   }),
 });
 
-export const createCategory = Joi.object({
+export const createCategoryBody = Joi.object({
   name: Joi.string()
     .trim()
     .min(2)
@@ -22,7 +22,7 @@ export const createCategory = Joi.object({
     }),
 });
 
-export const updateCategory = createCategory
+export const updateCategoryBody = createCategoryBody
   .fork(["name"], (schema) => schema.optional())
   .min(1)
   .messages({

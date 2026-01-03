@@ -1,4 +1,5 @@
-import { GenderEnum } from "@/shares/constants/enum";
+import { AgePermissionTypeEnum, GenderEnum, MovieStatusEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
+import mongoose from "mongoose";
 
 interface IActorBody {
     name: string;
@@ -41,4 +42,23 @@ interface IUserBody {
 }
 
 export type { IUserBody };
+
+interface IMovieBody {
+    name: string;
+    duration: number;
+    releaseDate: Date;
+    director?: string;
+    description: string;
+    poster: string;
+    banner: string;
+    trailer: string;
+    actors: mongoose.Types.ObjectId[];
+    categories: mongoose.Types.ObjectId[];
+    nationality?: string;
+    agePermission: AgePermissionTypeEnum;
+    status: MovieStatusEnum;
+    subtitle?: SubtitleTypeEnum;
+    format?: string[];
+}
+export type { IMovieBody };
 

@@ -1,0 +1,181 @@
+import { IMovieBody } from "@/types/body.type";
+import { IMovieQuery } from "@/types/param.type";
+import { AppError } from "@/utils/appError";
+import { buildPagination } from "@/utils/buildPagination";
+import mongoose from "mongoose";
+import { default as ActorModel } from "../actor/actor.schema";
+import { default as CategoryModel } from "../category/category.schema";
+import { buildMovieQuery } from "./movie.query";
+import { default as MovieModel } from "./movie.schema";
+
+export class MovieService {
+    private movieModel = MovieModel;
+    private actorModel = ActorModel;
+    private categoryModel = CategoryModel;
+
+    async getMovies(query: IMovieQuery) {
+        const { filter, sort } = buildMovieQuery(query);
+        const { page, limit, skip } = buildPagination(query);
+
+        const [items, total] = await Promise.all([
+            this.movieModel
+                .find(filter)
+                .sort(sort)
+                .skip(skip)
+                .limit(limit)
+                .select("name poster releaseDate status categories format"),
+            this.movieModel.countDocuments(filter),
+        ]);
+
+        return {
+            items,
+            pagination: {
+                page,
+                limit,
+                totalItems: total,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
+    }
+
+    async getMoviesForAdmin(query: IMovieQuery) {
+        const { filter, sort } = buildMovieQuery(query);
+        const { page, limit, skip } = buildPagination(query);
+        const [items, total] = await Promise.all([
+            this.movieModel
+                .find(filter)
+                .sort(sort)
+                .skip(skip)
+                .limit(limit),
+            this.movieModel.countDocuments(filter),
+        ]);
+        return {
+            items,
+            pagination: {
+                page,
+                limit,
+                totalItems: total,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
+    }
+
+    async getMovieDetail(id: string) {
+        const movie = await this.movieModel.findOne({
+            _id: id,
+            isDeleted: false,
+        });
+
+        if (!movie) {
+            throw new AppError("Không tìm thấy phim", 404);
+        }
+
+        return movie;
+    }
+
+    async getActorsByMovie(movieId: string) {
+        if (!mongoose.Types.ObjectId.isValid(movieId)) {
+            throw new AppError("Movie ID không hợp lệ", 400);
+        }
+
+        const movie = await this.movieModel
+            .findOne({ _id: movieId, isDeleted: false })
+            .populate({
+                path: "actors",
+                match: { isDeleted: false },
+                select: "name avatar",
+            });
+
+        if (!movie) {
+            throw new AppError("Không tìm thấy phim", 404);
+        }
+
+        return movie.actors;
+    }
+
+    async validateActors(actorIds?: mongoose.Types.ObjectId[]) {
+        if (!actorIds || actorIds.length === 0) return;
+
+        const uniqueIds = [...new Set(actorIds)];
+
+        const actors = await this.actorModel.find({
+            _id: { $in: uniqueIds },
+            isDeleted: false,
+        });
+
+        if (actors.length !== uniqueIds.length) {
+            throw new AppError("Có diễn viên không tồn tại hoặc đã bị xóa", 400);
+        }
+    }
+
+    async validateCategories(categoryIds?: mongoose.Types.ObjectId[]) {
+        if (!categoryIds || categoryIds.length === 0) return;
+
+        const uniqueIds = [...new Set(categoryIds)];
+
+        const categories = await this.categoryModel.find({
+            _id: { $in: uniqueIds },
+            isDeleted: false,
+        });
+
+        if (categories.length !== uniqueIds.length) {
+            throw new AppError("Có thể loại không tồn tại hoặc đã bị xóa", 400);
+        }
+    }
+
+    async createMovie(data: IMovieBody, userId: string) {
+        await this.validateActors(data.actors);
+        await this.validateCategories(data.categories);
+
+        return this.movieModel.create({
+            ...data,
+            createdBy: userId,
+        });
+    }
+
+    async updateMovie(id: string, data: IMovieBody, userId: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new AppError("ID không hợp lệ", 400);
+        }
+
+        await this.validateActors(data.actors);
+        await this.validateCategories(data.categories);
+
+        const updatedMovie = await this.movieModel.findOneAndUpdate(
+            { _id: id, isDeleted: false },
+            {
+                ...data,
+                updatedBy: userId
+            },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedMovie) {
+            throw new AppError("Không tìm thấy phim", 404);
+        }
+
+        return updatedMovie;
+    }
+
+    async deleteMovie(id: string, userId: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new AppError("ID không hợp lệ", 400);
+        }
+
+        const movie = await this.movieModel.findOneAndUpdate(
+            { _id: id, isDeleted: false },
+            {
+                isDeleted: true,
+                deletedAt: new Date(),
+                deletedBy: userId
+            },
+            { new: true }
+        );
+
+        if (!movie) {
+            throw new AppError("Không tìm thấy phim", 404);
+        }
+
+        return movie;
+    }
+}

@@ -11,14 +11,14 @@ router.get("/", controller.getCategories);
 router.post(
     "/",
     authenticationMiddleware,
-    validateMiddleware(v.createCategory, "body"),
+    validateMiddleware(v.createCategoryBody, "body"),
     controller.createCategory
 );
 
 router.patch("/:id",
     authenticationMiddleware,
     validateMiddleware(v.GetCategoryIdParam, "params"),
-    validateMiddleware(v.updateCategory, "body"),
+    validateMiddleware(v.updateCategoryBody, "body"),
     controller.updateCategory);
 
 router.delete("/:id", 

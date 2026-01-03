@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { GenderEnum } from "../../shares/constants/enum";
 
-export const updateUserProfile = Joi.object({
+export const updateUserProfileBody = Joi.object({
     fullName: Joi.string()
         .trim()
         .max(100)

@@ -20,7 +20,7 @@ export const GetActorIdParam = Joi.object({
   }),
 });
 
-export const createActor = Joi.object({
+export const createActorBody = Joi.object({
   name: Joi.string()
     .min(2)
     .required()
@@ -58,7 +58,7 @@ export const createActor = Joi.object({
 });
 
 //Actor sẽ kế thừa từ createActor và không bắt buộc gửi các trường
-export const updateActor = createActor
+export const updateActorBody = createActorBody
   .fork(["name"], schema => schema.optional())
   .min(1)
   .messages({

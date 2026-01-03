@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { GenderEnum } from "../../shares/constants/enum";
 
-export const register = Joi.object({
+export const registerBody = Joi.object({
     username: Joi.string()
         .trim()
         .min(3)
@@ -67,7 +67,7 @@ export const register = Joi.object({
         }),
 });
 
-export const login = Joi.object({
+export const loginBody = Joi.object({
     username: Joi.string().required().messages({
         "string.empty": "Tên đăng nhập không được để trống",
         "any.required": "Tên đăng nhập là bắt buộc",
@@ -78,7 +78,7 @@ export const login = Joi.object({
     }),
 });
 
-export const forgotPassword = Joi.object({
+export const forgotPasswordBody = Joi.object({
     email: Joi.string().email().required().messages({
         "string.empty": "Email không được để trống",
         "string.email": "Email không hợp lệ",
@@ -86,7 +86,7 @@ export const forgotPassword = Joi.object({
     }),
 });
 
-export const resetPassword = Joi.object({
+export const resetPasswordBody = Joi.object({
     email: Joi.string().email().required().messages({
         "string.empty": "Email không được để trống",
         "string.email": "Email không hợp lệ",
