@@ -1,4 +1,4 @@
-import { BaseStatusEnum } from "@/shares/constants/enum";
+import { BaseStatusEnum, DayOfWeekEnum } from "@/shares/constants/enum";
 
 interface IPagintion {
     page?: number;
@@ -59,3 +59,15 @@ interface IFoodQuery extends IPagintion {
 }
 
 export type { IFoodQuery };
+
+interface ITicketPriceQuery extends IPagintion {
+    timeSlot?: string;
+    ageType?: string;
+    formatRoom?: string;
+    dayOfWeek?: DayOfWeekEnum;
+    minPrice?: string;
+    maxPrice?: string;
+}
+
+export type { ITicketPriceQuery };
+

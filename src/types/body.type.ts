@@ -1,4 +1,4 @@
-import { AgePermissionTypeEnum, BaseStatusEnum, GenderEnum, MovieStatusEnum, SeatLayoutTypeEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
+import { AgePermissionTypeEnum, BaseStatusEnum, DayOfWeekEnum, GenderEnum, MovieStatusEnum, SeatLayoutTypeEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 
 interface IActorBody {
@@ -135,4 +135,15 @@ interface IFoodBody {
 }
 
 export type { IFoodBody };
+
+interface ITicketPriceBody {
+    timeSlot: mongoose.Types.ObjectId,
+    ageType: mongoose.Types.ObjectId,
+    formatRoom: mongoose.Types.ObjectId,
+    seatType: mongoose.Types.ObjectId,
+    dayOfWeek: DayOfWeekEnum,
+    finalPrice: number
+}
+
+export type { ITicketPriceBody };
 
