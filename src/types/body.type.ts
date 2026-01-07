@@ -128,3 +128,11 @@ interface ISeatTypeBody {
 }
 export type { ISeatTypeBody };
 
+interface IFoodBody {
+    name: string,
+    price: number,
+    image: string
+}
+
+export type { IFoodBody };
+

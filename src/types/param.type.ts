@@ -51,3 +51,11 @@ interface IRoomQuery extends IPagintion {
 
 export type { IRoomQuery };
 
+
+interface IFoodQuery extends IPagintion {
+    name?: string,
+    minPrice?: number,
+    maxPrice?: number
+}
+
+export type { IFoodQuery };

@@ -228,7 +228,7 @@ interface IVoucher {
 
 export type { IVoucher };
 
-interface IFood {
+interface IFood extends IBaseDocument {
     _id: mongoose.Types.ObjectId,
     name: string,
     image: string,
