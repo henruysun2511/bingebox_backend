@@ -20,7 +20,7 @@ router.get(
 );
 
 router.get(
-  "/:id/actors", 
+  "/actors/:id", 
   validateMiddleware(v.getMovieIdParam, "params"), 
   controller.getActorsByMovie
 );

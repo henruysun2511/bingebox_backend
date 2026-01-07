@@ -15,7 +15,8 @@ const roomSchema = new mongoose.Schema<IRoom>({
         columns: Number,
         width: Number,
         height: Number
-    }
+    },
+    totalSeats: Number,
 }, { timestamps: true });
 
 export default mongoose.model<IRoom>('Room', roomSchema);

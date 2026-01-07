@@ -14,7 +14,7 @@ export class CinemaService {
 
         const [items, total] = await Promise.all([
             this.cinemaModel.find(filter).sort(sort).skip(skip).limit(limit)
-            .select("_id name image location").lean(),
+                .select("_id name image location").lean(),
             this.cinemaModel.countDocuments(filter),
         ]);
 
@@ -25,7 +25,7 @@ export class CinemaService {
     }
 
     async getCinemaDetail(id: string) {
-        const cinema= await this.cinemaModel.findOne({
+        const cinema = await this.cinemaModel.findOne({
             _id: id,
             isDeleted: false,
         });
@@ -63,4 +63,6 @@ export class CinemaService {
         if (!cinema) throw new AppError("Không tìm thấy rạp", 404);
         return cinema;
     }
+
+   
 }

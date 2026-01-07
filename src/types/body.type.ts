@@ -1,4 +1,4 @@
-import { AgePermissionTypeEnum, BaseStatusEnum, GenderEnum, MovieStatusEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
+import { AgePermissionTypeEnum, BaseStatusEnum, GenderEnum, MovieStatusEnum, SeatLayoutTypeEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 
 interface IActorBody {
@@ -89,4 +89,42 @@ interface ITimeSlotBody {
     endTime: string
 }
 export type { ITimeSlotBody };
+
+interface IRoomBody {
+    name: string,
+    cinema: mongoose.Types.ObjectId,
+    format: mongoose.Types.ObjectId,
+    status: BaseStatusEnum;
+    seatLayout: {
+        type: SeatLayoutTypeEnum;
+        rows?: number;
+        columns?: number;
+        width?: number;
+        height?: number;
+    };
+}
+export type { IRoomBody };
+
+interface ISeatBody {
+    code: string;
+
+    row?: number;
+    column?: number;
+
+    position?: {
+        x: number;
+        y: number;
+    };
+    isBlocked?: boolean; //ô trống?
+    seatType: mongoose.Types.ObjectId;
+    isCoupleSeat?: boolean; //ghế đôi?
+    coupleId?: string;
+}
+export type { ISeatBody };
+
+interface ISeatTypeBody {
+    name: string,
+    color: string
+}
+export type { ISeatTypeBody };
 

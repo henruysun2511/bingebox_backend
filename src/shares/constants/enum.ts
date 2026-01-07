@@ -12,7 +12,7 @@ export enum PermissionMethodTypeEnum {
 }
 
 export enum GenderEnum {
-    MALE = 'male',              
+    MALE = 'male',
     FEMALE = 'female',
     OTHER = 'other',
 }
@@ -38,13 +38,13 @@ export enum AgePermissionTypeEnum {
 }
 
 export enum DayOfWeekEnum {
-  MON = "MON",
-  TUE = "TUE",
-  WED = "WED",
-  THU = "THU",
-  FRI = "FRI",
-  SAT = "SAT",
-  SUN = "SUN",
+    MON = "MON",
+    TUE = "TUE",
+    WED = "WED",
+    THU = "THU",
+    FRI = "FRI",
+    SAT = "SAT",
+    SUN = "SUN",
 }
 
 
@@ -67,4 +67,10 @@ export enum PaymentStatusEnum {
 export enum SeatLayoutTypeEnum {
     GRID = "GRID",
     FREE = "FREE"
+}
+
+export enum TicketStatusEnum {
+    USED = "USED",
+    UNUSED = "UNUSED",
+    REFUNDED = "REFUNDED"
 }

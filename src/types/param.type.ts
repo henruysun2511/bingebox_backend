@@ -43,3 +43,11 @@ interface IShowtimeQuery extends IPagintion {
 
 export type { IShowtimeQuery };
 
+
+interface IRoomQuery extends IPagintion {
+    name?: string,
+    cinemaId?: string
+}
+
+export type { IRoomQuery };
+

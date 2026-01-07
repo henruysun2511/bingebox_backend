@@ -1,4 +1,4 @@
-import { AgePermissionTypeEnum, BookingStatusEnum, DayOfWeekEnum, GenderEnum, LoginTypeEnum, MovieStatusEnum, PaymentStatusEnum, PermissionMethodTypeEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
+import { AgePermissionTypeEnum, BookingStatusEnum, DayOfWeekEnum, GenderEnum, LoginTypeEnum, MovieStatusEnum, PaymentStatusEnum, PermissionMethodTypeEnum, SeatLayoutTypeEnum, SubtitleTypeEnum, TicketStatusEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 import { IBaseDocument } from "../shares/bases/baseDocument";
 import { BaseStatusEnum } from './../shares/constants/enum';
@@ -123,12 +123,13 @@ interface IRoom extends IBaseDocument {
     format: mongoose.Types.ObjectId,
     status: BaseStatusEnum;
     seatLayout: {
-        type: "GRID" | "FREE";
+        type: SeatLayoutTypeEnum;
         rows?: number;
         columns?: number;
         width?: number;
         height?: number;
     };
+    totalSeats: number;
 }
 
 export type { IRoom };
@@ -153,7 +154,7 @@ export type { IFormatRoom };
 
 interface ISeat {
     _id?: mongoose.Types.ObjectId;
-    roomId: mongoose.Types.ObjectId;
+    room: mongoose.Types.ObjectId;
     code: string;
 
     row?: number;
@@ -164,16 +165,17 @@ interface ISeat {
         y: number;
     };
     isBlocked?: boolean; //ô trống?
-    seatTypeId: mongoose.Types.ObjectId;
+    seatType: mongoose.Types.ObjectId;
     isCoupleSeat: boolean; //ghế đôi?
-    partnerSeatId?: mongoose.Types.ObjectId; //id ghế đôi
+    partnerSeat?: mongoose.Types.ObjectId; //id ghế đôi
 }
 
 export type { ISeat };
 
 interface ISeatType extends IBaseDocument {
     _id: mongoose.Types.ObjectId,
-    name: string
+    name: string,
+    color: string
 }
 
 export type { ISeatType };
@@ -197,15 +199,15 @@ interface ITicketPrice extends IBaseDocument {
 
 export type { ITicketPrice };
 
-interface ITicket {
-    _id: mongoose.Types.ObjectId,
-    seatId: mongoose.Types.ObjectId,
-    showtimeId: mongoose.Types.ObjectId,
-    ticketPrice: mongoose.Types.ObjectId,
-    bookingTicket: mongoose.Types.ObjectId,
-    booking: mongoose.Types.ObjectId;
+interface ITicket extends IBaseDocument {
+    _id: mongoose.Types.ObjectId;
+    booking: mongoose.Types.ObjectId; 
+    showtime: mongoose.Types.ObjectId;
+    seat: mongoose.Types.ObjectId;
+    ticketPrice: mongoose.Types.ObjectId;
+    price: number;
     qrCode: string;
-    price: number
+    status: TicketStatusEnum; 
 }
 
 export type { ITicket };
@@ -217,13 +219,12 @@ interface IVoucher {
     startTime: Date,
     endTime: Date,
     minOrderValue: number,
-    maxDiscountAmout: number,
+    maxDiscountAmount: number,
     usedCount: number,
     maxUsage: number,
     code: string,
     status: BaseStatusEnum
 }
-
 
 export type { IVoucher };
 
@@ -239,12 +240,7 @@ export type { IFood };
 interface IBooking extends IBaseDocument {
     _id: mongoose.Types.ObjectId;
     userId: mongoose.Types.ObjectId;
-    showtimeId: mongoose.Types.ObjectId;
-    // tickets: {
-    //     ticketId: mongoose.Types.ObjectId;
-    //     seatCode: string; // Lưu thêm code ghế 
-    //     price: number;     // Giá tại thời điểm đặt
-    // }[];
+    showtime: mongoose.Types.ObjectId;
     foods: {
         foodId: mongoose.Types.ObjectId;
         quantity: number;

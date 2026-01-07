@@ -1,8 +1,9 @@
 import { AppError } from "../../utils/appError";
 
-import { IShowtimeBody } from "@/types/body.type";
-import { IShowtimeQuery } from "@/types/param.type";
-import { buildPagination } from "@/utils/buildPagination";
+import mongoose from "mongoose";
+import { IShowtimeBody } from "../../types/body.type";
+import { IShowtimeQuery } from "../../types/param.type";
+import { buildPagination } from "../../utils/buildPagination";
 import { default as MovieModel } from "../Movie/movie.schema";
 import { default as TimeSlotModel } from "../TimeSlot/timeSlot.schema";
 import { buildShowtimeQuery } from "./showtime.query";
@@ -164,5 +165,110 @@ export class ShowtimeService {
         );
         if (!result) throw new AppError("Không tìm thấy suất chiếu", 404);
         return result;
+    }
+
+    async getShowtimesByCinema(cinemaId: string, date?: string) {
+        return await this.showtimeModel.aggregate([
+            { $match: { isDeleted: false } },
+
+            // $lookup giúp join Showtime với Room thông qua _id
+            // Sau bước này, mỗi showtime sẽ có dạng:
+            //             {
+            //   _id: "...",
+            //   movie: "...",
+            //   room: [
+            //     {
+            //       _id: "...",
+            //       name: "Phòng 1",
+            //       cinema: "cinemaId"
+            //     }
+            //   ]
+            // }
+            {
+                $lookup: {
+                    from: "rooms",
+                    localField: "room",
+                    foreignField: "_id",
+                    as: "room"
+                }
+            },
+
+
+            //$unwind ROOM – BÓC ARRAY
+            //Do chỉ có 1 suất chỉ có 1 phòng nên chuyển chuyển array phòng thành object
+            { $unwind: "$room" },
+
+            //$match giúp lọc suất chiếu theo rạp
+            {
+                $match: {
+                    "room.cinema": new mongoose.Types.ObjectId(cinemaId)
+                }
+            },
+
+            // lọc suất chiếu theo ngày
+            ...(date ? [{
+                $match: {
+                    startTime: {
+                        $gte: new Date(`${date}T00:00:00.000Z`),
+                        $lte: new Date(`${date}T23:59:59.999Z`)
+                    }
+                }
+            }] : []),
+
+            //Sắp xếp suất chiếu theo startTime
+            { $sort: { startTime: 1 } },
+
+            //$group giúp gom nhóm theo movie
+            //Data giờ sẽ trông như này
+            //             {
+            //   _id: "movieId",
+            //   showtimes: [
+            //     { startTime: "...", room: { name: "Phòng 1" } },
+            //     { startTime: "...", room: { name: "Phòng 2" } }
+            //   ]
+            // }
+            {
+                $group: {
+                    _id: "$movie",
+                    showtimes: {
+                        $push: {
+                            _id: "$_id",
+                            startTime: "$startTime",
+                            room: {
+                                id: "$room._id",
+                                name: "$room.name"
+                            }
+                        }
+                    }
+                }
+            },
+
+            //$lookup giúp lấy thông tin phim
+            {
+                $lookup: {
+                    from: "movies",
+                    localField: "_id",
+                    foreignField: "_id",
+                    as: "movie"
+                }
+            },
+            { $unwind: "$movie" },
+
+            //$project định dạng response trả về
+            {
+                $project: {
+                    _id: 0,
+                    movie: {
+                        id: "$movie._id",
+                        title: "$movie.title",
+                        poster: "$movie.poster",
+                        duration: "$movie.duration",
+                        agePermission: "$movie.agePermission",
+                        format: "$movie.format"
+                    },
+                    showtimes: 1
+                }
+            }
+        ]);
     }
 }

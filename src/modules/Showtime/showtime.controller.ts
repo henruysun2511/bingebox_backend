@@ -24,3 +24,10 @@ export const deleteShowtime = catchAsync(async (req: Request, res: Response) => 
   await showtimeService.deleteShowtime(req.params.id, req.user!._id.toString());
   return success(res, null, "Xóa suất chiếu thành công");
 });
+
+export const getScheduleByCinema = catchAsync(async (req: Request, res: Response) => {
+    const { cinemaId } = req.params;
+    const { date } = req.query; // Ví dụ: ?date=2025-05-27
+    const schedule = await showtimeService.getShowtimesByCinema(cinemaId, date as string);
+    return success(res, schedule, "Lấy lịch chiếu theo rạp thành công");
+});

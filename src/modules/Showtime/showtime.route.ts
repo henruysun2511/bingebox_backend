@@ -24,4 +24,11 @@ router.patch(
 
 router.delete("/:id", authenticationMiddleware, controller.deleteShowtime);
 
+router.get(
+    "/cinemas/:cinemaId",
+    validateMiddleware(v.getScheduleParam, "params"),
+    validateMiddleware(v.getScheduleQuery, "query"),
+    controller.getScheduleByCinema
+);
+
 export default router;
