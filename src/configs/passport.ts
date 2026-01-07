@@ -1,4 +1,4 @@
-import User from "@/modules/user/user.schema";
+import User from "@/modules/User/user.schema";
 import { LoginTypeEnum } from "@/shares/constants/enum";
 import { ENV } from "@/shares/constants/enviroment";
 import passport from "passport";

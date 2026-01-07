@@ -24,3 +24,10 @@ interface IMovieQuery extends IPagintion {
 }
 export type { IMovieQuery };
 
+interface ICinemaQuery extends IPagintion {
+    name?: string,
+    province?: string
+}
+
+export type { ICinemaQuery };
+

@@ -62,3 +62,13 @@ interface IMovieBody {
 }
 export type { IMovieBody };
 
+interface ICinemaBody {
+    name: string,
+    location: string,
+    description?: string,
+    image?: string,
+    province?: string
+}
+
+export type { ICinemaBody };
+

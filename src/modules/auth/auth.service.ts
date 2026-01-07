@@ -1,11 +1,11 @@
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import Jwt from "jsonwebtoken";
-import { default as UserModel } from "../../modules/user/user.schema";
 import { ENV } from "../../shares/constants/enviroment";
 import { IChangePasswordBody, ILoginBody, IRegisterBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { sendOtpEmail } from "../../utils/sendEmail";
+import { default as UserModel } from "../User/user.schema";
 import { default as PasswordResetModel } from "./passwordReset.schema";
 import { default as SessionModel } from "./session.schema";
 

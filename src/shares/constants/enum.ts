@@ -3,6 +3,14 @@ export enum LoginTypeEnum {
     GOOGLE = 'google',
 }
 
+export enum PermissionMethodTypeEnum {
+    POST = 'POST',
+    GET = 'GET',
+    PATCH = 'PATCH',
+    PUT = 'PUT',
+    DELETE = 'DELETE'
+}
+
 export enum GenderEnum {
     MALE = 'male',              
     FEMALE = 'female',
@@ -27,4 +35,31 @@ export enum AgePermissionTypeEnum {
     T13 = "T13",
     T16 = "T16",
     T18 = "T18",
+}
+
+export enum DayOfWeekEnum {
+  MON = "MON",
+  TUE = "TUE",
+  WED = "WED",
+  THU = "THU",
+  FRI = "FRI",
+  SAT = "SAT",
+  SUN = "SUN",
+}
+
+
+export enum BaseStatusEnum {
+    ACTIVE = "active",
+    INACTIVE = "inactive"
+}
+
+export enum BookingStatusEnum {
+    SUCCESS = "success",
+    FAILED = "failed"
+}
+
+export enum PaymentStatusEnum {
+    PENDING = "pending",
+    PAID = "paid",
+    CANCELLED = "cancelled"
 }

@@ -3,7 +3,7 @@ import { IActorBody } from "../../types/body.type";
 import { IActorQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
-import MovieModel from "../movie/movie.schema";
+import MovieModel from "../Movie/movie.schema";
 import { buildActorQuery } from "./actor.query";
 import ActorModel from "./actor.schema";
 
