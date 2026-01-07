@@ -1,4 +1,4 @@
-import { AgePermissionTypeEnum, GenderEnum, MovieStatusEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
+import { AgePermissionTypeEnum, BaseStatusEnum, GenderEnum, MovieStatusEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 
 interface IActorBody {
@@ -71,4 +71,22 @@ interface ICinemaBody {
 }
 
 export type { ICinemaBody };
+
+interface IShowtimeBody {
+    movie: mongoose.Types.ObjectId;
+    room: mongoose.Types.ObjectId;
+    startTime: Date
+    endTime: Date
+    status: BaseStatusEnum
+    timeslot: mongoose.Types.ObjectId;
+}
+
+export type { IShowtimeBody };
+
+interface ITimeSlotBody {
+    name: string,
+    startTime: string,
+    endTime: string
+}
+export type { ITimeSlotBody };
 

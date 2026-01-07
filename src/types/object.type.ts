@@ -99,7 +99,6 @@ interface IShowtime extends IBaseDocument {
     _id?: mongoose.Types.ObjectId;
     movie: mongoose.Types.ObjectId;
     room: mongoose.Types.ObjectId;
-    date: Date,
     startTime: Date
     endTime: Date
     status: BaseStatusEnum
@@ -111,8 +110,8 @@ export type { IShowtime };
 interface ITimeSlot extends IBaseDocument {
     _id?: mongoose.Types.ObjectId,
     name: string,
-    startTime: Date,
-    endTime: Date,
+    startTime: string,
+    endTime: string,
 }
 
 export type { ITimeSlot };
@@ -152,19 +151,22 @@ interface IFormatRoom extends IBaseDocument {
 }
 export type { IFormatRoom };
 
-interface ISeat extends IBaseDocument {
-    _id: mongoose.Types.ObjectId,
-    room: mongoose.Types.ObjectId,
-    code: string,
-    row?: number
-    column?: number,
-    isGroupSeat: boolean;
+interface ISeat {
+    _id?: mongoose.Types.ObjectId;
+    roomId: mongoose.Types.ObjectId;
+    code: string;
+
+    row?: number;
+    column?: number;
+
     position?: {
-        x: number,
-        y: number
-    }
-    type: mongoose.Types.ObjectId,
-    partnerId?: mongoose.Types.ObjectId //ghế cặp trong ghế đôi
+        x: number;
+        y: number;
+    };
+    isBlocked?: boolean; //ô trống?
+    seatTypeId: mongoose.Types.ObjectId;
+    isCoupleSeat: boolean; //ghế đôi?
+    partnerSeatId?: mongoose.Types.ObjectId; //id ghế đôi
 }
 
 export type { ISeat };

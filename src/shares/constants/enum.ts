@@ -63,3 +63,8 @@ export enum PaymentStatusEnum {
     PAID = "paid",
     CANCELLED = "cancelled"
 }
+
+export enum SeatLayoutTypeEnum {
+    GRID = "GRID",
+    FREE = "FREE"
+}

@@ -1,3 +1,5 @@
+import { BaseStatusEnum } from "@/shares/constants/enum";
+
 interface IPagintion {
     page?: number;
     limit?: number;
@@ -30,4 +32,14 @@ interface ICinemaQuery extends IPagintion {
 }
 
 export type { ICinemaQuery };
+
+interface IShowtimeQuery extends IPagintion {
+    movieId?: string,
+    roomId?: string,
+    date?: Date,
+    status?: BaseStatusEnum
+    sort?: string
+}
+
+export type { IShowtimeQuery };
 
