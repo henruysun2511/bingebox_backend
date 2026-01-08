@@ -15,8 +15,18 @@ export class UserService {
             _id: userId,
             isDeleted: false,
         })
-            .select("username email fullName avatar gender birth role createdAt")
-            .lean();
+            .select("username email fullName avatar gender birth role membership currentPoints totalSpending createdAt")
+            .populate({
+                path: "role",
+                select: "name", 
+                match: { isDeleted: false }
+            })
+            .populate({
+                path: "membership",
+                select: "name discountRate pointAccumulationRate", 
+                match: { isDeleted: false }
+            })
+            .lean(); 
 
         if (!user) {
             throw new AppError("Người dùng không tồn tại", 404);
@@ -33,7 +43,7 @@ export class UserService {
         // Logic ngắn gọn hơn:
         const user = await this.userModel.findOneAndUpdate(
             { _id: userId, isDeleted: false },
-            { $set: data }, 
+            { $set: data },
             {
                 new: true,
                 runValidators: true

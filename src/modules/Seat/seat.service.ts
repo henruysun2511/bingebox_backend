@@ -1,11 +1,17 @@
+import { TicketStatusEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 import { AppError } from "../../utils/appError";
 import { default as RoomModel } from "../Room/room.schema";
+import { default as ShowtimeModel } from "../Showtime/showtime.schema";
+import { default as TicketModel } from "../Ticket/ticket.schema";
 import { default as SeatModel } from "./seat.schema";
 
 export class SeatService {
     private seatModel = SeatModel;
     private roomModel = RoomModel;
+    private showtimeModel = ShowtimeModel;
+    private ticketModel = TicketModel;
+
 
     async updateSeat(roomId: string, seats: any[], userId: string) {
         const session = await mongoose.startSession();
@@ -70,7 +76,7 @@ export class SeatService {
         }
     }
 
-    async getSeatsByRoomId(roomId: string) {
+    async getSeatsByRoom(roomId: string) {
         const seats = await this.seatModel.find({
             roomId: roomId
         })
@@ -84,6 +90,47 @@ export class SeatService {
             .lean();
 
         return seats;
+    }
+
+    async getSeatsByShowtime(showtimeId: string) {
+        if (!mongoose.Types.ObjectId.isValid(showtimeId)) {
+            throw new AppError("ID suất chiếu không hợp lệ", 400);
+        }
+
+        //Lấy thông tin suất chiếu 
+        const showtime = await this.showtimeModel.findOne({
+            _id: showtimeId,
+            isDeleted: false
+        }).lean();
+
+        if (!showtime) {
+            throw new AppError("Không tìm thấy suất chiếu", 404);
+        }
+
+        //Lấy tất cả ghế thuộc phòng của suất chiếu đó
+        const allSeats = await this.seatModel.find({
+            room: showtime.room,
+            isDeleted: false
+        })
+            .sort({ row: 1, number: 1 })
+            .lean();
+
+        //Lấy danh sách các vé đã được đặt (không bao gồm vé đã hủy)
+        const bookedTickets = await this.ticketModel.find({
+            showtime: showtimeId,
+            status: { $ne: TicketStatusEnum.CANCELLED }
+        }).select("seat").lean();
+
+        //Chuyển danh sách vé đã đặt thành một Set ID ghế để tra cứu nhanh
+        const bookedSeatIds = new Set(bookedTickets.map(t => t.seat.toString()));
+
+        // Map lại danh sách ghế kèm trạng thái isBooked
+        const seatsWithStatus = allSeats.map(seat => ({
+            ...seat,
+            isBooked: bookedSeatIds.has(seat._id.toString())
+        }));
+
+        return seatsWithStatus;
     }
 }
 

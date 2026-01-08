@@ -71,3 +71,19 @@ interface ITicketPriceQuery extends IPagintion {
 
 export type { ITicketPriceQuery };
 
+interface IAgeTypeQuery extends IPagintion {
+    name?: string,
+    age?: number
+}
+
+export type { IAgeTypeQuery };
+
+interface IVoucherQuery extends IPagintion {
+    name?: string;
+    code?: string;
+    status?: BaseStatusEnum,
+    sort?: string
+}
+
+export type { IVoucherQuery };
+

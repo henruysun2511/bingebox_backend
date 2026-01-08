@@ -15,12 +15,12 @@ export const updateSeat = catchAsync(async (req: Request, res: Response) => {
 
 export const getSeatsByRoom = catchAsync(async (req: Request, res: Response) => {
     const { roomId } = req.params;
-    
-    const seats = await seatService.getSeatsByRoomId(roomId);
-    
-    return success(
-        res, 
-        seats, 
-        "Lấy danh sách ghế theo phòng thành công"
-    );
+    const seats = await seatService.getSeatsByRoom(roomId);
+    return success(res, seats, "Lấy danh sách ghế theo phòng thành công");
+});
+
+export const getSeatsByShowtime = catchAsync(async (req: Request, res: Response) => {
+    const { showtimeId } = req.params;
+    const result = await seatService.getSeatsByShowtime(showtimeId);
+    return success(res, result, "Lấy danh sách ghế theo suất chiếu thành công");
 });

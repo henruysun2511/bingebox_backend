@@ -15,9 +15,11 @@ router.put(
 );
 
 router.get(
-    "/:roomId", 
+    "/rooms/:roomId", 
     validateMiddleware(v.getSeatsByRoomParam, "params"), 
     controller.getSeatsByRoom
 );
+
+router.get("/showtimes/:showtimeId", validateMiddleware(v.getSeatsByShowtimeParam, "params"),  controller.getSeatsByShowtime);
 
 export default router;

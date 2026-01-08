@@ -44,6 +44,26 @@ const userSchema = new mongoose.Schema<IUser>({
         enum: Object.values(LoginTypeEnum),
         default: LoginTypeEnum.LOCAL,
     },
+    role: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Role',
+        required: true
+    },
+    membership: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Membership',
+        default: null
+    },
+    currentPoints: {
+        type: Number,
+        default: 0,
+        min: 0
+    },
+    totalSpending: {
+        type: Number,
+        default: 0,
+        min: 0
+    }
 },
     {
         timestamps: true,

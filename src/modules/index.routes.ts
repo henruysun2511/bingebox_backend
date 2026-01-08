@@ -1,10 +1,12 @@
 import { Router } from "express";
 import actorRouter from "./Actor/actor.route";
+import ageTypeRouter from "./AgeType/ageType.route";
 import authRouter from "./Auth/auth.route";
 import categoryRouter from "./Category/category.route";
 import cinemaRouter from "./Cinema/cinema.route";
 import foodRouter from "./Food/food.routes";
 import formatRoomRouter from "./FormatRoom/formatRoom.route";
+import membershipRouter from "./Membership/membership.route";
 import movieRouter from "./Movie/movie.route";
 import roomRouter from "./Room/room.route";
 import seatRouter from "./Seat/seat.route";
@@ -13,6 +15,7 @@ import showtimeRouter from "./Showtime/showtime.route";
 import ticketPriceRouter from "./TicketPrice/ticketPrice.route";
 import timeSlotRouter from "./TimeSlot/timeSlot.route";
 import userRouter from "./User/user.route";
+import voucherRouter from "./Voucher/voucher.route";
 const router = Router();
 
 router.use("/auth", authRouter);
@@ -29,5 +32,8 @@ router.use("/rooms", roomRouter);
 router.use("/seat-types", seatTypeoRouter);
 router.use("/foods", foodRouter);
 router.use("/ticket-prices", ticketPriceRouter);
+router.use("/age-types", ageTypeRouter);
+router.use("/memberships", membershipRouter);
+router.use("/voucher", voucherRouter);
 
 export default router;

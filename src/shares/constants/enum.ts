@@ -38,13 +38,13 @@ export enum AgePermissionTypeEnum {
 }
 
 export enum DayOfWeekEnum {
-    MON = "MON",
-    TUE = "TUE",
-    WED = "WED",
-    THU = "THU",
-    FRI = "FRI",
-    SAT = "SAT",
-    SUN = "SUN",
+    MONDAY = "MONDAY",
+    TUESDAY = "TUESDAY",
+    WEDNESDAY = "WEDNESDAY",
+    THURSDAY = "THURSDAY",
+    FRIDAY = "FRIDAY",
+    SATURDAY = "SATURDAY",
+    SUNDAY = "SUNDAY",
 }
 
 
@@ -55,6 +55,7 @@ export enum BaseStatusEnum {
 
 export enum BookingStatusEnum {
     SUCCESS = "success",
+    PENDING = "pending",
     FAILED = "failed"
 }
 
@@ -72,5 +73,5 @@ export enum SeatLayoutTypeEnum {
 export enum TicketStatusEnum {
     USED = "USED",
     UNUSED = "UNUSED",
-    REFUNDED = "REFUNDED"
+    CANCELLED = "CANCELLED"
 }

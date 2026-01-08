@@ -182,7 +182,9 @@ export type { ISeatType };
 
 interface IAgeType {
     _id: mongoose.Types.ObjectId,
-    ageType: string,
+    name: string,
+    minAge: number,
+    maxAge: number
 }
 
 export type { IAgeType };

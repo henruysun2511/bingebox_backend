@@ -147,3 +147,32 @@ interface ITicketPriceBody {
 
 export type { ITicketPriceBody };
 
+interface IBookingBody {
+    showtimeId: string,
+    seatIds: string[],
+    foods: [
+        {
+            foodId: string,
+            quantity: number
+        }
+    ],
+    voucherCode: string,
+    pointsUsed: number
+}
+export type { IBookingBody };
+
+interface IAgeTypebody {
+    name: string,
+    minAge: number,
+    maxAge: number
+}
+export type { IAgeTypebody };
+
+interface IMembershipBody {
+    name: string;
+    minSpending: number;
+    pointAccumulationRate: number;
+    discountRate: number;
+}
+export type { IMembershipBody };
+
