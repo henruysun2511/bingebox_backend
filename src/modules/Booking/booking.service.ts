@@ -158,7 +158,7 @@ export class BookingService {
                 if (dto.pointsUsed > user.currentPoints) throw new AppError("Số dư điểm tích lũy không đủ", 400);
 
                 pointsUsed = dto.pointsUsed;
-                discountAmount += pointsUsed; // Quy đổi 1 điểm = 1đ (Tùy logic của bạn)
+                discountAmount += pointsUsed; // Quy đổi 1 điểm = 1đ 
                 user.currentPoints -= pointsUsed;
             }
 

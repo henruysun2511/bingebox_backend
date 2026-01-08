@@ -1,3 +1,4 @@
+import { TicketStatusEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 import { IMovieBody } from "../../types/body.type";
 import { IMovieQuery } from "../../types/param.type";
@@ -5,11 +6,13 @@ import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { default as ActorModel } from "../Actor/actor.schema";
 import { default as CategoryModel } from "../Category/category.schema";
+import { default as TicketModel } from "../Ticket/ticket.schema";
 import { buildMovieQuery } from "./movie.query";
 import { default as MovieModel } from "./movie.schema";
 
 export class MovieService {
     private movieModel = MovieModel;
+    private ticketModel = TicketModel;
     private actorModel = ActorModel;
     private categoryModel = CategoryModel;
 
@@ -183,5 +186,38 @@ export class MovieService {
         }
 
         return movie;
+    }
+
+    async getWatchedMovies(userId: string) {
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            throw new AppError("User ID không hợp lệ", 400);
+        }
+
+        const tickets = await this.ticketModel.find({ 
+            user: userId, 
+            isDeleted: false,
+            status: TicketStatusEnum.UNUSED || TicketStatusEnum.USED
+        })
+        .populate({
+            path: "showtime",
+            populate: {
+                path: "movie",
+                select: "name poster categories", 
+                populate: { path: "categories", select: "name" } 
+            }
+        })
+        .lean();
+
+        //Loại bỏ các phim trùng lặp
+        const moviesMap = new Map();
+        
+        tickets.forEach(ticket => {
+            const movie = (ticket.showtime as any)?.movie;
+            if (movie && !moviesMap.has(movie._id.toString())) {
+                moviesMap.set(movie._id.toString(), movie);
+            }
+        });
+
+        return Array.from(moviesMap.values());
     }
 }

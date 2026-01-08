@@ -38,3 +38,13 @@ export const toggleBlockUser = catchAsync(async (req: Request, res: Response) =>
     const message = isBlocked ? "Khóa tài khoản thành công" : "Mở khóa tài khoản thành công";
     return success(res, result, message);
 });
+
+export const redeemUserPoints = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params; 
+    const { points } = req.body;
+    const adminId = req.user!._id.toString(); 
+
+    const result = await userService.redeemUserPoints(id, points, adminId);
+    
+    return success(res, result, `Đã trừ thành công ${points} điểm tích lũy`);
+});

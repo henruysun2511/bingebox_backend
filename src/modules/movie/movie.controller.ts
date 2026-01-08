@@ -41,3 +41,10 @@ export const deleteMovie = catchAsync(async (req: Request, res: Response) => {
   await movieService.deleteMovie(req.params.id, req.user!._id.toString());
   return success(res, null, "Xóa phim thành công");
 });
+
+export const getWatchedMovies = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user!._id.toString();
+    const movies = await movieService.getWatchedMovies(userId);
+
+    return success(res,  movies, "Lấy danh sách phim đã xem thành công");
+});

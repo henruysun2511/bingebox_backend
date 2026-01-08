@@ -1,5 +1,5 @@
-import { TicketStatusEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
+import { TicketStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
 import { default as RoomModel } from "../Room/room.schema";
 import { default as ShowtimeModel } from "../Showtime/showtime.schema";

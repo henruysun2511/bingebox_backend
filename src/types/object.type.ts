@@ -204,13 +204,13 @@ export type { ITicketPrice };
 
 interface ITicket extends IBaseDocument {
     _id: mongoose.Types.ObjectId;
-    booking: mongoose.Types.ObjectId; 
+    booking: mongoose.Types.ObjectId;
     showtime: mongoose.Types.ObjectId;
     seat: mongoose.Types.ObjectId;
     ticketPrice: mongoose.Types.ObjectId;
     price: number;
     qrCode: string;
-    status: TicketStatusEnum; 
+    status: TicketStatusEnum;
 }
 
 export type { ITicket };
@@ -270,4 +270,16 @@ interface IPayment extends IBaseDocument {
     status: PaymentStatusEnum;
 }
 export type { IPayment };
+
+interface IComment extends IBaseDocument {
+    user: mongoose.Types.ObjectId;
+    movie: mongoose.Types.ObjectId;
+    content: string;
+    rating: number;
+    likesCount: number;
+    replyCount: number;
+    parent?: mongoose.Types.ObjectId;
+    likes: mongoose.Types.ObjectId[];
+}
+export type { IComment };
 

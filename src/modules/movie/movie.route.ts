@@ -54,4 +54,10 @@ router.delete(
   controller.deleteMovie
 );
 
+router.get(
+    "/watched", 
+    authenticationMiddleware, 
+    controller.getWatchedMovies
+);
+
 export default router;

@@ -192,3 +192,12 @@ interface IRoleBody {
 
 export type { IRoleBody };
 
+interface ICommentBody {
+    parent?: mongoose.Types.ObjectId, 
+    movie: mongoose.Types.ObjectId,
+    content: string, 
+    rating: number
+}
+
+export type { ICommentBody };
+

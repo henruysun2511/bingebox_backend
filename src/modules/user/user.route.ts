@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
+import { authorizationMiddleware } from "../../middlewares/authorization.middleware";
 import { validateMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./user.controller";
 import * as v from "./user.validation";
@@ -18,3 +19,28 @@ router.patch(
     controller.assignUserRole
 );
 export default router;
+
+router.get(
+    "/",
+    authenticationMiddleware,
+    authorizationMiddleware,
+    validateMiddleware(v.getUserListQuery, "query"),
+    controller.getUsers
+);
+
+router.patch(
+    "/toggle-block/:id",
+    authenticationMiddleware,
+    validateMiddleware(v.getUserIdParam, "params"),
+    validateMiddleware(v.blockUserBody, "body"),
+    controller.toggleBlockUser
+);
+
+router.patch(
+    "/redeem-points/:id",
+    authenticationMiddleware,
+    // restrictTo('ADMIN'), // Chặn nếu chỉ muốn Admin thực hiện
+    validateMiddleware(v.getUserIdParam, "params"),
+    validateMiddleware(v.redeemPoints, "body"),
+    controller.redeemUserPoints
+);
