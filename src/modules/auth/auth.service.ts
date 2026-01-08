@@ -5,6 +5,8 @@ import { ENV } from "../../shares/constants/enviroment";
 import { IChangePasswordBody, ILoginBody, IRegisterBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { sendOtpEmail } from "../../utils/sendEmail";
+import { default as MembershipModel } from "../Membership/membership.schema";
+import { default as RoleModel } from "../Role/role.schema";
 import { default as UserModel } from "../User/user.schema";
 import { default as PasswordResetModel } from "./passwordReset.schema";
 import { default as SessionModel } from "./session.schema";
@@ -13,6 +15,8 @@ export class AuthService {
     private userModel = UserModel;
     private sessionModel = SessionModel;
     private passwordResetModel = PasswordResetModel;
+    private roleModel = RoleModel;
+    private membershipModel = MembershipModel;
 
     async register(data: IRegisterBody) {
         const { username, email, password, fullName, avatar, birth } = data;
@@ -25,6 +29,14 @@ export class AuthService {
             throw new AppError(`${field} đã được sử dụng`, 409);
         }
 
+        //Mặc định role là customer
+        const defaultRole = await this.roleModel.findOne({ name: "CUSTOMER", isDeleted: false });
+        if (!defaultRole) throw new AppError("Hệ thống chưa cấu hình vai trò mặc định", 500);
+
+        //Lấy hạng thấp nhất
+        const defaultMembership = await this.membershipModel.findOne({ isDeleted: false }).sort({ minSpending: 1 });
+        if (!defaultMembership) throw new AppError("Hệ thống chưa cấu hình hạng thành viên", 500);
+
         //Mã hóa mật khẩu
         const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -34,7 +46,12 @@ export class AuthService {
             password: hashedPassword,
             fullName,
             avatar,
-            birth
+            birth,
+            role: defaultRole._id,
+            membership: defaultMembership._id,
+            currentPoints: 0,
+            totalSpending: 0,
+            isBlocked: false
         });
     }
 
