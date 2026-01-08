@@ -63,7 +63,11 @@ const userSchema = new mongoose.Schema<IUser>({
         type: Number,
         default: 0,
         min: 0
-    }
+    },
+    isBlocked: {
+        type: Boolean,
+        default: false, 
+    },
 },
     {
         timestamps: true,

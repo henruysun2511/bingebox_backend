@@ -18,6 +18,7 @@ interface IUser extends IBaseDocument {
     membership?: mongoose.Types.ObjectId;
     currentPoints: number; // Điểm hiện đang có để tiêu dùng
     totalSpending: number;
+    isBlocked: boolean;
 }
 
 export type { IUser };

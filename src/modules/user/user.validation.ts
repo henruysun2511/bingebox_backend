@@ -46,3 +46,29 @@ export const getUserIdParam = Joi.object({
     "any.required": "ID người dùng là bắt buộc",
   }),
 });
+
+export const getUserListQuery = Joi.object({
+    username: Joi.string().trim().optional(),
+    email: Joi.string().trim().optional(),
+    role: Joi.string().hex().length(24).optional(),
+    isBlocked: Joi.string().valid('true', 'false').optional(),
+    page: Joi.number().integer().min(1).default(1),
+    limit: Joi.number().integer().min(1).max(50).default(10),
+    sort: Joi.string().optional(),
+});
+
+export const blockUserBody = Joi.object({
+    isBlocked: Joi.boolean().required().messages({
+        "any.required": "Trạng thái khóa/mở là bắt buộc",
+        "boolean.base": "Trạng thái phải là kiểu boolean (true/false)"
+    })
+});
+
+export const redeemPoints = Joi.object({
+  points: Joi.number().integer().min(1).required().messages({
+    "number.base": "Số điểm phải là một con số",
+    "number.min": "Số điểm trừ phải ít nhất là 1",
+    "any.required": "Số điểm cần trừ là bắt buộc",
+  }),
+  reason: Joi.string().trim().optional(),
+});

@@ -9,6 +9,13 @@ interface IPagintion {
 
 export type { IPagintion };
 
+interface IUserQuery extends IPagintion {
+    username?: string;
+    role?: string;
+    isBlocked?: string;
+    sort?: string;
+}
+export type { IUserQuery };
 
 interface IActorQuery extends IPagintion {
     name?: string;
