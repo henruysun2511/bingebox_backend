@@ -29,12 +29,12 @@ interface IMembership extends IBaseDocument {
     pointAccumulationRate: number; // Tỷ lệ tích điểm (VD: 0.05 tức là tích 5% giá trị đơn)
     discountRate: number; // Giảm giá trực tiếp cho thành viên (VD: 0.02 tức giảm 2%)
 }
-
 export type { IMembership };
 
 interface IRole extends IBaseDocument {
     _id?: mongoose.Types.ObjectId;
     name: string,
+    description?: string,
     permissions: mongoose.Types.ObjectId[];
 }
 

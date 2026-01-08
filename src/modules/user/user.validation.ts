@@ -33,3 +33,16 @@ export const updateUserProfileBody = Joi.object({
             "any.required": "Vui lòng cung cấp ngày sinh",
         }),
 });
+
+export const assignRole = Joi.object({
+  roleId: Joi.string().hex().length(24).required().messages({
+    "string.length": "ID vai trò không hợp lệ",
+    "any.required": "ID vai trò là bắt buộc",
+  }),
+});
+
+export const getUserIdParam = Joi.object({
+  id: Joi.string().hex().length(24).required().messages({
+    "any.required": "ID người dùng là bắt buộc",
+  }),
+});

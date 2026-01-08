@@ -1,4 +1,4 @@
-import { AgePermissionTypeEnum, BaseStatusEnum, DayOfWeekEnum, GenderEnum, MovieStatusEnum, SeatLayoutTypeEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
+import { AgePermissionTypeEnum, BaseStatusEnum, DayOfWeekEnum, GenderEnum, MovieStatusEnum, PermissionMethodTypeEnum, SeatLayoutTypeEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 
 interface IActorBody {
@@ -175,4 +175,20 @@ interface IMembershipBody {
     discountRate: number;
 }
 export type { IMembershipBody };
+
+interface IPermissionBody {
+    name: string,
+    path: string,
+    method: PermissionMethodTypeEnum,
+    description?: string
+}
+export type { IPermissionBody };
+
+interface IRoleBody {
+    name: string,
+    description?: string,
+    permissions: mongoose.Types.ObjectId[];
+}
+
+export type { IRoleBody };
 

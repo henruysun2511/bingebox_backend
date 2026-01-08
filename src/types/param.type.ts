@@ -87,3 +87,17 @@ interface IVoucherQuery extends IPagintion {
 
 export type { IVoucherQuery };
 
+interface IPermissionQuery extends IPagintion {
+    name?: string;
+    path?: string;
+    method?: string,
+    sort?: string
+}
+
+export type { IPermissionQuery };
+
+interface IRoleQuery extends IPagintion {
+    name?: string
+}
+export type { IRoleQuery };
+

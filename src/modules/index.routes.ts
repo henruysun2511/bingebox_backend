@@ -8,6 +8,8 @@ import foodRouter from "./Food/food.routes";
 import formatRoomRouter from "./FormatRoom/formatRoom.route";
 import membershipRouter from "./Membership/membership.route";
 import movieRouter from "./Movie/movie.route";
+import permissionRouter from "./Permission/permission.route";
+import roleRouter from "./Role/role.route";
 import roomRouter from "./Room/room.route";
 import seatRouter from "./Seat/seat.route";
 import seatTypeoRouter from "./SeatType/seatType.route";
@@ -19,21 +21,30 @@ import voucherRouter from "./Voucher/voucher.route";
 const router = Router();
 
 router.use("/auth", authRouter);
-router.use("/user", userRouter);
+router.use("/users", userRouter);
+router.use("/memberships", membershipRouter);
+router.use("/roles", roleRouter);
+router.use("/permissions", permissionRouter);
+
 router.use("/actors", actorRouter);
 router.use("/categories", categoryRouter);
 router.use("/movies", movieRouter);
+
 router.use("/cinemas", cinemaRouter);
+router.use("/rooms", roomRouter);
 router.use("/format-rooms", formatRoomRouter);
+
 router.use("/showtimes", showtimeRouter);
 router.use("/time-slots", timeSlotRouter);
+
 router.use("/seats", seatRouter);
-router.use("/rooms", roomRouter);
 router.use("/seat-types", seatTypeoRouter);
+
 router.use("/foods", foodRouter);
+
 router.use("/ticket-prices", ticketPriceRouter);
 router.use("/age-types", ageTypeRouter);
-router.use("/memberships", membershipRouter);
+
 router.use("/voucher", voucherRouter);
 
 export default router;

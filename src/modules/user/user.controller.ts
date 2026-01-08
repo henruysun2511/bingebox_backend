@@ -15,3 +15,10 @@ export const updateUserProfile = catchAsync(async (req: Request, res: Response) 
     return success(res, user, "Cập nhật thông tin cá nhân thành công");
   }
 );
+
+export const assignUserRole = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params; 
+    const { roleId } = req.body;
+    const result = await userService.assignUserRole(id, roleId);
+    return success(res, result, "Gán vai trò cho người dùng thành công");
+});
