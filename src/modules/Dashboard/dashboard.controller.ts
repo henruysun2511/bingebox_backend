@@ -47,7 +47,7 @@ export const getMembershipDist = catchAsync(async (req: Request, res: Response) 
     return success(res, result, "Lấy phân bổ hạng thành viên thành công");
 });
 
-export const getHourlySales = catchAsync(async (req: Request, res: Response) => {
+export const getShowtimeSales = catchAsync(async (req: Request, res: Response) => {
     const { fromDate, toDate } = getQueryDates(req);
     const result = await service.getTicketCountByHour(fromDate, toDate);
     return success(res, result, "Lấy thống kê vé theo khung giờ thành công");

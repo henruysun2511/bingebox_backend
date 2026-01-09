@@ -6,6 +6,7 @@ import bookingRouter from "./Booking/booking.route";
 import categoryRouter from "./Category/category.route";
 import cinemaRouter from "./Cinema/cinema.route";
 import commentRouter from "./Comment/comment.route";
+import dashboardRouter from "./Dashboard/dashboard.route";
 import foodRouter from "./Food/food.routes";
 import formatRoomRouter from "./FormatRoom/formatRoom.route";
 import membershipRouter from "./Membership/membership.route";
@@ -20,6 +21,7 @@ import showtimeRouter from "./Showtime/showtime.route";
 import ticketRouter from "./Ticket/ticket.route";
 import ticketPriceRouter from "./TicketPrice/ticketPrice.route";
 import timeSlotRouter from "./TimeSlot/timeSlot.route";
+import uploadRouter from "./Upload/upload.route";
 import userRouter from "./User/user.route";
 import voucherRouter from "./Voucher/voucher.route";
 const router = Router();
@@ -55,5 +57,10 @@ router.use("/quick-ticket-buyings", quickTicketBuyingRouter);
 router.use("/vouchers", voucherRouter);
 
 router.use("/bookings", bookingRouter);
+router.use("/dashboards", dashboardRouter);
+
+router.use("/upload", uploadRouter);
+
+
 
 export default router;
