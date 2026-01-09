@@ -1,9 +1,9 @@
-import { getIo } from "@/configs/socket.config";
-import { IBookingBody } from "@/types/body.type";
-import { AppError } from "@/utils/appError";
-import { generateQRCode } from "@/utils/qrCode";
 import mongoose from "mongoose";
+import { getIo } from "../../configs/socket.config";
 import { BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
+import { IBookingBody } from "../../types/body.type";
+import { AppError } from "../../utils/appError";
+import { generateQRCode } from "../../utils/qrCode";
 import { FoodService } from "../Food/food.service";
 import { MembershipService } from "../Membership/membership.service";
 import RoomModel from "../Room/room.schema";
@@ -317,6 +317,38 @@ export class BookingService {
         const tickets = await this.ticketModel.find({ booking: booking._id });
 
         return { booking, tickets };
+    }
+
+
+    async deleteCancelledData() {
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            //Xóa tất cả vé có trạng thái CANCELLED
+            const ticketDeleteResult = await this.ticketModel.deleteMany(
+                { status: TicketStatusEnum.CANCELLED },
+                { session }
+            );
+
+            //Xóa tất cả booking có trạng thái FAILED
+            const bookingDeleteResult = await this.bookingModel.deleteMany(
+                { bookingStatus: BookingStatusEnum.FAILED },
+                { session }
+            );
+
+            await session.commitTransaction();
+
+            return {
+                deletedTickets: ticketDeleteResult.deletedCount,
+                deletedBookings: bookingDeleteResult.deletedCount
+            };
+        } catch (e) {
+            await session.abortTransaction();
+            throw e;
+        } finally {
+            session.endSession();
+        }
     }
 
 }

@@ -1,5 +1,5 @@
-import { TicketStatusEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
+import { TicketStatusEnum } from "../../shares/constants/enum";
 import { IMovieBody } from "../../types/body.type";
 import { IMovieQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
@@ -196,7 +196,7 @@ export class MovieService {
         const tickets = await this.ticketModel.find({ 
             user: userId, 
             isDeleted: false,
-            status: TicketStatusEnum.UNUSED || TicketStatusEnum.USED
+            status: TicketStatusEnum.PAID 
         })
         .populate({
             path: "showtime",

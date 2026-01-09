@@ -1,6 +1,6 @@
-import { catchAsync } from "@/utils/catchAsync";
-import { success } from "@/utils/response";
 import { Request, Response } from "express";
+import { catchAsync } from "../../utils/catchAsync";
+import { success } from "../../utils/response";
 import { QuickTicketBuyingService } from "./quickTicketBuying.service";
 
 const quickTicketBuyingService = new QuickTicketBuyingService();

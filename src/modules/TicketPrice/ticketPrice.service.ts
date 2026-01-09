@@ -1,10 +1,10 @@
-import { ITicketPriceBody } from "@/types/body.type";
 import { IRoom, ISeat, IShowtime, IUser } from "@/types/object.type";
-import { ITicketPriceQuery } from "@/types/param.type";
-import { calcAge } from "@/utils/calcAge";
-import { mapDayOfWeek } from "@/utils/mapDayOfWeek";
 import { ClientSession } from "mongoose";
+import { ITicketPriceBody } from "../../types/body.type";
+import { ITicketPriceQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
+import { calcAge } from "../../utils/calcAge";
+import { mapDayOfWeek } from "../../utils/mapDayOfWeek";
 import { default as AgeTypeModel } from "../AgeType/ageType.schema";
 import { buildTicketPriceQuery } from "./ticketPrice.query";
 import TicketPriceModel from "./ticketPrice.schema";

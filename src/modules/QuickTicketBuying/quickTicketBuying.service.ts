@@ -1,5 +1,5 @@
-import { BaseStatusEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
+import { BaseStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
 import ShowtimeModel from "../Showtime/showtime.schema";
 

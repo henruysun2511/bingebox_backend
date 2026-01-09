@@ -1,4 +1,4 @@
-import { DayOfWeekEnum } from "@/shares/constants/enum";
+import { DayOfWeekEnum } from "../shares/constants/enum";
 
 export function mapDayOfWeek(date: Date): DayOfWeekEnum {
   const day = date.getDay(); // 0–6

@@ -1,5 +1,5 @@
-import { AppError } from "@/utils/appError";
 import mongoose from "mongoose";
+import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import CommentModel from "./comment.schema";
 

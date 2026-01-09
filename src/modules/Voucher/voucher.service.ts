@@ -1,5 +1,5 @@
-import { BaseStatusEnum } from "@/shares/constants/enum";
 import mongoose, { ClientSession } from "mongoose";
+import { BaseStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildVoucherQuery } from "./voucher.query";
