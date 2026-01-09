@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { ClientSession } from "mongoose";
 import { TicketStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
 import { default as RoomModel } from "../Room/room.schema";
@@ -97,7 +97,7 @@ export class SeatService {
             throw new AppError("ID suất chiếu không hợp lệ", 400);
         }
 
-        //Lấy thông tin suất chiếu 
+        /* ================== 1. SHOWTIME ================== */
         const showtime = await this.showtimeModel.findOne({
             _id: showtimeId,
             isDeleted: false
@@ -107,7 +107,7 @@ export class SeatService {
             throw new AppError("Không tìm thấy suất chiếu", 404);
         }
 
-        //Lấy tất cả ghế thuộc phòng của suất chiếu đó
+        /* ================== 2. ALL SEATS IN ROOM ================== */
         const allSeats = await this.seatModel.find({
             room: showtime.room,
             isDeleted: false
@@ -115,22 +115,67 @@ export class SeatService {
             .sort({ row: 1, number: 1 })
             .lean();
 
-        //Lấy danh sách các vé đã được đặt (không bao gồm vé đã hủy)
-        const bookedTickets = await this.ticketModel.find({
+        /* ================== 3. TICKETS (LOCK SEAT) ================== */
+        const now = new Date();
+
+        const tickets = await this.ticketModel.find({
             showtime: showtimeId,
             status: { $ne: TicketStatusEnum.CANCELLED }
-        }).select("seat").lean();
+        })
+            .select("seat status expiresAt")
+            .lean();
 
-        //Chuyển danh sách vé đã đặt thành một Set ID ghế để tra cứu nhanh
-        const bookedSeatIds = new Set(bookedTickets.map(t => t.seat.toString()));
+        /**
+         * Map seatId -> status
+         * SOLD  = PAID
+         * HOLD  = UNPAID + chưa hết hạn
+         */
+        const seatStatusMap = new Map<string, "SOLD" | "HOLD">();
 
-        // Map lại danh sách ghế kèm trạng thái isBooked
+        for (const t of tickets) {
+            const seatId = t.seat.toString();
+
+            if (t.status === TicketStatusEnum.PAID) {
+                seatStatusMap.set(seatId, "SOLD");
+            } else if (
+                t.status === TicketStatusEnum.UNPAID &&
+                t.expiresAt &&
+                t.expiresAt > now
+            ) {
+                seatStatusMap.set(seatId, "HOLD");
+            }
+        }
+
+        /* ================== 4. MERGE ================== */
         const seatsWithStatus = allSeats.map(seat => ({
-            ...seat,
-            isBooked: bookedSeatIds.has(seat._id.toString())
+            _id: seat._id,
+            row: seat.row,
+            code: seat.code,
+            seatType: seat.seatType,
+            status: seatStatusMap.get(seat._id.toString()) ?? "AVAILABLE"
         }));
 
         return seatsWithStatus;
+    }
+
+
+    async validateSeats(showtimeId: string, seatIds: string[], session: ClientSession) {
+        const seats = await SeatModel.find({ _id: { $in: seatIds } }).session(session);
+        if (seats.length !== seatIds.length) {
+            throw new AppError("Có ghế không tồn tại", 400);
+        }
+
+        const booked = await TicketModel.find({
+            showtime: showtimeId,
+            seat: { $in: seatIds },
+            status: { $ne: TicketStatusEnum.CANCELLED }
+        }).session(session);
+
+        if (booked.length > 0) {
+            throw new AppError("Ghế đã được đặt", 400);
+        }
+
+        return seats;
     }
 }
 

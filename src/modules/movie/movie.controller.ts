@@ -48,3 +48,18 @@ export const getWatchedMovies = catchAsync(async (req: Request, res: Response) =
 
     return success(res,  movies, "Lấy danh sách phim đã xem thành công");
 });
+
+export const toggleLikeMovie = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params; 
+    const userId = req.user!._id.toString();
+
+    const result = await movieService.toggleLikeMovie(id, userId);
+    return success(res, result, result.isLiked ? "Đã thêm vào danh sách yêu thích" : "Đã xóa khỏi danh sách yêu thích");
+});
+
+export const getMyFavoriteMovies = catchAsync(async (req: Request, res: Response) => {
+    const userId = req.user!._id.toString();
+    const favoriteMovies = await movieService.getMyFavoriteMovies(userId);
+
+    return success(res, favoriteMovies, "Lấy danh sách phim yêu thích thành công");
+});

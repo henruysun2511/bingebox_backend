@@ -1,11 +1,17 @@
 import { ITicketPriceBody } from "@/types/body.type";
+import { IRoom, ISeat, IShowtime, IUser } from "@/types/object.type";
 import { ITicketPriceQuery } from "@/types/param.type";
+import { calcAge } from "@/utils/calcAge";
+import { mapDayOfWeek } from "@/utils/mapDayOfWeek";
+import { ClientSession } from "mongoose";
 import { AppError } from "../../utils/appError";
+import { default as AgeTypeModel } from "../AgeType/ageType.schema";
 import { buildTicketPriceQuery } from "./ticketPrice.query";
 import TicketPriceModel from "./ticketPrice.schema";
 
 export class TicketPriceService {
     private ticketPriceModel = TicketPriceModel;
+    private ageTypeModel = AgeTypeModel;
 
     async createPrice(data: ITicketPriceBody, userId: string) {
         const duplicate = await this.ticketPriceModel.findOne({
@@ -22,7 +28,7 @@ export class TicketPriceService {
     }
 
     async getPrices(query: ITicketPriceQuery) {
-        const {filter} = buildTicketPriceQuery(query);
+        const { filter } = buildTicketPriceQuery(query);
 
         return await this.ticketPriceModel.find(filter)
             .populate('ageType seatType formatRoom')
@@ -47,5 +53,47 @@ export class TicketPriceService {
         );
         if (!deleted) throw new AppError("Không tìm thấy cấu hình giá", 404);
         return deleted;
+    }
+
+    async calculateTicketPrice(
+        seats: ISeat[],
+        showtime: IShowtime,
+        room: IRoom,
+        user: IUser,
+        session: ClientSession
+    ) {
+        const age = calcAge(user.birth);
+        const ageType = await this.ageTypeModel.findOne({
+            minAge: { $lte: age },
+            maxAge: { $gte: age }
+        }).session(session);
+
+        if (!ageType) throw new AppError("Không xác định độ tuổi", 400);
+
+        const dayOfWeek = mapDayOfWeek(showtime.startTime);
+
+        let total = 0;
+        const tickets = [];
+
+        for (const seat of seats) {
+            const price = await TicketPriceModel.findOne({
+                seatType: seat.seatType,
+                formatRoom: room.format,
+                timeSlot: showtime.timeslot,
+                dayOfWeek,
+                ageType: ageType._id
+            }).session(session);
+
+            if (!price) throw new AppError("Thiếu cấu hình giá vé", 400);
+
+            total += price.finalPrice;
+            tickets.push({
+                seat: seat._id,
+                ticketPrice: price._id,
+                price: price.finalPrice
+            });
+        }
+
+        return { ticketTotal: total, tickets };
     }
 }

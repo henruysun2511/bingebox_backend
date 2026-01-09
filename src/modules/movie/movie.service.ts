@@ -220,4 +220,36 @@ export class MovieService {
 
         return Array.from(moviesMap.values());
     }
+
+    async toggleLikeMovie(movieId: string, userId: string) {
+        const movie = await MovieModel.findById(movieId);
+        if (!movie) throw new AppError("Không tìm thấy phim", 404);
+
+        const userObjectId = new mongoose.Types.ObjectId(userId);
+        const isLiked = movie.likes.includes(userObjectId);
+
+        if (isLiked) {
+            // Unlike: Xóa user khỏi mảng và giảm count
+            movie.likes = movie.likes.filter(id => id.toString() !== userId);
+            movie.likeCount = Math.max(0, movie.likeCount - 1);
+        } else {
+            // Like: Thêm user vào mảng và tăng count
+            movie.likes.push(userObjectId);
+            movie.likeCount += 1;
+        }
+
+        await movie.save();
+
+        return {
+            isLiked: !isLiked,
+            likeCount: movie.likeCount
+        };
+    }
+
+    async getMyFavoriteMovies(userId: string) {
+        return await MovieModel.find({
+            likes: new mongoose.Types.ObjectId(userId),
+            isDeleted: false
+        }).select("name poster categories likeCount");
+    }
 }

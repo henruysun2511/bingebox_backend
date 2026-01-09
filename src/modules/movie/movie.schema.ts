@@ -14,12 +14,12 @@ const movieSchema = new mongoose.Schema<IMovie>({
         required: true
     },
     releaseDate: {
-        type: Date, 
+        type: Date,
         required: true
     },
     director: String,
     description: {
-        type: String,   
+        type: String,
         required: true
     },
     subtitle: {
@@ -60,6 +60,11 @@ const movieSchema = new mongoose.Schema<IMovie>({
         required: true
     },
     format: [String],
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    likeCount: { type: Number, default: 0 }
 }, {
     timestamps: true
 })

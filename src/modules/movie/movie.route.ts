@@ -60,4 +60,16 @@ router.get(
     controller.getWatchedMovies
 );
 
+router.post(
+    "/likes/:id", 
+    authenticationMiddleware, 
+    controller.toggleLikeMovie
+);
+
+router.get(
+    "/favorite",
+    authenticationMiddleware,
+    controller.getMyFavoriteMovies
+);
+
 export default router;

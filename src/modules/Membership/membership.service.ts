@@ -1,4 +1,5 @@
 import { IMembershipBody } from "@/types/body.type";
+import { IUser } from "@/types/object.type";
 import { AppError } from "../../utils/appError";
 import MembershipModel from "./membership.schema";
 
@@ -34,5 +35,24 @@ export class MembershipService {
         );
         if (!result) throw new AppError("Không tìm thấy hạng thành viên", 404);
         return result;
+    }
+
+    applyPoints(user: IUser, pointsUsed = 0) {
+        if (pointsUsed > user.currentPoints) {
+            throw new AppError("Không đủ điểm", 400);
+        }
+
+        user.currentPoints -= pointsUsed;
+        return pointsUsed;
+    }
+
+    calculateEarnedPoints(user: IUser, finalAmount: number) {
+        if (!user.membership) return 0;
+
+        if (typeof user.membership === "object" && "pointAccumulationRate" in user.membership) {
+            return Math.floor(finalAmount * user.membership.pointAccumulationRate);
+        }
+
+        return 0;
     }
 }

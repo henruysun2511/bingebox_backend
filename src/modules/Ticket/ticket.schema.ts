@@ -36,13 +36,17 @@ const ticketSchema = new mongoose.Schema<ITicket>({
     },
     status: {
         type: String,
-        enum: Object.values(TicketStatusEnum),
-        default: TicketStatusEnum.UNUSED
+        enum: Object.values(TicketStatusEnum)
+    },
+    expiresAt: {
+        type: Date,
+        index: true
     }
 }, {
     timestamps: true
 });
 
+//Chỉ tồn tại 1 ticket active, cancelled cho đặt lại
 ticketSchema.index({ showtime: 1, seat: 1 }, { unique: true, partialFilterExpression: { status: { $ne: 'CANCELLED' } } });
 
 export default mongoose.model<ITicket>('Ticket', ticketSchema);

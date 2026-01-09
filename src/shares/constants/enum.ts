@@ -47,10 +47,20 @@ export enum DayOfWeekEnum {
     SUNDAY = "SUNDAY",
 }
 
-
 export enum BaseStatusEnum {
     ACTIVE = "active",
     INACTIVE = "inactive"
+}
+
+export enum SeatLayoutTypeEnum {
+    GRID = "GRID",
+    FREE = "FREE"
+}
+
+export enum TicketStatusEnum {
+    PAID = "paid",
+    UNPAID = "unpaid",
+    CANCELLED = "cancelled"
 }
 
 export enum BookingStatusEnum {
@@ -61,17 +71,6 @@ export enum BookingStatusEnum {
 
 export enum PaymentStatusEnum {
     PENDING = "pending",
-    PAID = "paid",
-    CANCELLED = "cancelled"
-}
-
-export enum SeatLayoutTypeEnum {
-    GRID = "GRID",
-    FREE = "FREE"
-}
-
-export enum TicketStatusEnum {
-    USED = "USED",
-    UNUSED = "UNUSED",
-    CANCELLED = "CANCELLED"
+    SUCCESS = "success",
+    FAILED = "failed"
 }

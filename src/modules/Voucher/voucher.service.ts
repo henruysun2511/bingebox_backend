@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import { BaseStatusEnum } from "@/shares/constants/enum";
+import mongoose, { ClientSession } from "mongoose";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildVoucherQuery } from "./voucher.query";
@@ -83,5 +84,26 @@ export class VoucherService {
 
         if (!voucher) throw new AppError("Không tìm thấy voucher", 404);
         return voucher;
+    }
+
+    async applyVoucher(code: string | undefined, total: number, session: ClientSession) {
+        if (!code) return { discount: 0, voucher: null };
+
+        const voucher = await VoucherModel.findOne({
+            code,
+            status: BaseStatusEnum.ACTIVE
+        }).session(session);
+
+        if (!voucher) throw new AppError("Voucher không hợp lệ", 400);
+        if (total < voucher.minOrderValue)
+            throw new AppError("Không đủ điều kiện áp voucher", 400);
+
+        voucher.usedCount += 1;
+        await voucher.save({ session });
+
+        return {
+            voucher,
+            discount: Math.min(voucher.maxDiscountAmount, total)
+        };
     }
 }

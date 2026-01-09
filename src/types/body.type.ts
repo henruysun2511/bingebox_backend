@@ -148,11 +148,11 @@ interface ITicketPriceBody {
 export type { ITicketPriceBody };
 
 interface IBookingBody {
-    showtimeId: string,
+    showtimeId: mongoose.Types.ObjectId,
     seatIds: string[],
     foods: [
         {
-            foodId: string,
+            foodId: mongoose.Types.ObjectId,
             quantity: number
         }
     ],

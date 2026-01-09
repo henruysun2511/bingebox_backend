@@ -1,229 +1,322 @@
-import { calcAge } from "@/utils/calcAge";
-import { mapDayOfWeek } from "@/utils/mapDayOfWeek";
+import { getIo } from "@/configs/socket.config";
+import { IBookingBody } from "@/types/body.type";
+import { AppError } from "@/utils/appError";
+import { generateQRCode } from "@/utils/qrCode";
 import mongoose from "mongoose";
-import { BaseStatusEnum, BookingStatusEnum } from "../../shares/constants/enum";
-import { AppError } from "../../utils/appError";
-import AgeTypeModel from "../AgeType/ageType.schema";
-import FoodModel from "../Food/food.schema";
+import { BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
+import { FoodService } from "../Food/food.service";
+import { MembershipService } from "../Membership/membership.service";
 import RoomModel from "../Room/room.schema";
-import SeatModel from "../Seat/seat.schema";
+import { SeatService } from "../Seat/seat.service";
 import ShowtimeModel from "../Showtime/showtime.schema";
 import TicketModel from "../Ticket/ticket.schema";
-import TicketPriceModel from "../TicketPrice/ticketPrice.schema";
+import { TicketPriceService } from "../TicketPrice/ticketPrice.service";
 import UserModel from "../User/user.schema";
-import VoucherModel from "../Voucher/voucher.schema";
+import { VoucherService } from "../Voucher/voucher.service";
 import BookingModel from "./booking.schema";
 
 export class BookingService {
-    private bookingModel = BookingModel;
-    private userModel = UserModel;
     private showtimeModel = ShowtimeModel;
-    private ticketModel = TicketModel;
     private roomModel = RoomModel;
-    private seatModel = SeatModel;
-    private ticketPriceModel = TicketPriceModel;
-    private foodModel = FoodModel;
-    private ageTypeModel = AgeTypeModel;
-    private voucherModel = VoucherModel;
+    private userModel = UserModel;
+    private bookingModel = BookingModel;
+    private ticketModel = TicketModel;
 
-    async createBooking(userId: string, dto: any) {
+    async createBooking(userId: string, dto: IBookingBody) {
         const session = await mongoose.startSession();
         session.startTransaction();
 
         try {
-            // 1. Lấy user + membership
+            /* ================== 1. USER ================== */
             const user = await this.userModel.findById(userId)
                 .populate("membership")
                 .session(session);
 
-            if (!user) throw new AppError("Không tìm thấy người dùng", 404);
-
-            // 2. Kiểm tra showtime
-            const showtime = await this.showtimeModel.findById(dto.showtimeId).session(session);
-            if (!showtime) throw new AppError("Không tìm thấy suất chiếu", 404);
-
-            // 3. Kiểm tra ghế đã đặt chưa
-            const bookedSeats = await this.ticketModel.find({
-                showtime: showtime._id,
-                seat: { $in: dto.seatIds },
-                status: { $ne: "CANCELLED" }
-            }).session(session);
-
-            if (bookedSeats.length > 0) {
-                throw new AppError("Một hoặc nhiều ghế đã được đặt", 400);
+            if (!user) {
+                throw new AppError("Người dùng không tồn tại", 404);
             }
 
-            // Lấy thông tin phòng và định dạng
-            const room = await this.roomModel.findById(showtime.room)
+            /* ================== 2. SHOWTIME + ROOM ================== */
+            const showtime = await this.showtimeModel.findById(dto.showtimeId).session(session);
+            if (!showtime) {
+                throw new AppError("Suất chiếu không tồn tại", 404);
+            }
+
+            const room = await this.roomModel
+                .findById(showtime.room)
                 .populate("format")
                 .session(session);
 
-            if (!room) throw new AppError("Không tìm thấy phòng chiếu", 404);
-
-            // 4. TÍNH TIỀN VÉ
-            let ticketTotal = 0;
-            const ticketsToCreate: any[] = [];
-            const showtimeDate = new Date(showtime.startTime);
-
-            //Tính tuổi 
-            const age = calcAge(user.birth);
-            const ageType = await this.ageTypeModel.findOne({
-                minAge: { $lte: age },
-                maxAge: { $gte: age }
-            }).session(session);
-            if (!ageType) {
-                throw new AppError("Không xác định được loại tuổi", 400);
+            if (!room) {
+                throw new AppError("Phòng chiếu không tồn tại", 404);
             }
 
-            const dayOfWeek = mapDayOfWeek(new Date(showtime.startTime));
+            /* ================== 3. INIT SERVICES ================== */
+            const seatService = new SeatService();
+            const priceService = new TicketPriceService();
+            const foodService = new FoodService();
+            const voucherService = new VoucherService();
+            const membershipService = new MembershipService();
 
-            const seats = await this.seatModel.find({
-                _id: { $in: dto.seatIds }
-            }).session(session);
-
-            if (seats.length !== dto.seatIds.length) {
-                throw new AppError("Một hoặc nhiều ghế không tồn tại", 404);
-            }
-            for (const seatId of seats) {
-                const seat = await this.seatModel.findById(seatId).session(session);
-                if (!seat) throw new AppError(`Không tìm thấy ghế ID: ${seatId}`, 404);
-
-                const ticketPrice = await this.ticketPriceModel.findOne({
-                    seatType: seat.seatType,
-                    formatRoom: room.format,
-                    timeSlot: showtime.timeslot,
-                    dayOfWeek: dayOfWeek,
-                    ageType: ageType._id
-                }).session(session);
-
-                if (!ticketPrice) throw new AppError("Không tìm thấy cấu hình giá vé phù hợp", 400);
-
-                ticketTotal += ticketPrice.finalPrice;
-
-                ticketsToCreate.push({
-                    showtime: showtime._id,
-                    seat: seat._id,
-                    ticketPrice: ticketPrice._id,
-                    price: ticketPrice.finalPrice,
-                    status: "UNUSED"
-                });
-            }
-
-            // 5. TÍNH TIỀN ĐỒ ĂN
-            let foodTotal = 0;
-            const foodsBooking: any[] = [];
-
-            if (dto.foods && dto.foods.length > 0) {
-                for (const f of dto.foods) {
-                    const food = await this.foodModel.findOne({ _id: f.foodId, isDeleted: false }).session(session);
-                    if (!food) throw new AppError("Món ăn không tồn tại", 404);
-
-                    const itemTotal = Number(food.price) * f.quantity;
-                    foodTotal += itemTotal;
-
-                    foodsBooking.push({
-                        foodId: food._id,
-                        quantity: f.quantity,
-                        priceAtBooking: food.price
-                    });
-                }
-            }
-
-            // 6. TỔNG TIỀN BAN ĐẦU
-            const totalAmount = ticketTotal + foodTotal;
-            let discountAmount = 0;
-
-            // 7. ÁP VOUCHER
-            let voucherDoc = null;
-            if (dto.voucherCode) {
-                voucherDoc = await this.voucherModel.findOne({
-                    code: dto.voucherCode,
-                    status: BaseStatusEnum.ACTIVE,
-                    startTime: { $lte: new Date() },
-                    endTime: { $gte: new Date() }
-                }).session(session);
-
-                if (!voucherDoc) throw new AppError("Mã giảm giá không hợp lệ hoặc đã hết hạn", 400);
-                if (totalAmount < voucherDoc.minOrderValue) throw new AppError("Đơn hàng không đủ giá trị tối thiểu để áp dụng voucher", 400);
-                if (voucherDoc.usedCount >= voucherDoc.maxUsage) throw new AppError("Voucher đã hết lượt sử dụng", 400);
-
-                discountAmount += Math.min(voucherDoc.maxDiscountAmount, totalAmount);
-                voucherDoc.usedCount += 1;
-                await voucherDoc.save({ session });
-            }
-
-            // 8. ÁP ĐIỂM THÀNH VIÊN (Nếu khách chọn dùng điểm)
-            let pointsUsed = 0;
-            if (dto.pointsUsed && dto.pointsUsed > 0) {
-                if (dto.pointsUsed > user.currentPoints) throw new AppError("Số dư điểm tích lũy không đủ", 400);
-
-                pointsUsed = dto.pointsUsed;
-                discountAmount += pointsUsed; // Quy đổi 1 điểm = 1đ 
-                user.currentPoints -= pointsUsed;
-            }
-
-            // 9. ÁP GIẢM GIÁ HẠNG THÀNH VIÊN (Nếu có)
-            if (user.membership) {
-                const membershipDiscount = totalAmount * (user.membership as any).discountRate;
-                discountAmount += membershipDiscount;
-            }
-
-            // 10. TÍNH TIỀN CUỐI
-            const finalAmount = Math.max(totalAmount - discountAmount, 0);
-
-            // 11. TÍCH ĐIỂM SAU THANH TOÁN
-            let pointsEarned = 0;
-            if (user.membership) {
-                pointsEarned = Math.floor(finalAmount * (user.membership as any).pointAccumulationRate);
-                user.currentPoints += pointsEarned;
-            }
-
-            user.totalSpending += finalAmount;
-            await user.save({ session });
-
-            // 12. TẠO BOOKING
-            const booking = await this.bookingModel.create(
-                [
-                    {
-                        userId: user._id,
-                        showtime: showtime._id,
-                        foods: foodsBooking,
-                        voucher: voucherDoc?._id,
-                        pointsUsed,
-                        pointsEarned,
-                        totalAmount,
-                        discountAmount,
-                        finalAmount,
-                        bookingStatus: BookingStatusEnum.PENDING,
-                        expiresAt: new Date(Date.now() + 10 * 60 * 1000) // 10 phút giữ chỗ
-                    }
-                ],
-                { session }
+            /* ================== 4. SEAT + TICKET PRICE ================== */
+            const seats = await seatService.validateSeats(
+                showtime._id.toString(),
+                dto.seatIds,
+                session
             );
 
-            // 13. TẠO TICKETS
-            for (const t of ticketsToCreate) {
-                t.booking = booking[0]._id;
-                t.qrCode = `QR-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+            const { ticketTotal, tickets } =
+                await priceService.calculateTicketPrice(
+                    seats,
+                    showtime,
+                    room,
+                    user,
+                    session
+                );
+
+            /* ================== 5. FOOD ================== */
+            const { foodTotal, foodsPayload } =
+                await foodService.calculateFoods(dto.foods, session);
+
+            let totalAmount = ticketTotal + foodTotal;
+
+            /* ================== 6. VOUCHER ================== */
+            const { voucher, discount: voucherDiscount } =
+                await voucherService.applyVoucher(
+                    dto.voucherCode,
+                    totalAmount,
+                    session
+                );
+
+            /* ================== 7. POINTS ================== */
+            const pointsUsed = membershipService.applyPoints(user, dto.pointsUsed);
+            let discountAmount = voucherDiscount + pointsUsed;
+
+            /* ================== 8. MEMBERSHIP DISCOUNT ================== */
+            if (user.membership) {
+                discountAmount += totalAmount * (user.membership as any).discountRate;
             }
 
-            await this.ticketModel.insertMany(ticketsToCreate, { session });
+            const finalAmount = Math.max(totalAmount - discountAmount, 0);
+
+            /* ================== 9. EARN POINTS (CHƯA CỘNG NGAY) ================== */
+            const pointsEarned = membershipService.calculateEarnedPoints(
+                user,
+                finalAmount
+            );
+
+            //format food
+            const formattedFoods = foodsPayload.map((f: any) => ({
+                foodId: f.foodId,
+                quantity: Number(f.quantity), // Chuyển sang primitive number
+                priceAtBooking: Number(f.priceAtBooking) // Chuyển sang primitive number
+            }));
+
+            // Khi dùng session với .create(), tham số thứ 2 phải là options object
+            const [booking] = await this.bookingModel.create([{
+                userId: user._id,
+                showtime: showtime._id,
+                foods: formattedFoods,
+                voucher: voucher?._id,
+                pointsUsed: Number(pointsUsed),
+                pointsEarned: Number(pointsEarned),
+                totalAmount: Number(totalAmount),
+                discountAmount: Number(discountAmount),
+                finalAmount: Number(finalAmount),
+                bookingStatus: BookingStatusEnum.PENDING,
+                expiresAt: new Date(Date.now() + 10 * 60 * 1000)
+            }], { session });
+
+            /* ================== 11. CREATE TICKETS ================== */
+            const ticketsData = await Promise.all(tickets.map(async (t) => {
+                const ticketId = new mongoose.Types.ObjectId();
+                const domain = ""; //url fe
+                const qrUrl = `${domain}/ticket?ticketId=${ticketId}`;
+                const qrCodeBase64 = await generateQRCode(qrUrl);
+
+                return {
+                    ...t,
+                    _id: ticketId,
+                    booking: booking._id,
+                    showtime: showtime._id,
+                    status: TicketStatusEnum.UNPAID, // Giữ ghế, hết hạn thì release
+                    expiresAt: new Date(Date.now() + 10 * 60 * 1000),
+                    qrCode: qrCodeBase64
+                };
+            }));
+
+            try {
+                await this.ticketModel.insertMany(ticketsData, { session });
+            } catch (e: any) {
+                if (e.code === 11000) {
+                    throw new AppError("Có ghế đã được giữ hoặc đặt", 409);
+                }
+                throw e;
+            }
+
+            /* ================== 12. SAVE USER (TRỪ ĐIỂM) ================== */
+            await user.save({ session });
 
             await session.commitTransaction();
 
-            return {
-                booking: booking[0],
-                ticketTotal,
-                foodTotal,
-                discountAmount,
-                finalAmount,
-                pointsEarned
-            };
-        } catch (error) {
+            return booking;
+
+        } catch (e) {
             await session.abortTransaction();
-            throw error;
+            throw e;
         } finally {
             session.endSession();
         }
     }
+
+    async fakePayBooking(bookingId: string, userId: string) {
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            const booking = await this.bookingModel
+                .findById(bookingId)
+                .session(session);
+
+            if (!booking) {
+                throw new AppError("Booking không tồn tại", 404);
+            }
+
+            if (booking.bookingStatus !== BookingStatusEnum.PENDING) {
+                throw new AppError("Booking không hợp lệ", 400);
+            }
+
+            if (booking.expiresAt < new Date()) {
+                throw new AppError("Booking đã hết hạn", 410);
+            }
+
+            /* ===== UPDATE BOOKING ===== */
+            booking.bookingStatus = BookingStatusEnum.SUCCESS;
+            await booking.save({ session });
+
+            /* ===== UPDATE TICKETS ===== */
+            await this.ticketModel.updateMany(
+                { booking: booking._id },
+                {
+                    status: TicketStatusEnum.PAID,
+                    expiresAt: null
+                },
+                { session }
+            );
+
+            /* ===== COMMIT ===== */
+            await session.commitTransaction();
+
+            /* ===== REALTIME ===== */
+            const io = getIo();
+            const roomName = `showtime-${booking.showtime.toString()}`;
+
+            io.to(roomName).emit("seat:update", {
+                type: "PAID",
+                bookingId: booking._id,
+                seatIds: (booking as any).seatIds
+            });
+
+            return { success: true };
+
+        } catch (e) {
+            await session.abortTransaction();
+            throw e;
+        } finally {
+            session.endSession();
+        }
+    }
+
+    async fakeFailBooking(bookingId: string) {
+        const session = await mongoose.startSession();
+        session.startTransaction();
+
+        try {
+            const booking = await this.bookingModel.findById(bookingId).session(session);
+
+            if (!booking) throw new AppError("Booking không tồn tại", 404);
+
+            booking.bookingStatus = BookingStatusEnum.FAILED;
+            await booking.save({ session });
+
+            await this.ticketModel.updateMany(
+                { booking: booking._id },
+                {
+                    status: TicketStatusEnum.CANCELLED,
+                    expiresAt: null
+                },
+                { session }
+            );
+
+            await session.commitTransaction();
+
+            const io = getIo();
+            const roomName = `showtime-${booking.showtime.toString()}`;
+
+            io.to(roomName).emit("seat:update", {
+                type: "RELEASE",
+                bookingId: booking._id,
+                seatIds: (booking as any).seatIds
+            });
+
+            return { success: true };
+
+        } catch (e) {
+            await session.abortTransaction();
+            throw e;
+        } finally {
+            session.endSession();
+        }
+    }
+
+    async getUserBookingDetail(bookingId: string, userId: string) {
+        const booking = await this.bookingModel.findOne({ _id: bookingId, userId })
+            .populate("showtime")
+            .populate("foods.foodId")
+            .populate("userId", "fullName email");
+
+        if (!booking) throw new AppError("Không tìm thấy đơn hàng", 404);
+
+        // Lấy thêm danh sách vé (có chứa QR) thuộc booking này
+        const tickets = await this.ticketModel.find({ booking: booking._id });
+
+        return { booking, tickets };
+    }
+
+    async getBookings(page: number = 1, limit: number = 10, status?: string) {
+        const skip = (page - 1) * limit;
+        const query = status ? { bookingStatus: status } : {};
+
+        const [items, total] = await Promise.all([
+            this.bookingModel.find(query)
+                .sort({ createdAt: -1 })
+                .skip(skip)
+                .limit(limit)
+                .populate("userId", "username fullName email")
+                .select("userId createdAt finalAmount bookingStatus"),
+            this.bookingModel.countDocuments(query)
+        ]);
+
+        return { items, total, page, totalPages: Math.ceil(total / limit) };
+    }
+
+    async getBookingDetail(bookingId: string) {
+        const booking = await this.bookingModel.findById(bookingId)
+            .populate("userId", "username fullName email phoneNumber")
+            .populate({
+                path: "showtime",
+                populate: [
+                    { path: "movie", select: "name" },
+                    { path: "room", select: "name" }
+                ]
+            })
+            .populate("foods.foodId", "name");
+
+        if (!booking) throw new AppError("Không tìm thấy hóa đơn", 404);
+
+        const tickets = await this.ticketModel.find({ booking: booking._id });
+
+        return { booking, tickets };
+    }
+
 }

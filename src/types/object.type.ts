@@ -15,7 +15,7 @@ interface IUser extends IBaseDocument {
     googleId?: string;
     provider?: LoginTypeEnum;
     role: mongoose.Types.ObjectId;
-    membership?: mongoose.Types.ObjectId;
+    membership?: mongoose.Types.ObjectId | IMembership;
     currentPoints: number; // Điểm hiện đang có để tiêu dùng
     totalSpending: number;
     isBlocked: boolean;
@@ -92,6 +92,8 @@ interface IMovie extends IBaseDocument {
     agePermission: AgePermissionTypeEnum;
     status: MovieStatusEnum;
     format?: string[];
+    likes: mongoose.Types.ObjectId[];
+    likeCount: number;
 }
 
 export type { IMovie };
@@ -211,6 +213,7 @@ interface ITicket extends IBaseDocument {
     price: number;
     qrCode: string;
     status: TicketStatusEnum;
+    expiresAt: Date;
 }
 
 export type { ITicket };
