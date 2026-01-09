@@ -174,51 +174,50 @@ export class BookingService {
         session.startTransaction();
 
         try {
-            const booking = await this.bookingModel
-                .findById(bookingId)
-                .session(session);
+            const booking = await this.bookingModel.findById(bookingId).session(session);
+            if (!booking) throw new AppError("Booking không tồn tại", 404);
+            if (booking.bookingStatus !== BookingStatusEnum.PENDING) throw new AppError("Booking không hợp lệ", 400);
+            if (booking.expiresAt < new Date()) throw new AppError("Booking đã hết hạn", 410);
 
-            if (!booking) {
-                throw new AppError("Booking không tồn tại", 404);
-            }
+            //Lấy danh sách seatIds từ Ticket để gửi Socket 
+            const tickets = await this.ticketModel.find({ booking: booking._id }).session(session);
+            const seatIds = tickets.map(t => t.seat.toString());
 
-            if (booking.bookingStatus !== BookingStatusEnum.PENDING) {
-                throw new AppError("Booking không hợp lệ", 400);
-            }
-
-            if (booking.expiresAt < new Date()) {
-                throw new AppError("Booking đã hết hạn", 410);
-            }
-
-            /* ===== UPDATE BOOKING ===== */
+            //UPDATE BOOKING 
             booking.bookingStatus = BookingStatusEnum.SUCCESS;
             await booking.save({ session });
 
-            /* ===== UPDATE TICKETS ===== */
+            //UPDATE TICKETS 
             await this.ticketModel.updateMany(
                 { booking: booking._id },
+                { status: TicketStatusEnum.PAID, expiresAt: null },
+                { session }
+            );
+
+            //CẬP NHẬT ĐIỂM VÀ CHI TIÊU CHO USER 
+            await this.userModel.findByIdAndUpdate(
+                booking.userId,
                 {
-                    status: TicketStatusEnum.PAID,
-                    expiresAt: null
+                    $inc: {
+                        currentPoints: booking.pointsEarned, // Cộng điểm mới
+                        totalSpending: booking.finalAmount   // Cộng tổng chi tiêu
+                    }
                 },
                 { session }
             );
 
-            /* ===== COMMIT ===== */
             await session.commitTransaction();
 
-            /* ===== REALTIME ===== */
+            //Giữ tạm ghế
             const io = getIo();
             const roomName = `showtime-${booking.showtime.toString()}`;
-
             io.to(roomName).emit("seat:update", {
                 type: "PAID",
                 bookingId: booking._id,
-                seatIds: (booking as any).seatIds
+                seatIds: seatIds 
             });
 
             return { success: true };
-
         } catch (e) {
             await session.abortTransaction();
             throw e;
@@ -233,34 +232,44 @@ export class BookingService {
 
         try {
             const booking = await this.bookingModel.findById(bookingId).session(session);
-
             if (!booking) throw new AppError("Booking không tồn tại", 404);
 
+            // Lấy seatIds trước khi hủy
+            const tickets = await this.ticketModel.find({ booking: booking._id }).session(session);
+            const seatIds = tickets.map(t => t.seat.toString());
+
+            //Cập nhật failed cho booking
             booking.bookingStatus = BookingStatusEnum.FAILED;
             await booking.save({ session });
 
+            //Cập nhật cancelled cho vé
             await this.ticketModel.updateMany(
                 { booking: booking._id },
-                {
-                    status: TicketStatusEnum.CANCELLED,
-                    expiresAt: null
-                },
+                { status: TicketStatusEnum.CANCELLED, expiresAt: null },
                 { session }
             );
 
+            //Trả điểm cho người dùng
+            if ((booking.pointsUsed || 0) > 0) {
+                await this.userModel.findByIdAndUpdate(
+                    booking.userId,
+                    { $inc: { currentPoints: booking.pointsUsed } }, //cộng dồn
+                    { session }
+                );
+            }
+
             await session.commitTransaction();
 
+            //Giải phóng ghế cho người khác chọn
             const io = getIo();
             const roomName = `showtime-${booking.showtime.toString()}`;
-
             io.to(roomName).emit("seat:update", {
                 type: "RELEASE",
                 bookingId: booking._id,
-                seatIds: (booking as any).seatIds
+                seatIds: seatIds
             });
 
             return { success: true };
-
         } catch (e) {
             await session.abortTransaction();
             throw e;
