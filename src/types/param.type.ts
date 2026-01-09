@@ -108,3 +108,8 @@ interface IRoleQuery extends IPagintion {
 }
 export type { IRoleQuery };
 
+interface IBlogQuery extends IPagintion {
+    title?: string,
+    isPublished?: string
+}
+export type { IBlogQuery };

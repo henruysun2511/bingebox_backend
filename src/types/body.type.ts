@@ -193,11 +193,22 @@ interface IRoleBody {
 export type { IRoleBody };
 
 interface ICommentBody {
-    parent?: mongoose.Types.ObjectId, 
+    parent?: mongoose.Types.ObjectId,
     movie: mongoose.Types.ObjectId,
-    content: string, 
+    content: string,
     rating: number
 }
 
 export type { ICommentBody };
+
+interface IBlogBody {
+    title: string;
+    slug: string;
+    content: string;
+    thumbnail?: string;
+    author: mongoose.Types.ObjectId;
+    views: number;
+    isPublished: boolean;
+}
+export type { IBlogBody };
 
