@@ -2,6 +2,7 @@ import { Router } from "express";
 import actorRouter from "./Actor/actor.route";
 import ageTypeRouter from "./AgeType/ageType.route";
 import authRouter from "./Auth/auth.route";
+import blogRouter from "./Blog/blog.route";
 import bookingRouter from "./Booking/booking.route";
 import categoryRouter from "./Category/category.route";
 import cinemaRouter from "./Cinema/cinema.route";
@@ -59,8 +60,8 @@ router.use("/vouchers", voucherRouter);
 router.use("/bookings", bookingRouter);
 router.use("/dashboards", dashboardRouter);
 
+router.use("/blogs", blogRouter);
+
 router.use("/upload", uploadRouter);
-
-
 
 export default router;
