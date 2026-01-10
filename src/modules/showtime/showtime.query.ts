@@ -1,5 +1,4 @@
-
-import { IShowtimeQuery } from "@/types/param.type";
+import { IShowtimeQuery } from "../../types/param.type";
 import { buildSort } from "../../utils/buidSort";
 
 export function buildShowtimeQuery(query: IShowtimeQuery) {
