@@ -1,4 +1,4 @@
-import { IAgeTypeQuery } from "@/types/param.type";
+import { IAgeTypeQuery } from "../../types/param.type";
 
 export function buildAgeTypeQuery(query: IAgeTypeQuery) {
     const filter: any = { isDeleted: false };

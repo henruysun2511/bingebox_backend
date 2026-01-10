@@ -1,5 +1,5 @@
-import { ICinemaBody } from "@/types/body.type";
-import { ICinemaQuery } from "@/types/param.type";
+import { ICinemaBody } from "../../types/body.type";
+import { ICinemaQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildCinemaQuery } from "./cinema.query";

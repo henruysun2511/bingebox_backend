@@ -1,4 +1,4 @@
-import { IUserQuery } from "@/types/param.type";
+import { IUserQuery } from "../../types/param.type";
 import { buildSort } from "../../utils/buidSort";
 
 export function buildUserQuery(query: IUserQuery) {

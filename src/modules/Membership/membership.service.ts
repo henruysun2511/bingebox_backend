@@ -1,5 +1,5 @@
-import { IMembershipBody } from "@/types/body.type";
-import { IUser } from "@/types/object.type";
+import { IMembershipBody } from "../../types/body.type";
+import { IUser } from "../../types/object.type";
 import { AppError } from "../../utils/appError";
 import MembershipModel from "./membership.schema";
 

@@ -1,7 +1,7 @@
-import { IShowtime } from "@/types/object.type";
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { BaseStatusEnum } from "../../shares/constants/enum";
+import { IShowtime } from "../../types/object.type";
 
 const showtimeSchema = new mongoose.Schema<IShowtime>({
     ...baseFields,

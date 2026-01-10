@@ -1,4 +1,4 @@
-import { ITimeSlotBody } from "@/types/body.type";
+import { ITimeSlotBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { default as TimeSlotModel } from "./timeSlot.schema";
 

@@ -1,5 +1,5 @@
-import { IComment } from "@/types/object.type";
 import mongoose, { Schema } from "mongoose";
+import { IComment } from "../../types/object.type";
 
 const commentSchema = new Schema<IComment>({
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },

@@ -1,4 +1,4 @@
-import { IPermissionQuery } from "@/types/param.type";
+import { IPermissionQuery } from "../../types/param.type";
 import { buildSort } from "../../utils/buidSort";
 
 export function buildPermissionQuery(query: IPermissionQuery) {

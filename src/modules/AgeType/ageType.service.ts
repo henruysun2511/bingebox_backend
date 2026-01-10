@@ -1,5 +1,5 @@
-import { IAgeTypebody } from "@/types/body.type";
-import { IAgeTypeQuery } from "@/types/param.type";
+import { IAgeTypebody } from "../../types/body.type";
+import { IAgeTypeQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { buildAgeTypeQuery } from "./ageType.query";
 import AgeTypeModel from "./ageType.schema";

@@ -1,5 +1,5 @@
-import { IRoleBody } from "@/types/body.type";
 import mongoose from "mongoose";
+import { IRoleBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import PermissionModel from "../Permission/permission.schema";

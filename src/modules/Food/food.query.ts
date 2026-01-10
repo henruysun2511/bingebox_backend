@@ -1,4 +1,4 @@
-import { IFoodQuery } from "@/types/param.type";
+import { IFoodQuery } from "../../types/param.type";
 
 export function buildFoodQuery(query: IFoodQuery) {
     const filter: any = {

@@ -1,4 +1,4 @@
-import { IBlogQuery } from "@/types/param.type";
+import { IBlogQuery } from "../../types/param.type";
 
 export function buildBlogQuery(query: IBlogQuery) {
     const filter: any = { isDeleted: false };

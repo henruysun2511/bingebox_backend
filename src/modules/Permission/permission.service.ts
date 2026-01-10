@@ -1,6 +1,6 @@
-import { IPermissionBody } from "@/types/body.type";
-import { IPermissionQuery } from "@/types/param.type";
 import mongoose from "mongoose";
+import { IPermissionBody } from "../../types/body.type";
+import { IPermissionQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildPermissionQuery } from "./permission.query";

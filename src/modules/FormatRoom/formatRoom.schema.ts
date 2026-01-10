@@ -1,6 +1,6 @@
-import { IFormatRoom } from "@/types/object.type";
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
+import { IFormatRoom } from "../../types/object.type";
 
 const formatRoomSchema = new mongoose.Schema<IFormatRoom>({
     ...baseFields,

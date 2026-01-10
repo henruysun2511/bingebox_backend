@@ -1,6 +1,6 @@
-import { IFoodBody } from "@/types/body.type";
-import { IFoodQuery } from "@/types/param.type";
 import { ClientSession } from "mongoose";
+import { IFoodBody } from "../../types/body.type";
+import { IFoodQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { buildFoodQuery } from "./food.query";
 import FoodModel from "./food.schema";

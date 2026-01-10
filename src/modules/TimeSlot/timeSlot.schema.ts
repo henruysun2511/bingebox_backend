@@ -1,6 +1,6 @@
-import { ITimeSlot } from "@/types/object.type";
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
+import { ITimeSlot } from "../../types/object.type";
 
 const timeSlotSchema = new mongoose.Schema<ITimeSlot>({
     ...baseFields,

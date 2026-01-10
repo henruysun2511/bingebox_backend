@@ -1,6 +1,6 @@
-import { IRoom, ISeat, IShowtime, IUser } from "@/types/object.type";
 import { ClientSession } from "mongoose";
 import { ITicketPriceBody } from "../../types/body.type";
+import { IRoom, ISeat, IShowtime, IUser } from "../../types/object.type";
 import { ITicketPriceQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { calcAge } from "../../utils/calcAge";

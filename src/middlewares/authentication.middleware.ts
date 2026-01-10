@@ -1,8 +1,8 @@
-import { IUser } from "@/types/object.type";
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import User from "../modules/User/user.schema";
 import { ENV } from "../shares/constants/enviroment";
+import { IUser } from "../types/object.type";
 import { AppError } from "../utils/appError";
 
 interface TokenPayload extends JwtPayload {

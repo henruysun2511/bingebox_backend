@@ -1,4 +1,4 @@
-import { IVoucherQuery } from "@/types/param.type";
+import { IVoucherQuery } from "../../types/param.type";
 import { buildSort } from "../../utils/buidSort";
 
 export function buildVoucherQuery(query: IVoucherQuery) {

@@ -1,4 +1,4 @@
-import { IRoleQuery } from "@/types/param.type";
+import { IRoleQuery } from "../../types/param.type";
 
 export function buildRoleQuery(query: IRoleQuery) {
     const filter: any = {
