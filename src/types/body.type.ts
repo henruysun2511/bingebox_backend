@@ -1,5 +1,5 @@
-import { AgePermissionTypeEnum, BaseStatusEnum, DayOfWeekEnum, GenderEnum, MovieStatusEnum, PermissionMethodTypeEnum, SeatLayoutTypeEnum, SubtitleTypeEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
+import { AgePermissionTypeEnum, BaseStatusEnum, DayOfWeekEnum, GenderEnum, MovieStatusEnum, PermissionMethodTypeEnum, SeatLayoutTypeEnum, SubtitleTypeEnum } from "../shares/constants/enum";
 
 interface IActorBody {
     name: string;

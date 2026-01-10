@@ -1,4 +1,4 @@
-import { BaseStatusEnum, DayOfWeekEnum } from "@/shares/constants/enum";
+import { BaseStatusEnum, DayOfWeekEnum } from "../shares/constants/enum";
 
 interface IPagintion {
     page?: number;
@@ -113,3 +113,4 @@ interface IBlogQuery extends IPagintion {
     isPublished?: string
 }
 export type { IBlogQuery };
+

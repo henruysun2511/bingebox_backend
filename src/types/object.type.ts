@@ -1,6 +1,6 @@
-import { AgePermissionTypeEnum, BookingStatusEnum, DayOfWeekEnum, GenderEnum, LoginTypeEnum, MovieStatusEnum, PaymentStatusEnum, PermissionMethodTypeEnum, SeatLayoutTypeEnum, SubtitleTypeEnum, TicketStatusEnum } from "@/shares/constants/enum";
 import mongoose from "mongoose";
 import { IBaseDocument } from "../shares/bases/baseDocument";
+import { AgePermissionTypeEnum, BookingStatusEnum, DayOfWeekEnum, GenderEnum, LoginTypeEnum, MovieStatusEnum, PaymentStatusEnum, PermissionMethodTypeEnum, SeatLayoutTypeEnum, SubtitleTypeEnum, TicketStatusEnum } from "../shares/constants/enum";
 import { BaseStatusEnum } from './../shares/constants/enum';
 
 interface IUser extends IBaseDocument {
