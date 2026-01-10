@@ -18,6 +18,34 @@ export class AuthService {
     private roleModel = RoleModel;
     private membershipModel = MembershipModel;
 
+    private async generateAuthTokens(user: any) {
+        // 1. Lấy thông tin Role name (vì bạn lưu role là ID)
+        const userWithRole = await this.userModel.findById(user._id).populate("role");
+        const roleName = (userWithRole?.role as any)?.name || "CUSTOMER";
+
+        // 2. Tạo Access Token
+        const accessToken = Jwt.sign(
+            {
+                userId: user._id,
+                role: roleName
+            },
+            ENV.ACCESS_TOKEN_SECRET as string,
+            { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
+        );
+
+        // 3. Tạo Refresh Token
+        const refreshToken = crypto.randomBytes(64).toString("hex");
+
+        // 4. Lưu vào Database Session
+        await this.sessionModel.create({
+            userId: user._id,
+            refreshToken,
+            expiresAt: new Date(Date.now() + ENV.REFRESH_TOKEN_TTL),
+        });
+
+        return { accessToken, refreshToken, role: roleName };
+    }
+
     async register(data: IRegisterBody) {
         const { username, email, password, fullName, avatar, birth } = data;
 
@@ -57,42 +85,23 @@ export class AuthService {
 
     async login(data: ILoginBody) {
         const { username, password } = data;
-
-        //Tìm người dùng theo username
         const user = await this.userModel.findOne({ username, isDeleted: false }).select("+password");
 
         if (!user || !user.password) {
             throw new AppError("Tên đăng nhập hoặc mật khẩu không đúng", 401);
         }
 
-        //So sánh mật khẩu
         const isPasswordValid = await bcrypt.compare(password, user.password);
-
         if (!isPasswordValid) {
             throw new AppError("Tên đăng nhập hoặc mật khẩu không đúng", 401);
         }
 
-        //Tạo accsessToken
-        const accessToken = Jwt.sign(
-            { userId: user._id },
-            ENV.ACCESS_TOKEN_SECRET as string,
-            { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
-        );
-
-        //Tạo refreshToken
-        const refreshToken = crypto.randomBytes(64).toString("hex");
-
-        //Lưu refreshToken vào session
-        await this.sessionModel.create({
-            userId: user._id,
-            refreshToken,
-            expiresAt: new Date(Date.now() + ENV.REFRESH_TOKEN_TTL),
-        });
+        // Gọi hàm dùng chung
+        const tokens = await this.generateAuthTokens(user);
 
         return {
             username: user.username,
-            accessToken,
-            refreshToken
+            ...tokens
         };
     }
 
@@ -110,27 +119,25 @@ export class AuthService {
     }
 
     async refreshToken(refreshToken: string) {
-        if (!refreshToken) {
-            throw new AppError("Không tìm thấy refreshToken", 400);
-        }
+        if (!refreshToken) throw new AppError("Không tìm thấy refreshToken", 400);
 
         const session = await this.sessionModel.findOne({ refreshToken });
-        if (!session) {
-            throw new AppError("Token không hợp lệ hoặc hết hạn", 404);
-        }
-        if (session.expiresAt < new Date()) {
+        if (!session || session.expiresAt < new Date()) {
             throw new AppError("Token không hợp lệ hoặc hết hạn", 404);
         }
 
+        const user = await this.userModel.findById(session.userId).populate("role");
+        if (!user) throw new AppError("Người dùng không tồn tại", 404);
+
+        const roleName = (user.role as any)?.name || "CUSTOMER";
+
         const accessToken = Jwt.sign(
-            {
-                userId: session.userId,
-            },
+            { userId: user._id, role: roleName },
             ENV.ACCESS_TOKEN_SECRET as string,
             { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
         );
 
-        return accessToken;
+        return { accessToken, role: roleName };
     }
 
     async forgotPassword(email: string) {
@@ -215,23 +222,10 @@ export class AuthService {
     }
 
     async googleLogin(userId: string) {
-        const accessToken = Jwt.sign(
-            { userId: userId },
-            ENV.ACCESS_TOKEN_SECRET as string,
-            { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
-        );
+        const user = await this.userModel.findById(userId);
+        if (!user) throw new AppError("Người dùng không tồn tại", 404);
 
-        const refreshToken = crypto.randomBytes(64).toString("hex");
-
-        await this.sessionModel.create({
-            userId: userId,
-            refreshToken,
-            expiresAt: new Date(Date.now() + ENV.REFRESH_TOKEN_TTL),
-        });
-
-        return {
-            accessToken,
-            refreshToken
-        };
+        // Gọi hàm dùng chung
+        return await this.generateAuthTokens(user);
     }
 }

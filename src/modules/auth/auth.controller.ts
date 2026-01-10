@@ -7,28 +7,35 @@ import { AuthService } from "./auth.service";
 const authService = new AuthService();
 
 export const register = catchAsync(async (req: Request, res: Response) => {
-    const user = await authService.register(req.body);
-    return success(res, user, "Đăng ký thành công", 201);
+  const user = await authService.register(req.body);
+  return success(res, user, "Đăng ký thành công", 201);
 });
 
 export const login = catchAsync(async (req: Request, res: Response) => {
-    const { username, accessToken, refreshToken } = await authService.login(req.body);
+  const { username, accessToken, refreshToken } = await authService.login(req.body);
 
-    res.cookie("refreshToken", refreshToken, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none", //backend, frontend deploy riêng
-        maxAge: ENV.REFRESH_TOKEN_TTL,
-    });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: ENV.REFRESH_TOKEN_TTL,
+  });
 
-    return success(res, { username, accessToken }, "Đăng nhập thành công", 200);
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: Number(ENV.ACCESS_TOKEN_TTL),
+  });
+
+  return success(res, { username, accessToken }, "Đăng nhập thành công", 200);
 });
 
 export const logout = catchAsync(async (req: Request, res: Response) => {
-    const refreshToken = req.cookies.refreshToken;
-    await authService.logout(refreshToken);
+  const refreshToken = req.cookies.refreshToken;
+  await authService.logout(refreshToken);
 
-    return success(res, null, "Đăng xuất thành công", 200);
+  return success(res, null, "Đăng xuất thành công", 200);
 });
 
 export const refreshToken = catchAsync(async (req: Request, res: Response) => {
@@ -68,6 +75,13 @@ export const googleCallback = async (req: Request, res: Response) => {
     secure: true,
     sameSite: "none",
     maxAge: ENV.REFRESH_TOKEN_TTL,
+  });
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: Number(ENV.ACCESS_TOKEN_TTL),
   });
 
   // Redirect về frontend
