@@ -1,6 +1,6 @@
-import { AppError } from "@/utils/appError";
-import { catchAsync } from "@/utils/catchAsync";
 import { Request, Response } from "express";
+import { AppError } from "../../utils/appError";
+import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
 import { UploadService } from "./upload.service";
 

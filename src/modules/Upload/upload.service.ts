@@ -1,5 +1,5 @@
-import cloudinary from "@/configs/cloudinary.config";
-import { AppError } from "@/utils/appError";
+import cloudinary from "../../configs/cloudinary.config";
+import { AppError } from "../../utils/appError";
 
 export class UploadService {
   async deleteFromCloudinary(publicIds: string | string[]) {

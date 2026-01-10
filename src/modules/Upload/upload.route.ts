@@ -1,6 +1,6 @@
-import { authenticationMiddleware } from "@/middlewares/authentication.middleware";
-import { uploadMiddleware } from "@/middlewares/upload.middleware";
 import { Router } from "express";
+import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
+import { uploadMiddleware } from "../../middlewares/upload.middleware";
 import * as controller from "./upload.controller";
 const router = Router();
 

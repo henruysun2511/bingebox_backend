@@ -1,8 +1,8 @@
-import { IBlogBody } from "@/types/body.type";
-import { IBlogQuery } from "@/types/param.type";
-import { buildPagination } from "@/utils/buildPagination";
 import slugify from "slugify";
+import { IBlogBody } from "../../types/body.type";
+import { IBlogQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
+import { buildPagination } from "../../utils/buildPagination";
 import { buildBlogQuery } from "./blog.query";
 import BlogModel from "./blog.schema";
 

@@ -1,4 +1,4 @@
-import { BaseStatusEnum, BookingStatusEnum, TicketStatusEnum } from "@/shares/constants/enum";
+import { BaseStatusEnum, BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
 import BookingModel from "../Booking/booking.schema";
 import ShowtimeModel from "../Showtime/showtime.schema";
 import TicketModel from "../Ticket/ticket.schema";
