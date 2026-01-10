@@ -22,7 +22,7 @@ import showtimeRouter from "./showtime/showtime.route";
 import ticketRouter from "./ticket/ticket.route";
 import ticketPriceRouter from "./ticketPrice/ticketPrice.route";
 import timeSlotRouter from "./timeSlot/timeSlot.route";
-import uploadRouter from "./Upload/upload.route";
+import uploadRouter from "./upload/upload.route";
 import userRouter from "./user/user.route";
 import voucherRouter from "./voucher/voucher.route";
 const router = Router();
