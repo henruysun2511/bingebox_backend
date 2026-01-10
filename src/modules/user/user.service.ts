@@ -3,7 +3,7 @@ import { IUserBody } from "../../types/body.type";
 import { IUserQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
-import { default as RoleModel } from "../Role/role.schema";
+import { default as RoleModel } from "../role/role.schema";
 import { buildUserQuery } from "./user.query";
 import UserModel from "./user.schema";
 

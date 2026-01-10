@@ -8,7 +8,7 @@ import { initIo } from "./configs/socket.config";
 import { startReleaseSeatCron } from "./crons/releaseSeat.cron";
 import { errorHandlerMiddleware } from "./middlewares/error.middleware";
 import routes from "./modules/index.routes";
-import { registerSeatSocket } from "./modules/Seat/seat.gateway";
+import { registerSeatSocket } from "./modules/seat/seat.gateway";
 import { ENV } from "./shares/constants/enviroment";
 
 dotenv.config();

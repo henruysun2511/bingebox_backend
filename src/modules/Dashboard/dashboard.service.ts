@@ -1,8 +1,8 @@
 import { BaseStatusEnum, BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
-import BookingModel from "../Booking/booking.schema";
-import ShowtimeModel from "../Showtime/showtime.schema";
-import TicketModel from "../Ticket/ticket.schema";
-import UserModel from "../User/user.schema";
+import BookingModel from "../booking/booking.schema";
+import ShowtimeModel from "../showtime/showtime.schema";
+import TicketModel from "../ticket/ticket.schema";
+import UserModel from "../user/user.schema";
 import { buildDateFilter } from "./dashboard.query";
 
 export class DashboardService {

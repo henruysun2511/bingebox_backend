@@ -1,6 +1,6 @@
 import cron from "node-cron";
-import BookingModel from "../modules/Booking/booking.schema";
-import TicketModel from "../modules/Ticket/ticket.schema";
+import BookingModel from "../modules/booking/booking.schema";
+import TicketModel from "../modules/ticket/ticket.schema";
 import { BookingStatusEnum, TicketStatusEnum } from "../shares/constants/enum";
 
 

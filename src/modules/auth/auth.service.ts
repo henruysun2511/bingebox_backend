@@ -5,9 +5,9 @@ import { ENV } from "../../shares/constants/enviroment";
 import { IChangePasswordBody, ILoginBody, IRegisterBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { sendOtpEmail } from "../../utils/sendEmail";
-import { default as MembershipModel } from "../Membership/membership.schema";
-import { default as RoleModel } from "../Role/role.schema";
-import { default as UserModel } from "../User/user.schema";
+import { default as MembershipModel } from "../membership/membership.schema";
+import { default as RoleModel } from "../role/role.schema";
+import { default as UserModel } from "../user/user.schema";
 import { default as PasswordResetModel } from "./passwordReset.schema";
 import { default as SessionModel } from "./session.schema";
 

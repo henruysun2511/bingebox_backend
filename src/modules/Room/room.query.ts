@@ -1,4 +1,4 @@
-import { IRoomQuery } from "@/types/param.type";
+import { IRoomQuery } from "../../types/param.type";
 
 export function buildRoomQuery(query: IRoomQuery) {
     const filter: any = {

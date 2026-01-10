@@ -1,8 +1,8 @@
-import { IRoomBody } from "@/types/body.type";
 import mongoose from "mongoose";
+import { IRoomBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
-import CinemaModel from "../Cinema/cinema.schema";
-import FormatRoomModel from "../FormatRoom/formatRoom.schema";
+import CinemaModel from "../cinema/cinema.schema";
+import FormatRoomModel from "../formatRoom/formatRoom.schema";
 import { buildRoomQuery } from "./room.query";
 import RoomModel from "./room.schema";
 

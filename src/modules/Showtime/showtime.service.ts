@@ -4,8 +4,8 @@ import mongoose from "mongoose";
 import { IShowtimeBody } from "../../types/body.type";
 import { IShowtimeQuery } from "../../types/param.type";
 import { buildPagination } from "../../utils/buildPagination";
-import { default as MovieModel } from "../Movie/movie.schema";
-import { default as TimeSlotModel } from "../TimeSlot/timeSlot.schema";
+import { default as MovieModel } from "../movie/movie.schema";
+import { default as TimeSlotModel } from "../timeSlot/timeSlot.schema";
 import { buildShowtimeQuery } from "./showtime.query";
 import { default as ShowtimeModel } from "./showtime.schema";
 

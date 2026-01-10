@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { BaseStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
-import ShowtimeModel from "../Showtime/showtime.schema";
+import ShowtimeModel from "../showtime/showtime.schema";
 
 export class QuickTicketBuyingService {
     private showtimeModel = ShowtimeModel;

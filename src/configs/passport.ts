@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import User from "../modules/User/user.schema";
+import User from "../modules/user/user.schema";
 import { LoginTypeEnum } from "../shares/constants/enum";
 import { ENV } from "../shares/constants/enviroment";
 

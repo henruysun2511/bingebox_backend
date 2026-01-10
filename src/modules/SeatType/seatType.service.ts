@@ -1,5 +1,5 @@
-import { ISeatTypeBody } from "@/types/body.type";
 import mongoose from "mongoose";
+import { ISeatTypeBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import SeatTypeModel from "./seatType.schema";
 

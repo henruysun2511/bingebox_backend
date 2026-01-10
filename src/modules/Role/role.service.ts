@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { IRoleBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
-import PermissionModel from "../Permission/permission.schema";
+import PermissionModel from "../permission/permission.schema";
 import { buildRoleQuery } from "./role.query";
 import RoleModel from "./role.schema";
 

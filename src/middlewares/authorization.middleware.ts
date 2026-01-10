@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import Role from "../modules/Role/role.schema";
+import Role from "../modules/role/role.schema";
 import { AppError } from "../utils/appError";
 
 export const authorizationMiddleware = async (

@@ -1,9 +1,9 @@
 import mongoose, { ClientSession } from "mongoose";
 import { TicketStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
-import { default as RoomModel } from "../Room/room.schema";
-import { default as ShowtimeModel } from "../Showtime/showtime.schema";
-import { default as TicketModel } from "../Ticket/ticket.schema";
+import { default as RoomModel } from "../room/room.schema";
+import { default as ShowtimeModel } from "../showtime/showtime.schema";
+import { default as TicketModel } from "../ticket/ticket.schema";
 import { default as SeatModel } from "./seat.schema";
 
 export class SeatService {

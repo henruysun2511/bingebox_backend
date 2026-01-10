@@ -4,15 +4,15 @@ import { BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum
 import { IBookingBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
 import { generateQRCode } from "../../utils/qrCode";
-import { FoodService } from "../Food/food.service";
-import { MembershipService } from "../Membership/membership.service";
-import RoomModel from "../Room/room.schema";
-import { SeatService } from "../Seat/seat.service";
-import ShowtimeModel from "../Showtime/showtime.schema";
-import TicketModel from "../Ticket/ticket.schema";
-import { TicketPriceService } from "../TicketPrice/ticketPrice.service";
-import UserModel from "../User/user.schema";
-import { VoucherService } from "../Voucher/voucher.service";
+import { FoodService } from "../food/food.service";
+import { MembershipService } from "../membership/membership.service";
+import RoomModel from "../room/room.schema";
+import { SeatService } from "../seat/seat.service";
+import ShowtimeModel from "../showtime/showtime.schema";
+import TicketModel from "../ticket/ticket.schema";
+import { TicketPriceService } from "../ticketPrice/ticketPrice.service";
+import UserModel from "../user/user.schema";
+import { VoucherService } from "../voucher/voucher.service";
 import BookingModel from "./booking.schema";
 
 export class BookingService {
