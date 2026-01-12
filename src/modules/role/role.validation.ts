@@ -18,10 +18,9 @@ export const createRole = Joi.object({
         "any.required": "Tên vai trò là bắt buộc",
     }),
     description: Joi.string().allow("").optional(),
-    permissions: Joi.array().items(Joi.string()).min(1).required().messages({
-        "array.min": "Phải gán ít nhất một quyền cho vai trò này",
-        "any.required": "Danh sách quyền là bắt buộc",
-    }),
+    permissions: Joi.array().items(Joi.string()).optional().default([]).messages({
+        "array.base": "Danh sách quyền phải là một mảng (array)",
+    })
 });
 
 export const updateRole = createRole.fork(

@@ -17,7 +17,6 @@ const roleSchema = new mongoose.Schema<IRole>({
     permissions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Permission',
-        required: true
     }]
 }, {
     timestamps: true

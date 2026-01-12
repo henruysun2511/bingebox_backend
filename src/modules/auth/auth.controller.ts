@@ -12,7 +12,7 @@ export const register = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const login = catchAsync(async (req: Request, res: Response) => {
-  const { username, accessToken, refreshToken } = await authService.login(req.body);
+  const { username, accessToken, refreshToken, roleName } = await authService.login(req.body);
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
@@ -25,10 +25,10 @@ export const login = catchAsync(async (req: Request, res: Response) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge: Number(ENV.ACCESS_TOKEN_TTL),
+    maxAge: ENV.ACCESS_TOKEN_TTL,
   });
 
-  return success(res, { username, accessToken }, "Đăng nhập thành công", 200);
+  return success(res, { username, accessToken, roleName }, "Đăng nhập thành công", 200);
 });
 
 export const logout = catchAsync(async (req: Request, res: Response) => {
@@ -68,7 +68,7 @@ export const changePassword = catchAsync(async (req: Request, res: Response) => 
 });
 
 export const googleCallback = async (req: Request, res: Response) => {
-  const { accessToken, refreshToken } = await authService.googleLogin(req.user!._id.toString());
+  const { username, accessToken, refreshToken, roleName } = await authService.googleLogin(req.user!._id.toString());
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
@@ -81,11 +81,11 @@ export const googleCallback = async (req: Request, res: Response) => {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    maxAge: Number(ENV.ACCESS_TOKEN_TTL),
+    maxAge: ENV.ACCESS_TOKEN_TTL,
   });
 
   // Redirect về frontend
   res.redirect(
-    `${ENV.CLIENT_URL}/oauth-success?accessToken=${accessToken}&refreshToken=${refreshToken}`
+    `${ENV.CLIENT_URL}/oauth-success?accessToken=${accessToken}&refreshToken=${refreshToken}&roleName=${roleName}&username=${encodeURIComponent(username)}`
   );
 };

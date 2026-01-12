@@ -22,6 +22,7 @@ export class AuthService {
         // 1. Lấy thông tin Role name (vì bạn lưu role là ID)
         const userWithRole = await this.userModel.findById(user._id).populate("role");
         const roleName = (userWithRole?.role as any)?.name || "CUSTOMER";
+        console.log(roleName)
 
         // 2. Tạo Access Token
         const accessToken = Jwt.sign(
@@ -43,7 +44,7 @@ export class AuthService {
             expiresAt: new Date(Date.now() + ENV.REFRESH_TOKEN_TTL),
         });
 
-        return { accessToken, refreshToken, role: roleName };
+        return { accessToken, refreshToken, roleName };
     }
 
     async register(data: IRegisterBody) {
@@ -225,7 +226,12 @@ export class AuthService {
         const user = await this.userModel.findById(userId);
         if (!user) throw new AppError("Người dùng không tồn tại", 404);
 
-        // Gọi hàm dùng chung
-        return await this.generateAuthTokens(user);
+        // Gọi hàm dùng chung để lấy các token và roleName
+        const tokens = await this.generateAuthTokens(user);
+
+        return {
+            username: user.username, // Bổ sung thêm username
+            ...tokens
+        };
     }
 }
