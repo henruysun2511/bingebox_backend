@@ -29,7 +29,7 @@ export class AuthService {
                 sub: user._id,
                 username: user.username,
                 role,
-                avatar: user.vatar
+                avatar: user.avatar
             },
             ENV.ACCESS_TOKEN_SECRET as string,
             { expiresIn: ENV.ACCESS_TOKEN_TTL as any }

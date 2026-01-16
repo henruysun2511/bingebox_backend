@@ -39,7 +39,7 @@ export const logout = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const refreshToken = catchAsync(async (req: Request, res: Response) => {
-  const { refreshToken } = req.cookies.refreshToken;
+  const refreshToken = req.cookies.refreshToken;;
 
   const result = await authService.refreshToken(refreshToken);
   return success(res, result, "Refresh token thành công");
