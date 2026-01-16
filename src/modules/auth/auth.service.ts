@@ -21,14 +21,14 @@ export class AuthService {
     private async generateAuthTokens(user: any) {
         // 1. Lấy thông tin Role và Avatar
         const userWithRole = await this.userModel.findById(user._id).populate("role");
-        const roleName = (userWithRole?.role as any)?.name || "CUSTOMER";
+        const role = (userWithRole?.role as any)?.name || "CUSTOMER";
 
         // 2. Tạo Access Token (Payload khớp hoàn toàn với UserJwtPayload của Frontend)
         const accessToken = Jwt.sign(
             {
                 sub: user._id,
                 username: user.username,
-                roleId: roleName,
+                role,
                 avatar: user.vatar
             },
             ENV.ACCESS_TOKEN_SECRET as string,
@@ -48,7 +48,7 @@ export class AuthService {
         return {
             accessToken,
             refreshToken,
-            roleName,
+            role,
         };
     }
 
