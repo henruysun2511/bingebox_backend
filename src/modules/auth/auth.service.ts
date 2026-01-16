@@ -19,16 +19,19 @@ export class AuthService {
     private membershipModel = MembershipModel;
 
     private async generateAuthTokens(user: any) {
-        // 1. Lấy thông tin Role name (vì bạn lưu role là ID)
+        // 1. Lấy thông tin Role và Avatar
         const userWithRole = await this.userModel.findById(user._id).populate("role");
         const roleName = (userWithRole?.role as any)?.name || "CUSTOMER";
-        console.log(roleName)
+        const avatar = userWithRole?.avatar || ""; 
+        const username = userWithRole?.username || user.username;
 
-        // 2. Tạo Access Token
+        // 2. Tạo Access Token (Payload khớp hoàn toàn với UserJwtPayload của Frontend)
         const accessToken = Jwt.sign(
             {
-                userId: user._id,
-                role: roleName
+                sub: user._id,
+                username: username,
+                roleId: roleName,
+                avatar: avatar
             },
             ENV.ACCESS_TOKEN_SECRET as string,
             { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
@@ -41,10 +44,16 @@ export class AuthService {
         await this.sessionModel.create({
             userId: user._id,
             refreshToken,
-            expiresAt: new Date(Date.now() + ENV.REFRESH_TOKEN_TTL),
+            expiresAt: new Date(Date.now() + Number(ENV.REFRESH_TOKEN_TTL)),
         });
 
-        return { accessToken, refreshToken, roleName };
+        return {
+            accessToken,
+            refreshToken,
+            username,
+            roleName,
+            avatar
+        };
     }
 
     async register(data: IRegisterBody) {

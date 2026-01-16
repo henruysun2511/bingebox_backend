@@ -298,4 +298,15 @@ interface IBlog extends IBaseDocument {
 
 export type { IBlog };
 
+interface IGiftCard extends IBaseDocument {
+    title: string;
+    description: string;
+    price: number;
+}
+
+export type {IGiftCard}
+
+
+
+
 
