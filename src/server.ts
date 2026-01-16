@@ -17,7 +17,15 @@ const app = express();
 const PORT = ENV.PORT;
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: ENV.CLIENT_URL, credentials: true }));
+const allowedOrigins = [
+  process.env.CLIENT_URL, 
+  process.env.CLIENT_URL_2
+].filter((origin): origin is string => Boolean(origin)); 
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 app.use("/api/v1", routes);
 
