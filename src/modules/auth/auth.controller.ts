@@ -19,6 +19,7 @@ export const login = catchAsync(async (req: Request, res: Response) => {
     secure: true,
     sameSite: "none",
     maxAge: ENV.REFRESH_TOKEN_TTL,
+    path: "/",
   });
 
   res.cookie("accessToken", accessToken, {
@@ -26,6 +27,7 @@ export const login = catchAsync(async (req: Request, res: Response) => {
     secure: true,
     sameSite: "none",
     maxAge: ENV.ACCESS_TOKEN_TTL,
+    path: "/",
   });
 
   return success(res, { username, accessToken, role }, "Đăng nhập thành công", 200);
@@ -75,6 +77,7 @@ export const googleCallback = async (req: Request, res: Response) => {
     secure: true,
     sameSite: "none",
     maxAge: ENV.REFRESH_TOKEN_TTL,
+    path: "/",
   });
 
   res.cookie("accessToken", accessToken, {
@@ -82,6 +85,7 @@ export const googleCallback = async (req: Request, res: Response) => {
     secure: true,
     sameSite: "none",
     maxAge: ENV.ACCESS_TOKEN_TTL,
+    path: "/",
   });
 
   // Redirect về frontend
