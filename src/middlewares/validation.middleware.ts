@@ -11,7 +11,7 @@ export const validateMiddleware =
         (req: Request, _res: Response, next: NextFunction) => {
             const { error, value } = schema.validate(req[property] ?? {}, {
                 abortEarly: false,
-                allowUnknown: false,
+                allowUnknown: true,
             });
 
             if (error) {
