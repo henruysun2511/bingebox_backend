@@ -133,7 +133,7 @@ export class AuthService {
             throw new AppError("Token không hợp lệ hoặc hết hạn", 404);
         }
 
-        const user = await this.userModel.findById(session.userId).populate("role");
+        const user = await this.userModel.findOne({ _id: session.userId, isDeleted: false }).populate("role");
         if (!user) throw new AppError("Người dùng không tồn tại", 404);
 
         const roleName = (user.role as any)?.name || "CUSTOMER";
