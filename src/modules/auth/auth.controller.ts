@@ -16,7 +16,7 @@ export const login = catchAsync(async (req: Request, res: Response) => {
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: true,
+    // secure: true,
     sameSite: "none",
     maxAge: ENV.REFRESH_TOKEN_TTL,
     path: "/",
@@ -24,7 +24,7 @@ export const login = catchAsync(async (req: Request, res: Response) => {
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: true,
+    // secure: true,
     sameSite: "none",
     maxAge: ENV.ACCESS_TOKEN_TTL,
     path: "/",
