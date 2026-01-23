@@ -2,7 +2,7 @@ import Joi from "joi";
 import { GenderEnum } from "../../shares/constants/enum";
 
 export const GetActorListQuery = Joi.object({
-  name: Joi.string().trim().optional(),
+  name: Joi.string().trim().allow("").optional(),
   page: Joi.number()
     .integer()
     .min(1)
