@@ -5,6 +5,7 @@ import { success } from "../../utils/response";
 import { AuthService } from "./auth.service";
 
 const authService = new AuthService();
+const isProd = ENV.NODE_ENV === "production";
 
 export const register = catchAsync(async (req: Request, res: Response) => {
   const user = await authService.register(req.body);
@@ -16,16 +17,16 @@ export const login = catchAsync(async (req: Request, res: Response) => {
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    // secure: true,
-    sameSite: "none",
+    secure: isProd,                 // prod: true | local: false
+    sameSite: isProd ? "none" : "lax",
     maxAge: ENV.REFRESH_TOKEN_TTL,
     path: "/",
   });
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    // secure: true,
-    sameSite: "none",
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
     maxAge: ENV.ACCESS_TOKEN_TTL,
     path: "/",
   });
@@ -36,6 +37,9 @@ export const login = catchAsync(async (req: Request, res: Response) => {
 export const logout = catchAsync(async (req: Request, res: Response) => {
   const refreshToken = req.cookies.refreshToken;
   await authService.logout(refreshToken);
+
+  res.clearCookie("refreshToken", { path: "/" });
+  res.clearCookie("accessToken", { path: "/" });
 
   return success(res, null, "Đăng xuất thành công", 200);
 });
@@ -74,16 +78,16 @@ export const googleCallback = async (req: Request, res: Response) => {
 
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: isProd,                 // prod: true | local: false
+    sameSite: isProd ? "none" : "lax",
     maxAge: ENV.REFRESH_TOKEN_TTL,
     path: "/",
   });
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
     maxAge: ENV.ACCESS_TOKEN_TTL,
     path: "/",
   });
