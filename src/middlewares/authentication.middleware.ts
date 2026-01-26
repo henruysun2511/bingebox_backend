@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import mongoose from "mongoose";
 import User from "../modules/user/user.schema";
 import { ENV } from "../shares/constants/enviroment";
 import { IUser } from "../types/object.type";
@@ -28,8 +29,14 @@ export const authenticationMiddleware = async (
       ENV.ACCESS_TOKEN_SECRET
     ) as TokenPayload;
 
+    console.log(decoded);
+
+    if (!mongoose.isValidObjectId(decoded.sub)) {
+      throw new AppError("Access token không hợp lệ", 401);
+    }
+
     const user = await User.findOne({
-      _id: decoded.userId,
+      _id: new mongoose.Types.ObjectId(decoded.sub),
       isDeleted: false,
     }).lean<IUser>();
 
@@ -37,7 +44,6 @@ export const authenticationMiddleware = async (
       throw new AppError("Người dùng không tồn tại", 404);
     }
 
-    //Gắn user vào request
     req.user = user;
     next();
   } catch (error: any) {

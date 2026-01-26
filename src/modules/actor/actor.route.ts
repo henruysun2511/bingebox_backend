@@ -6,7 +6,7 @@ import * as v from "./actor.validation";
 
 const router = Router();
 
-router.get("/", validateMiddleware(v.GetActorListQuery, "query"), controller.getActors);
+router.get("/", authenticationMiddleware, validateMiddleware(v.GetActorListQuery, "query"), controller.getActors);
 router.get("/:id", validateMiddleware(v.GetActorIdParam, "params"), controller.getActorDetail);
 router.get("/movies/:id", validateMiddleware(v.GetActorIdParam, "params"), controller.getMoviesByActor);
 router.post("/", authenticationMiddleware, validateMiddleware(v.createActorBody, "body"), controller.createActor);

@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import Jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 import { ENV } from "../../shares/constants/enviroment";
 import { IChangePasswordBody, ILoginBody, IRegisterBody } from "../../types/body.type";
 import { AppError } from "../../utils/appError";
@@ -132,14 +133,25 @@ export class AuthService {
         if (!session || session.expiresAt < new Date()) {
             throw new AppError("Token không hợp lệ hoặc hết hạn", 404);
         }
+        console.log(session.userId);
 
-        const user = await this.userModel.findOne({ _id: session.userId, isDeleted: false }).populate("role");
+        const user = await this.userModel
+            .findOne({
+                _id: new mongoose.Types.ObjectId(session.userId),
+                isDeleted: false,
+            })
+            .populate("role");
         if (!user) throw new AppError("Người dùng không tồn tại", 404);
 
         const roleName = (user.role as any)?.name || "CUSTOMER";
 
         const accessToken = Jwt.sign(
-            { userId: user._id, role: roleName },
+            {
+                sub: user._id,
+                role: roleName,
+                username: user.username,
+                avatar: user.avatar
+            },
             ENV.ACCESS_TOKEN_SECRET as string,
             { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
         );
