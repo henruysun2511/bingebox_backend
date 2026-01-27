@@ -15,7 +15,11 @@ export function buildMovieQuery(query: IMovieQuery) {
         filter.status = query.status;
     }
     if (query.categoryIds) {
-        filter.categories = query.categoryIds;
+        const ids = Array.isArray(query.categoryIds) ? query.categoryIds : [query.categoryIds];
+
+        filter.categories = {
+            $in: ids
+        };
     }
     if (query.agePermission) {
         filter.agePermission = query.agePermission;

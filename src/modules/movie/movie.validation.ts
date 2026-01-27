@@ -2,12 +2,12 @@ import Joi from "joi";
 import { AgePermissionTypeEnum, MovieStatusEnum, SubtitleTypeEnum } from "../../shares/constants/enum";
 
 export const getMovieListQuery = Joi.object({
-  name: Joi.string().trim().optional(),
-  status: Joi.string().valid(...Object.values(MovieStatusEnum)).optional(),
-  categoryIds: Joi.string().optional(),
-  page: Joi.number().integer().min(1).default(1),
-  limit: Joi.number().integer().min(1).max(50).default(10),
-  sort: Joi.string().optional(),
+  name: Joi.string().trim().allow("").optional(),
+  status: Joi.string().allow("").valid(...Object.values(MovieStatusEnum)).optional(),
+  categoryIds: Joi.string().allow("").optional(),
+  page: Joi.number().integer().allow("").min(1).default(1),
+  limit: Joi.number().integer().allow("").min(1).max(50).default(10),
+  sort: Joi.string().optional().allow(""),
 });
 
 export const getMovieIdParam = Joi.object({
