@@ -13,6 +13,15 @@ router.get(
   controller.getMovies
 );
 
+
+
+router.get(
+  "/admin", 
+  authenticationMiddleware, 
+  validateMiddleware(v.getMovieListQuery, "query"), 
+  controller.getMoviesForAdmin
+);
+
 router.get(
   "/:id", 
   validateMiddleware(v.getMovieIdParam, "params"), 
@@ -23,13 +32,6 @@ router.get(
   "/actors/:id", 
   validateMiddleware(v.getMovieIdParam, "params"), 
   controller.getActorsByMovie
-);
-
-router.get(
-  "/admin", 
-  authenticationMiddleware, 
-  validateMiddleware(v.getMovieListQuery, "query"), 
-  controller.getMoviesForAdmin
 );
 
 router.post(
