@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import { Types } from "mongoose";
 import { IMovieQuery } from "../../types/param.type";
 import { buildSort } from "../../utils/buidSort";
 
@@ -20,12 +20,12 @@ export function buildMovieQuery(query: IMovieQuery) {
             ? query.categoryIds
             : [query.categoryIds];
 
-        const validObjectIds = rawIds
-            .filter(id => mongoose.Types.ObjectId.isValid(id))
-            .map(id => new mongoose.Types.ObjectId(id));
+        const validIds = rawIds.filter(Boolean);
 
-        if (validObjectIds.length > 0) {
-            filter.categories = { $in: validObjectIds };
+        if (validIds.length) {
+            filter["categories._id"] = {
+                $in: validIds.map(id => new Types.ObjectId(id))
+            };
         }
     }
     if (query.agePermission) {
