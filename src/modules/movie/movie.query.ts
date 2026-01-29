@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { IMovieQuery } from "../../types/param.type";
 import { buildSort } from "../../utils/buidSort";
 
@@ -15,11 +16,17 @@ export function buildMovieQuery(query: IMovieQuery) {
         filter.status = query.status;
     }
     if (query.categoryIds) {
-        const ids = Array.isArray(query.categoryIds) ? query.categoryIds : [query.categoryIds];
+        const rawIds = Array.isArray(query.categoryIds)
+            ? query.categoryIds
+            : [query.categoryIds];
 
-        filter.categories = {
-            $in: ids
-        };
+        const validObjectIds = rawIds
+            .filter(id => mongoose.Types.ObjectId.isValid(id))
+            .map(id => new mongoose.Types.ObjectId(id));
+
+        if (validObjectIds.length > 0) {
+            filter.categories = { $in: validObjectIds };
+        }
     }
     if (query.agePermission) {
         filter.agePermission = query.agePermission;
