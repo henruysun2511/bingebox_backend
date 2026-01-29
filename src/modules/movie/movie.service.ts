@@ -29,8 +29,8 @@ export class MovieService {
                 .select("name poster releaseDate agePermission subtitle categories format")
                 .populate({
                     path: "categories",
-                    select: "name", // Chỉ lấy trường name của Category
-                    match: { isDeleted: false } // Chỉ lấy các thể loại chưa bị xóa
+                    select: "name",
+                    match: { isDeleted: false }
                 })
                 .lean(),
             this.movieModel.countDocuments(filter),
@@ -55,7 +55,12 @@ export class MovieService {
                 .find(filter)
                 .sort(sort)
                 .skip(skip)
-                .limit(limit),
+                .limit(limit)
+                .populate({
+                    path: "categories",
+                    select: "name",
+                    match: { isDeleted: false }
+                }),
             this.movieModel.countDocuments(filter),
         ]);
         return {
@@ -193,24 +198,24 @@ export class MovieService {
             throw new AppError("User ID không hợp lệ", 400);
         }
 
-        const tickets = await this.ticketModel.find({ 
-            user: userId, 
+        const tickets = await this.ticketModel.find({
+            user: userId,
             isDeleted: false,
-            status: TicketStatusEnum.PAID 
+            status: TicketStatusEnum.PAID
         })
-        .populate({
-            path: "showtime",
-            populate: {
-                path: "movie",
-                select: "name poster categories", 
-                populate: { path: "categories", select: "name" } 
-            }
-        })
-        .lean();
+            .populate({
+                path: "showtime",
+                populate: {
+                    path: "movie",
+                    select: "name poster categories",
+                    populate: { path: "categories", select: "name" }
+                }
+            })
+            .lean();
 
         //Loại bỏ các phim trùng lặp
         const moviesMap = new Map();
-        
+
         tickets.forEach(ticket => {
             const movie = (ticket.showtime as any)?.movie;
             if (movie && !moviesMap.has(movie._id.toString())) {
