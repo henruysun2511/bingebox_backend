@@ -29,8 +29,6 @@ export const authenticationMiddleware = async (
       ENV.ACCESS_TOKEN_SECRET
     ) as TokenPayload;
 
-    console.log(decoded);
-
     if (!mongoose.isValidObjectId(decoded.sub)) {
       throw new AppError("Access token không hợp lệ", 401);
     }

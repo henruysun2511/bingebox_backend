@@ -4,7 +4,7 @@ import { AgePermissionTypeEnum, MovieStatusEnum, SubtitleTypeEnum } from "../../
 export const getMovieListQuery = Joi.object({
   name: Joi.string().trim().allow("").optional(),
   status: Joi.string().allow("").valid(...Object.values(MovieStatusEnum)).optional(),
-  categoryIds: Joi.string().allow("").optional(),
+  categoryIds: Joi.allow("").optional(),
   page: Joi.number().integer().allow("").min(1).default(1),
   limit: Joi.number().integer().allow("").min(1).max(50).default(10),
   sort: Joi.string().optional().allow(""),
