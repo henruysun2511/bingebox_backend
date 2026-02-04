@@ -1,9 +1,9 @@
 import Joi from "joi";
 
 export const getRoleListQuery = Joi.object({
-    name: Joi.string().trim().optional(),
-    page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(50).default(10),
+    name: Joi.string().trim().optional().allow(""),
+    page: Joi.number().integer().min(1).default(1).allow(""),
+    limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
 });
 
 export const getRoleIdParam = Joi.object({

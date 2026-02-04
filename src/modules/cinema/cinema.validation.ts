@@ -1,11 +1,11 @@
 import Joi from "joi";
 
 export const getCinemaListQuery = Joi.object({
-  name: Joi.string().optional(),
-  province: Joi.string().optional(),
-  page: Joi.number().integer().min(1).default(1),
-  limit: Joi.number().integer().min(1).max(50).default(10),
-  sort: Joi.string().optional(),
+  name: Joi.string().allow("").optional(),
+  province: Joi.string().allow("").optional(),
+  page: Joi.number().integer().min(1).default(1).allow(""),
+  limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
+  sort: Joi.string().optional().allow(""),
 });
 
 export const getCinemaIdParam = Joi.object({

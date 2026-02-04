@@ -8,9 +8,9 @@ export const getFoodIdParam = Joi.object({
 });
 
 export const getFoodListQuery = Joi.object({
-  name: Joi.string().trim().optional(),
-  minPrice: Joi.number().min(0).optional(),
-  maxPrice: Joi.number().min(0).optional(),
+  name: Joi.string().trim().optional().allow(""),
+  minPrice: Joi.number().min(0).optional().allow(""),
+  maxPrice: Joi.number().min(0).optional().allow(""),
 });
 
 export const createFoodBody = Joi.object({

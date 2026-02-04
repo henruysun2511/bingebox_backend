@@ -4,8 +4,8 @@ import { SeatLayoutTypeEnum } from "../../shares/constants/enum";
 export const getRoomListQuery = Joi.object({
   cinemaId: Joi.string().hex().length(24).optional().messages({
     "string.length": "ID rạp không hợp lệ",
-  }),
-  name: Joi.string().trim().optional(),
+  }).allow(""),
+  name: Joi.string().trim().optional().allow(""),
 });
 
 export const getRoomIdParam = Joi.object({
