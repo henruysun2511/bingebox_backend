@@ -2,12 +2,12 @@ import Joi from "joi";
 import { PermissionMethodTypeEnum } from "../../shares/constants/enum";
 
 export const getPermissionListQuery = Joi.object({
-    name: Joi.string().trim().optional(),
-    path: Joi.string().trim().optional(),
-    method: Joi.string().valid(...Object.values(PermissionMethodTypeEnum)).optional(),
-    page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(50).default(10),
-    sort: Joi.string().optional(),
+    name: Joi.string().trim().optional().allow(""),
+    path: Joi.string().trim().optional().allow(""),
+    method: Joi.string().valid(...Object.values(PermissionMethodTypeEnum)).optional().allow(""),
+    page: Joi.number().integer().min(1).default(1).allow(""),
+    limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
+    sort: Joi.string().optional().allow(""),
 });
 
 export const getPermissionIdParam = Joi.object({

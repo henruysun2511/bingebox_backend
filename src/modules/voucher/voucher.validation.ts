@@ -2,12 +2,12 @@ import Joi from "joi";
 import { BaseStatusEnum } from "../../shares/constants/enum";
 
 export const getVoucherListQuery = Joi.object({
-    name: Joi.string().trim().optional(),
-    code: Joi.string().trim().optional(),
-    status: Joi.string().valid(...Object.values(BaseStatusEnum)).optional(),
-    page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(50).default(10),
-    sort: Joi.string().optional(),
+    name: Joi.string().trim().optional().allow(""),
+    code: Joi.string().trim().optional().allow(""),
+    status: Joi.string().valid(...Object.values(BaseStatusEnum)).optional().allow(""),
+    page: Joi.number().integer().min(1).default(1).allow(""),
+    limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
+    sort: Joi.string().optional().allow(""),
 });
 
 export const getVoucherIdParam = Joi.object({

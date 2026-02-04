@@ -25,13 +25,13 @@ export function buildMovieQuery(query: IMovieQuery) {
             .filter(id => Types.ObjectId.isValid(id))
             .map(id => new Types.ObjectId(id));
 
-        // 🚨 Nếu frontend gửi categoryIds nhưng KHÔNG CÓ ID HỢP LỆ
+        // Nếu frontend gửi categoryIds nhưng KHÔNG CÓ ID HỢP LỆ
         if (validObjectIds.length === 0) {
             // ép không trả về gì
             filter._id = { $exists: false };
         } else {
             filter.categories = {
-                $in: validObjectIds, // ✅ chỉ cần trùng 1 cái
+                $in: validObjectIds, // chỉ cần trùng 1 cái
             };
         }
     }

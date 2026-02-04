@@ -8,7 +8,7 @@ const router = Router();
 
 router.get("/", validateMiddleware(v.getCinemaListQuery, "query"), controller.getCinemas);
 
-router.get("/:id", validateMiddleware(v.getCinemaIdParam, "query"), controller.getCinemaDetail);
+router.get("/:id", validateMiddleware(v.getCinemaIdParam, "params"), controller.getCinemaDetail);
 
 router.post("/", 
     authenticationMiddleware, 

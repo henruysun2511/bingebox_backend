@@ -1,12 +1,12 @@
 import Joi from "joi";
 
 export const getShowtimeQuery = Joi.object({
-  movieId: Joi.string().optional(),
-  roomId: Joi.string().optional(),
-  date: Joi.date().optional(),
-  page: Joi.number().min(1).optional(),
-  limit: Joi.number().min(1).optional(),
-  sort: Joi.string().optional(),
+  movieId: Joi.string().optional().allow(""),
+  roomId: Joi.string().optional().allow(""),
+  date: Joi.date().optional().allow(""),
+  page: Joi.number().min(1).optional().allow(""),
+  limit: Joi.number().min(1).optional().allow(""),
+  sort: Joi.string().optional().allow(""),
 });
 
 export const createShowtime = Joi.object({
