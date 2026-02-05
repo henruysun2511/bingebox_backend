@@ -78,7 +78,7 @@ export class SeatService {
 
     async getSeatsByRoom(roomId: string) {
         const seats = await this.seatModel.find({
-            roomId: roomId
+            room: roomId
         })
             .sort({
                 row: 1,
