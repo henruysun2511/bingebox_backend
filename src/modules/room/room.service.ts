@@ -34,6 +34,7 @@ export class RoomService {
         const { filter } = buildRoomQuery(query);
         return this.roomModel
             .find(filter)
+            .populate('cinema', 'name')
             .populate('format', 'name')
             .lean();
     }

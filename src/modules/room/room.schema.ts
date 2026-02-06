@@ -7,7 +7,7 @@ const roomSchema = new mongoose.Schema<IRoom>({
     ...baseFields,
     name: { type: String, required: true },
     cinema: { type: mongoose.Schema.Types.ObjectId, ref: 'Cinema', required: true },
-    format: { type: mongoose.Schema.Types.ObjectId, ref: 'Format', required: true },
+    format: { type: mongoose.Schema.Types.ObjectId, ref: 'FormatRoom', required: true },
     status: { type: String, enum: Object.values(BaseStatusEnum), default: BaseStatusEnum.ACTIVE },
     seatLayout: {
         type: { type: String,  enum: Object.values(SeatLayoutTypeEnum), required: false },
