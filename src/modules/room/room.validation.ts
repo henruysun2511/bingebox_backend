@@ -1,5 +1,4 @@
 import Joi from "joi";
-import { SeatLayoutTypeEnum } from "../../shares/constants/enum";
 
 export const getRoomListQuery = Joi.object({
   cinemaId: Joi.string().hex().length(24).optional().messages({
@@ -27,35 +26,17 @@ export const createRoomBody = Joi.object({
     "any.required": "Định dạng phòng là bắt buộc",
   }),
   seatLayout: Joi.object({
-    type: Joi.string()
-      .valid(...Object.values(SeatLayoutTypeEnum))
-      .required()
-      .messages({
-        "any.only": "Loại sơ đồ không hợp lệ",
-        "any.required": "Loại sơ đồ là bắt buộc",
-      }),
-
-    rows: Joi.number()
-      .when("type", {
-        is: SeatLayoutTypeEnum.GRID,
-        then: Joi.required(),
-        otherwise: Joi.forbidden(),
-      })
-      .messages({
-        "any.required": "Số hàng là bắt buộc đối với sơ đồ lưới",
-      }),
-
-    columns: Joi.number()
-      .when("type", {
-        is: SeatLayoutTypeEnum.GRID,
-        then: Joi.required(),
-        otherwise: Joi.forbidden(),
-      })
-      .messages({
-        "any.required": "Số cột là bắt buộc đối với sơ đồ lưới",
-      }),
+    // type: Joi.string().valid(...Object.values(SeatLayoutTypeEnum)).required().messages({
+    //   "any.only": "Loại sơ đồ không hợp lệ",
+    // }),
+    // rows: Joi.number().when("type", { is: SeatLayoutTypeEnum.GRID, then: Joi.required() }).messages({
+    //   "any.required": "Số hàng là bắt buộc đối với sơ đồ lưới",
+    // }),
+    // columns: Joi.number().when("type", { is: SeatLayoutTypeEnum.GRID, then: Joi.required() }).messages({
+    //   "any.required": "Số cột là bắt buộc đối với sơ đồ lưới",
+    // }),
   }).optional(),
-
+  
 });
 
 export const updateRoomBody = createRoomBody

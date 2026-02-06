@@ -16,61 +16,72 @@ export class SeatService {
     async updateSeat(roomId: string, seats: any[], userId: string) {
         const session = await mongoose.startSession();
         session.startTransaction();
+
         try {
-            const room = await this.roomModel.findOne({ _id: roomId, isDeleted: false });
+            const room = await this.roomModel.findById(roomId);
             if (!room) throw new AppError("Phòng không tồn tại", 404);
 
-            //Xóa ghế cũ
-            await this.seatModel.deleteMany({ roomId }, { session });
+            await this.seatModel.deleteMany({ room: roomId }, { session });
 
-            //Chuẩn bị payload và chèn ghế mới
             const seatPayload = seats.map(seat => ({
-                ...seat,
-                roomId: new mongoose.Types.ObjectId(roomId),
+                code: seat.code,
+                row: seat.row,
+                column: seat.column,
+                isBlocked: seat.isBlocked,
+                isCoupleSeat: seat.isCoupleSeat,
+                partnerSeatCode: seat.partnerSeatCode,
+                seatType: seat.isBlocked
+                    ? undefined
+                    : new mongoose.Types.ObjectId(seat.seatTypeId),
+                room: roomId,
                 createdBy: userId
             }));
 
-            // insertMany trả về mảng các document đã kèm _id
             const createdSeats = await this.seatModel.insertMany(seatPayload, { session });
 
-            // XỬ LÝ GHẾ ĐÔI (PARTNER LINKING)
-            const coupleSeats = createdSeats.filter(s => s.isCoupleSeat && (s as any).coupleId);
+            // LINK GHẾ ĐÔI THEO CODE
+            for (const seat of createdSeats.filter(s => s.isCoupleSeat)) {
+                const partner = createdSeats.find(
+                    s => s.code === (seat as any).partnerSeatCode
+                );
 
-            if (coupleSeats.length > 0) {
-                const updatePromises = [];
-
-                for (const currentSeat of coupleSeats) {
-                    // Tìm ghế còn lại có cùng coupleId nhưng khác _id
-                    const partner = coupleSeats.find(s =>
-                        (s as any).coupleId === (currentSeat as any).coupleId &&
-                        s._id.toString() !== currentSeat._id.toString()
+                if (partner) {
+                    await this.seatModel.findByIdAndUpdate(
+                        seat._id,
+                        { partnerSeat: partner._id },
+                        { session }
                     );
-
-                    if (partner) {
-                        updatePromises.push(
-                            this.seatModel.findByIdAndUpdate(
-                                currentSeat._id,
-                                { partnerSeat: partner._id },
-                                { session }
-                            )
-                        );
-                    }
                 }
-                await Promise.all(updatePromises);
             }
 
-            //Cập nhật totalSeats cho Room
+            // TÍNH SEAT LAYOUT
+            const validSeats = createdSeats.filter(s => !s.isBlocked);
+
+            const maxRowIndex = Math.max(
+                ...validSeats.map(s => s.row.charCodeAt(0) - 65)
+            );
+
+            const maxColumn = Math.max(
+                ...validSeats.map(s => s.column ?? 0)
+            );
+
             await this.roomModel.findByIdAndUpdate(
                 roomId,
-                { totalSeats: createdSeats.filter(s => !s.isBlocked).length },
+                {
+                    seatLayout: {
+                        rows: maxRowIndex + 1,
+                        columns: maxColumn
+                    },
+                    totalSeats: validSeats.length
+                },
                 { session }
             );
 
             await session.commitTransaction();
             return createdSeats;
-        } catch (error) {
+        } catch (err) {
             await session.abortTransaction();
-            throw error;
+            throw err;
         } finally {
             session.endSession();
         }

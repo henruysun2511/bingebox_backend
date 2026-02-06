@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { BaseStatusEnum, SeatLayoutTypeEnum } from "../../shares/constants/enum";
+import { BaseStatusEnum } from "../../shares/constants/enum";
 import { IRoom } from "../../types/object.type";
 
 const roomSchema = new mongoose.Schema<IRoom>({
@@ -10,11 +10,8 @@ const roomSchema = new mongoose.Schema<IRoom>({
     format: { type: mongoose.Schema.Types.ObjectId, ref: 'FormatRoom', required: true },
     status: { type: String, enum: Object.values(BaseStatusEnum), default: BaseStatusEnum.ACTIVE },
     seatLayout: {
-        type: { type: String,  enum: Object.values(SeatLayoutTypeEnum), required: false },
         rows: Number,
         columns: Number,
-        width: Number,
-        height: Number
     },
     totalSeats: Number,
 }, { timestamps: true });

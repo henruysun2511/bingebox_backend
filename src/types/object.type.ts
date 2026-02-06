@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { IBaseDocument } from "../shares/bases/baseDocument";
-import { AgePermissionTypeEnum, BookingStatusEnum, DayOfWeekEnum, GenderEnum, LoginTypeEnum, MovieStatusEnum, PaymentStatusEnum, PermissionMethodTypeEnum, SeatLayoutTypeEnum, SubtitleTypeEnum, TicketStatusEnum } from "../shares/constants/enum";
+import { AgePermissionTypeEnum, BookingStatusEnum, DayOfWeekEnum, GenderEnum, LoginTypeEnum, MovieStatusEnum, PaymentStatusEnum, PermissionMethodTypeEnum, SubtitleTypeEnum, TicketStatusEnum } from "../shares/constants/enum";
 import { BaseStatusEnum } from './../shares/constants/enum';
 
 interface IUser extends IBaseDocument {
@@ -126,11 +126,11 @@ interface IRoom extends IBaseDocument {
     format: mongoose.Types.ObjectId,
     status: BaseStatusEnum;
     seatLayout: {
-        type: SeatLayoutTypeEnum;
+        // type: SeatLayoutTypeEnum;
         rows?: number;
         columns?: number;
-        width?: number;
-        height?: number;
+        // width?: number;
+        // height?: number;
     };
     totalSeats: number;
 }
@@ -160,17 +160,18 @@ interface ISeat {
     room: mongoose.Types.ObjectId;
     code: string;
 
-    row?: number;
+    row?: string;
     column?: number;
 
-    position?: {
-        x: number;
-        y: number;
-    };
+    // position?: {
+    //     x: number;
+    //     y: number;
+    // };
     isBlocked?: boolean; //ô trống?
     seatType: mongoose.Types.ObjectId;
     isCoupleSeat: boolean; //ghế đôi?
     partnerSeat?: mongoose.Types.ObjectId; //id ghế đôi
+    partnerSeatCode?: string;
 }
 
 export type { ISeat };
@@ -304,7 +305,7 @@ interface IGiftCard extends IBaseDocument {
     price: number;
 }
 
-export type {IGiftCard}
+export type { IGiftCard };
 
 
 
