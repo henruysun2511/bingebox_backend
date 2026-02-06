@@ -36,7 +36,7 @@ export const createRoomBody = Joi.object({
     columns: Joi.number().when("type", { is: SeatLayoutTypeEnum.GRID, then: Joi.required() }).messages({
       "any.required": "Số cột là bắt buộc đối với sơ đồ lưới",
     }),
-  }).required(),
+  }).optional(),
 });
 
 export const updateRoomBody = createRoomBody

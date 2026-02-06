@@ -10,7 +10,7 @@ const roomSchema = new mongoose.Schema<IRoom>({
     format: { type: mongoose.Schema.Types.ObjectId, ref: 'Format', required: true },
     status: { type: String, enum: Object.values(BaseStatusEnum), default: BaseStatusEnum.ACTIVE },
     seatLayout: {
-        type: { type: String,  enum: Object.values(SeatLayoutTypeEnum), required: true },
+        type: { type: String,  enum: Object.values(SeatLayoutTypeEnum), required: false },
         rows: Number,
         columns: Number,
         width: Number,
