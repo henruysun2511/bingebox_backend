@@ -18,53 +18,85 @@ export class SeatService {
         session.startTransaction();
 
         try {
-            const room = await this.roomModel.findById(roomId);
-            if (!room) throw new AppError("Phòng không tồn tại", 404);
+            const room = await this.roomModel.findOne({
+                _id: roomId,
+                isDeleted: false
+            });
 
-            await this.seatModel.deleteMany({ room: roomId }, { session });
+            if (!room) {
+                throw new AppError("Phòng không tồn tại", 404);
+            }
 
+            // 1. Xóa toàn bộ ghế cũ
+            await this.seatModel.deleteMany(
+                { room: roomId },
+                { session }
+            );
+
+            // 2. Chuẩn bị payload
             const seatPayload = seats.map(seat => ({
                 code: seat.code,
                 row: seat.row,
                 column: seat.column,
-                isBlocked: seat.isBlocked,
-                isCoupleSeat: seat.isCoupleSeat,
-                partnerSeatCode: seat.partnerSeatCode,
+                isBlocked: seat.isBlocked ?? false,
+                isCoupleSeat: seat.isCoupleSeat ?? false,
+                partnerSeatCode: seat.partnerSeatCode ?? null,
+
                 seatType: seat.isBlocked
-                    ? undefined
+                    ? null
                     : new mongoose.Types.ObjectId(seat.seatTypeId),
-                room: roomId,
-                createdBy: userId
+
+                room: new mongoose.Types.ObjectId(roomId),
+                createdBy: new mongoose.Types.ObjectId(userId)
             }));
 
-            const createdSeats = await this.seatModel.insertMany(seatPayload, { session });
+            // 3. Insert ghế
+            const createdSeats = await this.seatModel.insertMany(
+                seatPayload,
+                { session }
+            );
 
-            // LINK GHẾ ĐÔI THEO CODE
-            for (const seat of createdSeats.filter(s => s.isCoupleSeat)) {
-                const partner = createdSeats.find(
-                    s => s.code === (seat as any).partnerSeatCode
-                );
+            // 4. LINK GHẾ ĐÔI (theo code)
+            const seatMap = new Map<string, any>();
+            createdSeats.forEach(seat => {
+                seatMap.set(seat.code, seat);
+            });
 
-                if (partner) {
-                    await this.seatModel.findByIdAndUpdate(
-                        seat._id,
-                        { partnerSeat: partner._id },
-                        { session }
+            for (const seat of createdSeats) {
+                if (!seat.isCoupleSeat || !seat.partnerSeatCode) continue;
+
+                const partner = seatMap.get(seat.partnerSeatCode);
+
+                if (!partner) {
+                    throw new AppError(
+                        `Ghế đôi ${seat.code} không tìm thấy partner ${seat.partnerSeatCode}`,
+                        400
                     );
                 }
+
+                await this.seatModel.findByIdAndUpdate(
+                    seat._id,
+                    { partnerSeat: partner._id },
+                    { session }
+                );
             }
 
-            // TÍNH SEAT LAYOUT
-            const validSeats = createdSeats.filter(s => !s.isBlocked);
-
+            // 5. TÍNH SEAT LAYOUT (dựa vào row + column, KHÔNG QUAN TÂM GRID/FREE)
             const maxRowIndex = Math.max(
-                ...validSeats.map(s => s.row.charCodeAt(0) - 65)
+                ...createdSeats
+                    .filter(s => s.row)
+                    .map(s => s.row!.charCodeAt(0) - 65)
             );
 
             const maxColumn = Math.max(
-                ...validSeats.map(s => s.column ?? 0)
+                ...createdSeats.map(s => s.column ?? 0)
             );
 
+            const totalSeats = createdSeats.filter(
+                s => !s.isBlocked
+            ).length;
+
+            // 6. Update Room
             await this.roomModel.findByIdAndUpdate(
                 roomId,
                 {
@@ -72,16 +104,17 @@ export class SeatService {
                         rows: maxRowIndex + 1,
                         columns: maxColumn
                     },
-                    totalSeats: validSeats.length
+                    totalSeats
                 },
                 { session }
             );
 
             await session.commitTransaction();
             return createdSeats;
-        } catch (err) {
+
+        } catch (error) {
             await session.abortTransaction();
-            throw err;
+            throw error;
         } finally {
             session.endSession();
         }
