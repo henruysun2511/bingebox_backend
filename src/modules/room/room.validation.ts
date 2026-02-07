@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { BaseStatusEnum } from "shares/constants/enum";
+import { BaseStatusEnum } from "../../shares/constants/enum";
 
 export const getRoomListQuery = Joi.object({
   cinemaId: Joi.string().hex().length(24).optional().messages({
