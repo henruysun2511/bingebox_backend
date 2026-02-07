@@ -22,6 +22,14 @@ router.post(
 );
 
 router.patch(
+    "/change-status/:id",
+    authenticationMiddleware,
+    validateMiddleware(v.getRoomIdParam, "params"),
+    validateMiddleware(v.updateRoomStatusBody, "body"),
+    controller.updateRoomStatus
+);
+
+router.patch(
     "/:id",
     authenticationMiddleware,
     validateMiddleware(v.getRoomIdParam, "params"),
@@ -36,12 +44,6 @@ router.delete(
     controller.deleteRoom
 );
 
-router.patch(
-    "/:id/status",
-    authenticationMiddleware,
-    validateMiddleware(v.getRoomIdParam, "params"),
-    validateMiddleware(v.updateRoomStatusBody, "body"),
-    controller.updateRoomStatus
-);
+
 
 export default router;
