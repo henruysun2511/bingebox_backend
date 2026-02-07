@@ -27,4 +27,12 @@ export const deleteRoom = catchAsync(async (req: Request, res: Response) => {
     return success(res, null, "Xóa phòng chiếu thành công");
 });
 
+export const updateRoomStatus = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const room = await roomService.updateStatus(id, status, req.user!._id.toString());
+    
+    return success(res, room, "Cập nhật trạng thái phòng thành công");
+});
+
 

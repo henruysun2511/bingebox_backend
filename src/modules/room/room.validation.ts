@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { BaseStatusEnum } from "shares/constants/enum";
 
 export const getRoomListQuery = Joi.object({
   cinemaId: Joi.string().hex().length(24).optional().messages({
@@ -36,7 +37,7 @@ export const createRoomBody = Joi.object({
     //   "any.required": "Số cột là bắt buộc đối với sơ đồ lưới",
     // }),
   }).optional(),
-  
+
 });
 
 export const updateRoomBody = createRoomBody
@@ -48,3 +49,13 @@ export const updateRoomBody = createRoomBody
   .messages({
     "object.min": "Phải có ít nhất một trường cần cập nhật",
   });
+
+export const updateRoomStatusBody = Joi.object({
+  status: Joi.string()
+    .valid(...Object.values(BaseStatusEnum))
+    .required()
+    .messages({
+      "any.only": "Trạng thái không hợp lệ",
+      "any.required": "Trạng thái là bắt buộc",
+    }),
+});

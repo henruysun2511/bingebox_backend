@@ -52,13 +52,6 @@ export class RoomService {
         if (!cinema) throw new AppError("Rạp phim không tồn tại", 404);
         if (!format) throw new AppError("Định dạng phòng không tồn tại", 404);
 
-        const duplicate = await this.roomModel.findOne({
-            name: data.name,
-            cinema: data.cinema,
-            isDeleted: false
-        });
-        if (duplicate) throw new AppError("Tên phòng đã tồn tại trong rạp này", 400);
-
         const updatedRoom = await this.roomModel.findOneAndUpdate(
             { _id: id, isDeleted: false },
             { ...data, updatedBy: userId },
@@ -86,5 +79,26 @@ export class RoomService {
 
         if (!deletedRoom) throw new AppError("Không tìm thấy phòng chiếu hoặc đã bị xóa", 404);
         return deletedRoom;
+    }
+
+    async updateStatus(id: string, status: string, userId: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new AppError("ID phòng không hợp lệ", 400);
+        }
+
+        const updatedRoom = await this.roomModel.findOneAndUpdate(
+            { _id: id, isDeleted: false },
+            {
+                status: status,
+                updatedBy: userId
+            },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedRoom) {
+            throw new AppError("Không tìm thấy phòng chiếu", 404);
+        }
+
+        return updatedRoom;
     }
 }

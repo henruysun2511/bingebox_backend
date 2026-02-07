@@ -36,4 +36,12 @@ router.delete(
     controller.deleteRoom
 );
 
+router.patch(
+    "/:id/status",
+    authenticationMiddleware,
+    validateMiddleware(v.getRoomIdParam, "params"),
+    validateMiddleware(v.updateRoomStatusBody, "body"),
+    controller.updateRoomStatus
+);
+
 export default router;

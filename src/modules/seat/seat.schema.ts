@@ -30,6 +30,8 @@ const seatSchema = new mongoose.Schema<ISeat>({
   },
 }, { timestamps: true });
 
-seatSchema.index({ room: 1, code: 1 }, { unique: true });
+// seatSchema.index({ room: 1, code: 1 }, { unique: true });
+
+
 
 export default mongoose.model<ISeat>("Seat", seatSchema);
