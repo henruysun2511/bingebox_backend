@@ -1,5 +1,3 @@
-
-
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
 import { validateMiddleware } from "../../middlewares/validation.middleware";

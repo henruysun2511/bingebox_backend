@@ -20,41 +20,45 @@ export class ShowtimeService {
         const movieDoc = await this.movieModel.findOne({ _id: movie, isDeleted: false });
         if (!movieDoc) throw new AppError("Phim không tồn tại", 404);
 
-        //Tính endTime
+        // UTC time
         const start = new Date(startTime);
         const end = new Date(start.getTime() + (movieDoc.duration + 15) * 60000);
 
-        const startStr = start.toTimeString().slice(0, 5);
+        // Convert sang giờ VN để match timeslot
+        const startStr = start.toLocaleTimeString("vi-VN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "Asia/Ho_Chi_Minh",
+        });
 
-        //Tự động tìm timeslot
         const matchedSlot = await this.timeSlotModel.findOne({
             isDeleted: false,
             $or: [
-                // Trường hợp 1: Khung giờ trong cùng một ngày (VD: 08:00 - 12:00)
                 {
                     $expr: { $lt: ["$startTime", "$endTime"] },
                     startTime: { $lte: startStr },
                     endTime: { $gt: startStr }
                 },
-                // Trường hợp 2: Khung giờ qua đêm (VD: 23:00 - 08:00)
                 {
                     $expr: { $gt: ["$startTime", "$endTime"] },
                     $or: [
-                        { startTime: { $lte: startStr } }, // Từ 23:00 đến 23:59
-                        { endTime: { $gt: startStr } }    // Từ 00:00 đến 07:59
+                        { startTime: { $lte: startStr } },
+                        { endTime: { $gt: startStr } }
                     ]
                 }
             ]
         });
+
         if (!matchedSlot) throw new AppError("Giờ chiếu không thuộc khung giờ quy định", 400);
 
-        //Kiểm tra trùng khung giờ suất chiếu trường cùng phòng
         const overlap = await this.showtimeModel.findOne({
             room,
             isDeleted: false,
             startTime: { $lt: end },
             endTime: { $gt: start },
         });
+
         if (overlap) throw new AppError("Phòng đã có suất chiếu trùng giờ", 400);
 
         return this.showtimeModel.create({
@@ -77,7 +81,7 @@ export class ShowtimeService {
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
-                .select("_id movie room date startTime")
+                .select("_id movie room startTime endTime")
                 .populate("movie", "name poster duration")
                 .populate("room", "name")
                 .lean(),
