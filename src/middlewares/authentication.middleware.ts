@@ -17,6 +17,7 @@ export const authenticationMiddleware = async (
 ) => {
   try {
     const authHeader = req.headers.authorization;
+    console.log(authHeader);
 
     if (!authHeader?.startsWith("Bearer ")) {
       throw new AppError("Vui lòng đăng nhập", 401);

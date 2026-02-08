@@ -60,9 +60,8 @@ export const createMovie = Joi.object({
     "any.required": "Danh sách thể loại là bắt buộc",
   }),
   nationality: Joi.string().allow("").optional(),
-  agePermission: Joi.string().valid(...Object.values(AgePermissionTypeEnum)).required().messages({
+  agePermission: Joi.string().valid(...Object.values(AgePermissionTypeEnum)).optional().messages({
     "any.only": "Độ tuổi cho phép không hợp lệ",
-    "any.required": "Độ tuổi cho phép là bắt buộc",
   }),
   status: Joi.string().valid(...Object.values(MovieStatusEnum)).required().messages({
     "any.only": "Trạng thái phim không hợp lệ",

@@ -17,7 +17,7 @@ router.get(
 
 router.get(
   "/admin", 
-  // authenticationMiddleware, 
+  authenticationMiddleware, 
   validateMiddleware(v.getMovieListQuery, "query"), 
   controller.getMoviesForAdmin
 );

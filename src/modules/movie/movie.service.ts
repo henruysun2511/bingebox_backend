@@ -60,6 +60,11 @@ export class MovieService {
                     path: "categories",
                     select: "name",
                     match: { isDeleted: false }
+                })
+                .populate({
+                    path: "actors",
+                    select: "name avatar",
+                    match: { isDeleted: false }
                 }),
             this.movieModel.countDocuments(filter),
         ]);
@@ -78,7 +83,17 @@ export class MovieService {
         const movie = await this.movieModel.findOne({
             _id: id,
             isDeleted: false,
-        });
+        })
+            .populate({
+                path: "categories",
+                select: "name",
+                match: { isDeleted: false }
+            })
+            .populate({
+                path: "actors",
+                select: "name avatar",
+                match: { isDeleted: false }
+            });
 
         if (!movie) {
             throw new AppError("Không tìm thấy phim", 404);
