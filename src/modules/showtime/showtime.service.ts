@@ -84,7 +84,14 @@ export class ShowtimeService {
                 .select("_id movie room startTime endTime timeslot")
                 .populate("movie", "name poster duration")
                 .populate("timeslot", "name")
-                .populate("room", "name")
+                .populate({
+                    path: "room",
+                    select: "name cinema",
+                    populate: {
+                        path: "cinema",
+                        select: "name",
+                    },
+                })
                 .lean(),
             this.showtimeModel.countDocuments(filter),
         ]);
