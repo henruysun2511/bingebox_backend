@@ -28,9 +28,23 @@ export class ShowtimeService {
 
         //Tự động tìm timeslot
         const matchedSlot = await this.timeSlotModel.findOne({
-            startTime: { $lte: startStr },
-            endTime: { $gt: startStr },
-            isDeleted: false
+            isDeleted: false,
+            $or: [
+                // Trường hợp 1: Khung giờ trong cùng một ngày (VD: 08:00 - 12:00)
+                {
+                    $expr: { $lt: ["$startTime", "$endTime"] },
+                    startTime: { $lte: startStr },
+                    endTime: { $gt: startStr }
+                },
+                // Trường hợp 2: Khung giờ qua đêm (VD: 23:00 - 08:00)
+                {
+                    $expr: { $gt: ["$startTime", "$endTime"] },
+                    $or: [
+                        { startTime: { $lte: startStr } }, // Từ 23:00 đến 23:59
+                        { endTime: { $gt: startStr } }    // Từ 00:00 đến 07:59
+                    ]
+                }
+            ]
         });
         if (!matchedSlot) throw new AppError("Giờ chiếu không thuộc khung giờ quy định", 400);
 
