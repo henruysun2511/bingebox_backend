@@ -20,12 +20,12 @@ export function buildShowtimeQuery(query: IShowtimeQuery) {
 
     if (query.date) {
         const start = new Date(query.date);
-        start.setHours(0, 0, 0, 0);
+        start.setUTCHours(0, 0, 0, 0);
 
         const end = new Date(query.date);
-        end.setHours(23, 59, 59, 999);
+        end.setUTCHours(23, 59, 59, 999);
 
-        filter.date = { $gte: start, $lte: end };
+        filter.startTime = { $gte: start, $lte: end };
     }
 
     const sort = buildSort(query.sort, ["createdAt"]);
