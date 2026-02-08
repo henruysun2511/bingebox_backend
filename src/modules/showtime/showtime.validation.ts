@@ -17,9 +17,13 @@ export const createShowtime = Joi.object({
   room: Joi.string().required().messages({
     "any.required": "Phòng chiếu là bắt buộc",
   }),
-  startTime: Joi.string().required().messages({
-    "any.required": "Giờ bắt đầu là bắt buộc",
-  }),
+  startTime: Joi.string()
+    .isoDate()
+    .required()
+    .messages({
+      "string.isoDate": "Thời gian phải đúng định dạng ISO (YYYY-MM-DDTHH:mm:ssZ)",
+      "any.required": "Giờ bắt đầu là bắt buộc",
+    }),
 });
 
 export const updateShowtime = createShowtime.fork(
@@ -31,13 +35,13 @@ export const updateShowtime = createShowtime.fork(
 
 
 export const getScheduleParam = Joi.object({
-    cinemaId: Joi.string().hex().length(24).required().messages({
-        "any.required": "ID rạp là bắt buộc",
-    }),
+  cinemaId: Joi.string().hex().length(24).required().messages({
+    "any.required": "ID rạp là bắt buộc",
+  }),
 });
 
 export const getScheduleQuery = Joi.object({
-    date: Joi.date().iso().optional().messages({
-        "date.format": "Ngày không đúng định dạng YYYY-MM-DD",
-    }),
+  date: Joi.date().iso().optional().messages({
+    "date.format": "Ngày không đúng định dạng YYYY-MM-DD",
+  }),
 });

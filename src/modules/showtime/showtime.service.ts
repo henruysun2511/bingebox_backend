@@ -81,8 +81,9 @@ export class ShowtimeService {
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
-                .select("_id movie room startTime endTime")
+                .select("_id movie room startTime endTime timeslot")
                 .populate("movie", "name poster duration")
+                .populate("timeslot", "name")
                 .populate("room", "name")
                 .lean(),
             this.showtimeModel.countDocuments(filter),
