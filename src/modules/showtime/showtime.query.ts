@@ -19,11 +19,8 @@ export function buildShowtimeQuery(query: IShowtimeQuery) {
     }
 
     if (query.date) {
-        const start = new Date(query.date);
-        start.setUTCHours(0, 0, 0, 0);
-
-        const end = new Date(query.date);
-        end.setUTCHours(23, 59, 59, 999);
+        const start = new Date(`${query.date}T00:00:00+07:00`);
+        const end = new Date(`${query.date}T23:59:59+07:00`);
 
         filter.startTime = { $gte: start, $lte: end };
     }
