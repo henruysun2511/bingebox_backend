@@ -18,6 +18,7 @@ import roleRouter from "./role/role.route";
 import roomRouter from "./room/room.route";
 import seatRouter from "./seat/seat.route";
 import seatTypeoRouter from "./seatType/seatType.route";
+import settingRouter from "./setting/setting.route";
 import showtimeRouter from "./showtime/showtime.route";
 import ticketRouter from "./ticket/ticket.route";
 import ticketPriceRouter from "./ticketPrice/ticketPrice.route";
@@ -63,5 +64,7 @@ router.use("/dashboards", dashboardRouter);
 router.use("/blogs", blogRouter);
 
 router.use("/upload", uploadRouter);
+
+router.use("/setting", settingRouter);
 
 export default router;

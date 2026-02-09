@@ -307,6 +307,33 @@ interface IGiftCard extends IBaseDocument {
 
 export type { IGiftCard };
 
+interface ISetting extends IBaseDocument {
+    logo: string;
+    name: string;
+    company: string;
+    email: string;
+    address: string;
+    hotline: string;
+    workHours?: string;
+    social?: {
+        facebook?: string;
+        instagram?: string;
+        tiktok?: string;
+        zalo?: string;
+    }
+    banner?: string[];
+    popup: [
+        {
+            image: string,
+            link: string,
+            isActive: BaseStatusEnum
+        }
+    ]
+    metaTitle: String,
+    metaDescription: String,
+}
+
+export type { ISetting };
 
 
 
