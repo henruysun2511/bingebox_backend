@@ -321,8 +321,12 @@ interface ISetting extends IBaseDocument {
         tiktok?: string;
         zalo?: string;
     }
-    banner?: string[];
-    popup: [
+    banner?: [{
+        image: string,
+        link: string,
+        isActive: BaseStatusEnum
+    }];
+    popup?: [
         {
             image: string,
             link: string,

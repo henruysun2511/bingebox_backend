@@ -44,9 +44,23 @@ export const updateSettingBody = Joi.object({
             "string.base": "Thông tin Zalo phải là chuỗi ký tự",
         }),
     }),
-    banner: Joi.array().items(Joi.string().uri()).messages({
+    banner: Joi.array().items(
+        Joi.object({
+            image: Joi.string().required().messages({
+                "string.empty": "Ảnh banner không được để trống",
+                "any.required": "Ảnh banner là bắt buộc",
+            }),
+            link: Joi.string().uri().allow("").messages({
+                "string.uri": "Link điều hướng banner không hợp lệ",
+            }),
+            isActive: Joi.string()
+                .valid(...Object.values(BaseStatusEnum))
+                .messages({
+                    "any.only": "Trạng thái banner không hợp lệ",
+                }),
+        })
+    ).messages({
         "array.base": "Danh sách banner phải là một mảng",
-        "string.uri": "Link ảnh banner không hợp lệ",
     }),
     popup: Joi.array().items(
         Joi.object({

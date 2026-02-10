@@ -18,19 +18,28 @@ const settingSchema = new mongoose.Schema<ISetting>({
         tiktok: String,
         zalo: String,
     },
-    banner: [{ type: String }], // Danh sách link ảnh banner slider
-    popup: [
+    banner: [
         {
-            image: String,
-            link: String, // Nên có link khi click vào popup
-            isActive: { 
-                type: String, 
-                enum: Object.values(BaseStatusEnum), 
-                default: BaseStatusEnum.INACTIVE 
+            image: { type: String, required: true },
+            link: { type: String }, // Link khi click vào banner
+            isActive: {
+                type: String,
+                enum: Object.values(BaseStatusEnum),
+                default: BaseStatusEnum.ACTIVE
             }
         }
     ],
-    // Bổ sung SEO
+    popup: [
+        {
+            image: { type: String, required: true },
+            link: { type: String },
+            isActive: {
+                type: String,
+                enum: Object.values(BaseStatusEnum),
+                default: BaseStatusEnum.INACTIVE
+            }
+        }
+    ],
     metaTitle: String,
     metaDescription: String,
 }, { timestamps: true });
