@@ -34,7 +34,7 @@ export const updateShowtime = createShowtime.fork(
 });
 
 
-export const getScheduleParam = Joi.object({
+export const getShowtimeByCinemaParam = Joi.object({
   cinemaId: Joi.string().hex().length(24).required().messages({
     "any.required": "ID rạp là bắt buộc",
   }),
@@ -44,4 +44,11 @@ export const getScheduleQuery = Joi.object({
   date: Joi.date().iso().optional().messages({
     "date.format": "Ngày không đúng định dạng YYYY-MM-DD",
   }),
+});
+
+export const getShowtimeByMovieParam = Joi.object({
+    movieId: Joi.string().hex().length(24).required().messages({
+        "string.length": "ID phim không hợp lệ",
+        "any.required": "ID phim là bắt buộc"
+    })
 });

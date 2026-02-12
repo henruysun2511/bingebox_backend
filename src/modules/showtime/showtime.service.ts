@@ -297,4 +297,146 @@ export class ShowtimeService {
             }
         ]);
     }
+
+    async getShowtimesByMovie(movieId: string, date: string) {
+        const startOfDay = new Date(`${date}T00:00:00+07:00`);
+        const endOfDay = new Date(`${date}T23:59:59+07:00`);
+
+        return await this.showtimeModel.aggregate([
+            {
+                $match: {
+                    movie: new mongoose.Types.ObjectId(movieId),
+                    startTime: { $gte: startOfDay, $lte: endOfDay },
+                    isDeleted: false
+                }
+            },
+            { $sort: { startTime: 1 } },
+            // Lookup lấy thông tin Phòng và Rạp
+            {
+                $lookup: {
+                    from: "rooms",
+                    localField: "room",
+                    foreignField: "_id",
+                    as: "room"
+                }
+            },
+            { $unwind: "$room" },
+            {
+                $lookup: {
+                    from: "cinemas",
+                    localField: "room.cinema",
+                    foreignField: "_id",
+                    as: "cinema"
+                }
+            },
+            { $unwind: "$cinema" },
+            // Lookup lấy thông tin định dạng phòng (2D/3D/IMAX)
+            {
+                $lookup: {
+                    from: "formatrooms", // Tên collection định dạng phòng của bạn
+                    localField: "room.format",
+                    foreignField: "_id",
+                    as: "format"
+                }
+            },
+            { $unwind: "$format" },
+            // Nhóm theo Rạp và Định dạng
+            {
+                $group: {
+                    _id: {
+                        cinemaId: "$cinema._id",
+                        formatId: "$format._id"
+                    },
+                    cinemaName: { $first: "$cinema.name" },
+                    cinemaAddress: { $first: "$cinema.location" },
+                    formatName: { $first: "$format.name" },
+                    showtimes: {
+                        $push: {
+                            _id: "$_id",
+                            startTime: "$startTime",
+                            endTime: "$endTime"
+                        }
+                    }
+                }
+            },
+            // Nhóm lại lần nữa để gom các Format vào trong Rạp
+            {
+                $group: {
+                    _id: "$_id.cinemaId",
+                    name: { $first: "$cinemaName" },
+                    address: { $first: "$cinemaAddress" },
+                    formats: {
+                        $push: {
+                            format: "$formatName",
+                            showtimes: "$showtimes"
+                        }
+                    }
+                }
+            },
+            { $sort: { name: 1 } }
+        ]);
+    }
+
+    async getShowtimesGroupByRoom(cinemaId: string, date: string) {
+        const startOfDay = new Date(`${date}T00:00:00+07:00`);
+        const endOfDay = new Date(`${date}T23:59:59+07:00`);
+
+        return await this.showtimeModel.aggregate([
+            {
+                $match: {
+                    startTime: { $gte: startOfDay, $lte: endOfDay },
+                    isDeleted: false
+                }
+            },
+            // Lookup thông tin phòng để lọc theo cinemaId
+            {
+                $lookup: {
+                    from: "rooms",
+                    localField: "room",
+                    foreignField: "_id",
+                    as: "roomDetails"
+                }
+            },
+            { $unwind: "$roomDetails" },
+            // Lọc chính xác rạp theo ID
+            {
+                $match: {
+                    "roomDetails.cinema": new mongoose.Types.ObjectId(cinemaId)
+                }
+            },
+            // Lấy thêm thông tin Phim
+            {
+                $lookup: {
+                    from: "movies",
+                    localField: "movie",
+                    foreignField: "_id",
+                    as: "movieDetails"
+                }
+            },
+            { $unwind: "$movieDetails" },
+            { $sort: { startTime: 1 } },
+            // Nhóm theo Phòng
+            {
+                $group: {
+                    _id: "$roomDetails._id",
+                    roomName: { $first: "$roomDetails.name" },
+                    // Lấy định dạng phòng từ lookup (nếu cần hiển thị 2D/3D)
+                    showtimes: {
+                        $push: {
+                            _id: "$_id",
+                            startTime: "$startTime",
+                            endTime: "$endTime",
+                            movie: {
+                                _id: "$movieDetails._id",
+                                title: "$movieDetails.title",
+                                poster: "$movieDetails.poster",
+                                duration: "$movieDetails.duration"
+                            }
+                        }
+                    }
+                }
+            },
+            { $sort: { roomName: 1 } }
+        ]);
+    }
 }

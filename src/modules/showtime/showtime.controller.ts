@@ -25,9 +25,26 @@ export const deleteShowtime = catchAsync(async (req: Request, res: Response) => 
   return success(res, null, "Xóa suất chiếu thành công");
 });
 
-export const getScheduleByCinema = catchAsync(async (req: Request, res: Response) => {
+export const getShowtimesByMovie = catchAsync(async (req: Request, res: Response) => {
+    const { movieId } = req.params;
+    const { date } = req.query; // Ví dụ: 2026-02-12
+
+    const data = await showtimeService.getShowtimesByMovie(movieId, date as string);
+    return success(res, data, "Lấy lịch chiếu theo phim thành công");
+});
+
+export const getShowtimeByCinema = catchAsync(async (req: Request, res: Response) => {
     const { cinemaId } = req.params;
     const { date } = req.query; // Ví dụ: ?date=2025-05-27
-    const schedule = await showtimeService.getShowtimesByCinema(cinemaId, date as string);
-    return success(res, schedule, "Lấy lịch chiếu theo rạp thành công");
+    const showtime = await showtimeService.getShowtimesByCinema(cinemaId, date as string);
+    return success(res, showtime, "Lấy lịch chiếu theo rạp thành công");
 });
+
+export const getShowtimesGroupByRoom = catchAsync(async (req: Request, res: Response) => {
+    const { cinemaId } = req.params;
+    const { date } = req.query; // YYYY-MM-DD
+
+    const data = await showtimeService.getShowtimesGroupByRoom(cinemaId, date as string);
+    return success(res, data, "Lấy lịch chiếu theo rạp thành công");
+});
+

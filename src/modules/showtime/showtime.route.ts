@@ -24,11 +24,27 @@ router.patch(
 
 router.delete("/:id", authenticationMiddleware, controller.deleteShowtime);
 
+//Lấy theo rạp
 router.get(
-    "/cinemas/:cinemaId",
-    validateMiddleware(v.getScheduleParam, "params"),
-    validateMiddleware(v.getScheduleQuery, "query"),
-    controller.getScheduleByCinema
+  "/cinemas/:cinemaId",
+  validateMiddleware(v.getShowtimeByCinemaParam, "params"),
+  validateMiddleware(v.getScheduleQuery, "query"),
+  controller.getShowtimeByCinema
 );
 
 export default router;
+
+//Lấy theo phim
+router.get(
+    "/movies/:movieId",
+    validateMiddleware(v.getShowtimeByMovieParam, "params"), // Cần tạo validation param
+    controller.getShowtimesByMovie
+);
+
+//Gom nhóm theo phòng
+router.get(
+  "/cinemas/:cinemaId/rooms",
+  validateMiddleware(v.getShowtimeByCinemaParam, "params"),
+  validateMiddleware(v.getScheduleQuery, "query"),
+  controller.getShowtimesGroupByRoom
+);
