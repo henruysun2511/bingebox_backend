@@ -17,10 +17,11 @@ export const createShowtime = Joi.object({
   }),
   subtitle: Joi.string()
     .valid(...Object.values(SubtitleTypeEnum))
-    .optional()
+    .required()
     .messages({
       "string.base": "Phụ đề phải là định dạng chuỗi văn bản",
       "any.only": "Loại phụ đề không hợp lệ",
+      "any.required": "Loại phụ đề là bắt buộc",
     }),
   room: Joi.string().required().messages({
     "any.required": "Phòng chiếu là bắt buộc",
