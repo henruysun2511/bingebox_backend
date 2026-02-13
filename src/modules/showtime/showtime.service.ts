@@ -335,7 +335,7 @@ export class ShowtimeService {
             // Lookup lấy thông tin định dạng phòng (2D/3D/IMAX)
             {
                 $lookup: {
-                    from: "formatrooms", 
+                    from: "formatrooms",
                     localField: "room.format",
                     foreignField: "_id",
                     as: "format"
@@ -381,15 +381,19 @@ export class ShowtimeService {
     }
 
     async getShowtimesGroupByRoom(cinemaId: string, date: string) {
-        const startOfDay = new Date(`${date}T00:00:00+07:00`);
-        const endOfDay = new Date(`${date}T23:59:59+07:00`);
+        const matchConditions: any = {
+            isDeleted: false
+        };
+
+        if (date) {
+            const startOfDay = new Date(`${date}T00:00:00+07:00`);
+            const endOfDay = new Date(`${date}T23:59:59+07:00`);
+            matchConditions.startTime = { $gte: startOfDay, $lte: endOfDay };
+        }
 
         return await this.showtimeModel.aggregate([
             {
-                $match: {
-                    startTime: { $gte: startOfDay, $lte: endOfDay },
-                    isDeleted: false
-                }
+                $match: matchConditions
             },
             // Lookup thông tin phòng để lọc theo cinemaId
             {
