@@ -75,6 +75,7 @@ export type { ICinemaBody };
 interface IShowtimeBody {
     movie: mongoose.Types.ObjectId;
     room: mongoose.Types.ObjectId;
+    subtitle: SubtitleTypeEnum;
     startTime: Date
     endTime: Date
     status: BaseStatusEnum

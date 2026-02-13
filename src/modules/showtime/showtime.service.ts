@@ -18,7 +18,7 @@ export class ShowtimeService {
     private roomModel = RoomModel;
 
     async createShowtime(data: IShowtimeBody, userId: string) {
-        const { movie, room, startTime } = data;
+        const { movie, room, startTime, subtitle } = data;
 
         const movieDoc = await this.movieModel.findOne({ _id: movie, isDeleted: false });
         if (!movieDoc) throw new AppError("Phim không tồn tại", 404);
@@ -69,6 +69,7 @@ export class ShowtimeService {
             room,
             startTime: start,
             endTime: end,
+            subtitle,
             timeslot: matchedSlot._id,
             createdBy: userId,
         });
