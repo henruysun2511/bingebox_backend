@@ -6,6 +6,7 @@ import { IShowtimeBody } from "../../types/body.type";
 import { IShowtimeQuery } from "../../types/param.type";
 import { buildPagination } from "../../utils/buildPagination";
 import { default as MovieModel } from "../movie/movie.schema";
+import { default as RoomModel } from "../room/room.schema";
 import { default as TimeSlotModel } from "../timeSlot/timeSlot.schema";
 import { buildShowtimeQuery } from "./showtime.query";
 import { default as ShowtimeModel } from "./showtime.schema";
@@ -14,6 +15,7 @@ export class ShowtimeService {
     private showtimeModel = ShowtimeModel;
     private movieModel = MovieModel;
     private timeSlotModel = TimeSlotModel;
+    private roomModel = RoomModel;
 
     async createShowtime(data: IShowtimeBody, userId: string) {
         const { movie, room, startTime } = data;
@@ -380,69 +382,76 @@ export class ShowtimeService {
         ]);
     }
 
-    async getShowtimesGroupByRoom(cinemaId: string, date: string) {
-        const matchConditions: any = {
-            isDeleted: false
-        };
+    async getShowtimesGroupByRoom(cinemaId: string, date?: string) {
+        const startOfDay = date ? new Date(`${date}T00:00:00+07:00`) : null;
+        const endOfDay = date ? new Date(`${date}T23:59:59+07:00`) : null;
 
-        if (date) {
-            const startOfDay = new Date(`${date}T00:00:00+07:00`);
-            const endOfDay = new Date(`${date}T23:59:59+07:00`);
-            matchConditions.startTime = { $gte: startOfDay, $lte: endOfDay };
-        }
-
-        return await this.showtimeModel.aggregate([
-            {
-                $match: matchConditions
-            },
-            // Lookup thông tin phòng để lọc theo cinemaId
-            {
-                $lookup: {
-                    from: "rooms",
-                    localField: "room",
-                    foreignField: "_id",
-                    as: "roomDetails"
-                }
-            },
-            { $unwind: "$roomDetails" },
-            // Lọc chính xác rạp theo ID
+        return await this.roomModel.aggregate([
+            // 1. Lấy tất cả các phòng thuộc rạp này trước
             {
                 $match: {
-                    "roomDetails.cinema": new mongoose.Types.ObjectId(cinemaId)
+                    cinema: new mongoose.Types.ObjectId(cinemaId),
+                    isDeleted: false
                 }
             },
-            // Lấy thêm thông tin Phim
+            // 2. Lookup để lấy suất chiếu thuộc từng phòng
             {
                 $lookup: {
-                    from: "movies",
-                    localField: "movie",
-                    foreignField: "_id",
-                    as: "movieDetails"
-                }
-            },
-            { $unwind: "$movieDetails" },
-            { $sort: { startTime: 1 } },
-            // Nhóm theo Phòng
-            {
-                $group: {
-                    _id: "$roomDetails._id",
-                    roomName: { $first: "$roomDetails.name" },
-                    // Lấy định dạng phòng từ lookup (nếu cần hiển thị 2D/3D)
-                    showtimes: {
-                        $push: {
-                            _id: "$_id",
-                            startTime: "$startTime",
-                            endTime: "$endTime",
-                            subtitle: "$subtitle",
-                            status: "$status",
-                            movie: {
-                                _id: "$movieDetails._id",
-                                title: "$movieDetails.title",
-                                poster: "$movieDetails.poster",
-                                duration: "$movieDetails.duration"
+                    from: "showtimes",
+                    let: { roomId: "$_id" },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $and: [
+                                        { $eq: ["$room", "$$roomId"] },
+                                        { $eq: ["$isDeleted", false] },
+                                        // Chỉ lọc theo ngày nếu có biến date truyền vào
+                                        ...(startOfDay ? [
+                                            { $gte: ["$startTime", startOfDay] },
+                                            { $lte: ["$startTime", endOfDay] }
+                                        ] : [])
+                                    ]
+                                }
+                            }
+                        },
+                        { $sort: { startTime: 1 } },
+                        // 3. Lookup ngược lại để lấy thông tin phim cho từng suất chiếu
+                        {
+                            $lookup: {
+                                from: "movies",
+                                localField: "movie",
+                                foreignField: "_id",
+                                as: "movieDetails"
+                            }
+                        },
+                        { $unwind: "$movieDetails" },
+                        // Định dạng lại object showtime con
+                        {
+                            $project: {
+                                _id: 1,
+                                startTime: 1,
+                                endTime: 1,
+                                subtitle: 1,
+                                status: 1,
+                                movie: {
+                                    _id: "$movieDetails._id",
+                                    title: "$movieDetails.title",
+                                    poster: "$movieDetails.poster",
+                                    duration: "$movieDetails.duration"
+                                }
                             }
                         }
-                    }
+                    ],
+                    as: "showtimes"
+                }
+            },
+            // 4. Định dạng output cuối cùng
+            {
+                $project: {
+                    _id: 1,
+                    roomName: "$name",
+                    showtimes: 1 // Sẽ là mảng rỗng [] nếu không có suất chiếu
                 }
             },
             { $sort: { roomName: 1 } }
