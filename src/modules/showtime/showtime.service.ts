@@ -111,14 +111,16 @@ export class ShowtimeService {
     }
 
     async updateShowtime(id: string, data: IShowtimeBody, userId: string) {
+        // 1. Kiểm tra suất chiếu tồn tại
         const showtime = await this.showtimeModel.findOne({
             _id: id,
             isDeleted: false
         });
         if (!showtime) throw new AppError("Không tìm thấy suất chiếu", 404);
 
-        //Có vé rồi không cho sửa
-        //...
+        // 2. Kiểm tra vé (Nên bổ sung check Ticket tại đây)
+        // const hasTickets = await this.ticketModel.exists({ showtime: id });
+        // if (hasTickets) throw new AppError("Suất chiếu đã có vé, không thể chỉnh sửa", 400);
 
         const {
             movie = showtime.movie,
@@ -126,51 +128,61 @@ export class ShowtimeService {
             startTime = showtime.startTime,
         } = data;
 
-        const movieDoc = await this.movieModel.findOne({
-            _id: movie,
-            isDeleted: false
-        });
+        // 3. Kiểm tra phim và tính toán thời gian kết thúc
+        const movieDoc = await this.movieModel.findOne({ _id: movie, isDeleted: false });
         if (!movieDoc) throw new AppError("Phim không tồn tại", 404);
 
         const start = new Date(startTime);
-        const end = new Date(
-            start.getTime() + (movieDoc.duration + 15) * 60000
-        );
+        const end = new Date(start.getTime() + (movieDoc.duration + 15) * 60000);
 
-        //Gán lại TimeSlot
-        const startStr =
-            start.getHours().toString().padStart(2, "0") +
-            ":" +
-            start.getMinutes().toString().padStart(2, "0");
-
-        const matchedSlot = await this.timeSlotModel.findOne({
-            startTime: { $lte: startStr },
-            endTime: { $gt: startStr },
-            isDeleted: false
+        // 4. Convert sang giờ VN để match timeslot (Đồng bộ với logic Create)
+        const startStr = start.toLocaleTimeString("vi-VN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "Asia/Ho_Chi_Minh",
         });
 
-        if (!matchedSlot)
-            throw new AppError("Giờ chiếu không thuộc khung giờ quy định", 400);
+        // 5. Tìm TimeSlot với logic hỗ trợ khung giờ xuyên đêm
+        const matchedSlot = await this.timeSlotModel.findOne({
+            isDeleted: false,
+            $or: [
+                {
+                    $expr: { $lt: ["$startTime", "$endTime"] },
+                    startTime: { $lte: startStr },
+                    endTime: { $gt: startStr }
+                },
+                {
+                    $expr: { $gt: ["$startTime", "$endTime"] },
+                    $or: [
+                        { startTime: { $lte: startStr } },
+                        { endTime: { $gt: startStr } }
+                    ]
+                }
+            ]
+        });
 
-        // Check trùng lịch (loại trừ chính nó)
+        if (!matchedSlot) throw new AppError("Giờ chiếu không thuộc khung giờ quy định", 400);
+
+        // 6. Check trùng lịch (Loại trừ chính nó bằng $ne: id)
         const overlap = await this.showtimeModel.findOne({
             _id: { $ne: id },
             room,
             isDeleted: false,
             startTime: { $lt: end },
-            endTime: { $gt: start }
+            endTime: { $gt: start },
         });
 
-        if (overlap)
-            throw new AppError("Phòng chiếu đã có suất chiếu khác trong thời gian này", 400);
+        if (overlap) throw new AppError("Phòng chiếu đã có suất chiếu khác trong thời gian này", 400);
 
+        // 7. Cập nhật
         return await this.showtimeModel.findByIdAndUpdate(
             id,
             {
                 ...data,
                 movie,
                 room,
-                startTime,
+                startTime: start,
                 endTime: end,
                 timeslot: matchedSlot._id,
                 updatedBy: userId
