@@ -82,7 +82,7 @@ interface IMovie extends IBaseDocument {
     releaseDate: Date;
     director?: string;
     description: string;
-    subtitle?: SubtitleTypeEnum;
+    subtitle?: SubtitleTypeEnum[];
     poster: string;
     banner: string;
     trailer: string;
@@ -101,6 +101,7 @@ export type { IMovie };
 interface IShowtime extends IBaseDocument {
     _id?: mongoose.Types.ObjectId;
     movie: mongoose.Types.ObjectId;
+    subtitle?: BaseStatusEnum;
     room: mongoose.Types.ObjectId;
     startTime: Date
     endTime: Date

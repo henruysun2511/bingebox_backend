@@ -15,7 +15,7 @@ export function buildMovieQuery(query: IMovieQuery) {
     if (query.status) {
         filter.status = query.status;
     }
-    console.log("query.categoryIds:", query.categoryIds);
+
     if (query.categoryIds && query.categoryIds.length > 0) {
         const rawIds = Array.isArray(query.categoryIds)
             ? query.categoryIds

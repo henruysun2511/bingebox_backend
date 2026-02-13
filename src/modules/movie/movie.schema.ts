@@ -22,10 +22,10 @@ const movieSchema = new mongoose.Schema<IMovie>({
         type: String,
         required: true
     },
-    subtitle: {
+    subtitle: [{ 
         type: String,
         enum: Object.values(SubtitleTypeEnum),
-    },
+    }],
     poster: {
         type: String,
         required: true

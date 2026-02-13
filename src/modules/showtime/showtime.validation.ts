@@ -1,4 +1,5 @@
 import Joi from "joi";
+import { SubtitleTypeEnum } from "../../shares/constants/enum";
 
 export const getShowtimeQuery = Joi.object({
   movieId: Joi.string().optional().allow(""),
@@ -13,6 +14,11 @@ export const createShowtime = Joi.object({
   movie: Joi.string().required().messages({
     "any.required": "Phim là bắt buộc",
     "string.empty": "ID phim không được để trống",
+  }),
+  subtitle: Joi.array().items(
+    Joi.valid(...Object.values(SubtitleTypeEnum))
+  ).optional().messages({
+    "any.only": "Loại phụ đề không hợp lệ",
   }),
   room: Joi.string().required().messages({
     "any.required": "Phòng chiếu là bắt buộc",
@@ -47,8 +53,8 @@ export const getScheduleQuery = Joi.object({
 });
 
 export const getShowtimeByMovieParam = Joi.object({
-    movieId: Joi.string().hex().length(24).required().messages({
-        "string.length": "ID phim không hợp lệ",
-        "any.required": "ID phim là bắt buộc"
-    })
+  movieId: Joi.string().hex().length(24).required().messages({
+    "string.length": "ID phim không hợp lệ",
+    "any.required": "ID phim là bắt buộc"
+  })
 });

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { BaseStatusEnum } from "../../shares/constants/enum";
+import { BaseStatusEnum, SubtitleTypeEnum } from "../../shares/constants/enum";
 import { IShowtime } from "../../types/object.type";
 
 const showtimeSchema = new mongoose.Schema<IShowtime>({
@@ -10,6 +10,10 @@ const showtimeSchema = new mongoose.Schema<IShowtime>({
     timeslot: { type: mongoose.Schema.Types.ObjectId, ref: 'TimeSlot' },
     startTime: { type: Date, required: true },
     endTime: { type: Date, required: true },
+    subtitle: { // Bọc trong mảng để lưu array
+        type: String,
+        enum: Object.values(SubtitleTypeEnum),
+    },
     status: {
         type: String,
         enum: Object.values(BaseStatusEnum),

@@ -36,8 +36,12 @@ export const createMovie = Joi.object({
     "string.empty": "Mô tả phim không được để trống",
     "any.required": "Mô tả phim là bắt buộc",
   }),
-  subtitle: Joi.string().valid(...Object.values(SubtitleTypeEnum)).messages({
+  subtitle: Joi.array().items(
+    Joi.string().valid(...Object.values(SubtitleTypeEnum))
+  ).min(1).required().messages({
+    "array.base": "Phụ đề phải là một mảng",
     "any.only": "Loại phụ đề không hợp lệ",
+    "any.required": "Phụ đề là bắt buộc",
   }),
   poster: Joi.string().uri().required().messages({
     "string.uri": "Link poster không hợp lệ",

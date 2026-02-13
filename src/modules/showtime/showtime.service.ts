@@ -1,6 +1,7 @@
 import { AppError } from "../../utils/appError";
 
 import mongoose from "mongoose";
+import { BaseStatusEnum } from "../../shares/constants/enum";
 import { IShowtimeBody } from "../../types/body.type";
 import { IShowtimeQuery } from "../../types/param.type";
 import { buildPagination } from "../../utils/buildPagination";
@@ -195,7 +196,7 @@ export class ShowtimeService {
 
     async getShowtimesByCinema(cinemaId: string, date?: string) {
         return await this.showtimeModel.aggregate([
-            { $match: { isDeleted: false } },
+            { $match: { isDeleted: false, status: BaseStatusEnum.ACTIVE } },
 
             // $lookup giúp join Showtime với Room thông qua _id
             // Sau bước này, mỗi showtime sẽ có dạng:
@@ -307,6 +308,7 @@ export class ShowtimeService {
                 $match: {
                     movie: new mongoose.Types.ObjectId(movieId),
                     startTime: { $gte: startOfDay, $lte: endOfDay },
+                    status: BaseStatusEnum.ACTIVE,
                     isDeleted: false
                 }
             },
@@ -333,7 +335,7 @@ export class ShowtimeService {
             // Lookup lấy thông tin định dạng phòng (2D/3D/IMAX)
             {
                 $lookup: {
-                    from: "formatrooms", // Tên collection định dạng phòng của bạn
+                    from: "formatrooms", 
                     localField: "room.format",
                     foreignField: "_id",
                     as: "format"
@@ -354,7 +356,8 @@ export class ShowtimeService {
                         $push: {
                             _id: "$_id",
                             startTime: "$startTime",
-                            endTime: "$endTime"
+                            endTime: "$endTime",
+                            subtitle: "$subtitle"
                         }
                     }
                 }
@@ -426,6 +429,8 @@ export class ShowtimeService {
                             _id: "$_id",
                             startTime: "$startTime",
                             endTime: "$endTime",
+                            subtitle: "$subtitle",
+                            status: "$status",
                             movie: {
                                 _id: "$movieDetails._id",
                                 title: "$movieDetails.title",
