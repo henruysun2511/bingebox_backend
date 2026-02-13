@@ -57,7 +57,7 @@ interface IMovieBody {
     nationality?: string;
     agePermission: AgePermissionTypeEnum;
     status: MovieStatusEnum;
-    subtitle?: SubtitleTypeEnum;
+    subtitle?: SubtitleTypeEnum[];
     format?: string[];
 }
 export type { IMovieBody };
