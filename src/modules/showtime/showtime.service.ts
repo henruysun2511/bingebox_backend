@@ -436,7 +436,7 @@ export class ShowtimeService {
                                 status: 1,
                                 movie: {
                                     _id: "$movieDetails._id",
-                                    title: "$movieDetails.title",
+                                    name: "$movieDetails.name",
                                     poster: "$movieDetails.poster",
                                     duration: "$movieDetails.duration"
                                 }
