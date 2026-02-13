@@ -15,11 +15,13 @@ export const createShowtime = Joi.object({
     "any.required": "Phim là bắt buộc",
     "string.empty": "ID phim không được để trống",
   }),
-  subtitle: Joi.array().items(
-    Joi.valid(...Object.values(SubtitleTypeEnum))
-  ).optional().messages({
-    "any.only": "Loại phụ đề không hợp lệ",
-  }),
+  subtitle: Joi.string()
+    .valid(...Object.values(SubtitleTypeEnum))
+    .optional()
+    .messages({
+      "string.base": "Phụ đề phải là định dạng chuỗi văn bản",
+      "any.only": "Loại phụ đề không hợp lệ",
+    }),
   room: Joi.string().required().messages({
     "any.required": "Phòng chiếu là bắt buộc",
   }),
