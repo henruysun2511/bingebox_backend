@@ -314,18 +314,26 @@ export class ShowtimeService {
         ]);
     }
 
-    async getShowtimesByMovie(movieId: string, date: string) {
-        const startOfDay = new Date(`${date}T00:00:00+07:00`);
-        const endOfDay = new Date(`${date}T23:59:59+07:00`);
+ 
+    async getShowtimesByMovie(movieId: string, date?: string) {
+        // 1. Khởi tạo match cơ bản
+        const matchCondition: any = {
+            movie: new mongoose.Types.ObjectId(movieId),
+            status: BaseStatusEnum.ACTIVE,
+            isDeleted: false
+        };
+
+        if (date) {
+            const startOfDay = new Date(`${date}T00:00:00+07:00`);
+            const endOfDay = new Date(`${date}T23:59:59+07:00`);
+            matchCondition.startTime = { $gte: startOfDay, $lte: endOfDay };
+        } else {
+            matchCondition.startTime = { $gte: new Date() };
+        }
 
         return await this.showtimeModel.aggregate([
             {
-                $match: {
-                    movie: new mongoose.Types.ObjectId(movieId),
-                    startTime: { $gte: startOfDay, $lte: endOfDay },
-                    status: BaseStatusEnum.ACTIVE,
-                    isDeleted: false
-                }
+                $match: matchCondition
             },
             { $sort: { startTime: 1 } },
             // Lookup lấy thông tin Phòng và Rạp
