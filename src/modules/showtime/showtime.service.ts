@@ -82,7 +82,7 @@ export class ShowtimeService {
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
-                .select("_id movie room startTime endTime timeslot")
+                .select("_id subtitle movie room startTime endTime timeslot")
                 .populate("movie", "name poster duration")
                 .populate("timeslot", "name")
                 .populate({
