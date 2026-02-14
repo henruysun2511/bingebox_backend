@@ -26,7 +26,7 @@ export class MovieService {
                 .sort(sort)
                 .skip(skip)
                 .limit(limit)
-                .select("name poster releaseDate agePermission subtitle categories format")
+                .select("name poster trailer releaseDate agePermission subtitle categories format")
                 .populate({
                     path: "categories",
                     select: "name",
