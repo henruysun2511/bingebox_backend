@@ -8,6 +8,12 @@ const router = Router();
 
 router.get("/", validateMiddleware(v.getShowtimeQuery, "query"), controller.getShowtimes);
 
+router.get(
+  "/:id", 
+  validateMiddleware(v.getShowtimeIdParam, "params"), 
+  controller.getShowtimeDetail
+);
+
 router.post(
   "/",
   authenticationMiddleware,

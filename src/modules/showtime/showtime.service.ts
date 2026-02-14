@@ -111,6 +111,37 @@ export class ShowtimeService {
         };
     }
 
+    async getShowtimeDetail(id: string) {
+        const showtime = await this.showtimeModel.findOne({
+            _id: id,
+            isDeleted: false,
+        })
+            .select("_id subtitle movie room startTime endTime timeslot")
+            .populate("movie", "name poster duration agePermission")
+            .populate("timeslot", "name")
+            .populate({
+                path: "room",
+                select: "name cinema format",
+                populate: [
+                    {
+                        path: "cinema",
+                        select: "name",
+                    },
+                    {
+                        path: "format",
+                        select: "name",
+                    },
+                ],
+            })
+            .lean();
+
+        if (!showtime) {
+            throw new AppError("Không tìm thấy suất chiếu", 404);
+        }
+
+        return showtime;
+    }
+
     async updateShowtime(id: string, data: IShowtimeBody, userId: string) {
         // 1. Kiểm tra suất chiếu tồn tại
         const showtime = await this.showtimeModel.findOne({
@@ -314,7 +345,7 @@ export class ShowtimeService {
         ]);
     }
 
- 
+
     async getShowtimesByMovie(movieId: string, date?: string) {
         // 1. Khởi tạo match cơ bản
         const matchCondition: any = {

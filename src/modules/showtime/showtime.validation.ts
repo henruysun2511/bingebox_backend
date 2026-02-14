@@ -10,6 +10,13 @@ export const getShowtimeQuery = Joi.object({
   sort: Joi.string().optional().allow(""),
 });
 
+export const getShowtimeIdParam = Joi.object({
+  id: Joi.string().required().messages({
+    "any.required": "ID suất chiếu là bắt buộc",
+    "string.base": "ID suất chiếu không đúng định dạng",
+  }),
+});
+
 export const createShowtime = Joi.object({
   movie: Joi.string().required().messages({
     "any.required": "Phim là bắt buộc",
