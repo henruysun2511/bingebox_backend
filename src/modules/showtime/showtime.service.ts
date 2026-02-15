@@ -358,9 +358,7 @@ export class ShowtimeService {
             const startOfDay = new Date(`${date}T00:00:00+07:00`);
             const endOfDay = new Date(`${date}T23:59:59+07:00`);
             matchCondition.startTime = { $gte: startOfDay, $lte: endOfDay };
-        } else {
-            matchCondition.startTime = { $gte: new Date() };
-        }
+        } 
 
         return await this.showtimeModel.aggregate([
             {
