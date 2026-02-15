@@ -9,6 +9,7 @@ export const getShowtimes = catchAsync(async (req: Request, res: Response) => {
   const result = await showtimeService.getShowtimes(req.query);
   return success(res, result.items, "Lấy danh sách suất chiếu thành công", 200, result.pagination);
 });
+
 export const getShowtimeDetail = catchAsync(async (req: Request, res: Response) => {
   const { id } = req.params;
   const showtime = await showtimeService.getShowtimeDetail(id);

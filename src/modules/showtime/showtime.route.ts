@@ -38,7 +38,7 @@ router.get(
   controller.getShowtimeByCinema
 );
 
-export default router;
+
 
 //Lấy theo phim
 router.get(
@@ -54,3 +54,5 @@ router.get(
   validateMiddleware(v.getScheduleQuery, "query"),
   controller.getShowtimesGroupByRoom
 );
+
+export default router;
