@@ -46,6 +46,7 @@ interface IPermission extends IBaseDocument {
     name: string,
     path: string,
     method: PermissionMethodTypeEnum,
+    module: string,
     description?: string
 }
 

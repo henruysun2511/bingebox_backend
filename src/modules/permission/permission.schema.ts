@@ -20,6 +20,10 @@ const permissionSchema = new mongoose.Schema<IPermission>({
         required: true,
         enum: Object.values(PermissionMethodTypeEnum),
     },
+    module: {
+        type: String,
+        require: true
+    },
     description: {
         type: String,
         default: ""

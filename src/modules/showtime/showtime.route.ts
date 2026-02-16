@@ -43,7 +43,7 @@ router.get(
 //Lấy theo phim
 router.get(
     "/movies/:movieId",
-    validateMiddleware(v.getShowtimeByMovieParam, "params"), // Cần tạo validation param
+    validateMiddleware(v.getShowtimeByMovieParam, "params"), 
     controller.getShowtimesByMovie
 );
 
