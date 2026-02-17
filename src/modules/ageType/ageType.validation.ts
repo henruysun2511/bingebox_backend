@@ -7,6 +7,16 @@ export const getAgeTypeIdParam = Joi.object({
     }),
 });
 
+export const getAgeTypeQuery = Joi.object({
+    name: Joi.string().trim().optional().allow("").messages({
+        "string.base": "Tên phải là chuỗi ký tự",
+    }),
+    age: Joi.number().min(0).optional().allow("").messages({
+        "number.base": "Tuổi phải là số",
+        "number.min": "Tuổi không được nhỏ hơn 0",
+    }),
+});
+
 export const createAgeTypeBody = Joi.object({
     name: Joi.string().trim().required().messages({
         "string.empty": "Tên đối tượng không được để trống",

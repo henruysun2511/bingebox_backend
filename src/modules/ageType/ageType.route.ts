@@ -6,7 +6,11 @@ import * as v from "./ageType.validation";
 
 const router = Router();
 
-router.get("/", controller.createAgeType);
+router.get(
+    "/", 
+    validateMiddleware(v.getAgeTypeQuery, "query"), 
+    controller.getAgeTypes
+);
 
 
 router.post(
