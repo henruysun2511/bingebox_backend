@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
-import { authorizationMiddleware } from "../../middlewares/authorization.middleware";
 import { validateMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./user.controller";
 import * as v from "./user.validation";
@@ -13,7 +12,6 @@ router.patch("/me", authenticationMiddleware, validateMiddleware(v.updateUserPro
 router.patch(
     "/assign-role/:id",
     authenticationMiddleware,
-    // Nên có thêm middleware checkAdminRole ở đây
     validateMiddleware(v.getUserIdParam, "params"),
     validateMiddleware(v.assignRole, "body"),
     controller.assignUserRole
@@ -23,7 +21,6 @@ export default router;
 router.get(
     "/",
     authenticationMiddleware,
-    authorizationMiddleware,
     validateMiddleware(v.getUserListQuery, "query"),
     controller.getUsers
 );
