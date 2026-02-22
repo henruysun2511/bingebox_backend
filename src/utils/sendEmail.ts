@@ -1,20 +1,10 @@
-import nodemailer from "nodemailer";
-import { ENV } from "../shares/constants/enviroment";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function sendOtpEmail(email: string, otp: string) {
-  const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-      user: ENV.EMAIL_USER,
-      pass: ENV.EMAIL_PASSWORD,
-    },
-    connectionTimeout: 10000,
-  });
-
-  await transporter.sendMail({
-    from: `"BingeBox Cinema" <${ENV.EMAIL_USER}>`,
+  await resend.emails.send({
+    from: "BingeBox <onboarding@resend.dev>",
     to: email,
     subject: "Mã OTP đặt lại mật khẩu",
     html: `
