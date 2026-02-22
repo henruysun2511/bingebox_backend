@@ -6,7 +6,7 @@ const ticketPriceSchema = new mongoose.Schema({
     ...baseFields,
     timeSlot: { type: mongoose.Schema.Types.ObjectId, ref: 'TimeSlot', required: true },
     ageType: { type: mongoose.Schema.Types.ObjectId, ref: 'AgeType', required: true },
-    formatRoom: { type: mongoose.Schema.Types.ObjectId, ref: 'Format', required: true },
+    formatRoom: { type: mongoose.Schema.Types.ObjectId, ref: 'FormatRoom', required: true },
     seatType: { type: mongoose.Schema.Types.ObjectId, ref: 'SeatType', required: true },
     dayOfWeek: { 
         type: String, 

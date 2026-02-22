@@ -30,8 +30,12 @@ export class TicketPriceService {
     async getPrices(query: ITicketPriceQuery) {
         const { filter } = buildTicketPriceQuery(query);
 
-        return await this.ticketPriceModel.find(filter)
-            .populate('ageType seatType formatRoom')
+        return await this.ticketPriceModel
+            .find(filter)
+            .populate({ path: 'ageType', select: 'name' })
+            .populate({ path: 'seatType', select: 'name' })
+            .populate({ path: 'formatRoom', select: 'name' })
+            .populate({ path: 'timeSlot', select: 'name' })
             .lean();
     }
 
