@@ -3,11 +3,14 @@ import { ENV } from "../shares/constants/enviroment";
 
 export async function sendOtpEmail(email: string, otp: string) {
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false,
     auth: {
       user: ENV.EMAIL_USER,
       pass: ENV.EMAIL_PASSWORD,
     },
+    connectionTimeout: 10000,
   });
 
   await transporter.sendMail({
