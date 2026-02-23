@@ -1,9 +1,9 @@
-import { buildPagination } from "@utils/buildPagination";
 import { ClientSession } from "mongoose";
 import { ITicketPriceBody } from "../../types/body.type";
 import { IRoom, ISeat, IShowtime, IUser } from "../../types/object.type";
 import { ITicketPriceQuery } from "../../types/param.type";
 import { AppError } from "../../utils/appError";
+import { buildPagination } from "../../utils/buildPagination";
 import { calcAge } from "../../utils/calcAge";
 import { mapDayOfWeek } from "../../utils/mapDayOfWeek";
 import { default as AgeTypeModel } from "../ageType/ageType.schema";
