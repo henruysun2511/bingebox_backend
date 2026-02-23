@@ -1,0 +1,3746 @@
+[
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 44000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 140000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 112000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 75000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 85000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 68000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 150000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 120000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 44000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 140000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 112000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 75000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 85000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 68000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 150000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 120000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 44000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 140000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 112000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 75000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 85000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 68000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 150000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 120000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 44000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 140000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 112000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 75000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 85000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 68000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 65000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 52000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 150000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 120000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 55000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 136000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 85000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 68000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 90000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 72000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 95000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 76000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 200000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 75000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 136000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 136000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 85000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 68000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 90000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 72000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 95000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 76000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 200000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 75000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 136000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 70000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 56000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 136000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 85000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 68000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 90000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 72000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 95000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 76000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 200000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 75000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "698443b7285ca06541dc3113",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 136000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 48000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 90000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 72000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 48000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 90000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 72000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 48000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 90000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 72000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 60000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 48000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 128000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 90000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 72000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 180000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 144000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 200000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 104000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 140000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 112000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 280000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 224000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 120000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 96000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 104000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 260000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 208000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 200000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 104000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 140000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 112000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 280000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 224000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 120000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 96000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 104000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 260000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 208000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 64000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 200000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 160000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 100000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 80000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 110000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 88000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 220000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 176000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 104000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 140000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 112000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 280000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 224000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 120000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 96000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "69844875285ca06541dc3159",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 104000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 260000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "69844427285ca06541dc3125",
+    "seatType": "6984488d285ca06541dc315e",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 208000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "MONDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "TUESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "WEDNESDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "THURSDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "FRIDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SATURDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69885d7875aca88b9501b76b",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "698849dc67ab5f59e88c3e43",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a0267ab5f59e88c3e49",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948fb983e9246748f6ea68",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 170000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948e8d83e9246748f6ea52",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  },
+  {
+    "timeSlot": "69884a7967ab5f59e88c3e52",
+    "ageType": "69948c4998173b661f2b7c38",
+    "formatRoom": "6984441b285ca06541dc311f",
+    "seatType": "6984485b285ca06541dc3152",
+    "dayOfWeek": "SUNDAY",
+    "finalPrice": 130000
+  }
+]

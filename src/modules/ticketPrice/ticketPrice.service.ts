@@ -1,3 +1,4 @@
+import { buildPagination } from "@utils/buildPagination";
 import { ClientSession } from "mongoose";
 import { ITicketPriceBody } from "../../types/body.type";
 import { IRoom, ISeat, IShowtime, IUser } from "../../types/object.type";
@@ -29,14 +30,31 @@ export class TicketPriceService {
 
     async getPrices(query: ITicketPriceQuery) {
         const { filter } = buildTicketPriceQuery(query);
+        const { page, limit, skip } = buildPagination(query);
 
-        return await this.ticketPriceModel
-            .find(filter)
-            .populate({ path: 'ageType', select: 'name' })
-            .populate({ path: 'seatType', select: 'name' })
-            .populate({ path: 'formatRoom', select: 'name' })
-            .populate({ path: 'timeSlot', select: 'name' })
-            .lean();
+        const [items, total] = await Promise.all([
+            this.ticketPriceModel
+                .find(filter)
+                .skip(skip)
+                .limit(limit)
+                .populate({ path: 'ageType', select: 'name' })
+                .populate({ path: 'seatType', select: 'name' })
+                .populate({ path: 'formatRoom', select: 'name' })
+                .populate({ path: 'timeSlot', select: 'name' })
+                .lean(),
+
+            this.ticketPriceModel.countDocuments(filter),
+        ]);
+
+        return {
+            items,
+            pagination: {
+                page,
+                limit,
+                totalItems: total,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
     }
 
     async updatePrice(id: string, data: ITicketPriceBody, userId: string) {
@@ -80,7 +98,7 @@ export class TicketPriceService {
         const tickets = [];
 
         for (const seat of seats) {
-            const price = await TicketPriceModel.findOne({
+            const price = await this.ticketPriceModel.findOne({
                 seatType: seat.seatType,
                 formatRoom: room.format,
                 timeSlot: showtime.timeslot,
