@@ -12,7 +12,7 @@ export const createPrice = catchAsync(async (req: Request, res: Response) => {
 
 export const getPrices = catchAsync(async (req: Request, res: Response) => {
     const result = await service.getPrices(req.query);
-    return success(res, result, "Lấy danh sách giá vé thành công");
+    return success(res, result.items, "Lấy danh sách giá vé thành công", 200, result.pagination);
 });
 
 export const updatePrice = catchAsync(async (req: Request, res: Response) => {

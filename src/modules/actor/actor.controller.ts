@@ -9,7 +9,6 @@ const actorService = new ActorService();
 
 export const getActors = catchAsync(async (req: Request, res: Response) => {
   const result = await actorService.getActors(req.query as IActorQuery);
-
   return success(res, result.items, "Lấy danh sách thành công", 200, result.pagination);
 });
 
