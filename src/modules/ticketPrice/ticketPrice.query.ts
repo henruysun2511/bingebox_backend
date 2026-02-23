@@ -1,5 +1,5 @@
 export function buildTicketPriceQuery(query: any) {
-    const filter: any = { isDeleted: false };
+    const filter: any = { isDeleted: { $ne: true } };
 
     if (query.timeSlot) filter.timeSlot = query.timeSlot;
     if (query.ageType) filter.ageType = query.ageType;
