@@ -54,7 +54,6 @@ const voucherSchema = new mongoose.Schema<IVoucher>({
         type: String,
         enum: Object.values(BaseStatusEnum),
         default: BaseStatusEnum.ACTIVE,
-        required: true
     }
 }, {
     timestamps: true

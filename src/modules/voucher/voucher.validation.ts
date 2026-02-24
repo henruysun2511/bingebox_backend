@@ -42,7 +42,7 @@ export const createVoucher = Joi.object({
     maxUsage: Joi.number().integer().min(1).required().messages({
         "number.min": "Số lần sử dụng tối đa phải ít nhất là 1",
     }),
-    status: Joi.string().valid(...Object.values(BaseStatusEnum)).required().messages({
+    status: Joi.string().valid(...Object.values(BaseStatusEnum)).messages({
         "any.only": "Trạng thái không hợp lệ",
     }),
 });
