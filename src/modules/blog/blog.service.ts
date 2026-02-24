@@ -108,4 +108,22 @@ export class BlogService {
 
         return updatedBlog;
     }
+
+    async incrementViews(id: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new AppError("ID bài viết không hợp lệ", 400);
+        }
+
+        const updatedBlog = await this.blogModel.findOneAndUpdate(
+            { _id: id, isDeleted: false },
+            { $inc: { views: 1 } }, // Tăng tự động trường views lên 1
+            { new: true }
+        );
+
+        if (!updatedBlog) {
+            throw new AppError("Không tìm thấy bài viết", 404);
+        }
+
+        return updatedBlog;
+    }
 }
