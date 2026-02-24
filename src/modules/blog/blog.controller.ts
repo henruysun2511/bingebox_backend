@@ -29,3 +29,17 @@ export const deleteBlog = catchAsync(async (req: Request, res: Response) => {
     await service.deleteBlog(req.params.id, req.user!._id.toString());
     return success(res, null, "Xóa bài viết thành công");
 });
+
+export const updateBlogPublished = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { isPublished } = req.body;
+    
+    const blog = await service.updatePublishedStatus(
+        id, 
+        isPublished, 
+        req.user!._id.toString()
+    );
+    
+    const message = isPublished ? "Đã xuất bản bài viết" : "Đã hủy xuất bản bài viết";
+    return success(res, blog, message);
+});

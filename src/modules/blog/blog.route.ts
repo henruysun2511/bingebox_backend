@@ -39,4 +39,12 @@ router.delete(
     c.deleteBlog
 );
 
+router.patch(
+    "/publish/:id",
+    authenticationMiddleware,
+    validateMiddleware(v.getBlogIdParam, "params"),
+    validateMiddleware(v.updateBlogPublishedBody, "body"),
+    c.updateBlogPublished
+);
+
 export default router;

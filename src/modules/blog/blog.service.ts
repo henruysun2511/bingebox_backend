@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import slugify from "slugify";
 import { IBlogBody } from "../../types/body.type";
 import { IBlogQuery } from "../../types/param.type";
@@ -85,5 +86,26 @@ export class BlogService {
         );
         if (!deleted) throw new AppError("Không tìm thấy bài viết để xóa", 404);
         return deleted;
+    }
+
+    async updatePublishedStatus(id: string, isPublished: boolean, userId: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new AppError("ID bài viết không hợp lệ", 400);
+        }
+
+        const updatedBlog = await this.blogModel.findOneAndUpdate(
+            { _id: id, isDeleted: false },
+            {
+                isPublished: isPublished,
+                updatedBy: userId,
+            },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedBlog) {
+            throw new AppError("Không tìm thấy bài viết", 404);
+        }
+
+        return updatedBlog;
     }
 }

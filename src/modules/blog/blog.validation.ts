@@ -40,3 +40,17 @@ export const blogListQuery = Joi.object({
     page: Joi.number().min(1).optional(),
     limit: Joi.number().min(1).optional()
 });
+
+export const getBlogIdParam = Joi.object({
+  id: Joi.string().hex().length(24).required().messages({
+    "any.required": "ID bài viết là bắt buộc",
+    "string.length": "ID bài viết không hợp lệ",
+  }),
+});
+
+export const updateBlogPublishedBody = Joi.object({
+  isPublished: Joi.boolean().required().messages({
+    "any.required": "Trạng thái xuất bản là bắt buộc",
+    "boolean.base": "Trạng thái phải là true hoặc false",
+  }),
+});
