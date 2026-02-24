@@ -358,7 +358,7 @@ export class ShowtimeService {
             const startOfDay = new Date(`${date}T00:00:00+07:00`);
             const endOfDay = new Date(`${date}T23:59:59+07:00`);
             matchCondition.startTime = { $gte: startOfDay, $lte: endOfDay };
-        } 
+        }
 
         return await this.showtimeModel.aggregate([
             {
@@ -506,5 +506,26 @@ export class ShowtimeService {
             },
             { $sort: { roomName: 1 } }
         ]);
+    }
+
+    async updateStatus(id: string, status: string, userId: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new AppError("ID lịch chiếu không hợp lệ", 400);
+        }
+
+        const updatedShowtime = await this.showtimeModel.findOneAndUpdate(
+            { _id: id, isDeleted: false },
+            {
+                status: status,
+                updatedBy: userId
+            },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedShowtime) {
+            throw new AppError("Không tìm thấy lịch chiếu", 404);
+        }
+
+        return updatedShowtime;
     }
 }

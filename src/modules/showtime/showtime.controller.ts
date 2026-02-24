@@ -54,3 +54,11 @@ export const getShowtimesGroupByRoom = catchAsync(async (req: Request, res: Resp
   return success(res, data, "Lấy lịch chiếu theo rạp thành công");
 });
 
+export const updateShowtimeStatus = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const showtime = await showtimeService.updateStatus(id, status, req.user!._id.toString());
+    
+    return success(res, showtime, "Cập nhật trạng thái lịch chiếu thành công");
+});
+

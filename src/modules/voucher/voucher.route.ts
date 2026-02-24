@@ -40,4 +40,12 @@ router.delete(
     controller.deleteVoucher
 );
 
+router.patch(
+    "/change-status/:id",
+    authenticationMiddleware,
+    validateMiddleware(v.getVoucherIdParam, "params"),
+    validateMiddleware(v.updateVoucherStatusBody, "body"),
+    controller.updateVoucherStatus
+);
+
 export default router;

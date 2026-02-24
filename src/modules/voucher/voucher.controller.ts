@@ -29,3 +29,11 @@ export const deleteVoucher = catchAsync(async (req: Request, res: Response) => {
     await voucherService.deleteVoucher(req.params.id, req.user!._id.toString());
     return success(res, null, "Xóa voucher thành công");
 });
+
+export const updateVoucherStatus = catchAsync(async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const voucher = await voucherService.updateStatus(id, status, req.user!._id.toString());
+    
+    return success(res, voucher, "Cập nhật trạng thái voucher thành công");
+});

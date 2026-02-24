@@ -35,17 +35,17 @@ export class VoucherService {
 
     async getVoucherDetail(id: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) throw new AppError("ID không hợp lệ", 400);
-        
+
         const voucher = await this.voucherModel.findOne({ _id: id, isDeleted: false });
         if (!voucher) throw new AppError("Không tìm thấy voucher", 404);
-        
+
         return voucher;
     }
 
     async createVoucher(data: any, userId: string) {
-        const duplicate = await this.voucherModel.findOne({ 
-            code: data.code.toUpperCase(), 
-            isDeleted: false 
+        const duplicate = await this.voucherModel.findOne({
+            code: data.code.toUpperCase(),
+            isDeleted: false
         });
         if (duplicate) throw new AppError("Mã Voucher này đã tồn tại", 400);
 
@@ -84,6 +84,27 @@ export class VoucherService {
 
         if (!voucher) throw new AppError("Không tìm thấy voucher", 404);
         return voucher;
+    }
+
+    async updateStatus(id: string, status: string, userId: string) {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new AppError("ID voucher không hợp lệ", 400);
+        }
+
+        const updatedVoucher = await this.voucherModel.findOneAndUpdate(
+            { _id: id, isDeleted: false },
+            {
+                status: status,
+                updatedBy: userId
+            },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedVoucher) {
+            throw new AppError("Không tìm thấy voucher", 404);
+        }
+
+        return updatedVoucher;
     }
 
     async applyVoucher(code: string | undefined, total: number, session: ClientSession) {

@@ -55,4 +55,12 @@ router.get(
   controller.getShowtimesGroupByRoom
 );
 
+router.patch(
+    "/change-status/:id",
+    authenticationMiddleware,
+    validateMiddleware(v.getShowtimeIdParam, "params"),
+    validateMiddleware(v.updateShowtimeStatusBody, "body"),
+    controller.updateShowtimeStatus
+);
+
 export default router;

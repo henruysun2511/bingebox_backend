@@ -53,3 +53,14 @@ export const updateVoucher = createVoucher.fork(
 ).min(1).messages({
     "object.min": "Phải có ít nhất một trường cần cập nhật",
 });
+
+
+export const updateVoucherStatusBody = Joi.object({
+  status: Joi.string()
+    .valid(...Object.values(BaseStatusEnum))
+    .required()
+    .messages({
+      "any.only": "Trạng thái không hợp lệ",
+      "any.required": "Trạng thái là bắt buộc",
+    }),
+});

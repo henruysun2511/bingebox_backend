@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { SubtitleTypeEnum } from "../../shares/constants/enum";
+import { BaseStatusEnum, SubtitleTypeEnum } from "../../shares/constants/enum";
 
 export const getShowtimeQuery = Joi.object({
   movieId: Joi.string().optional().allow(""),
@@ -67,4 +67,15 @@ export const getShowtimeByMovieParam = Joi.object({
     "string.length": "ID phim không hợp lệ",
     "any.required": "ID phim là bắt buộc"
   })
+});
+
+
+export const updateShowtimeStatusBody = Joi.object({
+  status: Joi.string()
+    .valid(...Object.values(BaseStatusEnum))
+    .required()
+    .messages({
+      "any.only": "Trạng thái không hợp lệ",
+      "any.required": "Trạng thái là bắt buộc",
+    }),
 });
