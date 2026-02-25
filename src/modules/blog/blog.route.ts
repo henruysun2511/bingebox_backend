@@ -47,10 +47,5 @@ router.patch(
     c.updateBlogPublished
 );
 
-router.patch(
-    "/:id/view",
-    validateMiddleware(v.getBlogIdParam, "params"),
-    c.trackView
-);
 
 export default router;
