@@ -43,11 +43,3 @@ export const updateBlogPublished = catchAsync(async (req: Request, res: Response
     const message = isPublished ? "Đã xuất bản bài viết" : "Đã hủy xuất bản bài viết";
     return success(res, blog, message);
 });
-
-export const trackView = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params;
-    
-    const blog = await service.incrementViews(id);
-    
-    return success(res, { views: blog.views }, "Cập nhật lượt xem thành công");
-});

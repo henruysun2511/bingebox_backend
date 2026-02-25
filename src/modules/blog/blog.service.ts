@@ -30,7 +30,7 @@ export class BlogService {
 
         const [items, total] = await Promise.all([
             this.blogModel.find(filter)
-                .populate('author', 'fullName avatar')
+                .populate('author', 'username avatar')
                 .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
@@ -109,21 +109,4 @@ export class BlogService {
         return updatedBlog;
     }
 
-    async incrementViews(id: string) {
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            throw new AppError("ID bài viết không hợp lệ", 400);
-        }
-
-        const updatedBlog = await this.blogModel.findOneAndUpdate(
-            { _id: id, isDeleted: false },
-            { $inc: { views: 1 } }, // Tăng tự động trường views lên 1
-            { new: true }
-        );
-
-        if (!updatedBlog) {
-            throw new AppError("Không tìm thấy bài viết", 404);
-        }
-
-        return updatedBlog;
-    }
 }
