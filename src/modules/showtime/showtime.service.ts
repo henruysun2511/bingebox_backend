@@ -337,6 +337,8 @@ export class ShowtimeService {
                         poster: "$movie.poster",
                         duration: "$movie.duration",
                         agePermission: "$movie.agePermission",
+                        description: "$movie.description",
+                        releaseDate: "$movie.releaseDate",
                         format: "$movie.format"
                     },
                     showtimes: 1

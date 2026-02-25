@@ -58,7 +58,7 @@ export class BlogService {
             query,
             { $inc: { views: 1 } },
             { new: true }
-        ).populate('author', 'fullName avatar');
+        ).populate('author', 'username avatar');
 
         if (!blog) throw new AppError("Không tìm thấy bài viết", 404);
         return blog;
