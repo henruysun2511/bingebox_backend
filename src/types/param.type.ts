@@ -20,6 +20,7 @@ export type { IUserQuery };
 interface IActorQuery extends IPagintion {
     name?: string;
     sort?: string;
+    alphabet?: string;
 }
 export type { IActorQuery };
 
