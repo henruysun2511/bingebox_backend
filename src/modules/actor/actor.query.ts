@@ -13,6 +13,13 @@ export function buildActorQuery(query: IActorQuery) {
         };
     }
 
+    if (query.alphabet) {
+        filter.name = {
+            $regex: `^\\s*${query.alphabet}`,
+            $options: "i",
+        };
+    }
+
     const sort = buildSort(query.sort, ["name", "createdAt"]);
 
     return { filter, sort };

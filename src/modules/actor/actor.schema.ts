@@ -7,7 +7,8 @@ const actorSchema = new mongoose.Schema<IActor>({
     ...baseFields,
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     },
     gender: {
         type: String,
