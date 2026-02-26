@@ -139,6 +139,7 @@ export class BookingService {
                     _id: ticketId,
                     booking: booking._id,
                     showtime: showtime._id,
+                    user: user._id,
                     status: TicketStatusEnum.UNPAID, // Giữ ghế, hết hạn thì release
                     expiresAt: new Date(Date.now() + 10 * 60 * 1000),
                     qrCode: qrCodeBase64

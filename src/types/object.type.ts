@@ -219,6 +219,7 @@ interface ITicket extends IBaseDocument {
     qrCode: string;
     status: TicketStatusEnum;
     expiresAt: Date;
+    user: mongoose.Types.ObjectId;
 }
 
 export type { ITicket };

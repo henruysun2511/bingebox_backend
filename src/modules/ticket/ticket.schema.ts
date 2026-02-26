@@ -41,7 +41,12 @@ const ticketSchema = new mongoose.Schema<ITicket>({
     expiresAt: {
         type: Date,
         index: true
-    }
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
 }, {
     timestamps: true
 });
