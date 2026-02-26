@@ -41,11 +41,13 @@ export const updateUserProfileBody = Joi.object({
         }),
 
     tags: Joi.array()
-        .items(Joi.string().trim())
-        .optional()
-        .messages({
-            "array.base": "Tags phải là một mảng",
-        }),
+    .items(Joi.string().trim())
+    .max(3) // Giới hạn tối đa 3 phần tử
+    .optional()
+    .messages({
+        "array.base": "Tags phải là một mảng",
+        "array.max": "Bạn chỉ được chọn tối đa 3 danh hiệu", // Thông báo khi vượt quá 3
+    }),
 });
 
 export const assignRole = Joi.object({

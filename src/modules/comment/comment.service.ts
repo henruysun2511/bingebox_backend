@@ -37,7 +37,7 @@ export class CommentService {
                 .sort({ createdAt: -1 })
                 .skip(skip)
                 .limit(limit)
-                .populate("user", "fullName avatar")
+                .populate("user", "username avatar tags")
                 .lean(),
             this.commentModel.countDocuments(filter),
         ]);
@@ -59,7 +59,7 @@ export class CommentService {
                 .sort({ createdAt: 1 })
                 .skip(skip)
                 .limit(limit)
-                .populate("user", "fullName avatar")
+                .populate("user", "username avatar tags")
                 .lean(),
             this.commentModel.countDocuments(filter),
         ]);
