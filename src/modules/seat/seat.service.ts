@@ -155,7 +155,12 @@ export class SeatService {
         const allSeats = await this.seatModel.find({
             room: showtime.room,
         })
-            .sort({ row: 1, number: 1 })
+            .sort({
+                row: 1,
+                column: 1,
+                "position.y": 1,
+                "position.x": 1
+            })
             .populate("seatType", "name color")
             .lean();
 
