@@ -23,6 +23,20 @@ router.get(
 );
 
 router.get(
+    "/watched", 
+    authenticationMiddleware, 
+    controller.getWatchedMovies
+);
+
+
+
+router.get(
+    "/favorite",
+    authenticationMiddleware,
+    controller.getMyFavoriteMovies
+);
+
+router.get(
   "/:id", 
   validateMiddleware(v.getMovieIdParam, "params"), 
   controller.getMovieDetail
@@ -41,6 +55,12 @@ router.post(
   controller.createMovie
 );
 
+router.post(
+    "/likes/:id", 
+    authenticationMiddleware, 
+    controller.toggleLikeMovie
+);
+
 router.patch(
   "/:id", 
   authenticationMiddleware, 
@@ -56,22 +76,6 @@ router.delete(
   controller.deleteMovie
 );
 
-router.get(
-    "/watched", 
-    authenticationMiddleware, 
-    controller.getWatchedMovies
-);
 
-router.post(
-    "/likes/:id", 
-    authenticationMiddleware, 
-    controller.toggleLikeMovie
-);
-
-router.get(
-    "/favorite",
-    authenticationMiddleware,
-    controller.getMyFavoriteMovies
-);
 
 export default router;
