@@ -153,9 +153,10 @@ export class SeatService {
 
         /* ================== 2. ALL SEATS IN ROOM ================== */
         const allSeats = await this.seatModel.find({
-            room: new mongoose.Types.ObjectId(showtime.room.toString()),
+            room: showtime.room,
         })
             .sort({ row: 1, number: 1 })
+            .populate("seatType", "name color")
             .lean();
 
         console.log(allSeats);
