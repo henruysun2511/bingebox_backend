@@ -32,6 +32,20 @@ export const updateUserProfileBody = Joi.object({
             "date.less": "Ngày sinh phải là một ngày trong quá khứ",
             "any.required": "Vui lòng cung cấp ngày sinh",
         }),
+    banner: Joi.string()
+        .uri()
+        .allow("")
+        .optional()
+        .messages({
+            "string.uri": "Banner phải là URL hợp lệ",
+        }),
+
+    tags: Joi.array()
+        .items(Joi.string().trim())
+        .optional()
+        .messages({
+            "array.base": "Tags phải là một mảng",
+        }),
 });
 
 export const assignRole = Joi.object({
