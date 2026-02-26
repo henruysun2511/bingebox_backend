@@ -38,7 +38,6 @@ const bookingSchema = new mongoose.Schema<IBooking>({
     expiresAt: {
         type: Date,
         required: true,
-        index: { expires: 0 } 
     }
 }, {
     timestamps: true
