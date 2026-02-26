@@ -153,11 +153,13 @@ export class SeatService {
 
         /* ================== 2. ALL SEATS IN ROOM ================== */
         const allSeats = await this.seatModel.find({
-            room: showtime.room,
-            isDeleted: false
+            room: new mongoose.Types.ObjectId(showtime.room.toString()),
         })
             .sort({ row: 1, number: 1 })
             .lean();
+
+        console.log(allSeats);
+        console.log(showtime.room);
 
         /* ================== 3. TICKETS (LOCK SEAT) ================== */
         const now = new Date();
