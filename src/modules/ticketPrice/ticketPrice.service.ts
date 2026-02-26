@@ -7,12 +7,14 @@ import { buildPagination } from "../../utils/buildPagination";
 import { calcAge } from "../../utils/calcAge";
 import { mapDayOfWeek } from "../../utils/mapDayOfWeek";
 import { default as AgeTypeModel } from "../ageType/ageType.schema";
+import ShowtimeModel from "../showtime/showtime.schema";
 import { buildTicketPriceQuery } from "./ticketPrice.query";
 import TicketPriceModel from "./ticketPrice.schema";
 
 export class TicketPriceService {
     private ticketPriceModel = TicketPriceModel;
     private ageTypeModel = AgeTypeModel;
+    private showtimeModel = ShowtimeModel;
 
     async createPrice(data: ITicketPriceBody, userId: string) {
         const duplicate = await this.ticketPriceModel.findOne({
@@ -118,4 +120,6 @@ export class TicketPriceService {
 
         return { ticketTotal: total, tickets };
     }
+
+
 }
