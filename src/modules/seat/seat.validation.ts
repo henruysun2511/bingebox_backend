@@ -51,7 +51,7 @@ export const getSeatsByRoomParam = Joi.object({
 });
 
 export const getSeatsByShowtimeParam = Joi.object({
-    roomId: Joi.string().hex().length(24).required().messages({
+    showtimeId: Joi.string().hex().length(24).required().messages({
         "string.length": "ID suất chiếu không hợp lệ",
         "any.required": "ID suất chiếu là bắt buộc",
     }),
