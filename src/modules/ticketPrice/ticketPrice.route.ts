@@ -27,4 +27,10 @@ router.patch(
     c.updatePrice
 );
 
+router.post(
+    "/preview",
+    authenticationMiddleware,
+    c.previewSeatPrice
+);
+
 export default router;

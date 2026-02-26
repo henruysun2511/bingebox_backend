@@ -1,6 +1,11 @@
 import { Request, Response } from "express";
+import { AppError } from "../../utils/appError";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
+import RoomModel from "../room/room.schema";
+import SeatModel from "../seat/seat.schema";
+import ShowtimeModel from "../showtime/showtime.schema";
+import UserModel from "../user/user.schema";
 import { TicketPriceService } from "./ticketPrice.service";
 
 const service = new TicketPriceService();
@@ -23,4 +28,29 @@ export const updatePrice = catchAsync(async (req: Request, res: Response) => {
 export const deletePrice = catchAsync(async (req: Request, res: Response) => {
     await service.deletePrice(req.params.id, req.user!._id.toString());
     return success(res, null, "Xóa cấu hình giá thành công");
+});
+
+export const previewSeatPrice = catchAsync(async (req: Request, res: Response) => {
+    const { seatId, showtimeId } = req.body;
+
+    const seat = await SeatModel.findById(seatId).populate("seatType");
+    if (!seat) throw new AppError("Ghế không tồn tại", 404);
+
+    const showtime = await ShowtimeModel.findById(showtimeId).populate("timeslot");
+    if (!showtime) throw new AppError("Suất chiếu không tồn tại", 404);
+
+    const room = await RoomModel.findById(showtime.room).populate("format");
+    if (!room) throw new AppError("Phòng chiếu không tồn tại", 404);
+
+    const user = await UserModel.findById(req.user!._id);
+    if (!user) throw new AppError("Người dùng không tồn tại", 404);
+
+    const result = await service.previewSeatPrice(
+        seat,
+        showtime,
+        room,
+        user
+    );
+
+    return success(res, result, "Lấy giá ghế thành công");
 });

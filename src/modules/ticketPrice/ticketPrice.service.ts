@@ -128,5 +128,44 @@ export class TicketPriceService {
         return { ticketTotal: total, tickets };
     }
 
+    async previewSeatPrice(
+        seat: ISeat,
+        showtime: IShowtime,
+        room: IRoom,
+        user: IUser
+    ) {
+        const age = calcAge(user.birth);
+
+        const ageType = await this.ageTypeModel.findOne({
+            minAge: { $lte: age },
+            maxAge: { $gte: age }
+        });
+
+        if (!ageType) throw new AppError("Không xác định độ tuổi", 400);
+
+        const dayOfWeek = mapDayOfWeek(showtime.startTime);
+
+        const seatTypeId = (seat.seatType as any)?._id || seat.seatType;
+        const formatRoomId = (room.format as any)?._id || room.format;
+        const timeSlotId = (showtime.timeslot as any)?._id || showtime.timeslot;
+
+        const price = await this.ticketPriceModel.findOne({
+            seatType: seatTypeId,
+            formatRoom: formatRoomId,
+            timeSlot: timeSlotId,
+            dayOfWeek,
+            ageType: ageType._id,
+            isDeleted: false
+        });
+
+        if (!price) throw new AppError("Thiếu cấu hình giá vé", 400);
+
+        return {
+            seatId: seat._id,
+            ticketPriceId: price._id,
+            price: price.finalPrice
+        };
+    }
+
 
 }
