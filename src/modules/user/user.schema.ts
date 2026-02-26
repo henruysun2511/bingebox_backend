@@ -28,6 +28,14 @@ const userSchema = new mongoose.Schema<IUser>({
         trim: true
     },
     avatar: String,
+    banner: { 
+        type: String,
+        default: "" 
+    },
+    tags: { 
+        type: [String],
+        default: []
+    },
     birth: Date,
     gender: {
         type: String,

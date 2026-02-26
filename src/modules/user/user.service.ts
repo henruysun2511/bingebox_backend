@@ -21,7 +21,7 @@ export class UserService {
             _id: userId,
             isDeleted: false,
         })
-            .select("username email fullName avatar gender birth role membership currentPoints totalSpending createdAt")
+            .select("username email fullName avatar banner tags gender birth role membership currentPoints totalSpending createdAt")
             .populate({
                 path: "role",
                 select: "name",
@@ -55,7 +55,7 @@ export class UserService {
                 runValidators: true
             }
         )
-            .select("username email fullName avatar gender birth role")
+            .select("username email fullName banner tags avatar gender birth role")
             .lean();
 
         if (!user) {

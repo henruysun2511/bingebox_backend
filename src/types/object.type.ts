@@ -9,6 +9,8 @@ interface IUser extends IBaseDocument {
     email: string;
     password?: string;
     fullName?: string;
+    banner?: string;
+    tags?: string[];
     avatar?: string;
     birth?: Date;
     gender?: GenderEnum;
