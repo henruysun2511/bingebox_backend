@@ -1,4 +1,4 @@
-import { ClientSession } from "mongoose";
+import mongoose, { ClientSession } from "mongoose";
 import { ITicketPriceBody } from "../../types/body.type";
 import { IRoom, ISeat, IShowtime, IUser } from "../../types/object.type";
 import { ITicketPriceQuery } from "../../types/param.type";
@@ -100,13 +100,29 @@ export class TicketPriceService {
         const tickets = [];
 
         for (const seat of seats) {
+            // Đảm bảo lấy ID, không lấy cả Object. 
+            // Nếu seat.seatType đã được populate, nó là một object, ta lấy ._id
+            const seatTypeId = seat.seatType._id || seat.seatType;
+            const formatRoomId = room.format._id || room.format;
+            const timeSlotId = showtime.timeslot._id || showtime.timeslot;
+
             const price = await this.ticketPriceModel.findOne({
-                seatType: seat.seatType,
-                formatRoom: room.format,
-                timeSlot: showtime.timeslot,
-                dayOfWeek,
-                ageType: ageType._id
+                seatType: new mongoose.Types.ObjectId(seatTypeId.toString()),
+                formatRoom: new mongoose.Types.ObjectId(formatRoomId.toString()),
+                timeSlot: new mongoose.Types.ObjectId(timeSlotId.toString()),
+                dayOfWeek: dayOfWeek, // String thì giữ nguyên
+                ageType: new mongoose.Types.ObjectId(ageType._id.toString())
             }).session(session);
+
+            // Log chính xác các ID để kiểm tra trong Database
+            console.log("Querying with:", {
+                seatType: seatTypeId.toString(),
+                format: formatRoomId.toString(),
+                timeSlot: timeSlotId.toString(),
+                dayOfWeek,
+                ageType: ageType._id.toString()
+            });
+            console.log(price);
 
             if (!price) throw new AppError("Thiếu cấu hình giá vé", 400);
 
