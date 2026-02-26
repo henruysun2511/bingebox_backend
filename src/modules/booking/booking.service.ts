@@ -214,7 +214,7 @@ export class BookingService {
             io.to(roomName).emit("seat:update", {
                 type: "PAID",
                 bookingId: booking._id,
-                seatIds: seatIds 
+                seatIds: seatIds
             });
 
             return { success: true };
@@ -310,20 +310,39 @@ export class BookingService {
     }
 
     async getBookingDetail(bookingId: string) {
+        // 1. Lấy thông tin Booking
         const booking = await this.bookingModel.findById(bookingId)
             .populate("userId", "username fullName email phoneNumber")
             .populate({
                 path: "showtime",
                 populate: [
-                    { path: "movie", select: "name" },
-                    { path: "room", select: "name" }
+                    { path: "movie", select: "name agePermission duration" },
+                    {
+                        path: "room",
+                        select: "name format",
+                        populate: {
+                            path: "format",
+                            select: "name"
+                        }
+                    }
                 ]
             })
-            .populate("foods.foodId", "name");
+            .populate("foods.foodId", "name")
+            .lean();
 
         if (!booking) throw new AppError("Không tìm thấy hóa đơn", 404);
 
-        const tickets = await this.ticketModel.find({ booking: booking._id });
+        // 2. Lấy thông tin Tickets và POPULATE Seat + SeatType
+        const tickets = await this.ticketModel.find({ booking: booking._id })
+            .populate({
+                path: "seat",
+                select: "code seatType", 
+                populate: {
+                    path: "seatType", 
+                    select: "name color price"
+                }
+            })
+            .lean();
 
         return { booking, tickets };
     }

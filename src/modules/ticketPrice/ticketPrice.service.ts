@@ -1,4 +1,4 @@
-import mongoose, { ClientSession } from "mongoose";
+import { ClientSession } from "mongoose";
 import { ITicketPriceBody } from "../../types/body.type";
 import { IRoom, ISeat, IShowtime, IUser } from "../../types/object.type";
 import { ITicketPriceQuery } from "../../types/param.type";
@@ -107,22 +107,13 @@ export class TicketPriceService {
             const timeSlotId = showtime.timeslot._id || showtime.timeslot;
 
             const price = await this.ticketPriceModel.findOne({
-                seatType: new mongoose.Types.ObjectId(seatTypeId.toString()),
-                formatRoom: new mongoose.Types.ObjectId(formatRoomId.toString()),
-                timeSlot: new mongoose.Types.ObjectId(timeSlotId.toString()),
-                dayOfWeek: dayOfWeek, // String thì giữ nguyên
-                ageType: new mongoose.Types.ObjectId(ageType._id.toString())
+                seatType: seatTypeId,
+                formatRoom: formatRoomId,
+                timeSlot: timeSlotId,
+                dayOfWeek,
+                ageType: ageType._id
             }).session(session);
 
-            // Log chính xác các ID để kiểm tra trong Database
-            console.log("Querying with:", {
-                seatType: seatTypeId.toString(),
-                format: formatRoomId.toString(),
-                timeSlot: timeSlotId.toString(),
-                dayOfWeek,
-                ageType: ageType._id.toString()
-            });
-            console.log(price);
 
             if (!price) throw new AppError("Thiếu cấu hình giá vé", 400);
 
