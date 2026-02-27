@@ -58,12 +58,14 @@ export class CommentService {
     // Lấy danh sách Reply của 1 bình luận (Xem thêm)
     async getReplies(parentId: string, query: any) {
         const { page, limit, skip } = buildPagination(query);
-        const filter = { parentId, isDeleted: false };
+
+        // Sử dụng 'parent' thay vì 'parentId' để khớp với Schema
+        const filter = { parent: parentId, isDeleted: false };
 
         const [items, total] = await Promise.all([
             this.commentModel
                 .find(filter)
-                .sort({ createdAt: 1 })
+                .sort({ createdAt: 1 }) // Hiển thị reply cũ nhất trước
                 .skip(skip)
                 .limit(limit)
                 .populate("user", "username avatar tags")
