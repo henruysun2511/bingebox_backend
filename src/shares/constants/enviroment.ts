@@ -5,6 +5,8 @@ export const ENV = {
     PORT: process.env.PORT || 3000,
     MONGODB_CONNECTION_STRING: process.env.MONGODB_CONNECTION_STRING,
     CLIENT_URL: process.env.CLIENT_URL,
+    CLIENT_URL_2: process.env.CLIENT_URL_2,
+
 
     ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET || "default_secret_key",
     ACCESS_TOKEN_TTL: Number(process.env.ACCESS_TOKEN_TTL) || 30 * 60 * 1000,
