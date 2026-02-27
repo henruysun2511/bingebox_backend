@@ -24,7 +24,7 @@ router.get(
 
 // Favorite & Watched
 router.get(
-    "/favorite",
+    "/favourite",
     authenticationMiddleware,
     controller.getMyFavoriteMovies
 );

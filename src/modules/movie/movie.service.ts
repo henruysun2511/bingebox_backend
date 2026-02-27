@@ -267,9 +267,19 @@ export class MovieService {
     }
 
     async getMyFavoriteMovies(userId: string) {
-        return await MovieModel.find({
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            throw new AppError("User ID không hợp lệ", 400);
+        }
+
+        return await this.movieModel.find({
             likes: new mongoose.Types.ObjectId(userId),
             isDeleted: false
-        }).select("name poster categories likeCount");
-    }
+        })
+            .populate({
+                path: "categories", 
+                select: "name"     
+            })
+            .select("name poster categories likeCount")
+            .lean(); 
+        }
 }
