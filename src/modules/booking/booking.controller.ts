@@ -6,7 +6,7 @@ import { BookingService } from "./booking.service";
 const bookingService = new BookingService();
 
 export const createBooking = catchAsync(async (req: Request, res: Response) => {
-    const userId = req.user!._id.toString(); 
+    const userId = req.user!._id.toString();
     const result = await bookingService.createBooking(userId, req.body);
 
     return success(res, result, "Tạo đơn hàng thành công, vui lòng thanh toán trong 10 phút", 201);
@@ -23,11 +23,11 @@ export const getUserBookingDetail = catchAsync(async (req: Request, res: Respons
 export const getBookings = catchAsync(async (req: Request, res: Response) => {
     const { page, limit, status } = req.query;
     const result = await bookingService.getBookings(
-        Number(page), 
-        Number(limit), 
+        Number(page),
+        Number(limit),
         status as string
     );
-    return success(res, result, "Lấy danh sách hóa đơn thành công");
+    return success(res, result.items, "Lấy danh sách hóa đơn thành công", 200, result.pagination);
 });
 
 export const getBookingDetail = catchAsync(async (req: Request, res: Response) => {
@@ -41,7 +41,7 @@ export const fakePayBooking = catchAsync(async (req: Request, res: Response) => 
     const userId = req.user!._id.toString();
 
     const result = await bookingService.fakePayBooking(id, userId);
-    
+
     return success(res, result, "Thanh toán giả lập thành công");
 });
 
@@ -55,10 +55,10 @@ export const fakeFailBooking = catchAsync(async (req: Request, res: Response) =>
 
 export const cleanupCancelledData = catchAsync(async (req: Request, res: Response) => {
     const result = await bookingService.deleteCancelledData();
-    
+
     return success(
-        res, 
-        result, 
+        res,
+        result,
         `Đã dọn dẹp vĩnh viễn ${result.deletedTickets} vé và ${result.deletedBookings} đơn hàng lỗi.`
     );
 });
