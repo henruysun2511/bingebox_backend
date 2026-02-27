@@ -92,7 +92,9 @@ export class DashboardService {
                     _id: {
                         time: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
                         movieId: "$mv._id",
-                        movieName: "$mv.name"
+                        movieName: "$mv.name",
+                        // ✅ 1. LẤY THÊM TRƯỜNG POSTER Ở ĐÂY
+                        moviePoster: "$mv.poster"
                     },
                     revenue: { $sum: "$finalAmount" }
                 }
@@ -105,6 +107,7 @@ export class DashboardService {
                         $push: {
                             movieId: "$_id.movieId",
                             name: "$_id.movieName",
+                            // ✅ 2. ĐẨY TRƯỜNG POSTER VÀO MẢNG KẾT QUẢ
                             poster: "$_id.moviePoster",
                             revenue: "$revenue"
                         }
