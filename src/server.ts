@@ -3,9 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
 import http from "http";
-import passport from "passport"; // 👈 THÊM DÒNG NÀY
-import "./config/passport";
+import passport from "passport";
 import { connectDB } from "./configs/connectDB";
+import "./configs/passport";
 import { initIo } from "./configs/socket.config";
 import { startReleaseSeatCron } from "./crons/releaseSeat.cron";
 import { errorHandlerMiddleware } from "./middlewares/error.middleware";
