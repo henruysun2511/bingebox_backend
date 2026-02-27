@@ -6,15 +6,15 @@ import * as v from "./movie.validation";
 
 const router = Router();
 
-// Public routes
+
+// Public
 router.get(
   "/", 
   validateMiddleware(v.getMovieListQuery, "query"), 
   controller.getMovies
 );
 
-
-
+// Admin & Auth
 router.get(
   "/admin", 
   authenticationMiddleware, 
@@ -22,6 +22,7 @@ router.get(
   controller.getMoviesForAdmin
 );
 
+// Favorite & Watched
 router.get(
     "/favorite",
     authenticationMiddleware,
@@ -34,20 +35,18 @@ router.get(
     controller.getWatchedMovies
 );
 
-
-
+// Actors
+router.get(
+  "/actors/:id", 
+  validateMiddleware(v.getMovieIdParam, "params"), 
+  controller.getActorsByMovie
+);
 
 
 router.get(
   "/:id", 
   validateMiddleware(v.getMovieIdParam, "params"), 
   controller.getMovieDetail
-);
-
-router.get(
-  "/actors/:id", 
-  validateMiddleware(v.getMovieIdParam, "params"), 
-  controller.getActorsByMovie
 );
 
 router.post(
@@ -77,7 +76,5 @@ router.delete(
   validateMiddleware(v.getMovieIdParam, "params"), 
   controller.deleteMovie
 );
-
-
 
 export default router;
