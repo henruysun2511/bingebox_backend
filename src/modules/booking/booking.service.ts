@@ -131,7 +131,7 @@ export class BookingService {
             const ticketsData = await Promise.all(tickets.map(async (t) => {
                 const ticketId = new mongoose.Types.ObjectId();
                 const domain = "https://bingebox-flax.vercel.app"; //url fe
-                const qrUrl = `${domain}/ticket?ticketId=${ticketId}`;
+                const qrUrl = `${domain}/ticket/${ticketId}`;
                 const qrCodeBase64 = await generateQRCode(qrUrl);
 
                 return {
