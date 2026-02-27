@@ -84,7 +84,7 @@ export const googleCallback = catchAsync(async (req: Request, res: Response) => 
   });
 
   res.redirect(
-  `${ENV.CLIENT_URL}/oauth-success?accessToken=${accessToken}`
+  `${ENV.CLIENT_URL_2}/oauth-success?accessToken=${accessToken}`
 );
 });
 
