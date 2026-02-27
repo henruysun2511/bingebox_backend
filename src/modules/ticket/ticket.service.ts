@@ -93,18 +93,21 @@ export class TicketService {
             .populate({
                 path: "showtime",
                 populate: [
-                    { path: "movie", select: "name subtitle format" },
+                    { path: "movie", select: "name duration agePermission" },
                     {
                         path: "room",
-                        select: "name cinema",
-                        populate: { path: "cinema", select: "name" }
+                        select: "name cinema formatRoom",
+                        populate: [
+                            { path: "cinema", select: "name" },
+                            { path: "format", select: "name" }
+                        ]
                     }
                 ]
             })
             .populate({
                 path: "seat",
                 select: "code seatType",
-                populate: { path: "seatType", select: "name" } // Để hiển thị "Standard/VIP" thay vì ID
+                populate: { path: "seatType", select: "name" }
             })
             .lean();
 
