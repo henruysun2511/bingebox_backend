@@ -83,13 +83,13 @@ export class TicketService {
     //   }
     // }
 
-    async getTicketDetail(ticketId: string, userId: string) {
+    async getTicketDetail(ticketId: string) {
         if (!mongoose.Types.ObjectId.isValid(ticketId)) {
             throw new AppError("ID vé không hợp lệ", 400);
         }
 
         const ticket = await this.ticketModel
-            .findOne({ _id: ticketId, user: userId, isDeleted: false })
+            .findOne({ _id: ticketId, isDeleted: false })
             .populate({
                 path: "showtime",
                 populate: [

@@ -14,6 +14,6 @@ export const getUserTickets = catchAsync(async (req: Request, res: Response) => 
 
 export const getTicketDetail = catchAsync(async (req: Request, res: Response) => {
     const { id } = req.params;
-    const result = await ticketService.getTicketDetail(id, req.user!._id.toString());
+    const result = await ticketService.getTicketDetail(id);
     return success(res, result, "Lấy chi tiết vé thành công");
 });
