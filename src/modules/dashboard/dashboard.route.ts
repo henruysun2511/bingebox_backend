@@ -4,6 +4,7 @@ import * as controller from "./dashboard.controller";
 
 const router = Router();
 
+router.get("/general-stats", authenticationMiddleware, controller.getGeneralStats);
 router.get("/revenue", authenticationMiddleware, controller.getRevenueStats);
 router.get("/ticket-sales", authenticationMiddleware, controller.getTicketSales);
 router.get("/top-movies", authenticationMiddleware, controller.getTopMovies);

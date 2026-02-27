@@ -14,8 +14,35 @@ export class DashboardService {
         private ticketModel = TicketModel,
         private userModel = UserModel,
         private showtimeModel = ShowtimeModel,
-         private roleModel = RoleModel,
+        private roleModel = RoleModel,
     ) { }
+
+    async getGeneralStats() {
+        // 1. Tổng doanh thu (từ Booking thành công)
+        const revenuePromise = this.bookingModel.aggregate([
+            { $match: { bookingStatus: BookingStatusEnum.SUCCESS } },
+            { $group: { _id: null, totalRevenue: { $sum: "$finalAmount" } } }
+        ]);
+
+        // 2. Tổng số lượng vé (từ Ticket)
+        const ticketsPromise = this.ticketModel.countDocuments();
+
+        // 3. Tổng số lượng phim đã phát hành (từ Movie)
+        const moviesPromise = this.showtimeModel.distinct("movie").then(movies => movies.length);
+
+        // Chờ tất cả promise chạy xong
+        const [revenueResult, totalTickets, totalMovies] = await Promise.all([
+            revenuePromise,
+            ticketsPromise,
+            moviesPromise
+        ]);
+
+        return {
+            totalRevenue: revenueResult[0]?.totalRevenue || 0,
+            totalTickets,
+            totalMovies
+        };
+    }
 
     async getRevenueStatsByMonth(from?: Date, to?: Date) {
         return this.bookingModel.aggregate([

@@ -13,6 +13,11 @@ const getQueryDates = (req: Request) => {
     };
 };
 
+export const getGeneralStats = catchAsync(async (req: Request, res: Response) => {
+    const result = await service.getGeneralStats();
+    return success(res, result, "Lấy thống kê chung thành công");
+});
+
 export const getRevenueStats = catchAsync(async (req: Request, res: Response) => {
     const { fromDate, toDate } = getQueryDates(req);
     const result = await service.getRevenueStatsByMonth(fromDate, toDate);
