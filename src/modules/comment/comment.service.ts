@@ -30,7 +30,13 @@ export class CommentService {
     // Lấy danh sách bình luận gốc (Phân trang)
     async getRootComments(movieId: string, query: any) {
         const { page, limit, skip } = buildPagination(query);
-        const filter = { movie: movieId, parentId: null, isDeleted: false };
+
+        // Sửa parentId thành parent
+        const filter = {
+            movie: movieId,
+            parent: null, // Lấy những bình luận không có cha
+            isDeleted: false
+        };
 
         const [items, total] = await Promise.all([
             this.commentModel
