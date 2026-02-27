@@ -23,6 +23,12 @@ router.get(
 );
 
 router.get(
+    "/favorite",
+    authenticationMiddleware,
+    controller.getMyFavoriteMovies
+);
+
+router.get(
     "/watched", 
     authenticationMiddleware, 
     controller.getWatchedMovies
@@ -30,11 +36,7 @@ router.get(
 
 
 
-router.get(
-    "/favorite",
-    authenticationMiddleware,
-    controller.getMyFavoriteMovies
-);
+
 
 router.get(
   "/:id", 
