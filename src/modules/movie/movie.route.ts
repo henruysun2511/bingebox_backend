@@ -55,7 +55,7 @@ router.post(
   controller.createMovie
 );
 
-router.patch(
+router.post(
     "/likes/:id", 
     authenticationMiddleware, 
     controller.toggleLikeMovie
