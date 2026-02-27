@@ -1,5 +1,5 @@
-import { AppError } from "@utils/appError";
 import { BaseStatusEnum, BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
+import { AppError } from "../../utils/appError";
 import BookingModel from "../booking/booking.schema";
 import RoleModel from "../role/role.schema";
 import ShowtimeModel from "../showtime/showtime.schema";
