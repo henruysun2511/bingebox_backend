@@ -130,7 +130,7 @@ export class BookingService {
             /* ================== 11. CREATE TICKETS ================== */
             const ticketsData = await Promise.all(tickets.map(async (t) => {
                 const ticketId = new mongoose.Types.ObjectId();
-                const domain = "https://bingebox-flax.vercel.app/"; //url fe
+                const domain = "https://bingebox-flax.vercel.app"; //url fe
                 const qrUrl = `${domain}/ticket?ticketId=${ticketId}`;
                 const qrCodeBase64 = await generateQRCode(qrUrl);
 
@@ -307,7 +307,15 @@ export class BookingService {
             this.bookingModel.countDocuments(query)
         ]);
 
-        return { items, total, page, totalPages: Math.ceil(total / limit) };
+        return {
+            items, 
+            pagination: {
+                page,
+                limit,
+                totalItems: total,
+                totalPages: Math.ceil(total / limit),
+            },
+        };
     }
 
     async getBookingDetail(bookingId: string) {
@@ -337,9 +345,9 @@ export class BookingService {
         const tickets = await this.ticketModel.find({ booking: booking._id })
             .populate({
                 path: "seat",
-                select: "code seatType", 
+                select: "code seatType",
                 populate: {
-                    path: "seatType", 
+                    path: "seatType",
                     select: "name color price"
                 }
             })
