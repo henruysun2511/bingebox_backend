@@ -121,7 +121,7 @@ export class DashboardService {
     }
 
     async getTop5SpendingCustomers() {
-        return this.userModel.find({ role: "USER" }) // Chỉ lấy khách hàng, bỏ qua admin
+        return this.userModel.find({ role: "CUSTOMER" }) // Chỉ lấy khách hàng, bỏ qua admin
             .sort({ totalSpending: -1 }) // Sắp xếp giảm dần
             .limit(5)
             .select("fullName email totalSpending avatar membership")
