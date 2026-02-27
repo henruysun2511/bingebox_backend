@@ -15,6 +15,7 @@ export class CommentService {
             movie,
             content,
             rating,
+            isDeleted: false,
             parent: parent || null
         });
 
