@@ -1,7 +1,9 @@
 import mongoose, { Schema } from "mongoose";
+import { baseFields } from "../../shares/bases/baseField";
 import { IComment } from "../../types/object.type";
 
 const commentSchema = new Schema<IComment>({
+    ...baseFields,
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     movie: { type: Schema.Types.ObjectId, ref: "Movie", required: true },
     parent: { type: Schema.Types.ObjectId, ref: "Comment", default: null }, 
