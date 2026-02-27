@@ -105,6 +105,7 @@ export class DashboardService {
                         $push: {
                             movieId: "$_id.movieId",
                             name: "$_id.movieName",
+                            poster: "$_id.moviePoster",
                             revenue: "$revenue"
                         }
                     }
