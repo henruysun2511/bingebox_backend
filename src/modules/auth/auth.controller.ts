@@ -83,14 +83,9 @@ export const googleCallback = catchAsync(async (req: Request, res: Response) => 
     maxAge: ENV.REFRESH_TOKEN_TTL,
   });
 
-  // res.cookie("accessToken", accessToken, {
-  //   ...cookieOptions,
-  //   maxAge: ENV.ACCESS_TOKEN_TTL,
-  // });
-
-  // ❌ KHÔNG truyền token qua query string
-  // ✅ Cookie là đủ
-  res.redirect(`${ENV.CLIENT_URL}/oauth-success`);
+  res.redirect(
+  `${ENV.CLIENT_URL}/oauth-success?accessToken=${accessToken}`
+);
 });
 
 
