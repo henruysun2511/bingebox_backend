@@ -15,6 +15,12 @@ router.post("/forgot-password", validateMiddleware(v.forgotPasswordBody, "body")
 router.post("/reset-password", validateMiddleware(v.resetPasswordBody, "body"), controller.resetPassword);
 router.post("/change-password", authenticationMiddleware, validateMiddleware(v.ChangePasswordBody), controller.changePassword);
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-router.get("/google/callback", passport.authenticate("google", { session: false, failureRedirect: "/login" }), controller.googleCallback);
-
+router.get(
+  "/google/callback",
+  passport.authenticate("google", {
+    session: false,
+    failureRedirect: "/auth/login",
+  }),
+  controller.googleCallback
+);
 export default router;
