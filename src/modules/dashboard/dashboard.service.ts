@@ -1,8 +1,11 @@
+import { AppError } from "@utils/appError";
 import { BaseStatusEnum, BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
 import BookingModel from "../booking/booking.schema";
+import RoleModel from "../role/role.schema";
 import ShowtimeModel from "../showtime/showtime.schema";
 import TicketModel from "../ticket/ticket.schema";
 import UserModel from "../user/user.schema";
+
 import { buildDateFilter } from "./dashboard.query";
 
 export class DashboardService {
@@ -11,6 +14,7 @@ export class DashboardService {
         private ticketModel = TicketModel,
         private userModel = UserModel,
         private showtimeModel = ShowtimeModel,
+         private roleModel = RoleModel,
     ) { }
 
     async getRevenueStatsByMonth(from?: Date, to?: Date) {
@@ -125,11 +129,18 @@ export class DashboardService {
     }
 
     async getTop5SpendingCustomers() {
-        return this.userModel.find({ role: "CUSTOMER" }) // Chỉ lấy khách hàng, bỏ qua admin
-            .sort({ totalSpending: -1 }) // Sắp xếp giảm dần
+        const customerRole = await this.roleModel.findOne({ name: "CUSTOMER" });
+
+        if (!customerRole) {
+            throw new AppError("Không tìm thấy role CUSTOMER", 404);
+        }
+
+        // 2. Sử dụng ID tìm được để truy vấn
+        return this.userModel.find({ role: customerRole._id })
+            .sort({ totalSpending: -1 })
             .limit(5)
             .select("fullName email totalSpending avatar membership")
-            .populate("membership", "name"); // Hiện hạng thẻ để biết họ là ai
+            .populate("membership", "name");
     }
 
     async getCustomerGrowthByMonth(from?: Date, to?: Date) {
