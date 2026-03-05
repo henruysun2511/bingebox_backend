@@ -134,6 +134,7 @@ export class BookingService {
                 const qrUrl = `${domain}/ticket/${ticketId}`;
                 const qrCodeBase64 = await generateQRCode(qrUrl);
 
+                
                 return {
                     ...t,
                     _id: ticketId,
