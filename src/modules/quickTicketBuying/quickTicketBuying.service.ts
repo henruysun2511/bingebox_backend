@@ -17,7 +17,6 @@ export class QuickTicketBuyingService {
                     movie: new mongoose.Types.ObjectId(movieId),
                     isDeleted: false,
                     status: BaseStatusEnum.ACTIVE,
-                    startTime: { $gte: new Date() } // Chỉ lấy các suất chiếu trong tương lai
                 }
             },
             {
@@ -72,7 +71,6 @@ export class QuickTicketBuyingService {
                     movie: mId,
                     isDeleted: false,
                     status: BaseStatusEnum.ACTIVE,
-                    // ✅ Đã loại bỏ lọc startTime >= today để lấy cả quá khứ
                 }
             },
             {
@@ -106,7 +104,7 @@ export class QuickTicketBuyingService {
             { $sort: { "_id": 1 } }
         ]);
 
-        // ✅ Cập nhật thông báo lỗi phù hợp với việc tìm kiếm lịch sử
+        //Cập nhật thông báo lỗi phù hợp với việc tìm kiếm lịch sử
         if (showtimes.length === 0) {
             throw new AppError("Rạp này không có dữ liệu suất chiếu cho phim bạn chọn", 404);
         }
@@ -114,44 +112,27 @@ export class QuickTicketBuyingService {
         return showtimes.map(item => item._id);
     }
 
-    async debugQuickBooking(movieId: string, cinemaId: string) {
-        const mId = new mongoose.Types.ObjectId(movieId);
-
-        // Bước 1: Kiểm tra xem phim này có suất chiếu nào không?
-        const step1 = await this.showtimeModel.find({ movie: mId }).limit(1);
-        console.log("Step 1 (Showtimes by Movie):", step1.length > 0 ? "OK" : "FAILED");
-
-        // Bước 2: Kiểm tra lookup sang Room có ra dữ liệu không?
-        const step2 = await this.showtimeModel.aggregate([
-            { $match: { movie: mId } },
-            { $lookup: { from: "rooms", localField: "room", foreignField: "_id", as: "roomInfo" } },
-            { $limit: 1 }
-        ]);
-        console.log("Step 2 (Lookup Room):", step2[0]?.roomInfo?.length > 0 ? "OK" : "FAILED - Sai tên collection 'rooms' hoặc ID room không khớp");
-
-        // Bước 3: Kiểm tra Cinema ID
-        if (step2[0]?.roomInfo?.[0]) {
-            console.log("Cinema ID trong DB:", step2[0].roomInfo[0].cinema.toString());
-            console.log("Cinema ID bạn truyền vào:", cinemaId);
-            console.log("Khớp nhau không?:", step2[0].roomInfo[0].cinema.toString() === cinemaId);
-        }
-    }
 
     // Bước 4: Chọn Ngày -> Lấy Suất chiếu cụ thể
     async getShowtimesFinal(movieId: string, cinemaId: string, date: string) {
-        // Đảm bảo lấy đúng khoảng thời gian của ngày đó theo UTC/Local
-        const startOfDay = new Date(date);
-        startOfDay.setUTCHours(0, 0, 0, 0);
-        const endOfDay = new Date(date);
-        endOfDay.setUTCHours(23, 59, 59, 999);
+        const mId = new mongoose.Types.ObjectId(movieId.trim());
+        const cId = new mongoose.Types.ObjectId(cinemaId.trim());
 
-        // Lấy thêm thông tin formatRoom (2D/3D/IMAX) nếu cần để user dễ chọn
+        // Xác định khoảng thời gian từ 00:00:00 đến 23:59:59 của ngày được chọn
+        // Lưu ý: date truyền vào nên có định dạng YYYY-MM-DD
+        const startOfDay = new Date(date);
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date(date);
+        endOfDay.setHours(23, 59, 59, 999);
+
         const showtimes = await this.showtimeModel.aggregate([
             {
                 $match: {
-                    movie: new mongoose.Types.ObjectId(movieId),
+                    movie: mId,
                     isDeleted: false,
-                    status: 'ACTIVE',
+                    status: BaseStatusEnum.ACTIVE,
+                    // Lọc chính xác trong ngày đó (bao gồm cả quá khứ nếu ngày đó đã qua)
                     startTime: { $gte: startOfDay, $lte: endOfDay }
                 }
             },
@@ -163,13 +144,21 @@ export class QuickTicketBuyingService {
                     as: "roomData"
                 }
             },
+            {
+                $match: { "roomData": { $ne: [] } }
+            },
             { $unwind: "$roomData" },
-            { $match: { "roomData.cinema": new mongoose.Types.ObjectId(cinemaId) } },
+            {
+                $match: { "roomData.cinema": cId }
+            },
             {
                 $project: {
                     _id: 1,
                     startTime: 1,
+                    endTime: 1,
                     roomName: "$roomData.name",
+                    // Bạn có thể lấy thêm format room nếu cần
+                    format: "$roomData.format"
                 }
             },
             { $sort: { startTime: 1 } }
