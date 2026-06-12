@@ -1,5 +1,5 @@
 import mongoose, { ClientSession } from "mongoose";
-import { TicketStatusEnum } from "../../shares/constants/enum";
+import { BaseStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
 import { default as RoomModel } from "../room/room.schema";
 import { default as ShowtimeModel } from "../showtime/showtime.schema";
@@ -25,6 +25,20 @@ export class SeatService {
 
             if (!room) {
                 throw new AppError("Phòng không tồn tại", 404);
+            }
+
+            // Kiểm tra phòng có suất chiếu đang chiếu không
+            const now = new Date();
+            const activeShowtime = await this.showtimeModel.findOne({
+                room: roomId,
+                startTime: { $lte: now },
+                endTime: { $gte: now },
+                status: BaseStatusEnum.ACTIVE,
+                isDeleted: false
+            });
+
+            if (activeShowtime) {
+                throw new AppError("Phòng đang có suất chiếu, không thể chỉnh sửa ghế", 400);
             }
 
             // 1. Xóa toàn bộ ghế cũ
