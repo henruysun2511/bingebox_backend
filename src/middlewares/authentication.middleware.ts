@@ -5,19 +5,15 @@ import User from "../modules/user/user.schema";
 import { ENV } from "../shares/constants/enviroment";
 import { IUser } from "../types/object.type";
 import { AppError } from "../utils/appError";
+import { catchAsync } from "../utils/catchAsync";
 
 interface TokenPayload extends JwtPayload {
   userId: string;
 }
 
-export const authenticationMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const authenticationMiddleware = catchAsync(
+  async (req: Request, _res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
-    console.log(authHeader);
 
     if (!authHeader?.startsWith("Bearer ")) {
       throw new AppError("Vui lòng đăng nhập", 401);
@@ -25,10 +21,7 @@ export const authenticationMiddleware = async (
 
     const token = authHeader.split(" ")[1];
 
-    const decoded = jwt.verify(
-      token,
-      ENV.ACCESS_TOKEN_SECRET
-    ) as TokenPayload;
+    const decoded = jwt.verify(token, ENV.ACCESS_TOKEN_SECRET) as TokenPayload;
 
     if (!mongoose.isValidObjectId(decoded.sub)) {
       throw new AppError("Access token không hợp lệ", 401);
@@ -45,15 +38,5 @@ export const authenticationMiddleware = async (
 
     req.user = user;
     next();
-  } catch (error: any) {
-    if (error.name === "TokenExpiredError") {
-      return next(new AppError("Access token đã hết hạn", 401));
-    }
-
-    if (error.name === "JsonWebTokenError") {
-      return next(new AppError("Access token không hợp lệ", 401));
-    }
-
-    next(error);
   }
-};
+);

@@ -1,13 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import Role from "../modules/role/role.schema";
 import { AppError } from "../utils/appError";
+import { catchAsync } from "../utils/catchAsync";
 
-export const authorizationMiddleware = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const authorizationMiddleware = catchAsync(
+  async (req: Request, _res: Response, next: NextFunction) => {
     if (!req.user) {
       throw new AppError("Vui lòng đăng nhập", 401);
     }
@@ -32,7 +29,5 @@ export const authorizationMiddleware = async (
     }
 
     next();
-  } catch (error) {
-    next(error);
   }
-};
+);
