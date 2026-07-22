@@ -88,65 +88,43 @@ npm run build    # Build TypeScript
 npm start        # Production
 ```
 
-## API Endpoints
+## API Endpoints (nghiệp vụ chính)
 
-### Auth
-| Method | Path | Mô tả |
-|---|---|---|
-| POST | `/api/v1/auth/register` | Đăng ký |
-| POST | `/api/v1/auth/login` | Đăng nhập (rate-limit: 5/phút) |
-| POST | `/api/v1/auth/logout` | Đăng xuất |
-| POST | `/api/v1/auth/refresh-token` | Refresh token |
-| POST | `/api/v1/auth/forgot-password` | Quên mật khẩu (rate-limit: 3/giờ) |
-| POST | `/api/v1/auth/reset-password` | Đặt lại mật khẩu |
-| POST | `/api/v1/auth/change-password` | Đổi mật khẩu |
-| GET | `/api/v1/auth/google` | Đăng nhập Google |
+| Module | Method | Path | Mô tả |
+|---|---|---|---|
+| **Auth** | POST | `auth/login` | Đăng nhập (rate-limit: 5/phút) |
+| | POST | `auth/register` | Đăng ký |
+| | POST | `auth/refresh-token` | Refresh JWT |
+| | POST | `auth/forgot-password` | Quên mật khẩu (rate-limit: 3/giờ) |
+| | GET | `auth/google` | Google OAuth |
+| **Movies** | GET | `movies` | Danh sách phim (cache 5 phút) |
+| | GET | `movies/:id` | Chi tiết phim (cache 10 phút) |
+| | POST | `movies/likes/:id` | Like/unlike |
+| **Showtimes** | GET | `showtimes/cinemas/:cinemaId` | Lịch theo rạp (cache 2 phút) |
+| | GET | `showtimes/movies/:movieId` | Lịch theo phim (cache 2 phút) |
+| | GET | `showtimes/cinemas/:cinemaId/rooms` | Lịch gom theo phòng |
+| **Seats** | GET | `seats/showtime/:showtimeId` | Sơ đồ ghế + trạng thái |
+| **Booking** | POST | `bookings` | Đặt vé (transaction: giữ ghế, tính giá, trừ điểm) |
+| | GET | `bookings/:id` | Chi tiết booking + QR |
+| **Payment** | POST | `payments` | Tạo giao dịch SePay |
+| | GET | `payments/:bookingId/status` | Poll trạng thái (5s) |
+| | POST | `payments/sepay-webhook` | Webhook SePay (HMAC) |
+| | POST | `payments/fail` | Hủy thanh toán |
+| **Ticket** | GET | `tickets` | Vé cá nhân |
+| | GET | `tickets/:id` | Chi tiết vé + QR |
+| **Voucher** | POST | `vouchers/apply` | Áp dụng mã giảm giá |
+| **Food** | GET | `foods` | Menu đồ ăn |
+| **Ticket Price** | GET | `ticket-prices` | Bảng giá (ghế, tuổi, giờ, định dạng) |
+| **Dashboard** | GET | `dashboards/general-stats` | Thống kê tổng quan (cache 15 phút) |
+| | GET | `dashboards/revenue` | Doanh thu theo tháng |
+| | GET | `dashboards/top-movies` | Top 5 phim doanh thu |
+| | GET | `dashboards/top-customers` | Top 5 khách hàng |
+| | GET | `dashboards/occupancy` | Tỷ lệ lấp đầy phòng |
+| **Comments** | GET | `comments/movie/:movieId` | Bình luận phim |
 
-### Movies
-| Method | Path | Mô tả |
-|---|---|---|
-| GET | `/api/v1/movies` | Danh sách phim (cache 5 phút) |
-| GET | `/api/v1/movies/:id` | Chi tiết phim (cache 10 phút) |
-| POST | `/api/v1/movies` | Tạo phim |
-| PATCH | `/api/v1/movies/:id` | Cập nhật phim |
-| DELETE | `/api/v1/movies/:id` | Xoá phim |
-| POST | `/api/v1/movies/likes/:id` | Like/unlike phim |
-
-### Showtimes
-| Method | Path | Mô tả |
-|---|---|---|
-| GET | `/api/v1/showtimes` | Danh sách suất chiếu |
-| GET | `/api/v1/showtimes/:id` | Chi tiết suất chiếu |
-| GET | `/api/v1/showtimes/cinemas/:cinemaId` | Lịch chiếu theo rạp (cache 2 phút) |
-| GET | `/api/v1/showtimes/movies/:movieId` | Lịch chiếu theo phim (cache 2 phút) |
-| GET | `/api/v1/showtimes/cinemas/:cinemaId/rooms` | Lịch chiếu gom theo phòng (cache 2 phút) |
-
-### Booking
-| Method | Path | Mô tả |
-|---|---|---|
-| POST | `/api/v1/bookings` | Tạo booking + giữ ghế |
-| GET | `/api/v1/bookings/:id` | Chi tiết booking |
-
-### Payment
-| Method | Path | Mô tả |
-|---|---|---|
-| POST | `/api/v1/payments` | Tạo giao dịch thanh toán |
-| GET | `/api/v1/payments/:bookingId/status` | Trạng thái thanh toán (polling) |
-| POST | `/api/v1/payments/sepay-webhook` | Webhook SePay |
-| POST | `/api/v1/payments/fail` | Hủy thanh toán |
-
-### Dashboard (Admin)
-| Method | Path | Mô tả |
-|---|---|---|
-| GET | `/api/v1/dashboards/general-stats` | Thống kê tổng quan (cache 15 phút) |
-| GET | `/api/v1/dashboards/revenue` | Doanh thu theo tháng |
-| GET | `/api/v1/dashboards/ticket-sales` | Vé bán theo tháng |
-| GET | `/api/v1/dashboards/top-movies` | Top phim doanh thu |
-| GET | `/api/v1/dashboards/top-customers` | Top khách hàng |
-| GET | `/api/v1/dashboards/customer-growth` | Tăng trưởng user |
-| GET | `/api/v1/dashboards/membership-distribution` | Phân bố hạng thành viên |
-| GET | `/api/v1/dashboards/showtime-sales` | Vé theo khung giờ |
-| GET | `/api/v1/dashboards/occupancy` | Tỷ lệ lấp đầy |
+> Các module CRUD còn lại (actor, category, cinema, room, seat-type, format-room, age-type, membership, role, permission, time-slot, blog, setting) dành cho admin. Xem chi tiết trong source route.
+> 
+> Tất cả endpoint có prefix `/api/v1/`.
 
 ## Rate Limiting
 
