@@ -1,22 +1,23 @@
-import { ClientSession } from "mongoose";
-import { ITicketPriceBody } from "../../types/body.type";
-import { IRoom, ISeat, IShowtime, IUser } from "../../types/object.type";
-import { ITicketPriceQuery } from "../../types/param.type";
+import mongoose, { ClientSession } from "mongoose";
+import { CreateTicketPriceBody, TicketPriceListQuery } from "./ticketPrice.validation";
+import { IRoom } from "../room/room.interface";
+import { ISeat } from "../seat/seat.interface";
+import { IShowtime } from "../showtime/showtime.interface";
+import { IUser } from "../user/user.interface";
+
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { calcAge } from "../../utils/calcAge";
 import { mapDayOfWeek } from "../../utils/mapDayOfWeek";
 import { default as AgeTypeModel } from "../ageType/ageType.schema";
-import ShowtimeModel from "../showtime/showtime.schema";
 import { buildTicketPriceQuery } from "./ticketPrice.query";
 import TicketPriceModel from "./ticketPrice.schema";
 
 export class TicketPriceService {
     private ticketPriceModel = TicketPriceModel;
     private ageTypeModel = AgeTypeModel;
-    private showtimeModel = ShowtimeModel;
 
-    async createPrice(data: ITicketPriceBody, userId: string) {
+    async createPrice(data: CreateTicketPriceBody, userId: string) {
         const duplicate = await this.ticketPriceModel.findOne({
             timeSlot: data.timeSlot,
             ageType: data.ageType,
@@ -30,7 +31,7 @@ export class TicketPriceService {
         return await this.ticketPriceModel.create({ ...data, createdBy: userId });
     }
 
-    async getPrices(query: ITicketPriceQuery) {
+    async getPrices(query: TicketPriceListQuery) {
         const { filter } = buildTicketPriceQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -59,7 +60,7 @@ export class TicketPriceService {
         };
     }
 
-    async updatePrice(id: string, data: ITicketPriceBody, userId: string) {
+    async updatePrice(id: string, data: CreateTicketPriceBody, userId: string) {
         const updated = await this.ticketPriceModel.findOneAndUpdate(
             { _id: id, isDeleted: false },
             { ...data, updatedBy: userId },
@@ -145,9 +146,9 @@ export class TicketPriceService {
 
         const dayOfWeek = mapDayOfWeek(showtime.startTime);
 
-        const seatTypeId = (seat.seatType as any)?._id || seat.seatType;
-        const formatRoomId = (room.format as any)?._id || room.format;
-        const timeSlotId = (showtime.timeslot as any)?._id || showtime.timeslot;
+        const seatTypeId = (seat.seatType as { _id: mongoose.Types.ObjectId })?._id || seat.seatType;
+        const formatRoomId = (room.format as { _id: mongoose.Types.ObjectId })?._id || room.format;
+        const timeSlotId = (showtime.timeslot as { _id: mongoose.Types.ObjectId })?._id || showtime.timeslot;
 
         const price = await this.ticketPriceModel.findOne({
             seatType: seatTypeId,

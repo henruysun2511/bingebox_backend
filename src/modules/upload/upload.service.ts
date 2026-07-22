@@ -25,13 +25,13 @@ export class UploadService {
   formatUploadResult(files: Express.Multer.File | Express.Multer.File[]) {
     if (Array.isArray(files)) {
       return files.map((file) => ({
-        url: (file as any).path,
-        publicId: (file as any).filename,
+        url: file.path,
+        publicId: file.filename,
       }));
     }
     return {
-      url: (files as any).path,
-      publicId: (files as any).filename,
+      url: files.path,
+      publicId: files.filename,
     };
   }
 }

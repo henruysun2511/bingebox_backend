@@ -1,8 +1,8 @@
-import { IUserQuery } from "../../types/param.type";
+import { GetUserListQuery } from "./user.validation";
 import { buildSort } from "../../utils/buidSort";
 
-export function buildUserQuery(query: IUserQuery) {
-    const filter: any = { isDeleted: false };
+export function buildUserQuery(query: GetUserListQuery) {
+    const filter: Record<string, any> = { isDeleted: false };
 
     if (query.username) {
         filter.username = { $regex: query.username, $options: "i" };

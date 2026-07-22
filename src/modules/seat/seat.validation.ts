@@ -1,58 +1,42 @@
-import Joi from "joi";
+import { z } from "zod";
+
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+const seatItemSchema = z.object({
+  code: z.string().min(1),
+  row: z
+    .string()
+    .regex(/^[A-Z]$/, "Row phải là chữ cái A-Z"),
+  column: z
+    .number()
+    .int()
+    .min(1)
+    .nullable(),
+  isBlocked: z.boolean().default(false),
+  seatTypeId: objectIdSchema.optional(),
+  isCoupleSeat: z.boolean().default(false),
+  partnerSeatCode: z.string().optional(),
+}).refine(d => {
+  if (d.isBlocked) return !d.seatTypeId;
+  return !!d.seatTypeId;
+}, { message: "Ghế không bị chặn phải có seatTypeId", path: ["seatTypeId"] }).refine(d => {
+  if (d.isCoupleSeat) return !!d.partnerSeatCode;
+  return !d.partnerSeatCode;
+}, { message: "Ghế đôi phải có partnerSeatCode", path: ["partnerSeatCode"] });
 
 export const updateSeatSchema = {
-    params: Joi.object({
-        roomId: Joi.string().hex().length(24).required()
-    }),
-
-    body: Joi.object({
-        seats: Joi.array().items(
-            Joi.object({
-                code: Joi.string().required(),
-
-                row: Joi.string()
-                    .pattern(/^[A-Z]$/)
-                    .required()
-                    .messages({
-                        "string.pattern.base": "Row phải là chữ cái A-Z"
-                    }),
-
-                column: Joi.number()
-                    .integer()
-                    .min(1)
-                    .allow(null)
-                    .required(),
-
-                isBlocked: Joi.boolean().default(false),
-
-                seatTypeId: Joi.when("isBlocked", {
-                    is: true,
-                    then: Joi.forbidden(),
-                    otherwise: Joi.string().hex().length(24).required()
-                }),
-
-                isCoupleSeat: Joi.boolean().default(false),
-
-                partnerSeatCode: Joi.when("isCoupleSeat", {
-                    is: true,
-                    then: Joi.string().required(),
-                    otherwise: Joi.forbidden()
-                })
-            })
-        ).min(1).required()
-    }).prefs({ abortEarly: false })
+  params: z.object({
+    roomId: objectIdSchema,
+  }),
+  body: z.object({
+    seats: z.array(seatItemSchema).min(1),
+  }),
 };
 
-export const getSeatsByRoomParam = Joi.object({
-    roomId: Joi.string().hex().length(24).required().messages({
-        "string.length": "ID phòng không hợp lệ",
-        "any.required": "ID phòng là bắt buộc",
-    }),
+export const getSeatsByRoomParam = z.object({
+  roomId: objectIdSchema,
 });
 
-export const getSeatsByShowtimeParam = Joi.object({
-    showtimeId: Joi.string().hex().length(24).required().messages({
-        "string.length": "ID suất chiếu không hợp lệ",
-        "any.required": "ID suất chiếu là bắt buộc",
-    }),
+export const getSeatsByShowtimeParam = z.object({
+  showtimeId: objectIdSchema,
 });

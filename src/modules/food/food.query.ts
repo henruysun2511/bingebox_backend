@@ -1,7 +1,7 @@
-import { IFoodQuery } from "../../types/param.type";
+import { GetFoodListQuery } from "./food.validation";
 
-export function buildFoodQuery(query: IFoodQuery) {
-    const filter: any = {
+export function buildFoodQuery(query: GetFoodListQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

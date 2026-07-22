@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { IBlog } from "../../types/object.type";
+import { IBlog } from "./blog.interface";
 
 const blogSchema = new mongoose.Schema<IBlog>({
   ...baseFields,

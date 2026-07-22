@@ -1,10 +1,16 @@
+import http from "http";
 import { Server } from "socket.io";
 
 let io: Server;
 
-export const initIo = (server: any) => {
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  process.env.CLIENT_URL_2,
+].filter((origin): origin is string => Boolean(origin));
+
+export const initIo = (server: http.Server) => {
   io = new Server(server, {
-    cors: { origin: "*" }
+    cors: { origin: allowedOrigins.length ? allowedOrigins : "*" }
   });
 
   io.on("connection", (socket) => {

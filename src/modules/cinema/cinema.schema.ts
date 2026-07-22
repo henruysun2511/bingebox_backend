@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { ICinema } from "../../types/object.type";
+import { ICinema } from "./cinema.interface";
 
 const cinemaSchema = new mongoose.Schema<ICinema>({
     ...baseFields,

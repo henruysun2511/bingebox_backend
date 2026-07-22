@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
-import { validateMiddleware } from "../../middlewares/validation.middleware";
+import { validationMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./movie.controller";
 import * as v from "./movie.validation";
 
@@ -10,7 +10,7 @@ const router = Router();
 // Public
 router.get(
   "/", 
-  validateMiddleware(v.getMovieListQuery, "query"), 
+  validationMiddleware(v.getMovieListQuery, "query"), 
   controller.getMovies
 );
 
@@ -18,7 +18,7 @@ router.get(
 router.get(
   "/admin", 
   authenticationMiddleware, 
-  validateMiddleware(v.getMovieListQuery, "query"), 
+  validationMiddleware(v.getMovieListQuery, "query"), 
   controller.getMoviesForAdmin
 );
 
@@ -38,21 +38,21 @@ router.get(
 // Actors
 router.get(
   "/actors/:id", 
-  validateMiddleware(v.getMovieIdParam, "params"), 
+  validationMiddleware(v.getMovieIdParam, "params"), 
   controller.getActorsByMovie
 );
 
 
 router.get(
   "/:id", 
-  validateMiddleware(v.getMovieIdParam, "params"), 
+  validationMiddleware(v.getMovieIdParam, "params"), 
   controller.getMovieDetail
 );
 
 router.post(
   "/", 
   authenticationMiddleware, 
-  validateMiddleware(v.createMovie, "body"), 
+  validationMiddleware(v.createMovie, "body"), 
   controller.createMovie
 );
 
@@ -65,15 +65,15 @@ router.post(
 router.patch(
   "/:id", 
   authenticationMiddleware, 
-  validateMiddleware(v.getMovieIdParam, "params"), 
-  validateMiddleware(v.updateMovie, "body"), 
+  validationMiddleware(v.getMovieIdParam, "params"), 
+  validationMiddleware(v.updateMovie, "body"), 
   controller.updateMovie
 );
 
 router.delete(
   "/:id", 
   authenticationMiddleware, 
-  validateMiddleware(v.getMovieIdParam, "params"), 
+  validationMiddleware(v.getMovieIdParam, "params"), 
   controller.deleteMovie
 );
 

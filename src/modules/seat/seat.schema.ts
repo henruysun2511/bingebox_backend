@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ISeat } from "../../types/object.type";
+import { ISeat } from "./seat.interface";
 
 const seatSchema = new mongoose.Schema<ISeat>({
   room: { type: mongoose.Schema.Types.ObjectId, ref: "Room", required: true },

@@ -1,7 +1,7 @@
 import { buildSort } from "../../utils/buidSort";
 
-export function buildCinemaQuery(query: any) {
-    const filter: any = {
+export function buildCinemaQuery(query: Record<string, any>) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

@@ -1,5 +1,6 @@
 import { BaseStatusEnum, BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
 import { AppError } from "../../utils/appError";
+import { getCache, setCache } from "../../configs/redis.config";
 import BookingModel from "../booking/booking.schema";
 import RoleModel from "../role/role.schema";
 import ShowtimeModel from "../showtime/showtime.schema";
@@ -7,6 +8,8 @@ import TicketModel from "../ticket/ticket.schema";
 import UserModel from "../user/user.schema";
 
 import { buildDateFilter } from "./dashboard.query";
+
+const DASHBOARD_TTL = 900;
 
 export class DashboardService {
     constructor(
@@ -18,7 +21,10 @@ export class DashboardService {
     ) { }
 
     async getGeneralStats() {
-        // 1. Tổng doanh thu (từ Booking thành công)
+        const cacheKey = "dashboard:general_stats";
+        const cached = await getCache<any>(cacheKey);
+        if (cached) return cached;
+
         const revenuePromise = this.bookingModel.aggregate([
             { $match: { bookingStatus: BookingStatusEnum.SUCCESS } },
             { $group: { _id: null, totalRevenue: { $sum: "$finalAmount" } } }
@@ -37,15 +43,20 @@ export class DashboardService {
             moviesPromise
         ]);
 
-        return {
+        const result = {
             totalRevenue: revenueResult[0]?.totalRevenue || 0,
             totalTickets,
             totalMovies
         };
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getRevenueStatsByMonth(from?: Date, to?: Date) {
-        return this.bookingModel.aggregate([
+        const cacheKey = `dashboard:revenue:${from?.toISOString() || "all"}:${to?.toISOString() || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+        const result = await this.bookingModel.aggregate([
             {
                 $match: {
                     bookingStatus: BookingStatusEnum.SUCCESS,
@@ -71,10 +82,15 @@ export class DashboardService {
                 }
             }
         ]);
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getTicketSalesByMonth(from?: Date, to?: Date) {
-        return this.ticketModel.aggregate([
+        const cacheKey = `dashboard:ticket_sales:${from?.toISOString() || "all"}:${to?.toISOString() || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+        const result = await this.ticketModel.aggregate([
             {
                 $match: {
                     status: TicketStatusEnum.PAID,
@@ -90,10 +106,15 @@ export class DashboardService {
             { $sort: { _id: 1 } },
             { $project: { time: "$_id", soldTickets: 1, _id: 0 } }
         ]);
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getTopMoviesByMonth(from?: Date, to?: Date) {
-        return this.bookingModel.aggregate([
+        const cacheKey = `dashboard:top_movies:${from?.toISOString() || "all"}:${to?.toISOString() || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+        const result = await this.bookingModel.aggregate([
             {
                 $match: {
                     bookingStatus: BookingStatusEnum.SUCCESS,
@@ -153,25 +174,36 @@ export class DashboardService {
                 }
             }
         ]);
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getTop5SpendingCustomers() {
+        const cacheKey = "dashboard:top_customers";
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+
         const customerRole = await this.roleModel.findOne({ name: "CUSTOMER" });
 
         if (!customerRole) {
             throw new AppError("Không tìm thấy role CUSTOMER", 404);
         }
 
-        // 2. Sử dụng ID tìm được để truy vấn
-        return this.userModel.find({ role: customerRole._id })
+        const result = await this.userModel.find({ role: customerRole._id })
             .sort({ totalSpending: -1 })
             .limit(5)
             .select("fullName email totalSpending avatar membership")
-            .populate("membership", "name");
+            .populate("membership", "name")
+            .lean();
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getCustomerGrowthByMonth(from?: Date, to?: Date) {
-        return this.userModel.aggregate([
+        const cacheKey = `dashboard:customer_growth:${from?.toISOString() || "all"}:${to?.toISOString() || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+        const result = await this.userModel.aggregate([
             {
                 // 1. Lọc theo thời gian tạo tài khoản trước
                 $match: buildDateFilter(from, to)
@@ -212,10 +244,15 @@ export class DashboardService {
                 }
             }
         ]);
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getMembershipDistribution() {
-        return this.userModel.aggregate([
+        const cacheKey = "dashboard:membership_dist";
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+        const result = await this.userModel.aggregate([
             {
                 $group: {
                     _id: "$membership",
@@ -239,10 +276,15 @@ export class DashboardService {
                 }
             }
         ]);
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getTicketCountByHour(from?: Date, to?: Date) {
-        return this.ticketModel.aggregate([
+        const cacheKey = `dashboard:ticket_hours:${from?.toISOString() || "all"}:${to?.toISOString() || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+        const result = await this.ticketModel.aggregate([
             {
                 // 1. Chỉ lấy vé đã thanh toán
                 $match: { status: TicketStatusEnum.PAID }
@@ -287,10 +329,15 @@ export class DashboardService {
                 }
             }
         ]);
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 
     async getOccupancyStatsByMonth() {
-        return this.showtimeModel.aggregate([
+        const cacheKey = "dashboard:occupancy";
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+        const result = await this.showtimeModel.aggregate([
             // 1. Lấy các suất chiếu đang hoạt động
             { $match: { status: BaseStatusEnum.ACTIVE } },
 
@@ -358,5 +405,7 @@ export class DashboardService {
             { $sort: { _id: 1 } },
             { $project: { time: "$_id", rate: { $round: ["$rate", 2] }, _id: 0 } }
         ]);
+        await setCache(cacheKey, result, DASHBOARD_TTL);
+        return result;
     }
 }

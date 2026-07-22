@@ -74,3 +74,10 @@ export enum PaymentStatusEnum {
     SUCCESS = "success",
     FAILED = "failed"
 }
+
+export enum PaymentMethodEnum {
+    SEPAY = "SEPAY",
+    VNPAY = "VNPAY",
+    MOMO = "MOMO",
+    PAYOS = "PAYOS",
+}

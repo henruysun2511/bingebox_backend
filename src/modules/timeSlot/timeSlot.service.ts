@@ -1,4 +1,4 @@
-import { ITimeSlotBody } from "../../types/body.type";
+import { CreateTimeSlotBody } from "./timeSlot.validation";
 import { AppError } from "../../utils/appError";
 import { default as TimeSlotModel } from "./timeSlot.schema";
 
@@ -12,11 +12,11 @@ export class TimeSlotService {
             .lean();
     }
 
-    async createTimeSlot(data: ITimeSlotBody, userId: string) {
+    async createTimeSlot(data: CreateTimeSlotBody, userId: string) {
         return this.timeSlotModel.create({ ...data, createdBy: userId });
     }
 
-    async updateTimeSlot(id: string, data: ITimeSlotBody, userId: string) {
+    async updateTimeSlot(id: string, data: CreateTimeSlotBody, userId: string) {
         const updated = await this.timeSlotModel.findOneAndUpdate(
             { _id: id, isDeleted: false },
             { ...data, updatedBy: userId },

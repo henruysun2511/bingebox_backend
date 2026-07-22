@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { IComment } from "../../types/object.type";
+import { IComment } from "./comment.interface";
 
 const commentSchema = new Schema<IComment>({
     ...baseFields,

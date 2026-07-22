@@ -9,8 +9,6 @@ router.get("/", authenticationMiddleware, controller.getBookings);
 router.get("/:id", authenticationMiddleware, controller.getBookingDetail);
 
 router.post("/", authenticationMiddleware,controller.createBooking);
-router.post("/fake-pay/:id",authenticationMiddleware, controller.fakePayBooking);
-router.post("/fake-fail/:id", authenticationMiddleware, controller.fakeFailBooking);
 
 router.delete("/cleanup", authenticationMiddleware,
 controller.cleanupCancelledData

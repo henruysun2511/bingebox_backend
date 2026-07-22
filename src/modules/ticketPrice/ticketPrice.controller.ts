@@ -11,26 +11,30 @@ import { TicketPriceService } from "./ticketPrice.service";
 const service = new TicketPriceService();
 
 export const createPrice = catchAsync(async (req: Request, res: Response) => {
-    const result = await service.createPrice(req.body, req.user!._id.toString());
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const result = await service.createPrice(req.validated!.body, req.user._id.toString());
     return success(res, result, "Tạo cấu hình giá thành công", 201);
 });
 
 export const getPrices = catchAsync(async (req: Request, res: Response) => {
-    const result = await service.getPrices(req.query);
+    const result = await service.getPrices(req.validated!.query);
     return success(res, result.items, "Lấy danh sách giá vé thành công", 200, result.pagination);
 });
 
 export const updatePrice = catchAsync(async (req: Request, res: Response) => {
-    const result = await service.updatePrice(req.params.id, req.body, req.user!._id.toString());
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const result = await service.updatePrice(req.params.id, req.validated!.body, req.user._id.toString());
     return success(res, result, "Cập nhật giá vé thành công");
 });
 
 export const deletePrice = catchAsync(async (req: Request, res: Response) => {
-    await service.deletePrice(req.params.id, req.user!._id.toString());
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    await service.deletePrice(req.params.id, req.user._id.toString());
     return success(res, null, "Xóa cấu hình giá thành công");
 });
 
 export const previewSeatPrice = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
     const { seatId, showtimeId } = req.body;
 
     const seat = await SeatModel.findById(seatId).populate("seatType");
@@ -42,7 +46,7 @@ export const previewSeatPrice = catchAsync(async (req: Request, res: Response) =
     const room = await RoomModel.findById(showtime.room).populate("format");
     if (!room) throw new AppError("Phòng chiếu không tồn tại", 404);
 
-    const user = await UserModel.findById(req.user!._id);
+    const user = await UserModel.findById(req.user._id);
     if (!user) throw new AppError("Người dùng không tồn tại", 404);
 
     const result = await service.previewSeatPrice(

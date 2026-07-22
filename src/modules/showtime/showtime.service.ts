@@ -2,9 +2,9 @@ import { AppError } from "../../utils/appError";
 
 import mongoose from "mongoose";
 import { BaseStatusEnum } from "../../shares/constants/enum";
-import { IShowtimeBody } from "../../types/body.type";
-import { IShowtimeQuery } from "../../types/param.type";
+import { CreateShowtimeBody, GetShowtimeQuery } from "./showtime.validation";
 import { buildPagination } from "../../utils/buildPagination";
+import { getCache, setCache } from "../../configs/redis.config";
 import { default as MovieModel } from "../movie/movie.schema";
 import { default as RoomModel } from "../room/room.schema";
 import { default as TimeSlotModel } from "../timeSlot/timeSlot.schema";
@@ -17,7 +17,7 @@ export class ShowtimeService {
     private timeSlotModel = TimeSlotModel;
     private roomModel = RoomModel;
 
-    async createShowtime(data: IShowtimeBody, userId: string) {
+    async createShowtime(data: CreateShowtimeBody, userId: string) {
         const { movie, room, startTime, subtitle } = data;
 
         const movieDoc = await this.movieModel.findOne({ _id: movie, isDeleted: false });
@@ -75,7 +75,7 @@ export class ShowtimeService {
         });
     }
 
-    async getShowtimes(query: IShowtimeQuery) {
+    async getShowtimes(query: GetShowtimeQuery) {
         const { filter, sort } = buildShowtimeQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -142,7 +142,7 @@ export class ShowtimeService {
         return showtime;
     }
 
-    async updateShowtime(id: string, data: IShowtimeBody, userId: string) {
+    async updateShowtime(id: string, data: CreateShowtimeBody, userId: string) {
         // 1. Kiểm tra suất chiếu tồn tại
         const showtime = await this.showtimeModel.findOne({
             _id: id,
@@ -241,22 +241,12 @@ export class ShowtimeService {
     }
 
     async getShowtimesByCinema(cinemaId: string, date?: string) {
-        return await this.showtimeModel.aggregate([
-            { $match: { isDeleted: false, status: BaseStatusEnum.ACTIVE } },
+        const cacheKey = `showtimes:cinema:${cinemaId}:${date || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
 
-            // $lookup giúp join Showtime với Room thông qua _id
-            // Sau bước này, mỗi showtime sẽ có dạng:
-            //             {
-            //   _id: "...",
-            //   movie: "...",
-            //   room: [
-            //     {
-            //       _id: "...",
-            //       name: "Phòng 1",
-            //       cinema: "cinemaId"
-            //     }
-            //   ]
-            // }
+        const result = await this.showtimeModel.aggregate([
+            { $match: { isDeleted: false, status: BaseStatusEnum.ACTIVE } },
             {
                 $lookup: {
                     from: "rooms",
@@ -265,20 +255,12 @@ export class ShowtimeService {
                     as: "room"
                 }
             },
-
-
-            //$unwind ROOM – BÓC ARRAY
-            //Do chỉ có 1 suất chỉ có 1 phòng nên chuyển chuyển array phòng thành object
             { $unwind: "$room" },
-
-            //$match giúp lọc suất chiếu theo rạp
             {
                 $match: {
                     "room.cinema": new mongoose.Types.ObjectId(cinemaId)
                 }
             },
-
-            // lọc suất chiếu theo ngày
             ...(date ? [{
                 $match: {
                     startTime: {
@@ -287,19 +269,7 @@ export class ShowtimeService {
                     }
                 }
             }] : []),
-
-            //Sắp xếp suất chiếu theo startTime
             { $sort: { startTime: 1 } },
-
-            //$group giúp gom nhóm theo movie
-            //Data giờ sẽ trông như này
-            //             {
-            //   _id: "movieId",
-            //   showtimes: [
-            //     { startTime: "...", room: { name: "Phòng 1" } },
-            //     { startTime: "...", room: { name: "Phòng 2" } }
-            //   ]
-            // }
             {
                 $group: {
                     _id: "$movie",
@@ -315,8 +285,6 @@ export class ShowtimeService {
                     }
                 }
             },
-
-            //$lookup giúp lấy thông tin phim
             {
                 $lookup: {
                     from: "movies",
@@ -326,8 +294,6 @@ export class ShowtimeService {
                 }
             },
             { $unwind: "$movie" },
-
-            //$project định dạng response trả về
             {
                 $project: {
                     _id: 0,
@@ -345,12 +311,17 @@ export class ShowtimeService {
                 }
             }
         ]);
+        await setCache(cacheKey, result, 120);
+        return result;
     }
 
 
     async getShowtimesByMovie(movieId: string, date?: string) {
-        // 1. Khởi tạo match cơ bản
-        const matchCondition: any = {
+        const cacheKey = `showtimes:movie:${movieId}:${date || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+
+        const matchCondition: Record<string, any> = {
             movie: new mongoose.Types.ObjectId(movieId),
             status: BaseStatusEnum.ACTIVE,
             isDeleted: false
@@ -362,7 +333,7 @@ export class ShowtimeService {
             matchCondition.startTime = { $gte: startOfDay, $lte: endOfDay };
         }
 
-        return await this.showtimeModel.aggregate([
+        const result = await this.showtimeModel.aggregate([
             {
                 $match: matchCondition
             },
@@ -432,13 +403,19 @@ export class ShowtimeService {
             },
             { $sort: { name: 1 } }
         ]);
+        await setCache(cacheKey, result, 120);
+        return result;
     }
 
     async getShowtimesGroupByRoom(cinemaId: string, date?: string) {
+        const cacheKey = `showtimes:room:${cinemaId}:${date || "all"}`;
+        const cached = await getCache<any[]>(cacheKey);
+        if (cached) return cached;
+
         const startOfDay = date ? new Date(`${date}T00:00:00+07:00`) : null;
         const endOfDay = date ? new Date(`${date}T23:59:59+07:00`) : null;
 
-        return await this.roomModel.aggregate([
+        const result = await this.roomModel.aggregate([
             // 1. Lấy tất cả các phòng thuộc rạp này trước
             {
                 $match: {
@@ -508,6 +485,8 @@ export class ShowtimeService {
             },
             { $sort: { roomName: 1 } }
         ]);
+        await setCache(cacheKey, result, 120);
+        return result;
     }
 
     async updateStatus(id: string, status: string, userId: string) {

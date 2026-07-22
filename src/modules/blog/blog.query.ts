@@ -1,14 +1,14 @@
-import { IBlogQuery } from "../../types/param.type";
+import { BlogListQuery } from "./blog.validation";
 
-export function buildBlogQuery(query: IBlogQuery) {
-    const filter: any = { isDeleted: false };
+export function buildBlogQuery(query: BlogListQuery) {
+    const filter: Record<string, any> = { isDeleted: false };
 
     if (query.title) {
         filter.title = { $regex: query.title, $options: "i" };
     }
     
     if (query.isPublished !== undefined) {
-        filter.isPublished = query.isPublished === 'true';
+        filter.isPublished = query.isPublished;
     }
 
     return { filter };

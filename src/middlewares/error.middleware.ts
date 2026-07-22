@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import { JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 import { AppError } from "../utils/appError";
 
-export const errorHandlerMiddleware = (
-  err: any,
+export const errorMiddleware = (
+  err: unknown,
   _req: Request,
   res: Response,
   _next: NextFunction

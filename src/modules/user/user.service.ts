@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
-import { IUserBody } from "../../types/body.type";
-import { IUserQuery } from "../../types/param.type";
+import { UpdateUserProfileBody, GetUserListQuery } from "./user.validation";
+
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { default as RoleModel } from "../role/role.schema";
@@ -41,7 +41,7 @@ export class UserService {
         return user;
     }
 
-    async updateUserProfile(userId: string, data: IUserBody) {
+    async updateUserProfile(userId: string, data: UpdateUserProfileBody) {
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             throw new AppError("User ID không hợp lệ", 400);
         }
@@ -86,7 +86,7 @@ export class UserService {
         return updatedUser;
     }
 
-    async getUsers(query: IUserQuery) {
+    async getUsers(query: GetUserListQuery) {
         const { filter, sort } = buildUserQuery(query);
         const { page, limit, skip } = buildPagination(query);
 

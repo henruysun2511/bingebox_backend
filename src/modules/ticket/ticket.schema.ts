@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { TicketStatusEnum } from "../../shares/constants/enum";
-import { ITicket } from "../../types/object.type";
+import { ITicket } from "./ticket.interface";
 
 const ticketSchema = new mongoose.Schema<ITicket>({
     ...baseFields,

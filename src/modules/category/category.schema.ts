@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { ICategory } from "../../types/object.type";
+import { ICategory } from "./category.interface";
 
 const categorySchema = new mongoose.Schema<ICategory>({
     ...baseFields,

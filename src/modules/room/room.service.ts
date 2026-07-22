@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IRoomBody } from "../../types/body.type";
+import { CreateRoomBody } from "./room.validation";
 import { AppError } from "../../utils/appError";
 import CinemaModel from "../cinema/cinema.schema";
 import FormatRoomModel from "../formatRoom/formatRoom.schema";
@@ -11,7 +11,7 @@ export class RoomService {
     private cinemaModel = CinemaModel;
     private formatRoomModel = FormatRoomModel;
 
-    async createRoom(data: IRoomBody, userId: string) {
+    async createRoom(data: CreateRoomBody, userId: string) {
         const [cinema, format] = await Promise.all([
             this.cinemaModel.findOne({ _id: data.cinema, isDeleted: false }),
             this.formatRoomModel.findOne({ _id: data.format, isDeleted: false })
@@ -30,7 +30,7 @@ export class RoomService {
         return await this.roomModel.create({ ...data, createdBy: userId });
     }
 
-    async getRooms(query: any) {
+    async getRooms(query: Record<string, any>) {
         const { filter } = buildRoomQuery(query);
         return this.roomModel
             .find(filter)
@@ -39,7 +39,7 @@ export class RoomService {
             .lean();
     }
 
-    async updateRoom(id: string, data: IRoomBody, userId: string) {
+    async updateRoom(id: string, data: CreateRoomBody, userId: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new AppError("ID phòng không hợp lệ", 400);
         }

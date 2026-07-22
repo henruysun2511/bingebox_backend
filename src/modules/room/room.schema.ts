@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { BaseStatusEnum } from "../../shares/constants/enum";
-import { IRoom } from "../../types/object.type";
+import { IRoom } from "./room.interface";
 
 const roomSchema = new mongoose.Schema<IRoom>({
     ...baseFields,

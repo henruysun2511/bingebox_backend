@@ -20,7 +20,7 @@ export const authorizationMiddleware = catchAsync(
 
     const currentPermission = `${req.method}:${req.route.path}`;
 
-    const allowed = role.permissions.some((p: any) => {
+    const allowed = (role.permissions as unknown as { path: string; method: string }[]).some((p) => {
       return `${p.method}:${p.path}` === currentPermission;
     });
 

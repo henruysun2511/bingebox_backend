@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
-import { validateMiddleware } from "../../middlewares/validation.middleware";
+import { validationMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./setting.controller";
 import * as v from "./setting.validation";
 
@@ -14,7 +14,7 @@ router.patch(
     "/",
     authenticationMiddleware,
     // Ở đây bạn nên thêm middleware checkRole('ADMIN') nếu có
-    validateMiddleware(v.updateSettingBody, "body"),
+    validationMiddleware(v.updateSettingBody, "body"),
     controller.updateSetting
 );
 

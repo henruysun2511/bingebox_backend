@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { ISession } from "../../types/object.type";
+import { ISession } from "./session.interface";
 
 const sessionSchema = new mongoose.Schema<ISession>({
     ...baseFields,

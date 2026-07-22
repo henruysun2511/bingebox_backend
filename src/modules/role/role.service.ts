@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { IRoleBody } from "../../types/body.type";
+import { CreateRoleBody, GetRoleListQuery } from "./role.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import PermissionModel from "../permission/permission.schema";
@@ -28,7 +28,7 @@ export class RoleService {
         }
     }
 
-    async getRoles(query: any) {
+    async getRoles(query: GetRoleListQuery) {
         const { filter } = buildRoleQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -53,7 +53,7 @@ export class RoleService {
         };
     }
 
-    async createRole(data: IRoleBody, userId: string) {
+    async createRole(data: CreateRoleBody, userId: string) {
         const roleName = data.name.trim();
 
         const duplicate = await this.roleModel.findOne({ 
@@ -70,11 +70,12 @@ export class RoleService {
         return await this.roleModel.create({
             ...data,
             name: roleName,
+            permissions: data.permissions?.map(p => new mongoose.Types.ObjectId(p)),
             createdBy: userId,
         });
     }
 
-    async updateRole(id: string, data: Partial<IRoleBody>, userId: string) {
+    async updateRole(id: string, data: Partial<CreateRoleBody>, userId: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) throw new AppError("ID không hợp lệ", 400);
 
         // Sửa 4: Nếu đổi tên, phải check tên mới có trùng với Role khác không

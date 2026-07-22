@@ -1,9 +1,9 @@
 import { Types } from "mongoose";
-import { IMovieQuery } from "../../types/param.type";
+import { GetMovieListQuery } from "./movie.validation";
 import { buildSort } from "../../utils/buidSort";
 
-export function buildMovieQuery(query: IMovieQuery) {
-    const filter: any = {
+export function buildMovieQuery(query: GetMovieListQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
     if (query.name) {

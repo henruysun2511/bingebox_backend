@@ -1,5 +1,6 @@
 import { CookieOptions, Request, Response } from "express";
-import { ENV } from "../../shares/constants/enviroment";
+import { ENV } from "../../shares/constants/environment";
+import { AppError } from "../../utils/appError";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
 import { AuthService } from "./auth.service";
@@ -7,7 +8,7 @@ import { AuthService } from "./auth.service";
 
 /* ===================== REGISTER ===================== */
 export const register = catchAsync(async (req: Request, res: Response) => {
-  const user = await authService.register(req.body);
+  const user = await authService.register(req.validated!.body);
   return success(res, user, "Đăng ký thành công", 201);
 });
 
@@ -24,7 +25,7 @@ const cookieOptions: CookieOptions = {
 
 export const login = catchAsync(async (req: Request, res: Response) => {
   const { username, accessToken, refreshToken, role } =
-    await authService.login(req.body);
+    await authService.login(req.validated!.body);
 
   res.cookie("refreshToken", refreshToken, {
     ...cookieOptions,
@@ -75,8 +76,9 @@ export const refreshToken = catchAsync(async (req: Request, res: Response) => {
 
 /* ===================== GOOGLE CALLBACK ===================== */
 export const googleCallback = catchAsync(async (req: Request, res: Response) => {
+  if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
   const { accessToken, refreshToken } =
-    await authService.googleLogin(req.user!._id.toString());
+    await authService.googleLogin(req.user._id.toString());
 
   res.cookie("refreshToken", refreshToken, {
     ...cookieOptions,
@@ -90,18 +92,19 @@ export const googleCallback = catchAsync(async (req: Request, res: Response) => 
 
 
 export const forgotPassword = catchAsync(async (req: Request, res: Response) => {
-  const { email } = req.body;
+  const { email } = req.validated!.body;
   await authService.forgotPassword(email);
   return success(res, null, "OTP đã được gửi về email");
 });
 
 export const resetPassword = catchAsync(async (req: Request, res: Response) => {
-  const { email, otp, newPassword } = req.body;
+  const { email, otp, newPassword } = req.validated!.body;
   await authService.resetPassword(email, otp, newPassword);
   return success(res, null, "Đặt lại mật khẩu thành công");
 });
 
 export const changePassword = catchAsync(async (req: Request, res: Response) => {
-  await authService.changePassword(req.body, req.user!._id.toString());
+  if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+  await authService.changePassword(req.validated!.body, req.user._id.toString());
   return success(res, null, "Đổi mật khẩu thành công");
 });

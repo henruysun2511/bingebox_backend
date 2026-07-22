@@ -1,82 +1,79 @@
-import Joi from "joi";
+import { z } from "zod";
 import { AgePermissionTypeEnum, MovieStatusEnum, SubtitleTypeEnum } from "../../shares/constants/enum";
 
-export const getMovieListQuery = Joi.object({
-  name: Joi.string().trim().allow("").optional(),
-  status: Joi.string().allow("").valid(...Object.values(MovieStatusEnum)).optional(),
-  categoryIds: Joi.allow("").optional(),
-  page: Joi.number().integer().allow("").min(1).default(1),
-  limit: Joi.number().integer().allow("").min(1).max(50).default(10),
-  sort: Joi.string().optional().allow(""),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+export const getMovieListQuery = z.object({
+  name: z.string().trim().optional(),
+  status: z.nativeEnum(MovieStatusEnum).optional(),
+  categoryIds: z.string().optional(),
+  releaseDate: z.string().optional(),
+  agePermission: z.string().optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+  sort: z.string().optional(),
 });
 
-export const getMovieIdParam = Joi.object({
-  id: Joi.string().required().messages({
-    "any.required": "ID phim là bắt buộc",
-    "string.base": "ID phim không đúng định dạng",
-  }),
+export type GetMovieListQuery = z.infer<typeof getMovieListQuery>;
+
+export const getMovieIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const createMovie = Joi.object({
-  name: Joi.string().trim().required().messages({
-    "string.empty": "Tên phim không được để trống",
-    "any.required": "Tên phim là bắt buộc",
-  }),
-  duration: Joi.number().min(1).required().messages({
-    "number.base": "Thời lượng phải là số",
-    "number.min": "Thời lượng phải lớn hơn 0",
-    "any.required": "Thời lượng là bắt buộc",
-  }),
-  releaseDate: Joi.date().required().messages({
-    "date.base": "Ngày phát hành không hợp lệ",
-    "any.required": "Ngày phát hành là bắt buộc",
-  }),
-  director: Joi.string().allow("").optional(),
-  description: Joi.string().required().messages({
-    "string.empty": "Mô tả phim không được để trống",
-    "any.required": "Mô tả phim là bắt buộc",
-  }),
-  subtitle: Joi.array().items(
-    Joi.string().valid(...Object.values(SubtitleTypeEnum))
-  ).min(1).required().messages({
-    "array.base": "Phụ đề phải là một mảng",
-    "any.only": "Loại phụ đề không hợp lệ",
-    "any.required": "Phụ đề là bắt buộc",
-  }),
-  poster: Joi.string().uri().required().messages({
-    "string.uri": "Link poster không hợp lệ",
-    "any.required": "Poster là bắt buộc",
-  }),
-  banner: Joi.string().uri().required().messages({
-    "string.uri": "Link banner không hợp lệ",
-    "any.required": "Banner là bắt buộc",
-  }),
-  trailer: Joi.string().uri().required().messages({
-    "string.uri": "Link trailer không hợp lệ",
-    "any.required": "Trailer là bắt buộc",
-  }),
-  actors: Joi.array().items(Joi.string()).min(1).required().messages({
-    "array.min": "Phải có ít nhất một diễn viên",
-    "any.required": "Danh sách diễn viên là bắt buộc",
-  }),
-  categories: Joi.array().items(Joi.string()).min(1).required().messages({
-    "array.min": "Phải có ít nhất một thể loại",
-    "any.required": "Danh sách thể loại là bắt buộc",
-  }),
-  nationality: Joi.string().allow("").optional(),
-  agePermission: Joi.string().valid(...Object.values(AgePermissionTypeEnum)).optional().messages({
-    "any.only": "Độ tuổi cho phép không hợp lệ",
-  }),
-  status: Joi.string().valid(...Object.values(MovieStatusEnum)).required().messages({
-    "any.only": "Trạng thái phim không hợp lệ",
-    "any.required": "Trạng thái phim là bắt buộc",
-  }),
-  format: Joi.array().items(Joi.string()).optional(),
+export const createMovie = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Tên phim không được để trống"),
+  duration: z
+    .number()
+    .min(1, "Thời lượng phải lớn hơn 0"),
+  releaseDate: z
+    .string()
+    .or(z.date())
+    .transform(v => new Date(v)),
+  director: z
+    .string()
+    .optional(),
+  description: z
+    .string()
+    .min(1, "Mô tả phim không được để trống"),
+  subtitle: z
+    .array(z.nativeEnum(SubtitleTypeEnum))
+    .min(1, "Phải có ít nhất một loại phụ đề"),
+  poster: z
+    .string()
+    .url("Link poster không hợp lệ"),
+  banner: z
+    .string()
+    .url("Link banner không hợp lệ"),
+  trailer: z
+    .string()
+    .url("Link trailer không hợp lệ"),
+  actors: z
+    .array(z.string())
+    .min(1, "Phải có ít nhất một diễn viên"),
+  categories: z
+    .array(z.string())
+    .min(1, "Phải có ít nhất một thể loại"),
+  nationality: z
+    .string()
+    .optional(),
+  agePermission: z
+    .nativeEnum(AgePermissionTypeEnum)
+    .optional(),
+  status: z
+    .nativeEnum(MovieStatusEnum),
+  format: z
+    .array(z.string())
+    .optional(),
 });
 
-export const updateMovie = createMovie.fork(
-  Object.keys(createMovie.describe().keys),
-  (schema) => schema.optional()
-).min(1).messages({
-  "object.min": "Phải có ít nhất một trường cần cập nhật",
-});
+export type CreateMovieBody = z.infer<typeof createMovie>;
+
+export const updateMovie = createMovie.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Phải có ít nhất một trường cần cập nhật"
+);
+
+export type UpdateMovieBody = z.infer<typeof updateMovie>;

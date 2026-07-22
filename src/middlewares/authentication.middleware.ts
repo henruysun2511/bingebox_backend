@@ -2,8 +2,8 @@ import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import mongoose from "mongoose";
 import User from "../modules/user/user.schema";
-import { ENV } from "../shares/constants/enviroment";
-import { IUser } from "../types/object.type";
+import { ENV } from "../shares/constants/environment";
+import { IUser } from "../modules/user/user.interface";
 import { AppError } from "../utils/appError";
 import { catchAsync } from "../utils/catchAsync";
 

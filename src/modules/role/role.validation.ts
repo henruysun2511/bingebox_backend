@@ -1,29 +1,38 @@
-import Joi from "joi";
+import { z } from "zod";
 
-export const getRoleListQuery = Joi.object({
-    name: Joi.string().trim().optional().allow(""),
-    page: Joi.number().integer().min(1).default(1).allow(""),
-    limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+export const getRoleListQuery = z.object({
+  name: z.string().trim().optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
 });
 
-export const getRoleIdParam = Joi.object({
-    id: Joi.string().required().messages({
-        "any.required": "ID vai trò là bắt buộc",
-    }),
+export type GetRoleListQuery = z.infer<typeof getRoleListQuery>;
+
+export const getRoleIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const createRole = Joi.object({
-    name: Joi.string().trim().required().messages({
-        "string.empty": "Tên vai trò không được để trống",
-        "any.required": "Tên vai trò là bắt buộc",
-    }),
-    description: Joi.string().allow("").optional(),
-    permissions: Joi.array().items(Joi.string()).optional().default([]).messages({
-        "array.base": "Danh sách quyền phải là một mảng (array)",
-    })
+export const createRole = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Tên vai trò không được để trống"),
+  description: z
+    .string()
+    .optional(),
+  permissions: z
+    .array(z.string())
+    .optional()
+    .default([]),
 });
 
-export const updateRole = createRole.fork(
-    Object.keys(createRole.describe().keys),
-    (schema) => schema.optional()
-).min(1);
+export type CreateRoleBody = z.infer<typeof createRole>;
+
+export const updateRole = createRole.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Phải có ít nhất một trường cần cập nhật"
+);
+
+export type UpdateRoleBody = z.infer<typeof updateRole>;

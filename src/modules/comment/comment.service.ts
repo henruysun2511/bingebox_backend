@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { IComment } from "./comment.interface";
+import { CreateCommentBody } from "./comment.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import CommentModel from "./comment.schema";
@@ -7,7 +9,7 @@ export class CommentService {
     private commentModel = CommentModel;
 
 
-    async createComment(data: any, userId: string) {
+    async createComment(data: CreateCommentBody, userId: string) {
         const { parent, movie, content, rating } = data;
 
         const newComment = await this.commentModel.create({
@@ -16,7 +18,7 @@ export class CommentService {
             content,
             rating,
             isDeleted: false,
-            parent: parent || null
+            parent: parent ?? undefined
         });
 
         // Nếu là reply, tăng replyCount của bình luận cha
@@ -28,7 +30,7 @@ export class CommentService {
     }
 
     // Lấy danh sách bình luận gốc (Phân trang)
-    async getRootComments(movieId: string, query: any) {
+    async getRootComments(movieId: string, query: Record<string, any>) {
         const { page, limit, skip } = buildPagination(query);
 
         // Sửa parentId thành parent
@@ -56,7 +58,7 @@ export class CommentService {
     }
 
     // Lấy danh sách Reply của 1 bình luận (Xem thêm)
-    async getReplies(parentId: string, query: any) {
+    async getReplies(parentId: string, query: Record<string, any>) {
         const { page, limit, skip } = buildPagination(query);
 
         // Sử dụng 'parent' thay vì 'parentId' để khớp với Schema
@@ -118,7 +120,7 @@ export class CommentService {
 
         const userObjectId = new mongoose.Types.ObjectId(userId);
         // Kiểm tra xem user đã like chưa
-        const isLiked = (comment as any).likes?.includes(userObjectId);
+        const isLiked = (comment as IComment).likes?.includes(userObjectId);
 
         const updateQuery = isLiked
             ? { $pull: { likes: userObjectId } } // Nếu rồi thì bỏ like

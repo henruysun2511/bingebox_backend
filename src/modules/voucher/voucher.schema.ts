@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { BaseStatusEnum } from "../../shares/constants/enum";
-import { IVoucher } from "../../types/object.type";
+import { IVoucher } from "./voucher.interface";
 
 const voucherSchema = new mongoose.Schema<IVoucher>({
     ...baseFields,

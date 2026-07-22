@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
-import { validateMiddleware } from "../../middlewares/validation.middleware";
+import { validationMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./ageType.controller";
 import * as v from "./ageType.validation";
 
@@ -8,7 +8,7 @@ const router = Router();
 
 router.get(
     "/", 
-    validateMiddleware(v.getAgeTypeQuery, "query"), 
+    validationMiddleware(v.getAgeTypeQuery, "query"), 
     controller.getAgeTypes
 );
 
@@ -16,22 +16,22 @@ router.get(
 router.post(
     "/", 
     authenticationMiddleware, 
-    validateMiddleware(v.createAgeTypeBody, "body"), 
+    validationMiddleware(v.createAgeTypeBody, "body"), 
     controller.createAgeType
 );
 
 router.patch(
     "/:id", 
     authenticationMiddleware, 
-    validateMiddleware(v.getAgeTypeIdParam, "params"), 
-    validateMiddleware(v.updateAgeTypeBody, "body"), 
+    validationMiddleware(v.getAgeTypeIdParam, "params"), 
+    validationMiddleware(v.updateAgeTypeBody, "body"), 
     controller.updateAgeType
 );
 
 router.delete(
     "/:id", 
     authenticationMiddleware, 
-    validateMiddleware(v.getAgeTypeIdParam, "params"), 
+    validationMiddleware(v.getAgeTypeIdParam, "params"), 
     controller.removeAgeType
 );
 

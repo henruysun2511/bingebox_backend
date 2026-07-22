@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
 import { TicketStatusEnum } from "../../shares/constants/enum";
-import { IMovieBody } from "../../types/body.type";
-import { IMovieQuery } from "../../types/param.type";
+import { CreateMovieBody } from "./movie.validation";
+import { IMovie } from "./movie.interface";
+import { GetMovieListQuery } from "./movie.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
+import { getCache, setCache } from "../../configs/redis.config";
 import { default as ActorModel } from "../actor/actor.schema";
 import { default as CategoryModel } from "../category/category.schema";
 import { default as TicketModel } from "../ticket/ticket.schema";
@@ -16,7 +18,11 @@ export class MovieService {
     private actorModel = ActorModel;
     private categoryModel = CategoryModel;
 
-    async getMovies(query: IMovieQuery) {
+    async getMovies(query: GetMovieListQuery) {
+        const cacheKey = `movies:${JSON.stringify(query)}`;
+        const cached = await getCache<{ items: any[]; pagination: any }>(cacheKey);
+        if (cached) return cached;
+
         const { filter, sort } = buildMovieQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -36,7 +42,7 @@ export class MovieService {
             this.movieModel.countDocuments(filter),
         ]);
 
-        return {
+        const result = {
             items,
             pagination: {
                 page,
@@ -45,9 +51,11 @@ export class MovieService {
                 totalPages: Math.ceil(total / limit),
             },
         };
+        await setCache(cacheKey, result, 300);
+        return result;
     }
 
-    async getMoviesForAdmin(query: IMovieQuery) {
+    async getMoviesForAdmin(query: GetMovieListQuery) {
         const { filter, sort } = buildMovieQuery(query);
         const { page, limit, skip } = buildPagination(query);
         const [items, total] = await Promise.all([
@@ -80,6 +88,10 @@ export class MovieService {
     }
 
     async getMovieDetail(id: string) {
+        const cacheKey = `movie:${id}`;
+        const cached = await getCache<any>(cacheKey);
+        if (cached) return cached;
+
         const movie = await this.movieModel.findOne({
             _id: id,
             isDeleted: false,
@@ -99,6 +111,7 @@ export class MovieService {
             throw new AppError("Không tìm thấy phim", 404);
         }
 
+        await setCache(cacheKey, movie, 600);
         return movie;
     }
 
@@ -122,7 +135,7 @@ export class MovieService {
         return movie.actors;
     }
 
-    async validateActors(actorIds?: mongoose.Types.ObjectId[]) {
+    async validateActors(actorIds?: string[]) {
         if (!actorIds || actorIds.length === 0) return;
 
         const uniqueIds = [...new Set(actorIds)];
@@ -137,7 +150,7 @@ export class MovieService {
         }
     }
 
-    async validateCategories(categoryIds?: mongoose.Types.ObjectId[]) {
+    async validateCategories(categoryIds?: string[]) {
         if (!categoryIds || categoryIds.length === 0) return;
 
         const uniqueIds = [...new Set(categoryIds)];
@@ -152,17 +165,19 @@ export class MovieService {
         }
     }
 
-    async createMovie(data: IMovieBody, userId: string) {
+    async createMovie(data: CreateMovieBody, userId: string) {
         await this.validateActors(data.actors);
         await this.validateCategories(data.categories);
 
         return this.movieModel.create({
             ...data,
+            actors: data.actors.map(a => new mongoose.Types.ObjectId(a)),
+            categories: data.categories.map(c => new mongoose.Types.ObjectId(c)),
             createdBy: userId,
         });
     }
 
-    async updateMovie(id: string, data: IMovieBody, userId: string) {
+    async updateMovie(id: string, data: CreateMovieBody, userId: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new AppError("ID không hợp lệ", 400);
         }
@@ -174,6 +189,8 @@ export class MovieService {
             { _id: id, isDeleted: false },
             {
                 ...data,
+                actors: data.actors.map(a => new mongoose.Types.ObjectId(a)),
+                categories: data.categories.map(c => new mongoose.Types.ObjectId(c)),
                 updatedBy: userId
             },
             { new: true, runValidators: true }
@@ -232,8 +249,8 @@ export class MovieService {
         const moviesMap = new Map();
 
         tickets.forEach(ticket => {
-            const movie = (ticket.showtime as any)?.movie;
-            if (movie && !moviesMap.has(movie._id.toString())) {
+            const movie = (ticket.showtime as unknown as { movie: IMovie })?.movie;
+            if (movie && movie._id && !moviesMap.has(movie._id.toString())) {
                 moviesMap.set(movie._id.toString(), movie);
             }
         });

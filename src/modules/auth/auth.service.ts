@@ -2,8 +2,9 @@ import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import Jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import { ENV } from "../../shares/constants/enviroment";
-import { IChangePasswordBody, ILoginBody, IRegisterBody } from "../../types/body.type";
+import { ENV } from "../../shares/constants/environment";
+import { ChangePasswordBodyType, LoginBody, RegisterBody } from "./auth.validation";
+import { IUser } from "../user/user.interface";
 import { AppError } from "../../utils/appError";
 import { sendOtpEmail } from "../../utils/sendEmail";
 import { default as MembershipModel } from "../membership/membership.schema";
@@ -19,10 +20,10 @@ export class AuthService {
     private roleModel = RoleModel;
     private membershipModel = MembershipModel;
 
-    private async generateAuthTokens(user: any) {
+    private async generateAuthTokens(user: Pick<IUser, "_id" | "username" | "avatar">) {
         // 1. Lấy thông tin Role và Avatar
         const userWithRole = await this.userModel.findById(user._id).populate("role");
-        const role = (userWithRole?.role as any)?.name || "CUSTOMER";
+        const role = (userWithRole?.role as unknown as { name: string })?.name || "CUSTOMER";
 
         // 2. Tạo Access Token (Payload khớp hoàn toàn với UserJwtPayload của Frontend)
         const accessToken = Jwt.sign(
@@ -33,7 +34,7 @@ export class AuthService {
                 avatar: user.avatar
             },
             ENV.ACCESS_TOKEN_SECRET as string,
-            { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
+            { expiresIn: ENV.ACCESS_TOKEN_TTL }
         );
 
         // 3. Tạo Refresh Token
@@ -53,7 +54,7 @@ export class AuthService {
         };
     }
 
-    async register(data: IRegisterBody) {
+    async register(data: RegisterBody) {
         const { username, email, password, fullName, avatar, birth } = data;
 
         //Kiểm tra user đã tồn tại
@@ -90,7 +91,7 @@ export class AuthService {
         });
     }
 
-    async login(data: ILoginBody) {
+    async login(data: LoginBody) {
         const { username, password } = data;
         const user = await this.userModel.findOne({ username, isDeleted: false }).select("+password");
 
@@ -143,7 +144,7 @@ export class AuthService {
             .populate("role");
         if (!user) throw new AppError("Người dùng không tồn tại", 404);
 
-        const roleName = (user.role as any)?.name || "CUSTOMER";
+        const roleName = (user.role as unknown as { name: string })?.name || "CUSTOMER";
 
         const accessToken = Jwt.sign(
             {
@@ -153,7 +154,7 @@ export class AuthService {
                 avatar: user.avatar
             },
             ENV.ACCESS_TOKEN_SECRET as string,
-            { expiresIn: ENV.ACCESS_TOKEN_TTL as any }
+            { expiresIn: ENV.ACCESS_TOKEN_TTL }
         );
 
         return { accessToken, role: roleName };
@@ -209,7 +210,7 @@ export class AuthService {
         return true;
     }
 
-    async changePassword(data: IChangePasswordBody, userId: string) {
+    async changePassword(data: ChangePasswordBodyType, userId: string) {
         const { oldPassword, newPassword } = data;
 
         const user = await this.userModel.findById(userId).select("+password");

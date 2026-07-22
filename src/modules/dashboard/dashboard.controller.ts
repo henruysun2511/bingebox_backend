@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
+import { delCacheByPattern } from "../../configs/redis.config";
 import { DashboardService } from "./dashboard.service";
 
 const service = new DashboardService();

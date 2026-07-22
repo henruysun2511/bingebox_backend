@@ -1,8 +1,8 @@
-import { IShowtimeQuery } from "../../types/param.type";
+import { GetShowtimeQuery } from "./showtime.validation";
 import { buildSort } from "../../utils/buidSort";
 
-export function buildShowtimeQuery(query: IShowtimeQuery) {
-    const filter: any = {
+export function buildShowtimeQuery(query: GetShowtimeQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

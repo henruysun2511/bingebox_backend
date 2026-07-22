@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { ISeatType } from "../../types/object.type";
+import { ISeatType } from "./seatType.interface";
 
 const seatTypeSchema = new mongoose.Schema<ISeatType>({
     ...baseFields,

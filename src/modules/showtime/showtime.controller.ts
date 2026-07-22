@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
+import { AppError } from "../../utils/appError";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
+import { delCacheByPattern } from "../../configs/redis.config";
 import { ShowtimeService } from "./showtime.service";
 
 const showtimeService = new ShowtimeService();
 
 export const getShowtimes = catchAsync(async (req: Request, res: Response) => {
-  const result = await showtimeService.getShowtimes(req.query);
+  const result = await showtimeService.getShowtimes(req.validated!.query);
   return success(res, result.items, "Lấy danh sách suất chiếu thành công", 200, result.pagination);
 });
 
@@ -17,17 +19,23 @@ export const getShowtimeDetail = catchAsync(async (req: Request, res: Response) 
 });
 
 export const createShowtime = catchAsync(async (req: Request, res: Response) => {
-  const result = await showtimeService.createShowtime(req.body, req.user!._id.toString());
+  if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+  const result = await showtimeService.createShowtime(req.validated!.body, req.user._id.toString());
+  await delCacheByPattern("showtimes:*");
   return success(res, result, "Tạo suất chiếu thành công", 201);
 });
 
 export const updateShowtime = catchAsync(async (req: Request, res: Response) => {
-  const result = await showtimeService.updateShowtime(req.params.id, req.body, req.user!._id.toString());
+  if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+  const result = await showtimeService.updateShowtime(req.params.id, req.validated!.body, req.user._id.toString());
+  await delCacheByPattern("showtimes:*");
   return success(res, result, "Cập nhật suất chiếu thành công");
 });
 
 export const deleteShowtime = catchAsync(async (req: Request, res: Response) => {
-  await showtimeService.deleteShowtime(req.params.id, req.user!._id.toString());
+  if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+  await showtimeService.deleteShowtime(req.params.id, req.user._id.toString());
+  await delCacheByPattern("showtimes:*");
   return success(res, null, "Xóa suất chiếu thành công");
 });
 
@@ -55,9 +63,10 @@ export const getShowtimesGroupByRoom = catchAsync(async (req: Request, res: Resp
 });
 
 export const updateShowtimeStatus = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
     const { id } = req.params;
-    const { status } = req.body;
-    const showtime = await showtimeService.updateStatus(id, status, req.user!._id.toString());
+    const { status } = req.validated!.body;
+    const showtime = await showtimeService.updateStatus(id, status, req.user._id.toString());
     
     return success(res, showtime, "Cập nhật trạng thái lịch chiếu thành công");
 });

@@ -13,7 +13,7 @@ export class SeatService {
     private ticketModel = TicketModel;
 
 
-    async updateSeat(roomId: string, seats: any[], userId: string) {
+    async updateSeat(roomId: string, seats: { code: string; row?: string; column?: number; isBlocked?: boolean; isCoupleSeat?: boolean; partnerSeatCode?: string; seatTypeId?: string }[], userId: string) {
         const session = await mongoose.startSession();
         session.startTransaction();
 

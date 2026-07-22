@@ -1,5 +1,6 @@
 import mongoose, { ClientSession } from "mongoose";
 import { BaseStatusEnum } from "../../shares/constants/enum";
+import { GetVoucherListQuery } from "./voucher.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildVoucherQuery } from "./voucher.query";
@@ -8,7 +9,7 @@ import VoucherModel from "./voucher.schema";
 export class VoucherService {
     private voucherModel = VoucherModel;
 
-    async getVouchers(query: any) {
+    async getVouchers(query: GetVoucherListQuery) {
         const { filter, sort } = buildVoucherQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -42,7 +43,7 @@ export class VoucherService {
         return voucher;
     }
 
-    async createVoucher(data: any, userId: string) {
+    async createVoucher(data: { name: string; description: string; code: string; startTime: Date; endTime: Date; minOrderValue: number; maxDiscountAmount: number; maxUsage: number; status: string }, userId: string) {
         const duplicate = await this.voucherModel.findOne({
             code: data.code.toUpperCase(),
             isDeleted: false
@@ -56,7 +57,7 @@ export class VoucherService {
         });
     }
 
-    async updateVoucher(id: string, data: any, userId: string) {
+    async updateVoucher(id: string, data: Partial<{ name: string; description: string; code: string; startTime: Date; endTime: Date; minOrderValue: number; maxDiscountAmount: number; maxUsage: number; status: string }>, userId: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) throw new AppError("ID không hợp lệ", 400);
 
         const updatedVoucher = await this.voucherModel.findOneAndUpdate(

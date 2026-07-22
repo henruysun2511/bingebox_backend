@@ -1,6 +1,5 @@
-import { ClientSession } from "mongoose";
-import { IFoodBody } from "../../types/body.type";
-import { IFoodQuery } from "../../types/param.type";
+import mongoose, { ClientSession } from "mongoose";
+import { CreateFoodBody, GetFoodListQuery } from "./food.validation";
 import { AppError } from "../../utils/appError";
 import { buildFoodQuery } from "./food.query";
 import FoodModel from "./food.schema";
@@ -8,7 +7,7 @@ import FoodModel from "./food.schema";
 export class FoodService {
     private foodModel = FoodModel;
 
-    async getAllFoods(query: IFoodQuery) {
+    async getAllFoods(query: GetFoodListQuery) {
         const { filter } = buildFoodQuery(query);
         return await this.foodModel
             .find(filter)
@@ -16,14 +15,14 @@ export class FoodService {
             .lean();
     }
 
-    async createFood(data: IFoodBody, userId: string) {
+    async createFood(data: CreateFoodBody, userId: string) {
         const duplicate = await this.foodModel.findOne({ name: data.name, isDeleted: false });
         if (duplicate) throw new AppError("Tên món ăn này đã tồn tại", 400);
 
         return await this.foodModel.create({ ...data, createdBy: userId });
     }
 
-    async updateFood(id: string, data: IFoodBody, userId: string) {
+    async updateFood(id: string, data: CreateFoodBody, userId: string) {
         const food = await this.foodModel.findOneAndUpdate(
             { _id: id, isDeleted: false },
             { ...data, updatedBy: userId },
@@ -49,7 +48,7 @@ export class FoodService {
         return food;
     }
 
-    async calculateFoods(foods: any[], session: ClientSession) {
+    async calculateFoods(foods: { foodId: mongoose.Types.ObjectId; quantity: number }[], session: ClientSession) {
         let total = 0;
         const payload = [];
 

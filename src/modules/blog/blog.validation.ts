@@ -1,56 +1,51 @@
-import Joi from "joi";
+import { z } from "zod";
 
-const objectIdCustom = Joi.string().hex().length(24).messages({
-    "string.hex": "ID phải là định dạng hexadecimal",
-    "string.length": "ID phải đúng 24 ký tự",
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID phải đúng 24 ký tự");
+
+export const blogIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const blogIdParam = Joi.object({
-    id: objectIdCustom.required().messages({
-        "any.required": "ID bài viết là bắt buộc"
-    }),
+export const createBlogBody = z.object({
+  title: z
+    .string()
+    .min(10, "Tiêu đề phải có ít nhất 10 ký tự"),
+  content: z
+    .string()
+    .min(1, "Nội dung bài viết không được để trống"),
+  thumbnail: z
+    .string()
+    .url("Thumbnail phải là một đường dẫn URL hợp lệ")
+    .optional()
+    .or(z.literal("")),
+  isPublished: z
+    .boolean()
+    .optional(),
 });
 
-export const createBlogBody = Joi.object({
-    title: Joi.string().min(10).required().messages({
-        "string.empty": "Tiêu đề không được để trống",
-        "string.min": "Tiêu đề phải có ít nhất 10 ký tự",
-        "any.required": "Tiêu đề là bắt buộc",
-    }),
-    content: Joi.string().required().messages({
-        "string.empty": "Nội dung bài viết không được để trống",
-        "any.required": "Nội dung là bắt buộc",
-    }),
-    thumbnail: Joi.string().uri().optional().messages({
-        "string.uri": "Thumbnail phải là một đường dẫn URL hợp lệ",
-    }),
-    isPublished: Joi.boolean().optional()
+export type CreateBlogBody = z.infer<typeof createBlogBody>;
+
+export const updateBlogBody = createBlogBody.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Cần ít nhất một trường để cập nhật"
+);
+
+export type UpdateBlogBody = z.infer<typeof updateBlogBody>;
+
+export const blogListQuery = z.object({
+  search: z.string().optional(),
+  title: z.string().optional(),
+  isPublished: z.coerce.boolean().optional(),
+  page: z.coerce.number().min(1).optional(),
+  limit: z.coerce.number().min(1).optional(),
 });
 
-export const updateBlogBody = createBlogBody.fork(
-    Object.keys(createBlogBody.describe().keys),
-    (schema) => schema.optional()
-).min(1).messages({
-    "object.min": "Cần ít nhất một trường để cập nhật",
+export type BlogListQuery = z.infer<typeof blogListQuery>;
+
+export const getBlogIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const blogListQuery = Joi.object({
-    search: Joi.string().optional(),
-    isPublished: Joi.boolean().optional(),
-    page: Joi.number().min(1).optional(),
-    limit: Joi.number().min(1).optional()
-});
-
-export const getBlogIdParam = Joi.object({
-  id: Joi.string().hex().length(24).required().messages({
-    "any.required": "ID bài viết là bắt buộc",
-    "string.length": "ID bài viết không hợp lệ",
-  }),
-});
-
-export const updateBlogPublishedBody = Joi.object({
-  isPublished: Joi.boolean().required().messages({
-    "any.required": "Trạng thái xuất bản là bắt buộc",
-    "boolean.base": "Trạng thái phải là true hoặc false",
-  }),
+export const updateBlogPublishedBody = z.object({
+  isPublished: z.boolean(),
 });

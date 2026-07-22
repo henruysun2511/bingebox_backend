@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { IMembership } from "../../types/object.type";
+import { IMembership } from "./membership.interface";
 
 const membershipSchema = new mongoose.Schema<IMembership>({
     ...baseFields,

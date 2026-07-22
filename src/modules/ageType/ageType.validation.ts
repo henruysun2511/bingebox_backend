@@ -1,40 +1,44 @@
-import Joi from "joi";
+import { z } from "zod";
 
-export const getAgeTypeIdParam = Joi.object({
-    id: Joi.string().hex().length(24).required().messages({
-        "string.length": "ID không hợp lệ",
-        "any.required": "ID là bắt buộc",
-    }),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+export const getAgeTypeIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const getAgeTypeQuery = Joi.object({
-    name: Joi.string().trim().optional().allow("").messages({
-        "string.base": "Tên phải là chuỗi ký tự",
-    }),
-    age: Joi.number().min(0).optional().allow("").messages({
-        "number.base": "Tuổi phải là số",
-        "number.min": "Tuổi không được nhỏ hơn 0",
-    }),
+export const getAgeTypeQuery = z.object({
+  name: z.string().trim().optional(),
+  age: z.coerce.number().min(0).optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+  sort: z.string().optional(),
 });
 
-export const createAgeTypeBody = Joi.object({
-    name: Joi.string().trim().required().messages({
-        "string.empty": "Tên đối tượng không được để trống",
-        "any.required": "Tên đối tượng là bắt buộc",
-    }),
-    minAge: Joi.number().min(0).required().messages({
-        "number.min": "Tuổi tối thiểu không được nhỏ hơn 0",
-        "any.required": "Tuổi tối thiểu là bắt buộc",
-    }),
-    maxAge: Joi.number().min(Joi.ref('minAge')).required().messages({
-        "number.min": "Tuổi tối đa phải lớn hơn hoặc bằng tuổi tối thiểu",
-        "any.required": "Tuổi tối đa là bắt buộc",
-    }),
+export type GetAgeTypeQuery = z.infer<typeof getAgeTypeQuery>;
+
+const ageTypeBody = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Tên đối tượng không được để trống"),
+  minAge: z
+    .number()
+    .min(0, "Tuổi tối thiểu không được nhỏ hơn 0"),
+  maxAge: z
+    .number()
+    .min(0, "Tuổi tối đa phải lớn hơn hoặc bằng tuổi tối thiểu"),
 });
 
-export const updateAgeTypeBody = createAgeTypeBody.fork(
-    Object.keys(createAgeTypeBody.describe().keys),
-    (schema) => schema.optional()
-).min(1).messages({
-    "object.min": "Cần ít nhất một trường để cập nhật",
+export const createAgeTypeBody = ageTypeBody.refine(d => d.maxAge >= d.minAge, {
+  message: "Tuổi tối đa phải lớn hơn hoặc bằng tuổi tối thiểu",
+  path: ["maxAge"],
 });
+
+export type CreateAgeTypeBody = z.infer<typeof createAgeTypeBody>;
+
+export const updateAgeTypeBody = ageTypeBody.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Cần ít nhất một trường để cập nhật"
+);
+
+export type UpdateAgeTypeBody = z.infer<typeof updateAgeTypeBody>;

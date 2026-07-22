@@ -1,8 +1,8 @@
-import { IVoucherQuery } from "../../types/param.type";
+import { GetVoucherListQuery } from "./voucher.validation";
 import { buildSort } from "../../utils/buidSort";
 
-export function buildVoucherQuery(query: IVoucherQuery) {
-    const filter: any = {
+export function buildVoucherQuery(query: GetVoucherListQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

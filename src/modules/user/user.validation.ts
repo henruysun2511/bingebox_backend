@@ -1,90 +1,71 @@
-import Joi from "joi";
+import { z } from "zod";
 import { GenderEnum } from "../../shares/constants/enum";
 
-export const updateUserProfileBody = Joi.object({
-    fullName: Joi.string()
-        .trim()
-        .max(100)
-        .optional()
-        .messages({
-            "string.base": "Họ tên phải là chuỗi",
-        }),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
 
-    avatar: Joi.string()
-        .uri()
-        .optional()
-        .messages({
-            "string.uri": "Avatar phải là URL hợp lệ",
-        }),
-
-    gender: Joi.string()
-        .valid(...Object.values(GenderEnum))
-        .optional()
-        .messages({
-            "any.only": "Giới tính không hợp lệ",
-        }),
-
-    birth: Joi.date()
-        .required()
-        .less("now")
-        .messages({
-            "date.base": "Ngày sinh không hợp lệ",
-            "date.less": "Ngày sinh phải là một ngày trong quá khứ",
-            "any.required": "Vui lòng cung cấp ngày sinh",
-        }),
-    banner: Joi.string()
-        .uri()
-        .allow("")
-        .optional()
-        .messages({
-            "string.uri": "Banner phải là URL hợp lệ",
-        }),
-
-    tags: Joi.array()
-    .items(Joi.string().trim())
-    .max(3) // Giới hạn tối đa 3 phần tử
+export const updateUserProfileBody = z.object({
+  fullName: z
+    .string()
+    .trim()
+    .max(100)
+    .optional(),
+  avatar: z
+    .string()
+    .url("Avatar phải là URL hợp lệ")
     .optional()
-    .messages({
-        "array.base": "Tags phải là một mảng",
-        "array.max": "Bạn chỉ được chọn tối đa 3 danh hiệu", // Thông báo khi vượt quá 3
-    }),
+    .or(z.literal("")),
+  gender: z
+    .nativeEnum(GenderEnum)
+    .optional(),
+  birth: z
+    .string()
+    .or(z.date())
+    .refine(v => new Date(v) < new Date(), "Ngày sinh phải là một ngày trong quá khứ")
+    .transform(v => new Date(v))
+    .optional(),
+  banner: z
+    .string()
+    .url("Banner phải là URL hợp lệ")
+    .optional()
+    .or(z.literal("")),
+  tags: z
+    .array(z.string().trim())
+    .max(3, "Bạn chỉ được chọn tối đa 3 danh hiệu")
+    .optional(),
 });
 
-export const assignRole = Joi.object({
-  roleId: Joi.string().hex().length(24).required().messages({
-    "string.length": "ID vai trò không hợp lệ",
-    "any.required": "ID vai trò là bắt buộc",
-  }),
+export const assignRole = z.object({
+  roleId: objectIdSchema,
 });
 
-export const getUserIdParam = Joi.object({
-  id: Joi.string().hex().length(24).required().messages({
-    "any.required": "ID người dùng là bắt buộc",
-  }),
+export const getUserIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const getUserListQuery = Joi.object({
-    username: Joi.string().trim().optional(),
-    email: Joi.string().trim().optional(),
-    role: Joi.string().hex().length(24).optional(),
-    isBlocked: Joi.string().valid('true', 'false').optional(),
-    page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(50).default(10),
-    sort: Joi.string().optional(),
+export const getUserListQuery = z.object({
+  username: z.string().trim().optional(),
+  email: z.string().trim().optional(),
+  role: objectIdSchema.optional(),
+  isBlocked: z.enum(["true", "false"]).optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+  sort: z.string().optional(),
 });
 
-export const blockUserBody = Joi.object({
-    isBlocked: Joi.boolean().required().messages({
-        "any.required": "Trạng thái khóa/mở là bắt buộc",
-        "boolean.base": "Trạng thái phải là kiểu boolean (true/false)"
-    })
+export const blockUserBody = z.object({
+  isBlocked: z.boolean(),
 });
 
-export const redeemPoints = Joi.object({
-  points: Joi.number().integer().min(1).required().messages({
-    "number.base": "Số điểm phải là một con số",
-    "number.min": "Số điểm trừ phải ít nhất là 1",
-    "any.required": "Số điểm cần trừ là bắt buộc",
-  }),
-  reason: Joi.string().trim().optional(),
+export type UpdateUserProfileBody = z.infer<typeof updateUserProfileBody>;
+export type GetUserListQuery = z.infer<typeof getUserListQuery>;
+
+export const redeemPoints = z.object({
+  points: z
+    .number()
+    .int()
+    .min(1, "Số điểm trừ phải ít nhất là 1"),
+  reason: z
+    .string()
+    .trim()
+    .optional(),
 });

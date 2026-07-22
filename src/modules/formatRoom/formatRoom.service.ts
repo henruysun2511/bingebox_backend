@@ -5,7 +5,7 @@ import { default as FormatRoomModel } from "./formatRoom.schema";
 export class FormatRoomService {
     private formatRoomModel = FormatRoomModel;
 
-    async getFormatRooms(query: any) {
+    async getFormatRooms(query: Record<string, any>) {
         const { page, limit, skip } = buildPagination(query);
         
         const [items, total] = await Promise.all([
@@ -25,14 +25,14 @@ export class FormatRoomService {
         return format;
     }
 
-    async createFormatRoom(data: any, userId: string) {
+    async createFormatRoom(data: { name: string; description?: string; image?: string }, userId: string) {
         const existing = await this.formatRoomModel.findOne({ name: data.name, isDeleted: false });
         if (existing) throw new AppError("Tên định dạng này đã tồn tại", 400);
 
         return this.formatRoomModel.create({ ...data, createdBy: userId });
     }
 
-    async updateFormatRoom(id: string, data: any, userId: string) {
+    async updateFormatRoom(id: string, data: { name: string; description?: string; image?: string }, userId: string) {
         const updated = await this.formatRoomModel.findOneAndUpdate(
             { _id: id, isDeleted: false },
             { ...data, updatedBy: userId },

@@ -1,5 +1,5 @@
-import { IMembershipBody } from "../../types/body.type";
-import { IUser } from "../../types/object.type";
+import { CreateMembershipBody } from "./membership.validation";
+import { IUser } from "../user/user.interface";
 import { AppError } from "../../utils/appError";
 import MembershipModel from "./membership.schema";
 
@@ -10,14 +10,14 @@ export class MembershipService {
         return await this.membershipModel.find({ isDeleted: false }).sort({ minSpending: 1 }).lean();
     }
 
-    async createMembership(data: IMembershipBody, userId: string) {
+    async createMembership(data: CreateMembershipBody, userId: string) {
         const duplicate = await this.membershipModel.findOne({ name: data.name, isDeleted: false });
         if (duplicate) throw new AppError("Tên hạng thành viên này đã tồn tại", 400);
 
         return await this.membershipModel.create({ ...data, createdBy: userId });
     }
 
-    async updateMembership(id: string, data: IMembershipBody, userId: string) {
+    async updateMembership(id: string, data: CreateMembershipBody, userId: string) {
         const result = await this.membershipModel.findOneAndUpdate(
             { _id: id, isDeleted: false },
             { ...data, updatedBy: userId },

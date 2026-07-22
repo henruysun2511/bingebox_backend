@@ -1,37 +1,34 @@
-import Joi from "joi";
+import { z } from "zod";
 
-export const getCinemaListQuery = Joi.object({
-  name: Joi.string().allow("").optional(),
-  province: Joi.string().allow("").optional(),
-  page: Joi.number().integer().min(1).default(1).allow(""),
-  limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
-  sort: Joi.string().optional().allow(""),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+export const getCinemaListQuery = z.object({
+  name: z.string().optional(),
+  province: z.string().optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+  sort: z.string().optional(),
 });
 
-export const getCinemaIdParam = Joi.object({
-  id: Joi.string().required().messages({
-    "any.required": "ID rạp là bắt buộc",
-    "string.base": "ID rạp không đúng định dạng",
-  }),
+export type GetCinemaListQuery = z.infer<typeof getCinemaListQuery>;
+
+export const getCinemaIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const createCinema = Joi.object({
-  name: Joi.string().required().messages({
-    "any.required": "Tên rạp là bắt buộc",
-  }),
-  location: Joi.string().required().messages({
-    "any.required": "Địa chỉ rạp là bắt buộc",
-  }),
-  province: Joi.string().required().messages({
-    "any.required": "Tỉnh/Thành phố là bắt buộc",
-  }),
-  description: Joi.string().allow("").optional(),
-  image: Joi.string().uri().allow("").optional(),
+export const createCinema = z.object({
+  name: z.string().min(1, "Tên rạp là bắt buộc"),
+  location: z.string().min(1, "Địa chỉ rạp là bắt buộc"),
+  province: z.string().min(1, "Tỉnh/Thành phố là bắt buộc"),
+  description: z.string().optional(),
+  image: z.string().url("Link ảnh không hợp lệ").optional().or(z.literal("")),
 });
 
-export const updateCinema = createCinema.fork(
-  Object.keys(createCinema.describe().keys),
-  (schema) => schema.optional()
-).min(1).messages({
-  "object.min": "Phải có ít nhất một trường cần cập nhật",
-});
+export type CreateCinemaBody = z.infer<typeof createCinema>;
+
+export const updateCinema = createCinema.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Phải có ít nhất một trường cần cập nhật"
+);
+
+export type UpdateCinemaBody = z.infer<typeof updateCinema>;

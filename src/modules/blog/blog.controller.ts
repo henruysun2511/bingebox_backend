@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../../utils/appError";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
 import { BlogService } from "./blog.service";
@@ -6,12 +7,13 @@ import { BlogService } from "./blog.service";
 const service = new BlogService();
 
 export const createBlog = catchAsync(async (req: Request, res: Response) => {
-    const result = await service.createBlog(req.body, req.user!._id.toString());
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const result = await service.createBlog(req.validated!.body, req.user._id.toString());
     return success(res, result, "Tạo bài viết thành công", 201);
 });
 
 export const getBlogs = catchAsync(async (req: Request, res: Response) => {
-    const result = await service.getBlogs(req.query);
+    const result = await service.getBlogs(req.validated!.query);
     return success(res, result.items, "Lấy danh sách blog thành công", 200, result.pagination);
 });
 
@@ -21,23 +23,26 @@ export const getBlogDetail = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const updateBlog = catchAsync(async (req: Request, res: Response) => {
-    const result = await service.updateBlog(req.params.id, req.body, req.user!._id.toString());
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const result = await service.updateBlog(req.params.id, req.validated!.body, req.user._id.toString());
     return success(res, result, "Cập nhật bài viết thành công");
 });
 
 export const deleteBlog = catchAsync(async (req: Request, res: Response) => {
-    await service.deleteBlog(req.params.id, req.user!._id.toString());
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    await service.deleteBlog(req.params.id, req.user._id.toString());
     return success(res, null, "Xóa bài viết thành công");
 });
 
 export const updateBlogPublished = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
     const { id } = req.params;
-    const { isPublished } = req.body;
+    const { isPublished } = req.validated!.body;
     
     const blog = await service.updatePublishedStatus(
         id, 
         isPublished, 
-        req.user!._id.toString()
+        req.user._id.toString()
     );
     
     const message = isPublished ? "Đã xuất bản bài viết" : "Đã hủy xuất bản bài viết";

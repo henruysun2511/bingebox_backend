@@ -1,3 +1,4 @@
+import { ISetting } from "./setting.interface";
 import SettingModel from "./setting.schema";
 
 export class SettingService {
@@ -12,7 +13,7 @@ export class SettingService {
         return setting;
     }
 
-    async updateSetting(data: any, userId: string) {
+    async updateSetting(data: Partial<ISetting>, userId: string) {
         // Upsert: true giúp tự động tạo nếu chưa có bản ghi nào
         const setting = await this.settingModel.findOneAndUpdate(
             {}, 

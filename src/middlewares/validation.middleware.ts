@@ -1,24 +1,29 @@
 import { NextFunction, Request, Response } from "express";
-import Joi from "joi";
+import { ZodSchema } from "zod";
 import { AppError } from "../utils/appError";
 
-export const validateMiddleware = (
-    schema: Joi.ObjectSchema,
+declare global {
+    namespace Express {
+        interface Request {
+            validated?: Record<string, any>;
+        }
+    }
+}
+
+export const validationMiddleware = (
+    schema: ZodSchema,
     property: "body" | "query" | "params" = "body"
 ) => {
     return (req: Request, _res: Response, next: NextFunction) => {
-        const { error, value } = schema.validate(req[property] ?? {}, {
-            abortEarly: false,
-            allowUnknown: true,
-        });
+        const result = schema.safeParse(req[property] ?? {});
 
-        if (error) {
-            return next(new AppError(error.details.map(d => d.message), 400));
+        if (!result.success) {
+            return next(new AppError(result.error.issues.map(e => e.message), 400));
         }
 
-        (req as any).validated = {
-            ...(req as any).validated,
-            [property]: value,
+        req.validated = {
+            ...req.validated,
+            [property]: result.data,
         };
 
         next();

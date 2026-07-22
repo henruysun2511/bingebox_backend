@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import { IPermissionBody } from "../../types/body.type";
-import { IPermissionQuery } from "../../types/param.type";
+import { CreatePermissionBody, GetPermissionListQuery } from "./permission.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildPermissionQuery } from "./permission.query";
@@ -9,7 +8,7 @@ import PermissionModel from "./permission.schema";
 export class PermissionService {
     private permissionModel = PermissionModel;
 
-    async getPermissions(query: IPermissionQuery) {
+    async getPermissions(query: GetPermissionListQuery) {
         const { filter, sort } = buildPermissionQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -34,7 +33,7 @@ export class PermissionService {
         };
     }
 
-    async createPermission(data: IPermissionBody, userId: string) {
+    async createPermission(data: CreatePermissionBody, userId: string) {
         const duplicate = await this.permissionModel.findOne({ 
             path: data.path, 
             method: data.method,
@@ -51,7 +50,7 @@ export class PermissionService {
         });
     }
 
-    async updatePermission(id: string, data: IPermissionBody, userId: string) {
+    async updatePermission(id: string, data: CreatePermissionBody, userId: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) throw new AppError("ID không hợp lệ", 400);
 
         const updated = await this.permissionModel.findOneAndUpdate(

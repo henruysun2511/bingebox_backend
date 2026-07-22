@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
-import { IActorBody } from "../../types/body.type";
-import { IActorQuery } from "../../types/param.type";
+import { CreateActorBody, GetActorListQuery } from "./actor.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import MovieModel from "../movie/movie.schema";
@@ -11,7 +10,7 @@ export class ActorService {
     private actorModel = ActorModel;
     private movieModel = MovieModel;
 
-    async getActors(query: IActorQuery) {
+    async getActors(query: GetActorListQuery) {
         const { filter, sort } = buildActorQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -76,7 +75,7 @@ export class ActorService {
         return actor;
     }
 
-    async createActor(data: IActorBody, userId: string) {
+    async createActor(data: CreateActorBody, userId: string) {
         const existed = await this.actorModel.findOne({
             name: data.name,
             isDeleted: false,
@@ -92,7 +91,7 @@ export class ActorService {
         });
     }
 
-    async updateActor(id: string, data: IActorBody, userId: string) {
+    async updateActor(id: string, data: CreateActorBody, userId: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new AppError("ID không hợp lệ", 400);
         }

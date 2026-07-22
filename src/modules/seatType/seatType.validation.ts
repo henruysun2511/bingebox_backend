@@ -1,26 +1,27 @@
-import Joi from "joi";
+import { z } from "zod";
 
-export const getSeatTypeIdParam = Joi.object({
-  id: Joi.string().hex().length(24).required().messages({
-    "any.required": "ID loại ghế là bắt buộc",
-    "string.length": "ID loại ghế không hợp lệ",
-  }),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+export const getSeatTypeIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const createSeatType = Joi.object({
-  name: Joi.string().trim().required().messages({
-    "string.empty": "Tên loại ghế không được để trống",
-    "any.required": "Tên loại ghế là bắt buộc",
-  }),
-  color: Joi.string().trim().required().messages({
-    "string.empty": "Mã màu không được để trống",
-    "any.required": "Mã màu là bắt buộc",
-  }),
+export const createSeatType = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Tên loại ghế không được để trống"),
+  color: z
+    .string()
+    .trim()
+    .min(1, "Mã màu không được để trống"),
 });
 
-export const updateSeatType = createSeatType.fork(
-  Object.keys(createSeatType.describe().keys),
-  (schema) => schema.optional()
-).min(1).messages({
-  "object.min": "Phải có ít nhất một trường cần cập nhật",
-});
+export type CreateSeatTypeBody = z.infer<typeof createSeatType>;
+
+export const updateSeatType = createSeatType.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Phải có ít nhất một trường cần cập nhật"
+);
+
+export type UpdateSeatTypeBody = z.infer<typeof updateSeatType>;

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { PermissionMethodTypeEnum } from "../../shares/constants/enum";
-import { IPermission } from "../../types/object.type";
+import { IPermission } from "./permission.interface";
 
 const permissionSchema = new mongoose.Schema<IPermission>({
     ...baseFields,

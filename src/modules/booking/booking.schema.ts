@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { BookingStatusEnum } from "../../shares/constants/enum";
-import { IBooking } from "../../types/object.type";
+import { IBooking } from "./booking.interface";
 
 const bookingSchema = new mongoose.Schema<IBooking>({
     ...baseFields,

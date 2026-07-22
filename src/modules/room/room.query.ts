@@ -1,7 +1,7 @@
-import { IRoomQuery } from "../../types/param.type";
+import { GetRoomListQuery } from "./room.validation";
 
-export function buildRoomQuery(query: IRoomQuery) {
-    const filter: any = {
+export function buildRoomQuery(query: GetRoomListQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

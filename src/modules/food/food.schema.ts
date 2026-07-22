@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { IFood } from "../../types/object.type";
+import { IFood } from "./food.interface";
 
 const foodSchema = new mongoose.Schema<IFood>({
     ...baseFields,

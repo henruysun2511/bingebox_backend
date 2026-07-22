@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
-import { IRole } from "../../types/object.type";
+import { IRole } from "./role.interface";
 
 const roleSchema = new mongoose.Schema<IRole>({
     ...baseFields,

@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
-import { validateMiddleware } from "../../middlewares/validation.middleware";
+import { validationMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./seatType.controller";
 import * as v from "./seatType.validation";
 
@@ -11,22 +11,22 @@ router.get("/", controller.getSeatTypes);
 router.post(
     "/", 
     authenticationMiddleware, 
-    validateMiddleware(v.createSeatType, "body"), 
+    validationMiddleware(v.createSeatType, "body"), 
     controller.createSeatType
 );
 
 router.patch(
     "/:id", 
     authenticationMiddleware, 
-    validateMiddleware(v.getSeatTypeIdParam, "params"), 
-    validateMiddleware(v.updateSeatType, "body"), 
+    validationMiddleware(v.getSeatTypeIdParam, "params"), 
+    validationMiddleware(v.updateSeatType, "body"), 
     controller.updateSeatType
 );
 
 router.delete(
     "/:id", 
     authenticationMiddleware, 
-    validateMiddleware(v.getSeatTypeIdParam, "params"), 
+    validationMiddleware(v.getSeatTypeIdParam, "params"), 
     controller.deleteSeatType
 );
 

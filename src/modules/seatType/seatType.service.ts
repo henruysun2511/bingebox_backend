@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { ISeatTypeBody } from "../../types/body.type";
+import { CreateSeatTypeBody } from "./seatType.validation";
 import { AppError } from "../../utils/appError";
 import SeatTypeModel from "./seatType.schema";
 
@@ -16,14 +16,14 @@ export class SeatTypeService {
         return seatType;
     }
 
-    async createSeatType(data: ISeatTypeBody, userId: string) {
+    async createSeatType(data: CreateSeatTypeBody, userId: string) {
         const duplicate = await this.seatTypeModel.findOne({ name: data.name, isDeleted: false });
         if (duplicate) throw new AppError("Tên loại ghế đã tồn tại", 400);
 
         return await this.seatTypeModel.create({ ...data, createdBy: userId });
     }
 
-    async updateSeatType(id: string, data: ISeatTypeBody, userId: string) {
+    async updateSeatType(id: string, data: CreateSeatTypeBody, userId: string) {
         if (!mongoose.Types.ObjectId.isValid(id)) throw new AppError("ID không hợp lệ", 400);
 
         const updated = await this.seatTypeModel.findOneAndUpdate(

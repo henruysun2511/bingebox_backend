@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../modules/user/user.schema";
 import { LoginTypeEnum } from "../shares/constants/enum";
-import { ENV } from "../shares/constants/enviroment";
+import { ENV } from "../shares/constants/environment";
 
 passport.use(
   new GoogleStrategy(
@@ -13,18 +13,19 @@ passport.use(
     },
     async (_accessToken, _refreshToken, profile, done) => {
       try {
-        const email = profile.emails?.[0].value;
+        const email = profile.emails?.[0]?.value;
 
-        let user = await User.findOne({
+        let user = email ? await User.findOne({
           $or: [{ googleId: profile.id }, { email }],
-        });
+        }) : await User.findOne({ googleId: profile.id });
 
         if (!user) {
+          if (!email) return done(new Error("Google account không có email"), false);
           user = await User.create({
             email,
             username: email,
             fullName: profile.displayName,
-            avatar: profile.photos?.[0].value,
+            avatar: profile.photos?.[0]?.value,
             googleId: profile.id,
             provider: LoginTypeEnum.GOOGLE,
           });

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../../utils/appError";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
 import { CommentService } from "./comment.service";
@@ -6,7 +7,8 @@ import { CommentService } from "./comment.service";
 const commentService = new CommentService();
 
 export const createComment = catchAsync(async (req: Request, res: Response) => {
-    const result = await commentService.createComment(req.body, req.user!._id.toString());
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const result = await commentService.createComment(req.validated!.body, req.user._id.toString());
     return success(res, result, "Gửi bình luận thành công", 201);
 });
 
@@ -23,20 +25,23 @@ export const getReplies = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const updateComment = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
     const { id } = req.params;
-    const { content } = req.body;
-    const result = await commentService.updateComment(id, req.user!._id.toString(), content);
+    const { content } = req.validated!.body;
+    const result = await commentService.updateComment(id, req.user._id.toString(), content);
     return success(res, result, "Cập nhật bình luận thành công");
 });
 
 export const deleteComment = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
     const { id } = req.params;
-    await commentService.deleteComment(id, req.user!._id.toString());
+    await commentService.deleteComment(id, req.user._id.toString());
     return success(res, null, "Xóa bình luận thành công");
 });
 
 export const toggleLike = catchAsync(async (req: Request, res: Response) => {
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
     const { id } = req.params;
-    const result = await commentService.toggleLike(id, req.user!._id.toString());
+    const result = await commentService.toggleLike(id, req.user._id.toString());
     return success(res, result, result.isLiked ? "Đã thích" : "Đã bỏ thích");
 });

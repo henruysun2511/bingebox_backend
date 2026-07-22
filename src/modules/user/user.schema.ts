@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { GenderEnum, LoginTypeEnum } from "../../shares/constants/enum";
-import { IUser } from "../../types/object.type";
+import { IUser } from "./user.interface";
 
 const userSchema = new mongoose.Schema<IUser>({
     ...baseFields,

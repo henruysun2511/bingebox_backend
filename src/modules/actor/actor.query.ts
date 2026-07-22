@@ -1,8 +1,8 @@
-import { IActorQuery } from "../../types/param.type";
+import { GetActorListQuery } from "./actor.validation";
 import { buildSort } from "../../utils/buidSort";
 
-export function buildActorQuery(query: IActorQuery) {
-    const filter: any = {
+export function buildActorQuery(query: GetActorListQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

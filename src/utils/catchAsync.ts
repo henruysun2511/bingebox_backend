@@ -1,8 +1,7 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, RequestHandler, Response } from "express";
 
-//Hàm này giúp tránh lặp code try catch trong các controller
 export const catchAsync =
-  (fn: Function) =>
-  (req: Request, res: Response, next: NextFunction) => {
+  (fn: (req: Request, res: Response, next: NextFunction) => Promise<any>): RequestHandler =>
+  (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
   };

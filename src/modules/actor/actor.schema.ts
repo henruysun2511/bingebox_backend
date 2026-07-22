@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { baseFields } from "../../shares/bases/baseField";
 import { GenderEnum } from "../../shares/constants/enum";
-import { IActor } from "../../types/object.type";
+import { IActor } from "./actor.interface";
 
 const actorSchema = new mongoose.Schema<IActor>({
     ...baseFields,

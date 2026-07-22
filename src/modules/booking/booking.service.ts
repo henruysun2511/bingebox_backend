@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { getIo } from "../../configs/socket.config";
 import { BookingStatusEnum, TicketStatusEnum } from "../../shares/constants/enum";
-import { IBookingBody } from "../../types/body.type";
+import { IBookingBody } from "./booking.validation";
+import { IMembership } from "../membership/membership.interface";
 import { AppError } from "../../utils/appError";
 import { generateQRCode } from "../../utils/qrCode";
 import { FoodService } from "../food/food.service";
@@ -76,7 +76,10 @@ export class BookingService {
 
             /* ================== 5. FOOD ================== */
             const { foodTotal, foodsPayload } =
-                await foodService.calculateFoods(dto.foods, session);
+                await foodService.calculateFoods(
+                    dto.foods.map(f => ({ ...f, foodId: new mongoose.Types.ObjectId(f.foodId) })),
+                    session
+                );
 
             let totalAmount = ticketTotal + foodTotal;
 
@@ -94,7 +97,7 @@ export class BookingService {
 
             /* ================== 8. MEMBERSHIP DISCOUNT ================== */
             if (user.membership) {
-                discountAmount += totalAmount * (user.membership as any).discountRate;
+                discountAmount += totalAmount * (user.membership as IMembership).discountRate;
             }
 
             const finalAmount = Math.max(totalAmount - discountAmount, 0);
@@ -106,7 +109,7 @@ export class BookingService {
             );
 
             //format food
-            const formattedFoods = foodsPayload.map((f: any) => ({
+            const formattedFoods = foodsPayload.map((f: { foodId: mongoose.Types.ObjectId; quantity: number; priceAtBooking: Number }) => ({
                 foodId: f.foodId,
                 quantity: Number(f.quantity), // Chuyển sang primitive number
                 priceAtBooking: Number(f.priceAtBooking) // Chuyển sang primitive number
@@ -149,8 +152,8 @@ export class BookingService {
 
             try {
                 await this.ticketModel.insertMany(ticketsData, { session });
-            } catch (e: any) {
-                if (e.code === 11000) {
+            } catch (e: unknown) {
+                if ((e as any)?.code === 11000) {
                     throw new AppError("Có ghế đã được giữ hoặc đặt", 409);
                 }
                 throw e;
@@ -163,115 +166,6 @@ export class BookingService {
 
             return booking;
 
-        } catch (e) {
-            await session.abortTransaction();
-            throw e;
-        } finally {
-            session.endSession();
-        }
-    }
-
-    async fakePayBooking(bookingId: string, userId: string) {
-        const session = await mongoose.startSession();
-        session.startTransaction();
-
-        try {
-            const booking = await this.bookingModel.findById(bookingId).session(session);
-            if (!booking) throw new AppError("Booking không tồn tại", 404);
-            if (booking.bookingStatus !== BookingStatusEnum.PENDING) throw new AppError("Booking không hợp lệ", 400);
-            if (booking.expiresAt < new Date()) throw new AppError("Booking đã hết hạn", 410);
-
-            //Lấy danh sách seatIds từ Ticket để gửi Socket 
-            const tickets = await this.ticketModel.find({ booking: booking._id }).session(session);
-            const seatIds = tickets.map(t => t.seat.toString());
-
-            //UPDATE BOOKING 
-            booking.bookingStatus = BookingStatusEnum.SUCCESS;
-            await booking.save({ session });
-
-            //UPDATE TICKETS 
-            await this.ticketModel.updateMany(
-                { booking: booking._id },
-                { status: TicketStatusEnum.PAID, expiresAt: null },
-                { session }
-            );
-
-            //CẬP NHẬT ĐIỂM VÀ CHI TIÊU CHO USER 
-            await this.userModel.findByIdAndUpdate(
-                booking.userId,
-                {
-                    $inc: {
-                        currentPoints: booking.pointsEarned, // Cộng điểm mới
-                        totalSpending: booking.finalAmount   // Cộng tổng chi tiêu
-                    }
-                },
-                { session }
-            );
-
-            await session.commitTransaction();
-
-            //Giữ tạm ghế
-            const io = getIo();
-            const roomName = `showtime-${booking.showtime.toString()}`;
-            io.to(roomName).emit("seat:update", {
-                type: "PAID",
-                bookingId: booking._id,
-                seatIds: seatIds
-            });
-
-            return { success: true };
-        } catch (e) {
-            await session.abortTransaction();
-            throw e;
-        } finally {
-            session.endSession();
-        }
-    }
-
-    async fakeFailBooking(bookingId: string) {
-        const session = await mongoose.startSession();
-        session.startTransaction();
-
-        try {
-            const booking = await this.bookingModel.findById(bookingId).session(session);
-            if (!booking) throw new AppError("Booking không tồn tại", 404);
-
-            // Lấy seatIds trước khi hủy
-            const tickets = await this.ticketModel.find({ booking: booking._id }).session(session);
-            const seatIds = tickets.map(t => t.seat.toString());
-
-            //Cập nhật failed cho booking
-            booking.bookingStatus = BookingStatusEnum.FAILED;
-            await booking.save({ session });
-
-            //Cập nhật cancelled cho vé
-            await this.ticketModel.updateMany(
-                { booking: booking._id },
-                { status: TicketStatusEnum.CANCELLED, expiresAt: null },
-                { session }
-            );
-
-            //Trả điểm cho người dùng
-            if ((booking.pointsUsed || 0) > 0) {
-                await this.userModel.findByIdAndUpdate(
-                    booking.userId,
-                    { $inc: { currentPoints: booking.pointsUsed } }, //cộng dồn
-                    { session }
-                );
-            }
-
-            await session.commitTransaction();
-
-            //Giải phóng ghế cho người khác chọn
-            const io = getIo();
-            const roomName = `showtime-${booking.showtime.toString()}`;
-            io.to(roomName).emit("seat:update", {
-                type: "RELEASE",
-                bookingId: booking._id,
-                seatIds: seatIds
-            });
-
-            return { success: true };
         } catch (e) {
             await session.abortTransaction();
             throw e;

@@ -1,11 +1,19 @@
 import { Response } from "express";
 
-export function success(
+export interface PaginationInfo {
+  page?: number;
+  currentPage?: number;
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+}
+
+export function success<T>(
   res: Response,
-  data: any,
+  data: T,
   message: string | null = null,
   statusCode = 200,
-  pagination?: any
+  pagination?: PaginationInfo
 ) {
   return res.status(statusCode).json({
     success: true,

@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../../utils/appError";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
 import { BookingService } from "./booking.service";
@@ -6,14 +7,16 @@ import { BookingService } from "./booking.service";
 const bookingService = new BookingService();
 
 export const createBooking = catchAsync(async (req: Request, res: Response) => {
-    const userId = req.user!._id.toString();
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const userId = req.user._id.toString();
     const result = await bookingService.createBooking(userId, req.body);
 
     return success(res, result, "Tạo đơn hàng thành công, vui lòng thanh toán trong 10 phút", 201);
 });
 
 export const getUserBookingDetail = catchAsync(async (req: Request, res: Response) => {
-    const userId = req.user!._id.toString();
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const userId = req.user._id.toString();
     const { id } = req.params; // bookingId
 
     const result = await bookingService.getUserBookingDetail(id, userId);
@@ -35,23 +38,6 @@ export const getBookingDetail = catchAsync(async (req: Request, res: Response) =
     const result = await bookingService.getBookingDetail(id);
     return success(res, result, "Lấy chi tiết hóa đơn thành công");
 });
-
-export const fakePayBooking = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params; // bookingId
-    const userId = req.user!._id.toString();
-
-    const result = await bookingService.fakePayBooking(id, userId);
-
-    return success(res, result, "Thanh toán giả lập thành công");
-});
-
-
-export const fakeFailBooking = catchAsync(async (req: Request, res: Response) => {
-    const { id } = req.params; // bookingId
-    const result = await bookingService.fakeFailBooking(id);
-    return success(res, result, "Đã cập nhật trạng thái thanh toán thất bại");
-});
-
 
 export const cleanupCancelledData = catchAsync(async (req: Request, res: Response) => {
     const result = await bookingService.deleteCancelledData();

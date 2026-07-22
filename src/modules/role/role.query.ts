@@ -1,7 +1,7 @@
-import { IRoleQuery } from "../../types/param.type";
+import { GetRoleListQuery } from "./role.validation";
 
-export function buildRoleQuery(query: IRoleQuery) {
-    const filter: any = {
+export function buildRoleQuery(query: GetRoleListQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

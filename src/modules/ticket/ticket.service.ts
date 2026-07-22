@@ -6,7 +6,7 @@ import TicketModel from "./ticket.schema";
 export class TicketService {
     private ticketModel = TicketModel;
 
-    async getTicketsByUser(userId: string, query: any) {
+    async getTicketsByUser(userId: string, query: Record<string, any>) {
         if (!mongoose.Types.ObjectId.isValid(userId)) {
             throw new AppError("User ID không hợp lệ", 400);
         }

@@ -1,66 +1,72 @@
-import Joi from "joi";
+import { z } from "zod";
 import { BaseStatusEnum } from "../../shares/constants/enum";
 
-export const getVoucherListQuery = Joi.object({
-    name: Joi.string().trim().optional().allow(""),
-    code: Joi.string().trim().optional().allow(""),
-    status: Joi.string().valid(...Object.values(BaseStatusEnum)).optional().allow(""),
-    page: Joi.number().integer().min(1).default(1).allow(""),
-    limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
-    sort: Joi.string().optional().allow(""),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+export const getVoucherListQuery = z.object({
+  name: z.string().trim().optional(),
+  code: z.string().trim().optional(),
+  status: z.nativeEnum(BaseStatusEnum).optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+  sort: z.string().optional(),
 });
 
-export const getVoucherIdParam = Joi.object({
-    id: Joi.string().required().messages({
-        "any.required": "ID voucher là bắt buộc",
-    }),
+export type GetVoucherListQuery = z.infer<typeof getVoucherListQuery>;
+
+export const getVoucherIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const createVoucher = Joi.object({
-    name: Joi.string().trim().required().messages({
-        "string.empty": "Tên voucher không được để trống",
-        "any.required": "Tên voucher là bắt buộc",
-    }),
-    code: Joi.string().uppercase().trim().required().messages({
-        "string.empty": "Mã code không được để trống",
-        "any.required": "Mã code là bắt buộc",
-    }),
-    description: Joi.string().allow("").optional(),
-    startTime: Joi.date().required().messages({
-        "any.required": "Ngày bắt đầu là bắt buộc",
-    }),
-    endTime: Joi.date().greater(Joi.ref('startTime')).required().messages({
-        "date.greater": "Ngày kết thúc phải sau ngày bắt đầu",
-        "any.required": "Ngày kết thúc là bắt buộc",
-    }),
-    minOrderValue: Joi.number().min(0).required().messages({
-        "number.min": "Giá trị đơn hàng tối thiểu không được âm",
-    }),
-    maxDiscountAmount: Joi.number().min(0).required().messages({
-        "number.min": "Số tiền giảm tối đa không được âm",
-    }),
-    maxUsage: Joi.number().integer().min(1).required().messages({
-        "number.min": "Số lần sử dụng tối đa phải ít nhất là 1",
-    }),
-    status: Joi.string().valid(...Object.values(BaseStatusEnum)).messages({
-        "any.only": "Trạng thái không hợp lệ",
-    }),
+const voucherBody = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Tên voucher không được để trống"),
+  code: z
+    .string()
+    .trim()
+    .transform(v => v.toUpperCase()),
+  description: z
+    .string()
+    .optional(),
+  startTime: z
+    .string()
+    .or(z.date())
+    .transform(v => new Date(v)),
+  endTime: z
+    .string()
+    .or(z.date())
+    .transform(v => new Date(v)),
+  minOrderValue: z
+    .number()
+    .min(0, "Giá trị đơn hàng tối thiểu không được âm"),
+  maxDiscountAmount: z
+    .number()
+    .min(0, "Số tiền giảm tối đa không được âm"),
+  maxUsage: z
+    .number()
+    .int()
+    .min(1, "Số lần sử dụng tối đa phải ít nhất là 1"),
+  status: z
+    .nativeEnum(BaseStatusEnum)
+    .optional(),
 });
 
-export const updateVoucher = createVoucher.fork(
-    Object.keys(createVoucher.describe().keys),
-    (schema) => schema.optional()
-).min(1).messages({
-    "object.min": "Phải có ít nhất một trường cần cập nhật",
+export const createVoucher = voucherBody.refine(d => d.endTime > d.startTime, {
+  message: "Ngày kết thúc phải sau ngày bắt đầu",
+  path: ["endTime"],
 });
 
+export type CreateVoucherBody = z.infer<typeof createVoucher>;
 
-export const updateVoucherStatusBody = Joi.object({
-  status: Joi.string()
-    .valid(...Object.values(BaseStatusEnum))
-    .required()
-    .messages({
-      "any.only": "Trạng thái không hợp lệ",
-      "any.required": "Trạng thái là bắt buộc",
-    }),
+export const updateVoucher = voucherBody.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Phải có ít nhất một trường cần cập nhật"
+);
+
+export type UpdateVoucherBody = z.infer<typeof updateVoucher>;
+
+export const updateVoucherStatusBody = z.object({
+  status: z.nativeEnum(BaseStatusEnum),
 });

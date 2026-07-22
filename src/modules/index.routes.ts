@@ -4,6 +4,7 @@ import ageTypeRouter from "./ageType/ageType.route";
 import authRouter from "./auth/auth.route";
 import blogRouter from "./blog/blog.route";
 import bookingRouter from "./booking/booking.route";
+import paymentRouter from "./payment/payment.route";
 import categoryRouter from "./category/category.route";
 import cinemaRouter from "./cinema/cinema.route";
 import commentRouter from "./comment/comment.route";
@@ -17,7 +18,7 @@ import quickTicketBuyingRouter from "./quickTicketBuying/quickTicketBuying.route
 import roleRouter from "./role/role.route";
 import roomRouter from "./room/room.route";
 import seatRouter from "./seat/seat.route";
-import seatTypeoRouter from "./seatType/seatType.route";
+import seatTypeRouter from "./seatType/seatType.route";
 import settingRouter from "./setting/setting.route";
 import showtimeRouter from "./showtime/showtime.route";
 import ticketRouter from "./ticket/ticket.route";
@@ -48,7 +49,7 @@ router.use("/showtimes", showtimeRouter);
 router.use("/time-slots", timeSlotRouter);
 
 router.use("/seats", seatRouter);
-router.use("/seat-types", seatTypeoRouter);
+router.use("/seat-types", seatTypeRouter);
 
 router.use("/foods", foodRouter);
 
@@ -59,6 +60,7 @@ router.use("/quick-ticket-buyings", quickTicketBuyingRouter);
 router.use("/vouchers", voucherRouter);
 
 router.use("/bookings", bookingRouter);
+router.use("/payments", paymentRouter);
 router.use("/dashboards", dashboardRouter);
 
 router.use("/blogs", blogRouter);

@@ -1,40 +1,44 @@
-import Joi from "joi";
+import { z } from "zod";
 import { PermissionMethodTypeEnum } from "../../shares/constants/enum";
 
-export const getPermissionListQuery = Joi.object({
-    name: Joi.string().trim().optional().allow(""),
-    path: Joi.string().trim().optional().allow(""),
-    method: Joi.string().valid(...Object.values(PermissionMethodTypeEnum)).optional().allow(""),
-    page: Joi.number().integer().min(1).default(1).allow(""),
-    limit: Joi.number().integer().min(1).max(50).default(10).allow(""),
-    sort: Joi.string().optional().allow(""),
+const objectIdSchema = z.string().regex(/^[0-9a-fA-F]{24}$/, "ID không hợp lệ");
+
+export const getPermissionListQuery = z.object({
+  name: z.string().trim().optional(),
+  path: z.string().trim().optional(),
+  method: z.nativeEnum(PermissionMethodTypeEnum).optional(),
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(50).default(10),
+  sort: z.string().optional(),
 });
 
-export const getPermissionIdParam = Joi.object({
-    id: Joi.string().required().messages({
-        "any.required": "ID quyền hạn là bắt buộc",
-    }),
+export type GetPermissionListQuery = z.infer<typeof getPermissionListQuery>;
+
+export const getPermissionIdParam = z.object({
+  id: objectIdSchema,
 });
 
-export const createPermission = Joi.object({
-    name: Joi.string().trim().required().messages({
-        "string.empty": "Tên quyền hạn không được để trống",
-        "any.required": "Tên quyền hạn là bắt buộc",
-    }),
-    path: Joi.string().trim().required().messages({
-        "string.empty": "Đường dẫn (Path) không được để trống",
-        "any.required": "Đường dẫn là bắt buộc",
-    }),
-    method: Joi.string().valid(...Object.values(PermissionMethodTypeEnum)).required().messages({
-        "any.only": "Phương thức (Method) không hợp lệ",
-        "any.required": "Phương thức là bắt buộc",
-    }),
-    description: Joi.string().allow("").optional(),
+export const createPermission = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Tên quyền hạn không được để trống"),
+  path: z
+    .string()
+    .trim()
+    .min(1, "Đường dẫn (Path) không được để trống"),
+  method: z
+    .nativeEnum(PermissionMethodTypeEnum),
+  description: z
+    .string()
+    .optional(),
 });
 
-export const updatePermission = createPermission.fork(
-    Object.keys(createPermission.describe().keys),
-    (schema) => schema.optional()
-).min(1).messages({
-    "object.min": "Phải có ít nhất một trường cần cập nhật",
-});
+export type CreatePermissionBody = z.infer<typeof createPermission>;
+
+export const updatePermission = createPermission.partial().refine(
+  d => Object.keys(d).length > 0,
+  "Phải có ít nhất một trường cần cập nhật"
+);
+
+export type UpdatePermissionBody = z.infer<typeof updatePermission>;

@@ -1,8 +1,8 @@
-import { IPermissionQuery } from "../../types/param.type";
+import { GetPermissionListQuery } from "./permission.validation";
 import { buildSort } from "../../utils/buidSort";
 
-export function buildPermissionQuery(query: IPermissionQuery) {
-    const filter: any = {
+export function buildPermissionQuery(query: GetPermissionListQuery) {
+    const filter: Record<string, any> = {
         isDeleted: false,
     };
 

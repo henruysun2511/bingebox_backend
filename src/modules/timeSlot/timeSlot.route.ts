@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
-import { validateMiddleware } from "../../middlewares/validation.middleware";
+import { validationMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./timeSlot.controller";
 import * as v from "./timeSlot.validation";
 
@@ -13,14 +13,14 @@ router.get("/", controller.getTimeSlots);
 router.post(
     "/",
     authenticationMiddleware,
-    validateMiddleware(v.createTimeSlot, "body"),
+    validationMiddleware(v.createTimeSlot, "body"),
     controller.createTimeSlot
 );
 
 router.patch(
     "/:id",
     authenticationMiddleware,
-    validateMiddleware(v.updateTimeSlot, "body"),
+    validationMiddleware(v.updateTimeSlot, "body"),
     controller.updateTimeSlot
 );
 

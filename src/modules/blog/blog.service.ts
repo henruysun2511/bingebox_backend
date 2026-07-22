@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import slugify from "slugify";
-import { IBlogBody } from "../../types/body.type";
-import { IBlogQuery } from "../../types/param.type";
+import { CreateBlogBody } from "./blog.validation";
+import { BlogListQuery } from "./blog.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildBlogQuery } from "./blog.query";
@@ -10,7 +10,7 @@ import BlogModel from "./blog.schema";
 export class BlogService {
     private blogModel = BlogModel;
 
-    async createBlog(data: IBlogBody, userId: string) {
+    async createBlog(data: CreateBlogBody & { slug: string; author: string; views: number }, userId: string) {
         const slug = slugify(data.title, { lower: true, locale: 'vi', strict: true });
 
         const duplicate = await this.blogModel.findOne({ slug, isDeleted: false });
@@ -24,7 +24,7 @@ export class BlogService {
         });
     }
 
-    async getBlogs(query: IBlogQuery) {
+    async getBlogs(query: BlogListQuery) {
         const { filter } = buildBlogQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -64,7 +64,7 @@ export class BlogService {
         return blog;
     }
 
-    async updateBlog(id: string, data: IBlogBody, userId: string) {
+    async updateBlog(id: string, data: Partial<CreateBlogBody & { slug: string }>, userId: string) {
         if (data.title) {
             data.slug = slugify(data.title, { lower: true, locale: 'vi', strict: true });
         }

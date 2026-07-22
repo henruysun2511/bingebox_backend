@@ -1,5 +1,4 @@
-import { ICinemaBody } from "../../types/body.type";
-import { ICinemaQuery } from "../../types/param.type";
+import { CreateCinemaBody, GetCinemaListQuery } from "./cinema.validation";
 import { AppError } from "../../utils/appError";
 import { buildPagination } from "../../utils/buildPagination";
 import { buildCinemaQuery } from "./cinema.query";
@@ -8,7 +7,7 @@ import CinemaModel from "./cinema.schema";
 export class CinemaService {
     private cinemaModel = CinemaModel;
 
-    async getCinemas(query: ICinemaQuery) {
+    async getCinemas(query: GetCinemaListQuery) {
         const { filter, sort } = buildCinemaQuery(query);
         const { page, limit, skip } = buildPagination(query);
 
@@ -37,14 +36,14 @@ export class CinemaService {
         return cinema;
     }
 
-    async createCinema(data: ICinemaBody, userId: string) {
+    async createCinema(data: CreateCinemaBody, userId: string) {
         const duplicate = await this.cinemaModel.findOne({ name: data.name, isDeleted: false });
         if (duplicate) throw new AppError("Tên rạp đã tồn tại", 400);
 
         return this.cinemaModel.create({ ...data, createdBy: userId });
     }
 
-    async updateCinema(id: string, data: ICinemaBody, userId: string) {
+    async updateCinema(id: string, data: CreateCinemaBody, userId: string) {
         const cinema = await this.cinemaModel.findOneAndUpdate(
             { _id: id, isDeleted: false },
             { ...data, updatedBy: userId },

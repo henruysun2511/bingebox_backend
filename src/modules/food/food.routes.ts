@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticationMiddleware } from "../../middlewares/authentication.middleware";
-import { validateMiddleware } from "../../middlewares/validation.middleware";
+import { validationMiddleware } from "../../middlewares/validation.middleware";
 import * as controller from "./food.controller";
 import * as v from "./food.validation";
 
@@ -9,7 +9,7 @@ const router = Router();
 // Public route: Lấy danh sách đồ ăn để hiển thị khi đặt vé
 router.get(
     "/", 
-    validateMiddleware(v.getFoodListQuery, "query"), 
+    validationMiddleware(v.getFoodListQuery, "query"), 
     controller.getFoods
 );
 
@@ -17,22 +17,22 @@ router.get(
 router.post(
     "/", 
     authenticationMiddleware, 
-    validateMiddleware(v.createFoodBody, "body"), 
+    validationMiddleware(v.createFoodBody, "body"), 
     controller.createFood
 );
 
 router.patch(
     "/:id", 
     authenticationMiddleware, 
-    validateMiddleware(v.getFoodIdParam, "params"), 
-    validateMiddleware(v.updateFoodBody, "body"), 
+    validationMiddleware(v.getFoodIdParam, "params"), 
+    validationMiddleware(v.updateFoodBody, "body"), 
     controller.updateFood
 );
 
 router.delete(
     "/:id", 
     authenticationMiddleware, 
-    validateMiddleware(v.getFoodIdParam, "params"), 
+    validationMiddleware(v.getFoodIdParam, "params"), 
     controller.deleteFood
 );
 

@@ -1,17 +1,19 @@
 import { Request, Response } from "express";
+import { AppError } from "../../utils/appError";
 import { catchAsync } from "../../utils/catchAsync";
 import { success } from "../../utils/response";
+import { delCacheByPattern } from "../../configs/redis.config";
 import { MovieService } from "./movie.service";
 
 const movieService = new MovieService();
 
 export const getMovies = catchAsync(async (req: Request, res: Response) => {
-  const result = await movieService.getMovies(req.query);
+  const result = await movieService.getMovies(req.validated!.query);
     return success(res, result.items, "Lấy danh sách phim thành công", 200, result.pagination);
 });
 
 export const getMoviesForAdmin = catchAsync(async (req: Request, res: Response) => {
-  const result = await movieService.getMoviesForAdmin(req.query);
+  const result = await movieService.getMoviesForAdmin(req.validated!.query);
     return success(res, result.items, "Lấy danh sách phim cho admin thành công", 200, result.pagination);
 });
 
@@ -28,17 +30,22 @@ export const getMovieDetail = catchAsync(async (req: Request, res: Response) => 
 });
 
 export const createMovie = catchAsync(async (req: Request, res: Response) => {
-  const movie = await movieService.createMovie(req.body, req.user!._id.toString());
-  return success(res, movie, "Tạo phim thành công", 201);
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const movie = await movieService.createMovie(req.validated!.body, req.user._id.toString());
+    await delCacheByPattern("movies:*");
+    return success(res, movie, "Tạo phim thành công", 201);
 });
 
 export const updateMovie = catchAsync(async (req: Request, res: Response) => {
-  const movie = await movieService.updateMovie(req.params.id, req.body, req.user!._id.toString());
-  return success(res, movie, "Cập nhật phim thành công");
+    if (!req.user) throw new AppError("Vui lòng đăng nhập", 401);
+    const movie = await movieService.updateMovie(req.params.id, req.validated!.body, req.user._id.toString());
+    await delCacheByPattern("movies:*");
+    return success(res, movie, "Cập nhật phim thành công");
 });
 
 export const deleteMovie = catchAsync(async (req: Request, res: Response) => {
   await movieService.deleteMovie(req.params.id, req.user!._id.toString());
+  await delCacheByPattern("movies:*");
   return success(res, null, "Xóa phim thành công");
 });
 
