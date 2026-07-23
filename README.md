@@ -15,6 +15,7 @@ Hệ thống backend cho ứng dụng đặt vé xem phim BingeBox Cinema.
 - **File upload:** Cloudinary + Multer
 - **Validation:** Zod 4
 - **Cron:** node-cron (release expired seats)
+- **Payments:** SePay (QR Code bank transfer webhooks)
 
 ## Cấu trúc
 
