@@ -8,8 +8,8 @@ import "./configs/passport.config";
 import { connectRedis } from "./configs/redis.config";
 import { initIo } from "./configs/socket.config";
 import { startReleaseSeatCron } from "./crons/releaseSeat.cron";
-import { createRateLimiter } from "./middlewares/rateLimit.middleware";
 import { errorMiddleware } from "./middlewares/error.middleware";
+import { createRateLimiter } from "./middlewares/rateLimit.middleware";
 import routes from "./modules/index.routes";
 import { registerSeatSocket } from "./modules/seat/seat.gateway";
 import { ENV } from "./shares/constants/environment";
@@ -27,6 +27,7 @@ app.use(passport.initialize());
 const allowedOrigins = [
   process.env.CLIENT_URL,
   process.env.CLIENT_URL_2,
+  process.env.CLIENT_URL_3
 ].filter((origin): origin is string => Boolean(origin));
 
 app.use(
